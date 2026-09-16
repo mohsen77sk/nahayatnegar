@@ -17,6 +17,11 @@
     "autoprefixer": "^10.6.1",
     "tailwindcss": "^4.3.3"
   },
+  "devDependencies": {
+    "prettier": "3.9.7",
+    "prettier-plugin-astro": "1.0.0",
+    "prettier-plugin-tailwindcss": "0.8.1"
+  },
   "allowScripts": {
     "esbuild": true
   }
