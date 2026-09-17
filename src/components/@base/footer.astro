@@ -1,1 +1,108 @@
-<footer></footer>
+---
+import Call from "./../../assets/icons/iconsax/outline/call.svg";
+import Map from "./../../assets/icons/iconsax/outline/map.svg";
+import Logo from "/public/icons/logo-footer.svg";
+---
+
+<footer class="flex items-center justify-center w-full px-2">
+  <div class="flex flex-col flex-1 max-w-300 items-center">
+    <div class="flex flex-col flex-1 md:flex-row justify-between gap-4 self-stretch py-10 sm:border-b-2 sm:border-secondary">
+      <div class="flex flex-row justify-center gap-3 bg-blue-100 rounded-full py-2 sm:py-2 sm:px-6 items-center leading-8">
+        <span>مشاوره و پاسخگویی</span>
+
+        <span class="bg-blue-300 h-5 w-0.25"></span>
+        <span>۲۴ ساعته در ۷ روز هفته</span>
+      </div>
+      <div class="flex flex-row gap-2 justify-end">
+        <div class="flex ltr items-center justify-center text-brand bg-blue-100 rounded-full p-2 sm:py-3 sm:px-6 flex-[1_0_0]">
+          ۰۲۱ ۸۴۴۵۰
+        </div>
+        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100">
+          <Call class="w-6 h-6 text-brand" />
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-8">
+      <div class="flex flex-col gap-3 py-6">
+        <div class="flex">
+          <Logo aria-label="نهایت‌‌‌‌‌نگر" />
+        </div>
+        <address class="flex flex-col gap-3 text-sm not-italic">
+          <p class="flex gap-2">
+            <span>آدرس:</span>
+            تهران، خیابان ولیعصر، بالاتر از پارک ساعی، پلاک ۲۴
+          </p>
+          <p class="flex gap-2">
+            <span>تماس:</span>
+            <span class="text-brand ltr">۸۴۴۵۰</span>
+            <span class="ltr">۰۲۱ -</span>
+          </p>
+        </address>
+        <p>
+          <a
+            class="flex gap-1 text-brand"
+            href="https://www.google.com/maps/search/?api=1&query=35.XXXXX,51.XXXXX"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="مسیریابی روی نقشه"
+          >
+            <Map />
+            <span class="ltr">مسیریابی رو نقشه</span>
+          </a>
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3 py-6">
+        <p class="text-sm not-italic text-brand">دسترسی سریع</p>
+
+        <a class="text-sm" href="/" aria-label="سامانه معاملاتی نئوتردیدر">
+          سامانه معاملاتی نئوتردیدر
+        </a>
+
+        <a class="text-sm" href="/" aria-label="سامانه معاملاتی پرو تریدر ">
+          سامانه معاملاتی پرو تریدر
+        </a>
+
+        <a class="text-sm" href="/" aria-label="آموزش">
+          آموزش
+        </a>
+
+        <a class="text-sm" href="/" aria-label="کد بورسی و سجام">
+          کد بورسی و سجام
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-3 py-6">
+        <p class="text-sm not-italic text-brand">خدمات</p>
+
+        <a class="text-sm" href="/" aria-label="صندوق‌های سرمایه‌گذاری">
+          صندوق‌های سرمایه‌گذاری
+        </a>
+
+        <a class="text-sm" href="/" aria-label="سبد گردانی اختصاصی ">
+          سبد گردانی اختصاصی
+        </a>
+
+        <a class="text-sm" href="/" aria-label="کد بورسی و سجام">
+          کد بورسی و سجام
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-3 py-6">
+        <p class="text-sm not-italic text-brand">درباره نهایت‌نگر</p>
+
+        <a class="text-sm" href="/" aria-label="تماس با ما">
+          تماس با ما
+        </a>
+
+        <a class="text-sm" href="/" aria-label="همکاری با ما ">
+          همکاری با ما
+        </a>
+
+        <a class="text-sm" href="/" aria-label="شعب و دفاتر پیشخوان">
+          شعب و دفاتر پیشخوان
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

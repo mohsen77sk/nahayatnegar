@@ -1,17 +1,16 @@
 ---
 import { readFile } from 'node:fs/promises'
-
+import path from 'path';
 interface Props {
   src?: string
   class?: string
-  id?: string| number
 }
 
-const { src, class: className = '', id = '' } = Astro.props
+const { src, class: className = '' } = Astro.props
 
 // خواندن فایل SVG از پوشه public
-
-const svgContent = await readFile(`public${src}`, 'utf8')
+const filePath = path.join(process.cwd(), 'src', 'assets',  src ?? '');
+const svgContent = await readFile(filePath, 'utf8')
 ---
 
-<div id={id} class={className} set:html={svgContent??''} />
+<div class={className} set:html={svgContent??''} />
