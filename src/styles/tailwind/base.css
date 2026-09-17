@@ -33,7 +33,6 @@
   }
 
   body {
-    font-family: var(--default-font-family);
     font-size: var(--text-body-medium);
     font-weight: var(--text-body-medium--font-weight);
     line-height: var(--text-body-medium--line-height);

@@ -44,8 +44,8 @@
   --color-neutral-700: oklch(78.125% 0.01706 262.791);
   --color-neutral-800: oklch(72.368% 0.02052 263.021);
   --color-neutral-900: oklch(66.134% 0.02283 261.78);
-  --color-neutral-white: oklch(100% 0.00011 271.152);
-  --color-neutral-black: oklch(20.596% 0.0229 268.9);
+  --color-white: oklch(100% 0.00011 271.152);
+  --color-black: oklch(20.596% 0.0229 268.9);
   /*  */
   --color-brand: var(--color-blue-500);
   --background-color-brand-hover: var(--color-blue-600);
@@ -87,8 +87,8 @@
   --background-color-primary: var(--color-neutral-500);
   --background-color-secondary: var(--color-neutral-100);
   --background-color-disabled: var(--color-neutral-200);
-  --background-color-modal: var(--color-neutral-white);
-  --background-color-fg-primary: var(--color-neutral-white);
+  --background-color-modal: var(--color-white);
+  --background-color-fg-primary: var(--color-white);
   --background-color-fg-secondary: var(--color-neutral-200);
   --background-color-fg-tertiary: var(--color-neutral-400);
   --background-color-fg-selected: oklch(from var(--color-blue-500) / 20%);
@@ -178,6 +178,7 @@
 @import "tailwind/base.css";
 
 /* Components */
+@import "tailwind/components/button.css";
 
 /* Utils */
 @import "tailwind/utilities/other.css";
