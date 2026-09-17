@@ -96,8 +96,8 @@
   --text-color-secondary: oklch(20.596% 0.0229 268.9 / 60%);
   --text-color-tertiary: oklch(20.596% 0.0229 268.9 / 40%);
   --text-color-disabled: var(--color-neutral-500);
-  --border-color-primary: var(--color-border-primary);
-  --border-color-secondary: var(--color-border-secondary);
+  --border-color-primary: var(--color-neutral-300);
+  --border-color-secondary: var(--color-neutral-500);
 
   --text-*: initial;
   --text-display-large: 48px;
