@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/@base/header.astro";
 import Footer from "../components/@base/footer.astro";
+const { title } = Astro.props;
 ---
 
 <!doctype html>
@@ -10,7 +11,7 @@ import Footer from "../components/@base/footer.astro";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content" />
 
-    <title>Nahayatnegar</title>
+    <title>{title}</title>
     <base href="/" />
 
     <meta name="description" content="" />
