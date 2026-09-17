@@ -1,0 +1,5 @@
+@layer components {
+  .neo-card {
+    @apply bg-fg-primary rounded-lg p-4;
+  }
+}

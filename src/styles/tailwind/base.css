@@ -37,7 +37,7 @@
     font-weight: var(--text-body-medium--font-weight);
     line-height: var(--text-body-medium--line-height);
     color: var(--text-color-primary);
-    background: var(--background-color-primary);
+    background: var(--background-color-secondary);
   }
 
   /* Better spacing and border for horizontal rule */
