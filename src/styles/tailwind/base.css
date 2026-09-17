@@ -1,0 +1,148 @@
+/* This injects additional styles into Tailwind's base styles layer. */
+@layer base {
+  * {
+    /* Text rendering */
+    -o-text-rendering: optimizeLegibility;
+    -ms-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    -webkit-text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+
+    /* Remove the focus ring */
+    &:focus {
+      outline: none !important;
+    }
+  }
+
+  /* HTML and Body default styles */
+  html,
+  body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 100%;
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+  }
+
+  /* Font size */
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    font-family: var(--default-font-family);
+    font-size: var(--text-body-medium);
+    font-weight: var(--text-body-medium--font-weight);
+    line-height: var(--text-body-medium--line-height);
+    color: var(--text-color-primary);
+    background: var(--background-color-primary);
+  }
+
+  /* Better spacing and border for horizontal rule */
+  hr {
+    margin: 32px 0;
+    border-bottom-width: 1px;
+  }
+
+  /* Make images and videos to take up all the available space */
+  img {
+    width: 100%;
+    vertical-align: top;
+  }
+
+  /* Fix: Disabled placeholder color is too faded on Safari */
+  input[disabled] {
+    opacity: 1;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  input,
+  textarea {
+    background: transparent;
+
+    /* Placeholder color */
+    &::placeholder,
+    &::-moz-placeholder,
+    &::-ms-input-placeholder,
+    &::-webkit-input-placeholder {
+      color: var(--background-color-primary);
+    }
+
+    /* Autofill color fix */
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-background-clip: text;
+      transition: background-color 5000s !important;
+    }
+
+    [data-autocompleted] {
+      background-color: transparent !important;
+    }
+  }
+
+  /* Set the border color */
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border-color-primary);
+  }
+
+  /* Style scrollbars on platforms other than MacOS and iOS */
+  @media only screen and (min-width: 840px) {
+    body:not(.os-mac) {
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        background-color: transparent;
+      }
+
+      ::-webkit-scrollbar:hover {
+        width: 8px;
+        height: 8px;
+        background-color: rgba(0, 0, 0, 0.06);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        border: 2px solid transparent;
+        border-radius: 20px;
+        box-shadow: inset 0 0 0 20px rgba(0, 0, 0, 0.24);
+      }
+
+      ::-webkit-scrollbar-thumb:active {
+        border-radius: 20px;
+        box-shadow: inset 0 0 0 20px rgba(0, 0, 0, 0.37);
+      }
+
+      &.dark {
+        ::-webkit-scrollbar:hover {
+          background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        ::-webkit-scrollbar-thumb {
+          box-shadow: inset 0 0 0 20px rgba(255, 255, 255, 0.24);
+        }
+
+        ::-webkit-scrollbar-thumb:active {
+          box-shadow: inset 0 0 0 20px rgba(255, 255, 255, 0.37);
+        }
+      }
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    /* Make the base font size smaller for print so everything is scaled nicely */
+    html {
+      font-size: 12px !important;
+    }
+
+    body {
+      background: none !important;
+    }
+  }
+}

@@ -112,25 +112,25 @@
   --text-heading-large: 24px;
   --text-heading-large--line-height: 1.8;
   --text-heading-large--font-weight: var(--font-weight-bold);
-  --text-heading-medium: 18px;
+  --text-heading-medium: 20px;
   --text-heading-medium--line-height: 1.8;
   --text-heading-medium--font-weight: var(--font-weight-bold);
-  --text-heading-small: 16px;
+  --text-heading-small: 18px;
   --text-heading-small--line-height: 1.8;
   --text-heading-small--font-weight: var(--font-weight-bold);
-  --text-title-large: 14px;
+  --text-title-large: 16px;
   --text-title-large--line-height: 1.5;
   --text-title-large--font-weight: var(--font-weight-semibold);
-  --text-title-medium: 13px;
+  --text-title-medium: 14px;
   --text-title-medium--line-height: 1.5;
   --text-title-medium--font-weight: var(--font-weight-semibold);
   --text-title-small: 12px;
   --text-title-small--line-height: 1.5;
   --text-title-small--font-weight: var(--font-weight-semibold);
-  --text-body-large: 14px;
+  --text-body-large: 16px;
   --text-body-large--line-height: 1.5;
   --text-body-large--font-weight: var(--font-weight-normal);
-  --text-body-medium: 13px;
+  --text-body-medium: 14px;
   --text-body-medium--line-height: 1.5;
   --text-body-medium--font-weight: var(--font-weight-normal);
   --text-body-small: 12px;
@@ -173,3 +173,5 @@
   --inset-shadow-secondary: 0 4px 12px 0 rgb(0 0 0 / 40%);
   --inset-shadow-tertiary: 0 4px 20px 0 rgb(0 0 0 / 40%);
 }
+
+@import "tailwind/base";
