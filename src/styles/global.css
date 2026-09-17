@@ -174,4 +174,10 @@
   --inset-shadow-tertiary: 0 4px 20px 0 rgb(0 0 0 / 40%);
 }
 
-@import "tailwind/base";
+/* Base */
+@import "tailwind/base.css";
+
+/* Components */
+
+/* Utils */
+@import "tailwind/utilities/other.css";
