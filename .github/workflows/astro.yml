@@ -33,6 +33,8 @@ jobs:
 
       - name: Build Astro
         run: npm run build
+        env:
+          PUBLIC_BASE_URL: /nahayatnegar
 
       - name: Deploy build to production branch
         uses: peaceiris/actions-gh-pages@v4
