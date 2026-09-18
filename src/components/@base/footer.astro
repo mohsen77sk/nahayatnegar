@@ -1,107 +1,101 @@
 ---
+import Instagram from "./../../assets/icons/iconsax/outline/instagram.svg";
+import Whatsapp from "./../../assets/icons/iconsax/outline/whatsapp.svg";
 import Call from "./../../assets/icons/iconsax/outline/call.svg";
 import Map from "./../../assets/icons/iconsax/outline/map.svg";
 import Logo from "/public/icons/logo-footer.svg";
+
+import FooterColumn from "./footer-column.astro";
+
+const phone = "02184450";
+const quickLinks = [
+  { label: "سامانه معاملاتی نئوتردیدر", href: "/" },
+  { label: "سامانه معاملاتی پرو تریدر", href: "/" },
+  { label: "آموزش", href: "/" },
+  { label: "کد بورسی و سجام", href: "/" },
+];
+const services = [
+  { label: "صندوق‌های سرمایه‌گذاری", href: "/" },
+  { label: "سبد گردانی اختصاصی", href: "/" },
+  { label: "کد بورسی و سجام", href: "/" },
+];
+const aboutLinks = [
+  { label: "تماس با ما", href: "/contactUs" },
+  { label: "همکاری با ما", href: "/" },
+  { label: "شعب و دفاتر پیشخوان", href: "/branches" },
+];
 ---
 
-<footer class="flex items-center justify-center w-full px-2">
-  <div class="flex flex-col flex-1 max-w-300 items-center">
-    <div class="flex flex-col flex-1 md:flex-row justify-between gap-4 self-stretch py-10 sm:border-b-2 sm:border-secondary">
-      <div class="flex flex-row justify-center gap-3 bg-blue-100 rounded-full py-2 sm:py-2 sm:px-6 items-center leading-8">
-        <span>مشاوره و پاسخگویی</span>
-
-        <span class="bg-blue-300 h-5 w-0.25"></span>
+<footer class="flex w-full justify-center px-2">
+  <div class="flex w-full max-w-300 flex-col items-center gap-8">
+    <!-- Support -->
+    <div class="flex w-full flex-col gap-4 border-b border-secondary py-10 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex items-center justify-center gap-3 rounded-full bg-blue-100 px-4 py-2 leading-8 sm:px-6">
+        <span>مشاوره و پاسخگویی</span> <span class="h-5 w-px bg-blue-300" aria-hidden="true"></span>
         <span>۲۴ ساعته در ۷ روز هفته</span>
       </div>
-      <div class="flex flex-row gap-2 justify-end">
-        <div class="flex ltr items-center justify-center text-brand bg-blue-100 rounded-full p-2 sm:py-3 sm:px-6 flex-[1_0_0]">
+      <div class="flex justify-end gap-2">
+        <a
+          href={`tel:${phone}`}
+          class="ltr flex flex-1 items-center justify-center rounded-full bg-blue-100 p-2 text-brand sm:px-6 sm:py-3"
+        >
           ۰۲۱ ۸۴۴۵۰
-        </div>
-        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100">
-          <Call class="w-6 h-6 text-brand" />
-        </div>
+        </a>
+        <a
+          href={`tel:${phone}`}
+          class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100"
+          aria-label="تماس با کارگزاری نهایت‌نگر"
+        >
+          <Call class="h-6 w-6 text-brand" aria-hidden="true" />
+        </a>
       </div>
     </div>
-    <div class="flex flex-col sm:flex-row gap-8">
-      <div class="flex flex-col gap-3 py-6">
-        <div class="flex">
-          <Logo aria-label="نهایت‌‌‌‌‌نگر" />
+
+    <!-- Main footer -->
+    <div class="flex w-full flex-col gap-6 pt-5 sm:gap-10">
+      <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-[3fr_1fr_1fr_1fr] sm:gap-x-8">
+        <!-- Company -->
+        <div class="flex flex-col items-start gap-9">
+          <Logo aria-label="نهایت‌نگر" />
+          <div class="flex flex-col gap-4">
+            <address class="flex flex-col gap-4 text-sm not-italic">
+              <p class="flex gap-2">
+                <span>آدرس:</span> <span>تهران، خیابان ملاصدرا، شیخ بهایی جنوبی، پلاک ۳۱</span>
+              </p>
+              <p class="flex gap-2">
+                <span>تماس:</span>
+                <span class="ltr">
+                  ۰۲۱- <span class="text-brand">۸۴۴۵۰</span>
+                </span>
+              </p>
+            </address>
+            <a
+              class="flex gap-1 py-4 font-bold text-brand"
+              href="https://www.google.com/maps/search/?api=1&query=35.XXXXX,51.XXXXX"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="مسیریابی روی نقشه"
+            >
+              <Map aria-hidden="true" /> <span class="ltr">مسیریابی رو نقشه</span>
+            </a>
+            <div class="flex gap-4">
+              <a href="/" aria-label="واتساپ">
+                <Whatsapp aria-hidden="true" />
+              </a>
+              <a href="/" aria-label="اینستاگرام">
+                <Instagram aria-hidden="true" />
+              </a>
+            </div>
+          </div>
         </div>
-        <address class="flex flex-col gap-3 text-sm not-italic">
-          <p class="flex gap-2">
-            <span>آدرس:</span>
-            تهران، خیابان ولیعصر، بالاتر از پارک ساعی، پلاک ۲۴
-          </p>
-          <p class="flex gap-2">
-            <span>تماس:</span>
-            <span class="text-brand ltr">۸۴۴۵۰</span>
-            <span class="ltr">۰۲۱ -</span>
-          </p>
-        </address>
-        <p>
-          <a
-            class="flex gap-1 text-brand"
-            href="https://www.google.com/maps/search/?api=1&query=35.XXXXX,51.XXXXX"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="مسیریابی روی نقشه"
-          >
-            <Map />
-            <span class="ltr">مسیریابی رو نقشه</span>
-          </a>
-        </p>
+        <!-- Quick links -->
+        <FooterColumn title="دسترسی سریع" links={quickLinks} />
+        <FooterColumn title="خدمات" links={services} />
+        <FooterColumn title="درباره نهایت‌نگر" links={aboutLinks} />
       </div>
-
-      <div class="flex flex-col gap-3 py-6">
-        <p class="text-sm not-italic text-brand">دسترسی سریع</p>
-
-        <a class="text-sm" href="/" aria-label="سامانه معاملاتی نئوتردیدر">
-          سامانه معاملاتی نئوتردیدر
-        </a>
-
-        <a class="text-sm" href="/" aria-label="سامانه معاملاتی پرو تریدر ">
-          سامانه معاملاتی پرو تریدر
-        </a>
-
-        <a class="text-sm" href="/" aria-label="آموزش">
-          آموزش
-        </a>
-
-        <a class="text-sm" href="/" aria-label="کد بورسی و سجام">
-          کد بورسی و سجام
-        </a>
-      </div>
-
-      <div class="flex flex-col gap-3 py-6">
-        <p class="text-sm not-italic text-brand">خدمات</p>
-
-        <a class="text-sm" href="/" aria-label="صندوق‌های سرمایه‌گذاری">
-          صندوق‌های سرمایه‌گذاری
-        </a>
-
-        <a class="text-sm" href="/" aria-label="سبد گردانی اختصاصی ">
-          سبد گردانی اختصاصی
-        </a>
-
-        <a class="text-sm" href="/" aria-label="کد بورسی و سجام">
-          کد بورسی و سجام
-        </a>
-      </div>
-
-      <div class="flex flex-col gap-3 py-6">
-        <p class="text-sm not-italic text-brand">درباره نهایت‌نگر</p>
-
-        <a class="text-sm" href="/" aria-label="تماس با ما">
-          تماس با ما
-        </a>
-
-        <a class="text-sm" href="/" aria-label="همکاری با ما ">
-          همکاری با ما
-        </a>
-
-        <a class="text-sm" href="/" aria-label="شعب و دفاتر پیشخوان">
-          شعب و دفاتر پیشخوان
-        </a>
+      <!-- Copyright -->
+      <div class="border-t border-secondary py-3 text-body-large font-normal text-secondary">
+        تمامی حقوق برای کارگزاری نهایت‌نگر محفوظ است.
       </div>
     </div>
   </div>
