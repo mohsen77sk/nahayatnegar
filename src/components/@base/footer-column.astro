@@ -1,4 +1,5 @@
 ---
+import { siteUrl } from "@utils/url";
 interface Props {
   title: string;
   links: { label: string; href: string }[];
@@ -10,7 +11,7 @@ const { title, links } = Astro.props;
   <span class="text-sm font-semibold text-brand"> {title} </span>
   <nav class="flex flex-col gap-4 text-sm font-bold">
     {links.map(({ label, href }) => (
-      <a class="py-4" href={href}>
+      <a class="py-4" href={siteUrl(href)}>
         {" "}
         {label}{" "}
       </a>
