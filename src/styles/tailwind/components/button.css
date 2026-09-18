@@ -1,0 +1,31 @@
+@layer components {
+  .neo-button {
+    @apply cursor-pointer border border-transparent leading-normal focus:outline-none;
+    /* medium */
+    @apply h-8.5 rounded-md px-3 text-[13px] font-semibold;
+
+    &.neo-button-small {
+      @apply h-7 rounded-sm px-2 text-[12px] font-medium;
+    }
+
+    &.neo-button-large {
+      @apply h-13 rounded-lg px-4 text-[14px] font-bold;
+    }
+
+    &.neo-button-primary {
+      @apply hover:bg-brand-light-hover active:bg-brand-light-active text-brand;
+    }
+
+    &.neo-button-fill-primary {
+      @apply bg-brand hover:bg-brand-hover active:bg-brand-active text-white;
+    }
+
+    &.neo-button-light-primary {
+      @apply bg-brand-light hover:bg-brand-light-hover active:bg-brand-light-active text-primary;
+    }
+
+    &.neo-button-outline-primary {
+      @apply border-brand hover:bg-brand-light-hover active:bg-brand-light-active text-brand;
+    }
+  }
+}

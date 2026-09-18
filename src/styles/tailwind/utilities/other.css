@@ -1,0 +1,24 @@
+.ltr {
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.bidi-plaintext {
+  unicode-bidi: plaintext;
+}
+
+.bidi-isolate {
+  unicode-bidi: isolate;
+}
+
+.bidi-isolate-override {
+  unicode-bidi: isolate-override;
+}
+
+.bidi-isolate-ltr {
+  direction: ltr !important;
+  unicode-bidi: isolate;
+}
