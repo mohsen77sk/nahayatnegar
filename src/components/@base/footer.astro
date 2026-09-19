@@ -1,4 +1,5 @@
 ---
+import { siteUrl } from "@utils/url";
 import Instagram from "./../../assets/icons/iconsax/outline/instagram.svg";
 import Whatsapp from "./../../assets/icons/iconsax/outline/whatsapp.svg";
 import Call from "./../../assets/icons/iconsax/outline/call.svg";
@@ -107,7 +108,7 @@ const columns = [
 
             <nav class="flex flex-col gap-4 text-sm font-bold">
               {links.map(({ label, href }) => (
-                <a class="py-4" href={href}>
+                <a class="py-4" href={siteUrl(href)}>
                   {label}
                 </a>
               ))}
