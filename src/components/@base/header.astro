@@ -74,16 +74,15 @@ const menus = [
         <div class="flex w-full items-center justify-between gap-2">
             <!-- Logo -->
             <a href="/">
-                <LogoNoText class="m-icon-nav hidden h-8 w-auto text-brand transition-all duration-300" />
-
-                <Logo class="d-icon-nav block h-8 w-auto text-white transition-all duration-300" />
+                <LogoNoText class="m-icon-nav hidden h-8 w-auto text-brand" />
+                <Logo class="d-icon-nav block h-8 w-auto text-white" />
             </a>
 
             <!-- Desktop Menu -->
             <nav class="hidden items-center gap-1 lg:flex lg:gap-2">
                 {menus.map((menu, i) => (
                     <div class="group relative text-white">
-                        <div class="menu-trigger flex gap-1.5 text-base cursor-pointer rounded-md px-3 py-2 font-semibold text-white transition-all duration-400 ease-in-out hover:bg-[#F0F3FA] hover:text-gray-900">
+                        <div class="menu-trigger flex gap-1.5 text-base cursor-pointer rounded-md px-3 py-2 font-semibold text-white transition-all duration-400 ease-in-out hover:bg-[#1C2754] items-center">
                             <span> {menu.title}</span>
                             {menu?.subMenus.length > 0 && (
                                 <svg
