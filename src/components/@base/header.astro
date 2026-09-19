@@ -1,1 +1,285 @@
-<header></header>
+---
+import Logo from "@assets/icons/logo-header.svg";
+import LogoNoText from "@assets/icons/logo-no-text.svg";
+import MobileMenue from "@assets/icons/iconsax/outline/hamburger-menu.svg";
+
+const menus = [
+    {
+        title: "کارگزاری",
+        width: "322px",
+        subMenus: [],
+    },
+    {
+        title: "مدیریت دارایی ",
+        width: "260px",
+        subMenus: [],
+    },
+    {
+        title: "آموزش",
+        width: "260px",
+        subMenus: [],
+    },
+    {
+        title: "نهایت‌نگر",
+        width: "260px",
+        subMenus: [
+            {
+                title: "درباره ما",
+                subTitle: "اطلاعات و تاریخچه شرکت",
+                link: "/about-us",
+                icon: "menu-about-us",
+            },
+            {
+                title: "همکاری با ما",
+                subTitle: "فرصت‌های شغلی",
+                link: "#",
+                icon: "menu-work-with-us",
+            },
+            {
+                title: "تماس با ما",
+                subTitle: "راه‌های ارتباطی",
+                link: "/contact-us",
+                icon: "menu-contact-us",
+            },
+            {
+                title: "شماره حساب‌های کارگزاری",
+                subTitle: "اطلاعات حساب‌های بانکی",
+                link: "/bank-accounts",
+                icon: "menu-acc-numbers",
+            },
+            {
+                title: "شعب و دفاتر پیشخوان",
+                subTitle: "آدرس و اطلاعات شعب",
+                link: "/branches",
+                icon: "menu-branches",
+            },
+        ],
+    },
+    {
+        title: "نئوتریدر",
+        width: "260px",
+        subMenus: [],
+    },
+];
+---
+
+<header
+    id="main-header"
+    class="fixed inset-x-0 top-3 z-50 flex justify-center mx-auto w-full px-3 lg:pointer-events-none transition-all duration-700 ease-in-out"
+>
+    <div
+        id="header-inner"
+        class="lg:pointer-events-auto flex h-15 px-6 py-4 w-full items-center max-w-lg justify-between rounded-2xl gap-2 transition-all duration-700 ease-in-out"
+    >
+        <div class="flex w-full items-center justify-between gap-2">
+            <!-- Logo -->
+            <a href="/">
+                <LogoNoText class="m-icon-nav hidden h-8 w-auto text-brand" />
+                <Logo class="d-icon-nav block h-8 w-auto text-white" />
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden items-center gap-1 lg:flex lg:gap-2">
+                {menus.map((menu, i) => (
+                    <div class="group relative text-white">
+                        <div class="menu-trigger flex gap-1.5 text-base cursor-pointer rounded-md px-3 py-2 font-semibold text-white transition-all duration-400 ease-in-out hover:bg-[#1C2754] items-center">
+                            <span> {menu.title}</span>
+                            {menu?.subMenus.length > 0 && (
+                                <svg
+                                    class="size-4 text-gray-400 transition-transform duration-200"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 9l-7 7-7-7"
+                                    />
+                                </svg>
+                            )}
+                        </div>
+                        {menu?.subMenus.length > 0 && (
+                            <div
+                                class="invisible absolute top-full right-0 mt-2 min-w-62.5 rounded-2xl bg-white p-4 opacity-0 transition-all duration-300 ease-in-out group-hover:visible group-hover:opacity-100"
+                                style={`width: ${menu.width}`}
+                            >
+                                <div class="absolute -top-2 right-10 h-2 w-4 border-r-7 border-b-7 border-l-7 border-r-transparent border-b-white border-l-transparent" />
+
+                                <ul class="m-0 p-0">
+                                    {menu.subMenus.map((sub, j) => (
+                                        <li>
+                                            <a
+                                                class="group/item flex flex-row items-center gap-4 rounded-2xl p-[10px_15px_30px_15px] text-[14px] leading-5.25 font-medium text-[#131722] hover:bg-(--Colors-Hover,#F0F3FA)"
+                                                href={sub.link ?? "#"}
+                                            >
+                                                {/* {sub.icon && <SvgLoader class="h-6 w-6" src={`/img/${sub.icon}.svg`} />} */}
+
+                                                <span class="relative flex w-full flex-col gap-1">
+                                                    <span>{sub.title}</span>
+
+                                                    {sub.subTitle && (
+                                                        <span class="invisible absolute translate-y-0 text-[12px] font-normal text-[#97A3B7] opacity-0 transition-all duration-300 ease-in-out group-hover/item:visible group-hover/item:translate-y-[125%] group-hover/item:opacity-100">
+                                                            {sub.subTitle}
+                                                        </span>
+                                                    )}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </nav>
+
+            <!-- Desktop CTA -->
+            <button
+                class="neo-button neo-button-fill-primary hidden px-4.25 py-1.25 leading-normal font-normal lg:block"
+                onclick="openRegNahayatnegar()"
+            >
+                افتتاح حساب
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex gap-2 items-stretch lg:hidden">
+                <button class="neo-button neo-button-fill-primary" onclick="openRegNahayatnegar">
+                    افتتاح حساب
+                </button>
+
+                <button
+                    id="mobile-menu-btn"
+                    class="neo-button neo-button-icon neo-button-fill-neutral items-center p-1"
+                >
+                    <MobileMenue class="main-kabab-icon text-white shrink-0" />
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div id="mobile-drawer" class="fixed inset-0 z-50 overflow-hidden hidden lg:hidden">
+    <div class="absolute top-0 right-0 flex h-full w-full flex-col bg-[#102550]/75 shadow-xl transition-transform duration-300">
+        <div class="flex items-center justify-between border-b border-gray-200 px-5 py-4">
+            <span class="text-primary text-xl font-bold">نهایت‌نگر</span>
+            <button id="drawer-close" class="flex size-10 cursor-pointer items-center justify-center">
+                <!-- <SvgLoader src="/img/close-sq.svg" /> -->
+            </button>
+        </div>
+        <div class="flex flex-1 flex-col">
+            <div class="flex flex-1 flex-col overflow-y-auto p-0">
+                <ul class="flex-1 py-4">
+                    {[...menus].map((menu, i) => (
+                        <li class="border-b border-gray-200">
+                            <button
+                                class="flex w-full cursor-pointer items-center justify-between border-none bg-transparent px-6 py-4 text-right transition-colors"
+                                onclick="toggleMenu(this)"
+                                type="button"
+                            >
+                                <span class="cursor-pointer text-base font-semibold text-[#1e293b]">{menu.title}</span>
+
+                                {/* <SvgLoader src="/img/arrow-left.svg" class="text-primary" /> */}
+                            </button>
+
+                            <div class="max-h-0 overflow-hidden bg-[#f8fafc] transition-[max-height] duration-500 ease-in-out">
+                                {menu.subMenus.map((sub, s) => (
+                                    <a
+                                        class="block text-inherit no-underline transition-all duration-500 ease-in-out"
+                                        href={sub.link}
+                                    >
+                                        <div class="flex items-start gap-3 px-5 py-2.5 pl-3">
+                                            <div class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[#e0f2fe]">
+                                                {/* {sub.icon && (
+                                                    <SvgLoader class="h-5 w-5" src={`/img/${sub.icon}-linear.svg`} />
+                                                )} */}
+                                            </div>
+                                            <div class="mb-1 text-[14px] leading-[1.4] font-semibold text-[#1e293b]">
+                                                <div class="mb-1 text-[14px] leading-[1.4] font-semibold text-[#1e293b]">
+                                                    {sub.title}
+                                                </div>
+                                                <div class="text-[12px] leading-[1.4] text-[#64748b]">
+                                                    {sub.subTitle}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script is:inline>
+    const headerInner = document.getElementById("header-inner");
+    const dIcon = document.querySelector(".d-icon-nav");
+    const mIcon = document.querySelector(".m-icon-nav");
+    const menuTriggers = document.querySelectorAll(".menu-trigger");
+
+    function toggleMenu(button) {
+        const content = button.nextElementSibling;
+        const li = button.closest("li");
+        li.classList.toggle("expanded");
+
+        content.classList.toggle("max-h-0");
+        content.classList.toggle("max-h-[1000px]");
+
+        const svg = button.querySelector("svg");
+        svg.classList.toggle("rotate-270");
+    }
+
+    // منوی موبایل
+    const drawer = document.getElementById("mobile-drawer");
+    const btn = document.getElementById("mobile-menu-btn");
+    const closeBtn = document.getElementById("drawer-close");
+
+    btn.addEventListener("click", () => {
+        drawer.classList.remove("hidden");
+    });
+
+    closeBtn.addEventListener("click", () => {
+        drawer.classList.add("hidden");
+    });
+
+    drawer.addEventListener("click", (e) => {
+        if (e.target === drawer) drawer.classList.add("hidden");
+    });
+
+    function resetHeaderStyles() {
+        headerInner.classList.remove("bg-[#102550]/75", "shadow-lg", "py-2", "px-4", "md:w-md");
+        headerInner.classList.add("py-4", "px-6", "w-full");
+        mIcon.classList.add("hidden");
+        dIcon.classList.remove("hidden");
+    }
+
+    function applyScrolledStyles() {
+        headerInner.classList.remove("py-4", "px-6");
+        headerInner.classList.add(
+            "px-4",
+            "bg-[#102550]/75",
+            "backdrop-blur-md",
+            "md:w-md",
+            "shadow-xl",
+            "border-white/20",
+        );
+
+        mIcon.classList.remove("hidden");
+        dIcon.classList.add("hidden");
+    }
+
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
+            applyScrolledStyles();
+        } else {
+            resetHeaderStyles();
+        }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+</script>

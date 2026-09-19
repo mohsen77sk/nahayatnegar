@@ -1,37 +1,48 @@
 ---
-import Instagram from "./../../assets/icons/iconsax/outline/instagram.svg";
-import Whatsapp from "./../../assets/icons/iconsax/outline/whatsapp.svg";
-import Call from "./../../assets/icons/iconsax/outline/call.svg";
-import Map from "./../../assets/icons/iconsax/outline/map.svg";
-import Logo from "./../../assets/icons/logo-footer.svg";
-
-import FooterColumn from "./footer-column.astro";
+import { siteUrl } from "@utils/url";
+import Instagram from "@assets/icons/iconsax/outline/instagram.svg";
+import Whatsapp from "@assets/icons/iconsax/outline/whatsapp.svg";
+import Call from "@assets/icons/iconsax/outline/call.svg";
+import Map from "@assets/icons/iconsax/outline/map.svg";
+import Logo from "@assets/icons/logo-footer.svg";
 
 const phone = "02184450";
-const quickLinks = [
-  { label: "سامانه معاملاتی نئوتردیدر", href: "/" },
-  { label: "سامانه معاملاتی پرو تریدر", href: "/" },
-  { label: "آموزش", href: "/" },
-  { label: "کد بورسی و سجام", href: "/" },
-];
-const services = [
-  { label: "صندوق‌های سرمایه‌گذاری", href: "/" },
-  { label: "سبد گردانی اختصاصی", href: "/" },
-  { label: "کد بورسی و سجام", href: "/" },
-];
-const aboutLinks = [
-  { label: "تماس با ما", href: "/contact-us" },
-  { label: "همکاری با ما", href: "/" },
-  { label: "شعب و دفاتر پیشخوان", href: "/branches" },
+const columns = [
+  {
+    title: "دسترسی سریع",
+    links: [
+      { label: "سامانه معاملاتی نئوتردیدر", href: "/" },
+      { label: "سامانه معاملاتی پرو تریدر", href: "/" },
+      { label: "آموزش", href: "/" },
+      { label: "کد بورسی و سجام", href: "/" },
+    ],
+  },
+  {
+    title: "خدمات",
+    links: [
+      { label: "صندوق‌های سرمایه‌گذاری", href: "/" },
+      { label: "سبد گردانی اختصاصی", href: "/" },
+      { label: "کد بورسی و سجام", href: "/" },
+    ],
+  },
+  {
+    title: "درباره نهایت‌نگر",
+    links: [
+      { label: "درباره ما", href: "/about-us" },
+      { label: "تماس با ما", href: "/contact-us" },
+      { label: "شعب و دفاتر پیشخوان", href: "/branches" },
+    ],
+  },
 ];
 ---
 
 <footer class="flex w-full justify-center px-2">
-  <div class="flex w-full max-w-300 flex-col items-center gap-8">
+  <div class="flex w-full max-w-lg flex-col items-center gap-8">
     <!-- Support -->
     <div class="flex w-full flex-col gap-4 border-b border-secondary py-10 sm:flex-row sm:items-center sm:justify-between">
       <div class="flex items-center justify-center gap-3 rounded-full bg-blue-100 px-4 py-2 leading-8 sm:px-6">
-        <span>مشاوره و پاسخگویی</span> <span class="h-5 w-px bg-blue-300" aria-hidden="true"></span>
+        <span>مشاوره و پاسخگویی</span>
+        <span class="h-5 w-px bg-blue-300" aria-hidden="true"></span>
         <span>۲۴ ساعته در ۷ روز هفته</span>
       </div>
       <div class="flex justify-end gap-2">
@@ -56,7 +67,9 @@ const aboutLinks = [
       <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-[3fr_1fr_1fr_1fr] sm:gap-x-8">
         <!-- Company -->
         <div class="flex flex-col items-start gap-9">
-          <Logo aria-label="نهایت‌نگر" />
+          <a href="/" aria-label="نهایت‌نگر">
+            <Logo aria-hidden="true" />
+          </a>
           <div class="flex flex-col gap-4">
             <address class="flex flex-col gap-4 text-sm not-italic">
               <p class="flex gap-2">
@@ -65,7 +78,10 @@ const aboutLinks = [
               <p class="flex gap-2">
                 <span>تماس:</span>
                 <span class="ltr">
-                  ۰۲۱- <span class="text-brand">۸۴۴۵۰</span>
+                  ۰۲۱-{" "}
+                  <a href={`tel:${phone}`} class="text-brand">
+                    ۸۴۴۵۰
+                  </a>
                 </span>
               </p>
             </address>
@@ -78,20 +94,30 @@ const aboutLinks = [
             >
               <Map aria-hidden="true" /> <span class="ltr">مسیریابی رو نقشه</span>
             </a>
-            <div class="flex gap-4">
-              <a href="/" aria-label="واتساپ">
+            <div class="flex gap-2">
+              <a class="neo-button neo-icon-button neo-button-neutral" href="/" aria-label="واتساپ">
                 <Whatsapp aria-hidden="true" />
               </a>
-              <a href="/" aria-label="اینستاگرام">
+              <a class="neo-button neo-icon-button neo-button-neutral" href="/" aria-label="اینستاگرام">
                 <Instagram aria-hidden="true" />
               </a>
             </div>
           </div>
         </div>
         <!-- Quick links -->
-        <FooterColumn title="دسترسی سریع" links={quickLinks} />
-        <FooterColumn title="خدمات" links={services} />
-        <FooterColumn title="درباره نهایت‌نگر" links={aboutLinks} />
+        {columns.map(({ title, links }) => (
+          <div class="flex flex-col items-start gap-4">
+            <span class="text-sm font-semibold text-brand">{title}</span>
+
+            <nav class="flex flex-col text-sm font-bold">
+              {links.map(({ label, href }) => (
+                <a class="py-4" href={siteUrl(href)}>
+                  {label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        ))}
       </div>
       <!-- Copyright -->
       <div class="border-t border-secondary py-3 text-body-large font-normal text-secondary">
