@@ -1,9 +1,9 @@
 ---
-import Instagram from "./../../assets/icons/iconsax/outline/instagram.svg";
-import Whatsapp from "./../../assets/icons/iconsax/outline/whatsapp.svg";
-import Call from "./../../assets/icons/iconsax/outline/call.svg";
-import Map from "./../../assets/icons/iconsax/outline/map.svg";
-import Logo from "./../../assets/icons/logo-footer.svg";
+import Instagram from "@assets/icons/iconsax/outline/instagram.svg";
+import Whatsapp from "@assets/icons/iconsax/outline/whatsapp.svg";
+import Call from "@assets/icons/iconsax/outline/call.svg";
+import Map from "@assets/icons/iconsax/outline/map.svg";
+import Logo from "@assets/icons/logo-footer.svg";
 
 const phone = "02184450";
 const columns = [
@@ -27,8 +27,8 @@ const columns = [
   {
     title: "درباره نهایت‌نگر",
     links: [
+      { label: "درباره ما", href: "/about-us" },
       { label: "تماس با ما", href: "/contact-us" },
-      { label: "همکاری با ما", href: "/" },
       { label: "شعب و دفاتر پیشخوان", href: "/branches" },
     ],
   },
@@ -77,7 +77,10 @@ const columns = [
               <p class="flex gap-2">
                 <span>تماس:</span>
                 <span class="ltr">
-                  ۰۲۱- <span class="text-brand">۸۴۴۵۰</span>
+                  ۰۲۱-{" "}
+                  <a href={`tel:${phone}`} class="text-brand">
+                    ۸۴۴۵۰
+                  </a>
                 </span>
               </p>
             </address>
