@@ -1,27 +1,67 @@
 @layer components {
   .neo-button {
-    @apply cursor-pointer border border-transparent leading-normal focus:outline-none;
+    @apply cursor-pointer border border-transparent leading-normal transition duration-200 focus:outline-none;
     /* medium */
     @apply h-8.5 rounded-md px-3 text-[13px] font-semibold;
 
+    &.neo-icon-button {
+      @apply flex w-8.5 items-center justify-center p-0;
+
+      svg {
+        @apply h-4.5 w-4.5;
+      }
+    }
+
     &.neo-button-small {
       @apply h-7 rounded-sm px-2 text-[12px] font-medium;
+
+      &.neo-icon-button {
+        @apply w-7 p-0;
+
+        svg {
+          @apply h-4 w-4;
+        }
+      }
     }
 
     &.neo-button-large {
       @apply h-13 rounded-lg px-4 text-[14px] font-bold;
+
+      &.neo-icon-button {
+        @apply w-13 p-0;
+
+        svg {
+          @apply h-6 w-6;
+        }
+      }
+    }
+
+    &.neo-button-neutral {
+      @apply hover:bg-neutral-light-hover active:bg-neutral-light-active text-primary;
     }
 
     &.neo-button-primary {
       @apply hover:bg-brand-light-hover active:bg-brand-light-active text-brand;
     }
 
+    &.neo-button-fill-neutral {
+      @apply bg-neutral hover:bg-neutral-hover active:bg-neutral-active text-primary;
+    }
+
     &.neo-button-fill-primary {
-      @apply bg-brand hover:bg-brand-hover active:bg-brand-active text-white;
+      @apply bg-brand hover:bg-brand-hover active:bg-brand-active text-primary;
+    }
+
+    &.neo-button-light-neutral {
+      @apply bg-neutral-light hover:bg-neutral-light-hover active:bg-neutral-light-active text-primary;
     }
 
     &.neo-button-light-primary {
       @apply bg-brand-light hover:bg-brand-light-hover active:bg-brand-light-active text-primary;
+    }
+
+    &.neo-button-outline-neutral {
+      @apply border-neutral hover:bg-neutral-light-hover active:bg-neutral-light-active text-neutral;
     }
 
     &.neo-button-outline-primary {
