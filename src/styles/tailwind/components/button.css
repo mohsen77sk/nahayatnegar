@@ -49,7 +49,7 @@
     }
 
     &.neo-button-fill-primary {
-      @apply bg-brand hover:bg-brand-hover active:bg-brand-active text-primary;
+      @apply bg-brand hover:bg-brand-hover active:bg-brand-active text-white;
     }
 
     &.neo-button-light-neutral {
