@@ -5,24 +5,33 @@ import Call from "./../../assets/icons/iconsax/outline/call.svg";
 import Map from "./../../assets/icons/iconsax/outline/map.svg";
 import Logo from "./../../assets/icons/logo-footer.svg";
 
-import FooterColumn from "./footer-column.astro";
-
 const phone = "02184450";
-const quickLinks = [
-  { label: "سامانه معاملاتی نئوتردیدر", href: "/" },
-  { label: "سامانه معاملاتی پرو تریدر", href: "/" },
-  { label: "آموزش", href: "/" },
-  { label: "کد بورسی و سجام", href: "/" },
-];
-const services = [
-  { label: "صندوق‌های سرمایه‌گذاری", href: "/" },
-  { label: "سبد گردانی اختصاصی", href: "/" },
-  { label: "کد بورسی و سجام", href: "/" },
-];
-const aboutLinks = [
-  { label: "تماس با ما", href: "/contact-us" },
-  { label: "همکاری با ما", href: "/" },
-  { label: "شعب و دفاتر پیشخوان", href: "/branches" },
+const columns = [
+  {
+    title: "دسترسی سریع",
+    links: [
+      { label: "سامانه معاملاتی نئوتردیدر", href: "/" },
+      { label: "سامانه معاملاتی پرو تریدر", href: "/" },
+      { label: "آموزش", href: "/" },
+      { label: "کد بورسی و سجام", href: "/" },
+    ],
+  },
+  {
+    title: "خدمات",
+    links: [
+      { label: "صندوق‌های سرمایه‌گذاری", href: "/" },
+      { label: "سبد گردانی اختصاصی", href: "/" },
+      { label: "کد بورسی و سجام", href: "/" },
+    ],
+  },
+  {
+    title: "درباره نهایت‌نگر",
+    links: [
+      { label: "تماس با ما", href: "/contact-us" },
+      { label: "همکاری با ما", href: "/" },
+      { label: "شعب و دفاتر پیشخوان", href: "/branches" },
+    ],
+  },
 ];
 ---
 
@@ -31,7 +40,8 @@ const aboutLinks = [
     <!-- Support -->
     <div class="flex w-full flex-col gap-4 border-b border-secondary py-10 sm:flex-row sm:items-center sm:justify-between">
       <div class="flex items-center justify-center gap-3 rounded-full bg-blue-100 px-4 py-2 leading-8 sm:px-6">
-        <span>مشاوره و پاسخگویی</span> <span class="h-5 w-px bg-blue-300" aria-hidden="true"></span>
+        <span>مشاوره و پاسخگویی</span>
+        <span class="h-5 w-px bg-blue-300" aria-hidden="true"></span>
         <span>۲۴ ساعته در ۷ روز هفته</span>
       </div>
       <div class="flex justify-end gap-2">
@@ -56,7 +66,9 @@ const aboutLinks = [
       <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-[3fr_1fr_1fr_1fr] sm:gap-x-8">
         <!-- Company -->
         <div class="flex flex-col items-start gap-9">
-          <Logo aria-label="نهایت‌نگر" />
+          <a href="/" aria-label="نهایت‌نگر">
+            <Logo aria-hidden="true" />
+          </a>
           <div class="flex flex-col gap-4">
             <address class="flex flex-col gap-4 text-sm not-italic">
               <p class="flex gap-2">
@@ -89,9 +101,19 @@ const aboutLinks = [
           </div>
         </div>
         <!-- Quick links -->
-        <FooterColumn title="دسترسی سریع" links={quickLinks} />
-        <FooterColumn title="خدمات" links={services} />
-        <FooterColumn title="درباره نهایت‌نگر" links={aboutLinks} />
+        {columns.map(({ title, links }) => (
+          <div class="flex flex-col items-start gap-9">
+            <span class="text-sm font-semibold text-brand">{title}</span>
+
+            <nav class="flex flex-col gap-4 text-sm font-bold">
+              {links.map(({ label, href }) => (
+                <a class="py-4" href={href}>
+                  {label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        ))}
       </div>
       <!-- Copyright -->
       <div class="border-t border-secondary py-3 text-body-large font-normal text-secondary">
