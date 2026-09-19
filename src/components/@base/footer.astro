@@ -1,4 +1,5 @@
 ---
+import { siteUrl } from "@utils/url";
 import Instagram from "@assets/icons/iconsax/outline/instagram.svg";
 import Whatsapp from "@assets/icons/iconsax/outline/whatsapp.svg";
 import Call from "@assets/icons/iconsax/outline/call.svg";
@@ -105,12 +106,12 @@ const columns = [
         </div>
         <!-- Quick links -->
         {columns.map(({ title, links }) => (
-          <div class="flex flex-col items-start gap-9">
+          <div class="flex flex-col items-start gap-4">
             <span class="text-sm font-semibold text-brand">{title}</span>
 
-            <nav class="flex flex-col gap-4 text-sm font-bold">
+            <nav class="flex flex-col text-sm font-bold">
               {links.map(({ label, href }) => (
-                <a class="py-4" href={href}>
+                <a class="py-4" href={siteUrl(href)}>
                   {label}
                 </a>
               ))}
