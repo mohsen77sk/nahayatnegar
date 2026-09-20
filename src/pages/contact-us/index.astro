@@ -8,6 +8,7 @@ import IconWhatsapp from "@assets/icons/iconsax/outline/whatsapp.svg";
 import IconLocation from "@assets/icons/iconsax/bulk/location.svg";
 import IconCall from "@assets/icons/iconsax/bulk/call.svg";
 import IconSMS from "@assets/icons/iconsax/bulk/sms.svg";
+import { siteUrl } from "@utils/url";
 ---
 
 <Layout title="تماس با ما">
@@ -39,9 +40,7 @@ import IconSMS from "@assets/icons/iconsax/bulk/sms.svg";
             <h3 class="text-title-large text-center lg:text-start">دفتر مرکزی</h3>
             <div class="flex items-center gap-4 p-2">
               <IconLocation />
-              <a href="https://www.google.com/maps/search/?api=1&query=35.XXXXX,51.XXXXX">
-                تهران، خیابان ملاصدرا، شیخ بهایی جنوبی، پلاک ۳۱
-              </a>
+              <span>تهران، خیابان ملاصدرا، شیخ بهایی جنوبی، پلاک ۳۱</span>
             </div>
             <div class="flex items-center gap-4 p-2">
               <IconCall />
@@ -51,7 +50,7 @@ import IconSMS from "@assets/icons/iconsax/bulk/sms.svg";
             </div>
             <div class="flex items-center gap-4 p-2">
               <IconSMS />
-              <a href="email:Info@nahayatnegar.com">Info@nahayatnegar.com</a>
+              <a href="mailto:Info@nahayatnegar.com">Info@nahayatnegar.com</a>
             </div>
           </div>
 
@@ -65,7 +64,9 @@ import IconSMS from "@assets/icons/iconsax/bulk/sms.svg";
           </div>
 
           <div class="flex">
-            <a class="neo-button neo-button-primary">آدرس و تلفن شعب</a>
+            <a class="neo-button neo-button-primary" href={siteUrl("/branches")}>
+              آدرس و تلفن شعب
+            </a>
           </div>
         </div>
 
