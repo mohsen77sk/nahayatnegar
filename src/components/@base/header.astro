@@ -4,6 +4,7 @@ import LogoNoText from "@assets/icons/logo-no-text.svg";
 import MobileMenu from "@assets/icons/iconsax/outline/hamburger-menu.svg";
 import Close from "@assets/icons/iconsax/outline/close-x.svg";
 import DownArrow from "@assets/icons/iconsax/outline/arrow-down-2.svg";
+import UpArrow from "@assets/icons/iconsax/outline/arrow-up-2.svg";
 import Building from "@assets/icons/menu/building.svg";
 import Chart from "@assets/icons/menu/graph.svg";
 import Learning from "@assets/icons/menu/teacher.svg";
@@ -16,7 +17,6 @@ import AboutUsMenuImg from "@assets/images/Nahayatnegar/About Us/about-us-menu.p
 
 import { siteUrl } from "@utils/url";
 import { Image } from "astro:assets";
-import { link } from "fs";
 
 const menus = [
     {
@@ -36,7 +36,7 @@ const menus = [
     },
     {
         title: "نهایت‌نگر",
-        width: "260px",
+        width: "350px",
         subMenus: [
             {
                 title: "درباره ما",
@@ -116,7 +116,7 @@ const mobileMenu = [
 >
     <div
         id="header-inner"
-        class="lg:pointer-events-auto flex h-15 px-6 py-4 w-full items-center max-w-lg justify-between rounded-2xl gap-2 transition-all duration-700 ease-in-out"
+        class="lg:pointer-events-auto flex h-15 lg:px-6 p-4 w-full items-center max-w-lg justify-between rounded-2xl gap-2 transition-all duration-700 ease-in-out"
     >
         <div class="flex w-full items-center justify-between gap-2">
             <!-- Logo -->
@@ -129,33 +129,86 @@ const mobileMenu = [
             <nav class="hidden items-center gap-1 lg:flex lg:gap-2">
                 {menus.map((menu, i) => (
                     <div class="group relative">
-                        <div class="menu-trigger flex gap-1.5 text-base items-center cursor-pointer rounded-md px-3 py-2 font-semibold text-white transition-all duration-400 ease-in-out hover:bg-[#1C2754]">
+                        <div class="menu-trigger flex gap-1.5 text-base items-center cursor-pointer rounded-md px-3 py-2 text-white transition-all duration-400 ease-in-out hover:bg-[#1C2754]">
                             <span> {menu.title}</span>
-                            {menu?.subMenus && menu?.subMenus.length > 0 && <DownArrow class="w-4 h-4" />}
-                        </div>
-                        {menu?.subMenus && menu?.subMenus.length > 0 && (
-                            <div
-                                class="invisible absolute top-full right-0 mt-2 min-w-62.5 rounded-2xl bg-white p-4 opacity-0 transition-all duration-300 ease-in-out group-hover:visible group-hover:opacity-100"
-                                style={`width: ${menu.width}`}
-                            >
-                                <div class="absolute -top-2 right-10 h-2 w-4 border-r-7 border-b-7 border-l-7 border-r-transparent border-l-transparent" />
 
-                                <div class="flex flex-col gap-1">
-                                    {menu.subMenus.map((sub, j) => {
-                                        const Icon = sub.icon;
-                                        return (
-                                            <>
-                                                <div class="group/item relative flex items-center gap-3 rounded-lg p-[10px_15px] text-body-small leading-5.25 hover:bg-secondary">
-                                                    <a href={sub.link ?? "#"} class="flex w-full gap-1">
-                                                        {Icon && <Icon class="text-brand shrink-0" />}
-                                                        <span>{sub.title}</span>
+                            {menu.subMenus && menu.subMenus.length > 0 && (
+                                <>
+                                    <DownArrow class="w-4 h-4 block group-hover:hidden" />
+                                    <UpArrow class="w-4 h-4 hidden group-hover:block" />
+                                </>
+                            )}
+                        </div>
+
+                        {menu?.subMenus && menu?.subMenus.length > 0 && (
+                            <>
+                                <div
+                                    class="invisible opacity-0 pointer-events-none absolute flex flex-col gap-4 w-max top-full right-0 mt- rounded-2xl bg-white p-4 transition-[opacity,transform,visibility] duration-200 ease-out
+                           group-hover:visible group-hover:pointer-events-auto
+                           group-hover:translate-y-0 group-hover:opacity-100
+                           max-w[500px]"
+                                    style={`min-width: ${menu.width}`}
+                                >
+                                    <div class="absolute -top-2 right-10 h-2 w-4 border-r-7 border-b-7 border-l-7 border-r-transparent border-l-transparent" />
+
+                                    <div class="grid grid-cols-2 gap-x-4 gap-y-3 p-2">
+                                        {menu.subMenus.map((sub, j) => {
+                                            const Icon = sub.icon;
+                                            return (
+                                                <a
+                                                    href={sub.link ?? "#"}
+                                                    class="flex min-h-12 min-w-0 items-center gap-3 rounded-lg px-4 py-3
+                                               text-body-small leading-5.25
+                                               transition-colors duration-150
+                                               hover:bg-secondary
+                                               focus-visible:bg-secondary
+                                               focus-visible:outline-none"
+                                                >
+                                                    {Icon && <Icon class="text-brand shrink-0" />}
+                                                    <span>{sub.title}</span>
+                                                </a>
+                                            );
+                                        })}
+                                    </div>
+                                    <div class="bg-secondary pt-4 space-y-3 text-xs rounded-lg text-gray-300 py-3 px-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="font-bold">دفتر مرکزی کارگزاری</div>
+                                        </div>
+
+                                        <div class="flex items-stretch gap-6">
+                                            <div class="flex flex-col gap-1">
+                                                <div class="flex items-start gap-2.5 p-2">
+                                                    <Location class="w-4 h-4 text-brand shrink-0 mt-0.5" />
+                                                    <span class="text-body-small wrap-normal">
+                                                        تهران، خیابان ملاصدرا، شیخ بهایی جنوبی، پلاک ۳۱
+                                                    </span>
+                                                </div>
+                                                <div class="flex items-center gap-2.5 p-2">
+                                                    <Phone class="w-4 h-4 text-brand shrink-0" />
+                                                    <a href="tel:02184450" class="ltr text-body-small">
+                                                        ۰۲۱ ۸۴۴۵۰
                                                     </a>
                                                 </div>
-                                            </>
-                                        );
-                                    })}
+                                                <div class="flex items-center gap-2.5 p-2">
+                                                    <Sms class="w-4 h-4 text-brand shrink-0" />
+                                                    <a href="mailto:info@nahayatnegar.com" class="text-body-small">
+                                                        Info@nahayatnegar.com
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="relative justify-center shrink-0 overflow-hidden rounded-lg w-56 align-stretch">
+                                                <Image
+                                                    class="w-full h-full"
+                                                    src={AboutUsMenuImg}
+                                                    alt="دفتر مرکزی نهایت‌نگر"
+                                                    class="w-full h-full object-cover"
+                                                    loading="lazy"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </>
                         )}
                     </div>
                 ))}
@@ -163,7 +216,7 @@ const mobileMenu = [
 
             <!-- Desktop CTA -->
             <button
-                class="neo-button neo-button-fill-primary hidden px-4.25 py-1.25 leading-normal font-normal lg:block"
+                class="neo-button neo-button-fill-primary hidden px-4.25 py-1.25 leading-normal lg:block"
                 onclick="openRegNahayatnegar()"
             >
                 افتتاح حساب
@@ -226,7 +279,7 @@ const mobileMenu = [
         <!-- Contact / Info Section -->
         <div class="bg-secondary pt-4 space-y-3 text-xs rounded-lg text-gray-300 py-3 px-4">
             <div class="flex items-center gap-3">
-                <div class="font-bold">دفتر مرکزی کارگزاری</div>
+                <div class="font-bold">دفتر مرکزی</div>
             </div>
 
             <div class="relative w-full rounded-lg overflow-hidden shrink-0">
@@ -310,22 +363,15 @@ const mobileMenu = [
     });
 
     function resetHeaderStyles() {
-        headerInner.classList.remove("bg-[#102550]/75", "shadow-lg", "py-2", "px-4", "md:w-md");
-        headerInner.classList.add("py-4", "px-6", "w-full");
+        headerInner.classList.remove("bg-[#102550]/75", "shadow-lg", "lg:py-2", "lg:px-4", "lg:w-md");
+        headerInner.classList.add("lg:py-4", "lg:px-6", "w-full");
         mIcon.classList.add("hidden");
         dIcon.classList.remove("hidden");
     }
 
     function applyScrolledStyles() {
-        headerInner.classList.remove("py-4", "px-6");
-        headerInner.classList.add(
-            "px-4",
-            "bg-[#102550]/75",
-            "backdrop-blur-md",
-            "md:w-md",
-            "shadow-xl",
-            "border-white/20",
-        );
+        headerInner.classList.remove("lg:py-4", "px-6");
+        headerInner.classList.add("lg:px-4", "bg-[#102550]/75", "backdrop-blur-md", "lg:w-md", "shadow-xl");
 
         mIcon.classList.remove("hidden");
         dIcon.classList.add("hidden");
