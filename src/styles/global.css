@@ -92,6 +92,8 @@
   --background-color-fg-secondary: var(--color-neutral-200);
   --background-color-fg-tertiary: var(--color-neutral-400);
   --background-color-fg-selected: oklch(from var(--color-blue-500) / 20%);
+  --background-color-hover-primary: var(--color-neutral-200);
+  --background-color-hover-secondary: oklch(0% 0 0 / 0.08);
   --text-color-primary: oklch(20.596% 0.0229 268.9);
   --text-color-secondary: oklch(20.596% 0.0229 268.9 / 60%);
   --text-color-tertiary: oklch(20.596% 0.0229 268.9 / 40%);
@@ -186,6 +188,7 @@
 /* Components */
 @import "tailwind/components/button.css";
 @import "tailwind/components/card.css";
+@import "tailwind/components/input.css";
 
 /* Utils */
 @import "tailwind/utilities/other.css";

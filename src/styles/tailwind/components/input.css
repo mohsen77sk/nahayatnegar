@@ -1,0 +1,6 @@
+@layer components {
+  input,
+  textarea {
+    @apply border-secondary hover:border-brand active:border-brand rounded-lg border bg-white px-4 py-3 transition duration-100;
+  }
+}
