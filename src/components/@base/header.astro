@@ -16,35 +16,23 @@ import AboutUsMenuImg from "@assets/images/Nahayatnegar/About Us/about-us-menu.p
 
 import { siteUrl } from "@utils/url";
 import { Image } from "astro:assets";
+import { link } from "fs";
 
-interface SubMenu {
-    title: string;
-    subTitle?: string;
-    link: string;
-    icon?: string;
-}
-
-interface MenuItem {
-    title: string;
-    width?: string;
-    subMenus: SubMenu[];
-}
-
-const menus: MenuItem[] = [
+const menus = [
     {
         title: "کارگزاری",
         width: "322px",
-        subMenus: [],
+        link: "/broker",
     },
     {
         title: "مدیریت دارایی ",
         width: "260px",
-        subMenus: [],
+        link: "/asset-management",
     },
     {
         title: "آموزش",
         width: "260px",
-        subMenus: [],
+        link: "/learning",
     },
     {
         title: "نهایت‌نگر",
@@ -54,38 +42,32 @@ const menus: MenuItem[] = [
                 title: "درباره ما",
                 subTitle: "اطلاعات و تاریخچه شرکت",
                 link: "/about-us",
-                icon: "menu-about-us",
-            },
-            {
-                title: "همکاری با ما",
-                subTitle: "فرصت‌های شغلی",
-                link: "#",
-                icon: "menu-work-with-us",
+                icon: TwoUser,
             },
             {
                 title: "تماس با ما",
                 subTitle: "راه‌های ارتباطی",
                 link: "/contact-us",
-                icon: "menu-contact-us",
+                icon: Phone,
             },
             {
                 title: "شماره حساب‌های کارگزاری",
                 subTitle: "اطلاعات حساب‌های بانکی",
                 link: "/bank-accounts",
-                icon: "menu-acc-numbers",
+                icon: Cards,
             },
             {
                 title: "شعب و دفاتر پیشخوان",
                 subTitle: "آدرس و اطلاعات شعب",
                 link: "/branches",
-                icon: "menu-branches",
+                icon: Location,
             },
         ],
     },
     {
         title: "نئوتریدر",
         width: "260px",
-        subMenus: [],
+        link: "https://neotrader.nahayatnegar.com",
     },
 ];
 
@@ -93,17 +75,17 @@ const mobileMenu = [
     {
         title: "کارگزاری",
         icon: Building,
-        link: "",
+        link: "broker",
     },
     {
         title: "مدیریت دارایی ",
         icon: Chart,
-        link: "",
+        link: "asset-management",
     },
     {
         title: "آموزش",
         icon: Learning,
-        link: "",
+        link: "learning",
     },
     {
         title: "درباره ما",
@@ -118,7 +100,7 @@ const mobileMenu = [
     {
         title: "شماره حساب‌های کارگزاری",
         icon: Cards,
-        link: "",
+        link: "bank-accounts",
     },
     {
         title: "شعب و دفاتر پیشخوان",
@@ -147,38 +129,33 @@ const mobileMenu = [
             <!-- Desktop Menu -->
             <nav class="hidden items-center gap-1 lg:flex lg:gap-2">
                 {menus.map((menu, i) => (
-                    <div class="group relative text-white">
+                    <div class="group relative">
                         <div class="menu-trigger flex gap-1.5 text-base items-center cursor-pointer rounded-md px-3 py-2 font-semibold text-white transition-all duration-400 ease-in-out hover:bg-[#F0F3FA] hover:text-gray-900">
                             <span> {menu.title}</span>
-                            {menu?.subMenus.length > 0 && <DownArrow class="w-4 h-4" />}
+                            {menu?.subMenus && menu?.subMenus.length > 0 && <DownArrow class="w-4 h-4" />}
                         </div>
-                        {menu?.subMenus.length > 0 && (
+                        {menu?.subMenus && menu?.subMenus.length > 0 && (
                             <div
                                 class="invisible absolute top-full right-0 mt-2 min-w-62.5 rounded-2xl bg-white p-4 opacity-0 transition-all duration-300 ease-in-out group-hover:visible group-hover:opacity-100"
                                 style={`width: ${menu.width}`}
                             >
-                                <div class="absolute -top-2 right-10 h-2 w-4 border-r-7 border-b-7 border-l-7 border-r-transparent border-b-white border-l-transparent" />
+                                <div class="absolute -top-2 right-10 h-2 w-4 border-r-7 border-b-7 border-l-7 border-r-transparent border-l-transparent" />
 
-                                <ul class="m-0 p-0">
-                                    {menu.subMenus.map((sub, j) => (
-                                        <li>
-                                            <a
-                                                class="group/item flex flex-row items-center gap-4 rounded-2xl p-[10px_15px_30px_15px] text-body-small leading-5.25 font-medium text-[#131722] hover:bg-(--Colors-Hover,#F0F3FA)"
-                                                href={sub.link ?? "#"}
-                                            >
-                                                <span class="relative flex w-full flex-col gap-1">
-                                                    <span>{sub.title}</span>
-
-                                                    {sub.subTitle && (
-                                                        <span class="invisible absolute translate-y-0 text-xs font-normal text-[#97A3B7] opacity-0 transition-all duration-300 ease-in-out group-hover/item:visible group-hover/item:translate-y-[125%] group-hover/item:opacity-100">
-                                                            {sub.subTitle}
-                                                        </span>
-                                                    )}
-                                                </span>
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
+                                <div class="flex flex-col gap-1">
+                                    {menu.subMenus.map((sub, j) => {
+                                        const Icon = sub.icon;
+                                        return (
+                                            <>
+                                                <div class="group/item relative flex items-center gap-3 rounded-lg p-[10px_15px] text-body-small leading-5.25 hover:bg-secondary">
+                                                    <a href={sub.link ?? "#"} class="flex w-full gap-1">
+                                                        {Icon && <Icon class="text-brand shrink-0" />}
+                                                        <span>{sub.title}</span>
+                                                    </a>
+                                                </div>
+                                            </>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         )}
                     </div>
@@ -236,7 +213,7 @@ const mobileMenu = [
                 return (
                     <li>
                         <a
-                            class="flex items-center gap-3 rounded-xl px-3 py-3 text-gray-200 hover:bg-white/10 hover:text-white transition-colors"
+                            class="flex items-center gap-3 rounded-xl px-3 py-3 text-gray-200 transition-colors"
                             href={siteUrl(menu.link)}
                         >
                             {Icon && <Icon class="text-brand shrink-0" />}
