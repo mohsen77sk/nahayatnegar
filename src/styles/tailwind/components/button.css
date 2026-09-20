@@ -1,6 +1,6 @@
 @layer components {
   .neo-button {
-    @apply cursor-pointer border border-transparent leading-normal transition duration-200 focus:outline-none;
+    @apply flex cursor-pointer items-center justify-center border border-transparent leading-normal transition duration-200 focus:outline-none;
     /* medium */
     @apply h-8.5 rounded-md px-3 text-[13px] font-semibold;
 

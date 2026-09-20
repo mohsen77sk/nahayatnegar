@@ -188,6 +188,7 @@
 /* Components */
 @import "tailwind/components/button.css";
 @import "tailwind/components/card.css";
+@import "tailwind/components/input.css";
 
 /* Utils */
 @import "tailwind/utilities/other.css";
