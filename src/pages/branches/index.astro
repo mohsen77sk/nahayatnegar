@@ -1,7 +1,254 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+import Section1Img from "@assets/images/Nahayatnegar/Branches/branches-hero.png";
+import Section1ImgMob from "@assets/images/Nahayatnegar/Branches/branches-hero-mob.png";
+import IconSearch from "@assets/icons/iconsax/outline/search-normal-1.svg";
+
+const branches = [
+  {
+    city: "تهران",
+    branch: [
+      {
+        title: "مرکزی",
+        address: "خیابان شیخ‌بهایی جنوبی- نبش کوچه مفتاح، پلاک 31",
+        number: "02184450",
+      },
+      {
+        title: "عباس آباد",
+        address: "خیابان بهشتی، خیابان پاکستان، کوچه 4، پلاک 15، ساختمان کشمیر، واحد2",
+        number: "02188747821-2",
+      },
+    ],
+  },
+  {
+    city: "اصفهان",
+    branch: [
+      {
+        title: "آذر",
+        address: "درب کوشک، خیابان آیت اله طیب، پلاک113، طبقه 2، واحد13",
+        number: "031-32230673",
+      },
+      {
+        title: "آپادانا",
+        address: "خیابان آپادانا،جنب بن بست شماره 14،مجتمع پارسیان، طبقه دوم، واحد 26",
+        number: "03136650827",
+      },
+      {
+        title: "اصفهان",
+        address: "خیابان میر، خیابان آب 250، تقاطع کاخ سعادت‌آباد، ساختمان پارسیان، طبقه دوم، واحد 25",
+        number: "03136614201",
+      },
+      {
+        title: "بلوار کشاورز",
+        address: "بلوار کشاورز، کوچه جام(105)، ساختمان سنگ سفید، پلاک4، طبقه اول، واحد راست",
+        number: "03137781600",
+      },
+    ],
+  },
+  {
+    city: "آذربایجان شرقی",
+    branch: [
+      {
+        title: "تبریز",
+        address: "چهارراه منصور، جنب سید لَر، ساختمان باراما، طبقه اول، واحد 1",
+        number: "04133368036",
+      },
+    ],
+  },
+  {
+    city: "البرز",
+    branch: [
+      {
+        title: "کرج",
+        address: "میدان آزادگان، نبش خیابان حسینی، برج میلاد، طبقه 10، واحد 5",
+        number: "02632502502",
+      },
+    ],
+  },
+  {
+    city: "چهار محال و بختیاری",
+    branch: [
+      {
+        title: "شهرکرد",
+        address: "خیابان سعدی، نبش کوچه 51، ساختمان حسام، طبقه 1، واحد 2",
+        number: "03832228677",
+      },
+    ],
+  },
+  {
+    city: "خراسان رضوی",
+    branch: [
+      {
+        title: "تالار معاملاتی مشهد",
+        address: "بلوار جلال آل احمد، بلوار فرهنگ، پلاک 124، ساختمان مجد، طبقه اول",
+        number: "05191690159",
+      },
+      {
+        title: "مر مر مشهد",
+        address: "بلوار شهید قرنی، چهارراه ابوطالب، مجتمع اداری تجاری جام جم، طبقه اول، واحد 107",
+        number: "05191690159",
+      },
+    ],
+  },
+  {
+    city: "فارس",
+    branch: [
+      {
+        title: "لارستان",
+        address: "شهرجدید-مجتمع تجاری اداری ارکید طبقه ٥ واحد806",
+        number: "07152255626",
+      },
+    ],
+  },
+  {
+    city: "کرمان",
+    branch: [
+      {
+        title: "سیرجان",
+        address: "بلوار ولی عصر، کوچه پشت استادیوم امام علی، مجتمع آموزشی اندیشه، طبقه دوم",
+        number: "03442302253",
+      },
+    ],
+  },
+  {
+    city: "کرمانشاه",
+    branch: [
+      {
+        title: "کرمانشاه",
+        address: "بلوار شهید بهشتی، بالاتر از تقاطع 22 بهمن،ساختمان بورس منطقه‌ای کرمانشاه، طبقه 3",
+        number: "08338250048",
+      },
+    ],
+  },
+  {
+    city: "گلستان",
+    branch: [
+      {
+        title: "گرگان",
+        address: "میدان ولیعصر، برج سرمایه، طبقه دوم، واحد 24",
+        number: "01732201940",
+      },
+    ],
+  },
+  {
+    city: "مازندران",
+    branch: [
+      {
+        title: "بابل",
+        address: "خیابان مدرس، مقابل مسجد عدنانی، جنب ساختمان توکل، ساختمان دی، طبقه 7، واحد73",
+        number: "01144420742",
+      },
+      {
+        title: "ساری",
+        address: "خيابان امير مازندراني، روبروي فرمانداري، مجتمع آرتين، طبقه2، واحد 7 و 8",
+        number: "01133378300",
+      },
+    ],
+  },
+  {
+    city: "مرکزی",
+    branch: [
+      {
+        title: "ساوه",
+        address: "خیابان انقلاب، نرسیده به میدان انقلاب، ساختمان نیاوران، طبقه اول، واحد4",
+        number: "08642223332",
+      },
+    ],
+  },
+];
 ---
 
-<Layout title="Branches">
-  <main></main>
+<Layout title="شعب و دفاتر نمایندگی">
+  <main>
+    <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <!-- right -->
+      <div class="flex items-center self-center flex-1" slot="right">
+        <div class="flex flex-col items-center gap-8 lg:items-start">
+          <span class="text-display-small text-white">شعب و دفاتر نمایندگی</span>
+          <h1 class="text-body-large text-white text-center">بیش از ۲۰ شعبه در سراسر ایران</h1>
+        </div>
+      </div>
+      <!-- left -->
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+    <section class="flex py-8 lg:py-16 px-4 bg-fg-primary">
+      <div class="flex flex-col gap-8 max-w-lg w-full mx-auto relative">
+        <div class="flex flex-col lg:flex-row w-full lg:w-auto items-center flex-1 justify-between gap-4">
+          <div class="neo-tabs w-full lg:w-auto">
+            <div class="neo-tab-label w-full lg:w-auto active">شعب</div>
+            <div class="neo-tab-label w-full lg:w-auto">دفاتر نمایندگی</div>
+            <div class="neo-tab-label w-full lg:w-auto">بازاریاب‌ها</div>
+          </div>
+          <div class="flex w-full lg:w-80 relative">
+            <input
+              class="flex-1 pl-10"
+              type="search"
+              name="search"
+              placeholder="جستجوی شعبه"
+              aria-label="جستجوی شعبه"
+              data-branch-search
+            />
+            <IconSearch class="absolute left-3 top-2.5 w-4 h-4" />
+          </div>
+        </div>
+
+        <div class="bg-fg-secondary rounded-xl gap-4 lg:gap-8 p-2 lg:p-8" data-branch-results>
+          {branches.map(({ city, branch }) => (
+            <div data-branch-city={city}>
+              <h4 class="text-heading-medium mb-3">{city}</h4>
+              <div class="flex flex-col flex-1 gap-4 mb-4">
+                {branch.map(({ title, number, address }) => (
+                  <div
+                    class="grid grid-cols-2 bg-fg-primary p-5 gap-4 rounded-xl"
+                    data-branch-card={`${city} ${title} ${address} ${number}`}
+                  >
+                    <div class="grid gap-4">
+                      <span class="text-title-medium">{title}</span>
+                      <span class="text-body-medium">{address}</span>
+                      <span class="text-body-medium text-secondary">{number}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+          <p class="hidden text-center text-body-medium p-4" data-branch-empty>
+            شعبه‌ای پیدا نشد.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<script>
+  const searchInput = document.querySelector<HTMLInputElement>("[data-branch-search]");
+  const cityGroups = document.querySelectorAll<HTMLElement>("[data-branch-city]");
+  const emptyMessage = document.querySelector<HTMLElement>("[data-branch-empty]");
+
+  const normalize = (value: string) => value.trim().toLocaleLowerCase().replace(/ي/g, "ی").replace(/ك/g, "ک");
+
+  searchInput?.addEventListener("input", () => {
+    const query = normalize(searchInput.value);
+    let visibleBranches = 0;
+
+    cityGroups.forEach((cityGroup) => {
+      const cityName = normalize(cityGroup.dataset.branchCity ?? "");
+      const cards = cityGroup.querySelectorAll<HTMLElement>("[data-branch-card]");
+      let visibleCityBranches = 0;
+
+      cards.forEach((card) => {
+        const matches =
+          !query || normalize(card.dataset.branchCard ?? `${cityName} ${card.textContent}`).includes(query);
+        card.classList.toggle("hidden", !matches);
+        visibleCityBranches += matches ? 1 : 0;
+      });
+
+      cityGroup.classList.toggle("hidden", visibleCityBranches === 0);
+      visibleBranches += visibleCityBranches;
+    });
+
+    emptyMessage?.classList.toggle("hidden", visibleBranches > 0);
+  });
+</script>
