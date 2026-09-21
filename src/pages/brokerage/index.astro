@@ -1,7 +1,62 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+import Section1ImgMob from "@assets/images/Brokerage/brokerage-hero-mob.png";
+import Section1Img from "@assets/images/Brokerage/brokerage-hero.png";
+import Section2ImgMob from "@assets/images/Brokerage/credit-section.png";
+import Section2Img from "@assets/images/Brokerage/credit-section-mob.png";
+import Section3ImgMob from "@assets/images/Brokerage/nahaban-section.png";
+import Section3Img from "@assets/images/Brokerage/nahaban-section-mob.png";
+import Section4ImgMob from "@assets/images/Brokerage/instant-withdraw-section.png";
+import Section4Img from "@assets/images/Brokerage/instant-withdraw-section-mob.png";
+import Section5ImgMob from "@assets/images/Brokerage/discount-commition-bg.png";
+import Section5Img from "@assets/images/Brokerage/discount-commition-bg-mob.png";
+import Section6ImgMob from "@assets/images/Brokerage/card-bg.png";
+import Section6Img from "@assets/images/Brokerage/card-bg-mob.png";
 ---
 
-<Layout title="Brokerage">
-  <main></main>
+<Layout title="کارگزاری">
+  <main>
+    <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right">
+        <div class="flex flex-col items-center gap-8 lg:items-start">
+          <div class="text-display-small text-white">خدمات کارگزاری</div>
+          <h1 class="text-body-large text-white text-center">تمام آنچه برای یک سرمایه‌گذاری حرفه‌ای نیاز دارید</h1>
+          <div class="flex gap-2 flex-wrap items-center justify-center text-white text-body-large">
+            <div class="lex py-1 px-4 justify-start font-medium rounded-full bg-disabled">سرویس‌های مالی</div>
+            <div class="lex py-1 px-4 justify-start font-medium rounded-full bg-disabled">پلتفرم‌های معاملاتی</div>
+            <div class="lex py-1 px-4 justify-start font-medium rounded-full bg-disabled">خدمات ویژه برای مشتریان</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+    <section class="flex min-h-225 py-8 lg:py-16 px-4 bg-center bg-cover bg-no-repeat">
+      <div class="flex flex-col"></div>
+    </section>
+
+    <SectionLayer1 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={Section3Img} mobileImage={Section3ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={Section4Img} mobileImage={Section4ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+    <SectionLayer1 desktopImage={Section5Img} mobileImage={Section5ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={Section6Img} mobileImage={Section6ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+  </main>
 </Layout>
