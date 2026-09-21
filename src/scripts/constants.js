@@ -1,4 +1,8 @@
-export const MoboTraderAppAddress = 'https://mobotrader.nahayatnegar.com/'
-export const NeoTraderAppAddress = 'https://neotrader.nahayatnegar.com/'
-export const ProTraderAppAddress = 'https://neotrader.nahayatnegar.com/'
-export const registerAddress = 'https://reg.nahayatnegar.com/'
+export const URLS = {
+moboTraderAppAddress : 'https://mobotrader.nahayatnegar.com/',
+neoTraderAppAddress : 'https://neotrader.nahayatnegar.com/',
+proTraderAppAddress : 'https://neotrader.nahayatnegar.com/',
+registerAddress : 'https://reg.nahayatnegar.com/'
+}
+    
+export default URLS;
