@@ -1,0 +1,32 @@
+---
+interface Props {
+  desktopVideo: string;
+  mobileVideo: any;
+  poster?: any;
+}
+
+const { desktopVideo, mobileVideo, poster } = Astro.props;
+---
+
+<section class="bg-center bg-cover bg-no-repeat relative flex min-h-225 py-8 lg:py-16 px-4 overflow-hidden">
+  <!-- Background video -->
+  <video
+    class="absolute inset-0 h-full w-full object-cover z-0"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster={poster}
+  >
+    <source src={desktopVideo} media="(min-width: 1200px)" type="video/mp4" />
+    <source src={mobileVideo} type="video/mp4" />
+  </video>
+
+  <div class="absolute inset-0 bg-black/15 z-10"></div>
+
+  <div class="flex flex-col  gap-4 lg:top-30 max-w-lg mx-auto relative z-20">
+    <slot name="right" />
+    <slot name="left" />
+  </div>
+</section>
