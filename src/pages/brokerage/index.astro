@@ -1,7 +1,108 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+import Section1ImgMob from "@assets/images/Brokerage/brokerage-hero-mob.png";
+import Section1Img from "@assets/images/Brokerage/brokerage-hero.png";
+import Section2Img from "@assets/images/Brokerage/credit-section.png";
+import Section2ImgMob from "@assets/images/Brokerage/credit-section-mob.png";
+import Section3Img from "@assets/images/Brokerage/nahaban-section.png";
+import Section3ImgMob from "@assets/images/Brokerage/nahaban-section-mob.png";
+import Section4Img from "@assets/images/Brokerage/instant-withdraw-section.png";
+import Section4ImgMob from "@assets/images/Brokerage/instant-withdraw-section-mob.png";
+import Section5Img from "@assets/images/Brokerage/discount-commition-bg.png";
+import Section5ImgMob from "@assets/images/Brokerage/discount-commition-bg-mob.png";
+import Section6Img from "@assets/images/Brokerage/card-bg.png";
+import Section6ImgMob from "@assets/images/Brokerage/card-bg-mob.png";
+
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+
+import MockUp from "@assets/images/Brokerage/mockup-object.png";
 ---
 
-<Layout title="Brokerage">
-  <main></main>
+<Layout title="کارگزاری">
+  <main>
+    <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right">
+        <div class="flex flex-col items-center gap-8 lg:items-start">
+          <div class="text-display-small text-white">خدمات کارگزاری</div>
+          <h1 class="text-body-large text-white text-center">تمام آنچه برای یک سرمایه‌گذاری حرفه‌ای نیاز دارید</h1>
+          <div class="flex gap-2 flex-wrap items-center justify-center text-white text-body-large">
+            <div class="lex py-1 px-4 justify-start font-medium rounded-full bg-disabled">سرویس‌های مالی</div>
+            <div class="lex py-1 px-4 justify-start font-medium rounded-full bg-disabled">پلتفرم‌های معاملاتی</div>
+            <div class="lex py-1 px-4 justify-start font-medium rounded-full bg-disabled">خدمات ویژه برای مشتریان</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+
+    <section class="flex min-h-225 py-8 lg:py-16 px-4 bg-center bg-cover bg-no-repeat">
+      <div class="flex flex-col lg:flex-row gap-4 max-w-lg w-full mx-auto relative">
+        <div class="flex flex-col gap-15">
+          <div class="flex flex-col gap-2 items-center text-center">
+            <h1 class="text-display-small">سامانه‌های معاملاتی نهایت‌نگر</h1>
+            <span class="text-secondary">
+              با پنل‌های نئوتریدر و موبوتریدر، تجربه‌ای سریع و حرفه‌ای از معاملات بازار سرمایه داشته باشید.
+            </span>
+          </div>
+
+          <div>
+            <!-- <div class="flex flex-col justify-center items-center">
+              <div class="flex flex-col gap-8 self-center py-8 px-16 text-white text-center rounded-3xl bg-[linear-gradient(90deg,#00BFA5_0%,#004EA2_40%,#0A1628_100%)]">
+                <h1 class="text-title-large">سامانه معاملاتی نئوتریدر</h1>
+                <h3>نئوتریدر، پنل معاملاتی پیشرفته برای تجربه‌ای سریع، دقیق و حرفه‌ای در بازار سرمایه.</h3>
+                <button class="neo-button neo-button neo-button-fill-primary">ورود به پنل‌ معاملاتی پروتریدر</button>
+              </div>
+              <div class="flex items-center pt-10">
+                <div></div>
+              </div>
+            </div> -->
+            <div class="flex flex-col gap-8 justify-center items-center text-center rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)]">
+              <div class="flex flex-col gap-3 self-center py-8 px-16 text-white">
+                <h1 class="text-heading-medium">سامانه‌ معاملاتی موبوتریدر</h1>
+                <h3 class="leading-8 font-normal">
+                  سامانه معاملاتی اختصاصی تلفن همراه نهایت‌نگر که به شما امکان می‌دهد در هر زمان و هر مکان، با رابط
+                  کاربری ساده و کاربرپسند، معاملات آنلاین خود را با سرعت و دقت بالا انجام دهید.
+                </h3>
+                <button class="neo-button neo-button-icon neo-button-fill-primary neo-button-large">
+                  ورود به پنل‌ معاملاتی موبوتریدر
+                  <ArrowLeft class="w-4 h-4 mr-2" />
+                </button>
+              </div>
+              <div class="flex flex-col flex-[1_0_0] self-stretch items-center pt-10">
+                <div
+                  class="h-54 w-full bg-contain bg-center bg-no-repeat"
+                  style="background-image: url('./../../src/assets/images/Brokerage/mockup-object.png');"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SectionLayer1 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={Section3Img} mobileImage={Section3ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={Section4Img} mobileImage={Section4ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+    <SectionLayer1 desktopImage={Section5Img} mobileImage={Section5ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={Section6Img} mobileImage={Section6ImgMob}>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+  </main>
 </Layout>
