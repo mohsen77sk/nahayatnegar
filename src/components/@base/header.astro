@@ -20,11 +20,10 @@ import { Image } from "astro:assets";
 import { URLS } from "../../scripts/constants";
 
 const menus = [
-<<<<<<< HEAD
   {
     title: "کارگزاری",
     width: "322px",
-    link: "/broker",
+    link: "/brokerage",
   },
   {
     title: "مدیریت دارایی ",
@@ -77,7 +76,7 @@ const mobileMenu = [
   {
     title: "کارگزاری",
     icon: Building,
-    link: "broker",
+    link: "brokerage",
   },
   {
     title: "مدیریت دارایی ",
@@ -109,96 +108,6 @@ const mobileMenu = [
     icon: Location,
     link: "",
   },
-=======
-    {
-        title: "کارگزاری",
-        width: "322px",
-        link: "/brokerage",
-    },
-    {
-        title: "مدیریت دارایی ",
-        width: "260px",
-        link: "/asset-management",
-    },
-    {
-        title: "آموزش",
-        width: "260px",
-        link: "/learning",
-    },
-    {
-        title: "نهایت‌نگر",
-        width: "350px",
-        subMenus: [
-            {
-                title: "درباره ما",
-                subTitle: "اطلاعات و تاریخچه شرکت",
-                link: "/about-us",
-                icon: TwoUser,
-            },
-            {
-                title: "تماس با ما",
-                subTitle: "راه‌های ارتباطی",
-                link: "/contact-us",
-                icon: Phone,
-            },
-            {
-                title: "شماره حساب‌های کارگزاری",
-                subTitle: "اطلاعات حساب‌های بانکی",
-                link: "/bank-accounts",
-                icon: Cards,
-            },
-            {
-                title: "شعب و دفاتر پیشخوان",
-                subTitle: "آدرس و اطلاعات شعب",
-                link: "/branches",
-                icon: Location,
-            },
-        ],
-    },
-    {
-        title: "نئوتریدر",
-        width: "260px",
-        link: URLS.neoTraderAppAddress,
-    },
-];
-
-const mobileMenu = [
-    {
-        title: "کارگزاری",
-        icon: Building,
-        link: "brokerage",
-    },
-    {
-        title: "مدیریت دارایی ",
-        icon: Chart,
-        link: "asset-management",
-    },
-    {
-        title: "آموزش",
-        icon: Learning,
-        link: "learning",
-    },
-    {
-        title: "درباره ما",
-        icon: TwoUser,
-        link: "about-us",
-    },
-    {
-        title: "تماس با ما",
-        icon: Phone,
-        link: "contact-us",
-    },
-    {
-        title: "شماره حساب‌های کارگزاری",
-        icon: Cards,
-        link: "bank-accounts",
-    },
-    {
-        title: "شعب و دفاتر پیشخوان",
-        icon: Location,
-        link: "",
-    },
->>>>>>> broker
 ];
 ---
 
@@ -217,11 +126,10 @@ const mobileMenu = [
         <Logo class="d-icon-nav block h-8 w-auto text-white" />
       </a>
 
-<<<<<<< HEAD
       <!-- Desktop Menu -->
       <nav class="hidden items-center gap-1 lg:flex lg:gap-2">
         {menus.map((menu, i) => {
-          const isExternal = "/^https?:\/\//i.test(item.href);";
+          const isExternal = menu.link && (/^https?:\/\//i.test(menu.link) || menu.link.startsWith("//"));
           return (
             <div class="group relative">
               <div class="menu-trigger flex gap-1.5 text-base items-center cursor-pointer rounded-md px-3 py-2 text-white transition-all duration-300 hover:bg-[#1C2754]">
@@ -236,26 +144,6 @@ const mobileMenu = [
                   <DownArrow class="w-4 h-4 block group-hover:rotate-180 transition duration-300" />
                 )}
               </div>
-=======
-            <!-- Desktop Menu -->
-            <nav class="hidden items-center gap-1 lg:flex lg:gap-2">
-                {menus.map((menu, i) => {
-                    const isExternal = menu.link && (/^https?:\/\//i.test(menu.link) || menu.link.startsWith("//"));
-                    return (
-                        <div class="group relative">
-                            <div class="menu-trigger flex gap-1.5 text-base items-center cursor-pointer rounded-md px-3 py-2 text-white transition-all duration-300 hover:bg-[#1C2754]">
-                                <a
-                                    href={siteUrl(menu.link)}
-                                    target={isExternal ? "_blank" : undefined}
-                                    rel={isExternal ? "noopener noreferrer" : undefined}
-                                >
-                                    <span> {menu.title} </span>
-                                </a>
-                                {menu.subMenus && menu.subMenus.length > 0 && (
-                                    <DownArrow class="w-4 h-4 block group-hover:rotate-180 transition duration-300" />
-                                )}
-                            </div>
->>>>>>> broker
 
               {menu?.subMenus && menu?.subMenus.length > 0 && (
                 <div
