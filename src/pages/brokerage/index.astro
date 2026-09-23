@@ -16,7 +16,11 @@ import Section6ImgMob from "@assets/images/Brokerage/card-bg-mob.png";
 
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 
-import MockUp from "@assets/images/Brokerage/mockup-object.png";
+import MoboObjectMob from "../../assets/images/Brokerage/introduce-mobo-mob.png";
+import MoboObjectImg from "../../assets/images/Brokerage/introduce-mobo.png";
+
+import NeoObjectMob from "../../assets/images/Brokerage/introduce-neo-mob.png";
+import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
 ---
 
 <Layout title="کارگزاری">
@@ -47,33 +51,45 @@ import MockUp from "@assets/images/Brokerage/mockup-object.png";
           </div>
 
           <div>
-            <!-- <div class="flex flex-col justify-center items-center">
-              <div class="flex flex-col gap-8 self-center py-8 px-16 text-white text-center rounded-3xl bg-[linear-gradient(90deg,#00BFA5_0%,#004EA2_40%,#0A1628_100%)]">
-                <h1 class="text-title-large">سامانه معاملاتی نئوتریدر</h1>
-                <h3>نئوتریدر، پنل معاملاتی پیشرفته برای تجربه‌ای سریع، دقیق و حرفه‌ای در بازار سرمایه.</h3>
-                <button class="neo-button neo-button neo-button-fill-primary">ورود به پنل‌ معاملاتی پروتریدر</button>
+            <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-4 p-1 justify-center items-center text-center rounded-3xl bg-[linear-gradient(90deg,#00BFA5_0%,#004EA2_40%,#0A1628_100%)]">
+              <div class="flex-1 flex flex-col gap-3 self-center py-8 px-16 text-white">
+                <h1 class="text-heading-medium">سامانه‌ معاملاتی نئوتریدر</h1>
+                <h3 class="leading-8 font-normal">
+                  پنل معاملاتی پیشرفته نهایت‌نگر که با ارائه امکانات حرفه‌ای و رابط کاربری روان، تجربه‌ای سریع، دقیق و
+                  مطمئن را برای انجام معاملات در بازار سرمایه فراهم می‌کند.
+                </h3>
+                <button class="neo-button neo-button-icon neo-button-fill-primary neo-button-large mx-auto">
+                  ورود به نئوتریدر
+                  <ArrowLeft class="w-4 h-4 mr-2" />
+                </button>
               </div>
-              <div class="flex items-center pt-10">
-                <div></div>
+              <div class="flex-1 lg:hidden w-full self-stretch flex items-center justify-center pt-6 lg:pt-0">
+                <img src={NeoObjectMob.src} class="max-w-68.75 h-auto object-contain" />
               </div>
-            </div> -->
-            <div class="flex flex-col gap-8 justify-center items-center text-center rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)]">
-              <div class="flex flex-col gap-3 self-center py-8 px-16 text-white">
+              <div class="hidden flex-1 w-full lg:flex items-center justify-center p-6">
+                <img src={NeoObjectImg.src} class="w-full h-auto lg:w-136.75 lg:h-83.5 object-contain" />
+              </div>
+            </div>
+            <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-4 p-1 justify-center items-center text-center rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)]">
+              <div class="flex-1 flex flex-col gap-3 self-center py-8 px-16 text-white">
                 <h1 class="text-heading-medium">سامانه‌ معاملاتی موبوتریدر</h1>
                 <h3 class="leading-8 font-normal">
                   سامانه معاملاتی اختصاصی تلفن همراه نهایت‌نگر که به شما امکان می‌دهد در هر زمان و هر مکان، با رابط
                   کاربری ساده و کاربرپسند، معاملات آنلاین خود را با سرعت و دقت بالا انجام دهید.
                 </h3>
-                <button class="neo-button neo-button-icon neo-button-fill-primary neo-button-large">
-                  ورود به پنل‌ معاملاتی موبوتریدر
+                <button class="neo-button neo-button-icon neo-button-fill-primary neo-button-large mx-auto">
+                  ورود به موبوتریدر
                   <ArrowLeft class="w-4 h-4 mr-2" />
                 </button>
               </div>
-              <div class="flex flex-col flex-[1_0_0] self-stretch items-center pt-10">
-                <div
-                  class="h-54 w-full bg-contain bg-center bg-no-repeat"
-                  style="background-image: url('./../../src/assets/images/Brokerage/mockup-object.png');"
-                ></div>
+              <div class="flex-1 lg:hidden w-full self-stretch flex items-center justify-center pt-6 lg:pt-0">
+                <img src={MoboObjectMob.src} class="max-h-87.5 w-auto object-contain" />
+              </div>
+              <div class="hidden flex-1 w-full lg:flex items-center justify-center p-6">
+                <img
+                  src={MoboObjectImg.src}
+                  class="w-full max-w-[300px] h-auto lg:w-[384px] lg:h-[403px] object-contain"
+                />
               </div>
             </div>
           </div>
