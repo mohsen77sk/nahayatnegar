@@ -107,9 +107,9 @@ const columns = [
         <!-- Quick links -->
         {columns.map(({ title, links }) => (
           <div class="flex flex-col items-start gap-4">
-            <span class="text-sm font-semibold text-brand">{title}</span>
+            <span class="font-semibold text-brand">{title}</span>
 
-            <nav class="flex flex-col text-sm font-bold">
+            <nav class="flex flex-col font-bold">
               {links.map(({ label, href }) => (
                 <a class="py-4" href={siteUrl(href)}>
                   {label}
