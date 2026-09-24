@@ -165,9 +165,30 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
         </div>
       </div>
     </SectionLayer1>
+
     <SectionLayer1 desktopImage={Section5Img} mobileImage={Section5ImgMob}>
-      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
-      <div class="flex-1" slot="left"></div>
+      <div class="flex items-center self-center flex-1 gap-8" slot="right">
+        <div class="flex flex-col gap-10 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6 text-center lg:text-start">
+            <div class="rounded-round h-1 w-16 lg:h-18 lg:w-1 bg-linear-to-r lg:bg-linear-to-b from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+            <div class="flex flex-col items-center lg:items-start">
+              <span class="text-secondary">طرح های تخفیف کارمزد</span>
+              <h1 class="text-display-small">تخفیف کارمزد ، هزینه کمتر و بازده بیشتر</h1>
+            </div>
+          </div>
+          <p class="text-body-large font-medium leading-8 text-center lg:text-justify text-secondary">
+            با طرح های تخفیف کارمزد نهایت نگر ، هزینه معاملات خود را کاهش دهید و بازده بیشتری از سرمایه گذاری تان بدست
+            آورید
+          </p>
+          <button class="neo-button neo-button-icon neo-button-fill-primary neo-button-large mx-auto">
+            بیشتر
+            <ArrowLeft class="w-4 h-4 mr-2" />
+          </button>
+        </div>
+      </div>
+      <div class="flex items-center justify-center flex-1" slot="left">
+        <img class="lg:w-126 w-75 h-auto" src="/src/assets/images/Brokerage/discount-commition-object.png" />
+      </div>
     </SectionLayer1>
 
     <SectionLayer1 desktopImage={Section6Img} mobileImage={Section6ImgMob}>
