@@ -14,8 +14,12 @@ import BankMelat from "@assets/icons/banks/melat.svg";
 import BankShar from "@assets/icons/banks/shahr.svg";
 import BankPasargad from "@assets/icons/banks/pasargad.svg";
 import BankKhavarmiane from "@assets/icons/banks/khavarmiane.svg";
+import BankTejarat from "@assets/icons/banks/tejarat.svg";
+import BankParsian from "@assets/icons/banks/parsian.svg";
+import BankGardeshgari from "@assets/icons/banks/gardeshgari.svg";
+import BankSaderat from "@assets/icons/banks/saderat.svg";
 
-const accounts = [
+const securitiesAccount = [
   {
     bankImg: BankSaman,
     bankName: "بانک سامان",
@@ -36,27 +40,6 @@ const accounts = [
     accountType: "حساب جاری",
     accountNumber: "1007-11-040-707071293",
     iban: "IR040780100711040707071293",
-  },
-  {
-    bankImg: BankSaman,
-    bankName: "بانک سامان",
-    accountType: "حساب جاری",
-    accountNumber: "849-40-544444-1",
-    iban: "IR570560084904000544444001",
-  },
-  {
-    bankImg: BankShar,
-    bankName: "بانک شهر",
-    accountType: "حساب جاری",
-    accountNumber: "1001002415054",
-    iban: "IR920610000001001002415054",
-  },
-  {
-    bankImg: BankPasargad,
-    bankName: "بانک پاسارگاد",
-    accountType: "حساب جاری",
-    accountNumber: "211-110-641808-2",
-    iban: "IR690570021111000641808002",
   },
   {
     bankImg: BankMelat,
@@ -66,46 +49,32 @@ const accounts = [
     iban: "IR690570021111000641808002",
   },
   {
-    bankImg: BankSaman,
-    bankName: "بانک سامان",
-    accountType: "حساب جاری",
-    accountNumber: "849-40-544444-1",
-    iban: "IR570560084904000544444001",
-  },
-  {
-    bankImg: BankSaman,
-    bankName: "بانک سامان",
-    accountType: "حساب جاری",
-    accountNumber: "849-40-544444-1",
-    iban: "IR570560084904000544444001",
-  },
-  {
-    bankImg: BankMeli,
-    bankName: "بانک ملی ایران",
-    accountType: "حساب جاری",
-    accountNumber: "0100945767001",
-    iban: "IR420170000000100945767001",
-  },
-  {
-    bankImg: BankKhavarmiane,
-    bankName: "بانک خاورمیانه",
-    accountType: "حساب جاری",
-    accountNumber: "1007-11-040-707071293",
-    iban: "IR040780100711040707071293",
-  },
-  {
-    bankImg: BankSaman,
-    bankName: "بانک سامان",
-    accountType: "حساب جاری",
-    accountNumber: "849-40-544444-1",
-    iban: "IR570560084904000544444001",
-  },
-  {
     bankImg: BankShar,
     bankName: "بانک شهر",
     accountType: "حساب جاری",
     accountNumber: "1001002415054",
     iban: "IR920610000001001002415054",
+  },
+  {
+    bankImg: BankTejarat,
+    bankName: "بانک تجارت",
+    accountType: "حساب جاری",
+    accountNumber: "393211768",
+    iban: "IR020180000000000393211768",
+  },
+  {
+    bankImg: BankParsian,
+    bankName: "بانک پارسیان",
+    accountType: "حساب جاری",
+    accountNumber: "20101340778600",
+    iban: "IR540540126020101340778600",
+  },
+  {
+    bankImg: BankGardeshgari,
+    bankName: "بانک گردشگری",
+    accountType: "حساب جاری",
+    accountNumber: "112-71-1374694-1",
+    iban: "IR200640011200711374694001",
   },
   {
     bankImg: BankPasargad,
@@ -114,6 +83,78 @@ const accounts = [
     accountNumber: "211-110-641808-2",
     iban: "IR690570021111000641808002",
   },
+];
+
+const commodityExchange = [
+  {
+    bankImg: BankMelat,
+    bankName: "بانک ملت",
+    accountType: "حساب جاری",
+    accountNumber: "184989514",
+    iban: "IR140120000000000184989514",
+  },
+  {
+    bankImg: BankMelat,
+    bankName: "بانک ملت",
+    accountType: "حساب جاری",
+    accountNumber: "9795649984",
+    iban: "IR360120000000009795649984",
+  },
+  {
+    bankImg: BankMelat,
+    bankName: "بانک ملت",
+    accountType: "حساب جاری",
+    accountNumber: "7730865505",
+    iban: "IR410120000000007730865505",
+  },
+  {
+    bankImg: BankKhavarmiane,
+    bankName: "بانک خاورمیانه",
+    accountType: "حساب جاری",
+    accountNumber: "1007-11-040-707076107",
+    iban: "IR060780100711040707076107",
+  },
+];
+
+const brokerage = [
+  {
+    bankImg: BankMelat,
+    bankName: "بانک ملت",
+    accountType: "حساب جاری",
+    accountNumber: "864334810",
+    iban: "IR800120000000000864334810",
+  },
+  {
+    bankImg: BankSaman,
+    bankName: "بانک سامان",
+    accountType: "حساب پس‌انداز کوتاه‌مدت",
+    accountNumber: "802-841-544444-1",
+    iban: "IR160560080284100544444001",
+  },
+];
+
+const energyExchange = [
+  {
+    bankImg: BankMelat,
+    bankName: "بانک ملت",
+    accountType: "حساب جاری",
+    accountNumber: "8915188446",
+    iban: "IR310120000000008915188446",
+  },
+  {
+    bankImg: BankSaderat,
+    bankName: "بانک صادرات",
+    accountType: "حساب پس‌انداز کوتاه‌مدت",
+    accountNumber: "0221877804002",
+    iban: "IR620190000000221877804002",
+  },
+];
+
+const accountGroups = [
+  { key: "securities", accounts: securitiesAccount },
+  { key: "commodity", accounts: commodityExchange },
+  { key: "brokerage", accounts: brokerage },
+  { key: "energy", accounts: energyExchange },
 ];
 ---
 
@@ -140,10 +181,18 @@ const accounts = [
       <div class="flex flex-col gap-8 max-w-lg w-full mx-auto relative">
         <div class="flex flex-col lg:flex-row w-full lg:w-auto items-center flex-1 justify-between gap-4">
           <div class="neo-tabs w-full lg:w-auto">
-            <div class="neo-tab-label w-full lg:w-auto active">حساب اوراق</div>
-            <div class="neo-tab-label w-full lg:w-auto">بورس کالا</div>
-            <div class="neo-tab-label w-full lg:w-auto">کارگزاری</div>
-            <div class="neo-tab-label w-full lg:w-auto">بورس انرژی</div>
+            <button class="neo-tab-label w-full lg:w-auto active" type="button" data-account-tab="securities">
+              حساب اوراق
+            </button>
+            <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="commodity">
+              بورس کالا
+            </button>
+            <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="brokerage">
+              کارگزاری
+            </button>
+            <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="energy">
+              بورس انرژی
+            </button>
           </div>
           <div class="flex w-full lg:w-80 relative">
             <input
@@ -163,67 +212,70 @@ const accounts = [
           id="account-list"
           class="grid grid-cols-1 lg:grid-cols-2 bg-fg-secondary rounded-xl gap-4 lg:gap-8 p-2 lg:p-8"
         >
-          {accounts.map(({ bankImg, bankName, accountType, accountNumber, iban }) => (
-            <div
-              class="grid bg-fg-primary p-5 gap-4 rounded-xl"
-              data-account-card
-              data-search-text={`${bankName} ${accountType} ${accountNumber} ${iban}`}
-            >
-              <div class="flex justify-between items-center">
-                <div class="flex items-center gap-4">
-                  <div class="rounded-full w-13 h-13 border overflow-hidden">
-                    <Image class="w-full h-full object-none" src={bankImg} alt={bankName} loading="lazy" />
+          {accountGroups.flatMap(({ key, accounts }) =>
+            accounts.map(({ bankImg, bankName, accountType, accountNumber, iban }) => (
+              <div
+                class:list={["grid bg-fg-primary p-5 gap-4 rounded-xl", { hidden: key !== "securities" }]}
+                data-account-card
+                data-account-category={key}
+                data-search-text={`${bankName} ${accountType} ${accountNumber} ${iban}`}
+              >
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <div class="rounded-full w-13 h-13 border overflow-hidden">
+                      <Image class="w-full h-full object-none" src={bankImg} alt={bankName} loading="lazy" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                      <span class="text-title-large">{bankName}</span>
+                      <span class="text-body-large text-secondary">{accountType}</span>
+                    </div>
                   </div>
-                  <div class="flex flex-col gap-1">
-                    <span class="text-title-large">{bankName}</span>
-                    <span class="text-body-large text-secondary">{accountType}</span>
-                  </div>
+                  <div></div>
                 </div>
-                <div></div>
-              </div>
 
-              <div class="flex flex-col gap-2 text-body-medium">
-                <div class="flex items-center justify-between">
-                  <span class="text-secondary">شماره حساب</span>
-                  <div class="flex items-center gap-2">
-                    <span class="font-medium">{accountNumber}</span>
-                    <button
-                      class="neo-button neo-icon-button neo-button-neutral neo-button-small"
-                      type="button"
-                      data-copy-value={accountNumber}
-                      aria-label={`کپی شماره حساب ${bankName}`}
-                    >
-                      <span class="copy-icon">
-                        <IconCopy />
-                      </span>
-                      <span class="check-icon hidden">
-                        <IconCheck />
-                      </span>
-                    </button>
+                <div class="flex flex-col gap-2 text-body-medium">
+                  <div class="flex items-center justify-between">
+                    <span class="text-secondary">شماره حساب</span>
+                    <div class="flex items-center gap-2">
+                      <span class="font-medium">{accountNumber}</span>
+                      <button
+                        class="neo-button neo-icon-button neo-button-neutral neo-button-small"
+                        type="button"
+                        data-copy-value={accountNumber}
+                        aria-label={`کپی شماره حساب ${bankName}`}
+                      >
+                        <span class="copy-icon">
+                          <IconCopy />
+                        </span>
+                        <span class="check-icon hidden">
+                          <IconCheck />
+                        </span>
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div class="flex items-center justify-between">
-                  <span class="text-secondary">شماره شبا</span>
-                  <div class="flex items-center gap-2">
-                    <span class="font-medium">{iban}</span>
-                    <button
-                      class="neo-button neo-icon-button neo-button-neutral neo-button-small"
-                      type="button"
-                      data-copy-value={iban}
-                      aria-label={`کپی شماره شبا ${bankName}`}
-                    >
-                      <span class="copy-icon">
-                        <IconCopy />
-                      </span>
-                      <span class="check-icon hidden">
-                        <IconCheck />
-                      </span>
-                    </button>
+                  <div class="flex items-center justify-between">
+                    <span class="text-secondary">شماره شبا</span>
+                    <div class="flex items-center gap-2">
+                      <span class="font-medium">{iban}</span>
+                      <button
+                        class="neo-button neo-icon-button neo-button-neutral neo-button-small"
+                        type="button"
+                        data-copy-value={iban}
+                        aria-label={`کپی شماره شبا ${bankName}`}
+                      >
+                        <span class="copy-icon">
+                          <IconCopy />
+                        </span>
+                        <span class="check-icon hidden">
+                          <IconCheck />
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )),
+          )}
           <p class="col-span-2 hidden text-center text-body-medium p-4" data-no-results>
             نتیجه‌ای پیدا نشد.
           </p>
@@ -236,21 +288,38 @@ const accounts = [
 <script>
   const searchInput = document.querySelector<HTMLInputElement>("[data-account-search]");
   const accountCards = document.querySelectorAll<HTMLElement>("[data-account-card]");
+  const accountTabs = document.querySelectorAll<HTMLButtonElement>("[data-account-tab]");
   const noResults = document.querySelector<HTMLElement>("[data-no-results]");
+  let activeCategory = "securities";
 
-  searchInput?.addEventListener("input", () => {
-    const searchTerm = searchInput.value.trim().toLocaleLowerCase();
+  const normalize = (value: string) => value.trim().toLocaleLowerCase().replace(/ي/g, "ی").replace(/ك/g, "ک");
+
+  const updateAccountList = () => {
+    const searchTerm = normalize(searchInput?.value ?? "");
     let visibleCards = 0;
 
     accountCards.forEach((card) => {
-      const searchText = card.dataset.searchText?.toLocaleLowerCase() ?? "";
-      const isMatch = searchText.includes(searchTerm);
+      const belongsToCategory = card.dataset.accountCategory === activeCategory;
+      const matchesSearch = normalize(card.dataset.searchText ?? "").includes(searchTerm);
+      const isVisible = belongsToCategory && matchesSearch;
 
-      card.classList.toggle("hidden", !isMatch);
-      visibleCards += Number(isMatch);
+      card.classList.toggle("hidden", !isVisible);
+      visibleCards += Number(isVisible);
     });
 
     noResults?.classList.toggle("hidden", visibleCards > 0);
+  };
+
+  accountTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activeCategory = tab.dataset.accountTab ?? "securities";
+      accountTabs.forEach((item) => item.classList.toggle("active", item === tab));
+      updateAccountList();
+    });
+  });
+
+  searchInput?.addEventListener("input", () => {
+    updateAccountList();
   });
 
   document.querySelectorAll<HTMLButtonElement>("[data-copy-value]").forEach((button) => {
