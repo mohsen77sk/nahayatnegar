@@ -80,9 +80,9 @@
   --color-neutral: var(--color-neutral-400);
   --background-color-neutral-hover: var(--color-neutral-500);
   --background-color-neutral-active: var(--color-neutral-600);
-  --color-neutral-light: oklch(from var(--color-neutral-500) / 28%);
-  --background-color-neutral-light-hover: oklch(from var(--color-neutral-500) / 36%);
-  --background-color-neutral-light-active: oklch(from var(--color-neutral-500) / 52%);
+  --color-neutral-light: oklch(from var(--color-neutral-500) l c h / 28%);
+  --background-color-neutral-light-hover: oklch(from var(--color-neutral-500) l c h / 36%);
+  --background-color-neutral-light-active: oklch(from var(--color-neutral-500) l c h / 52%);
   /* semantic */
   --background-color-primary: var(--color-neutral-500);
   --background-color-secondary: var(--color-neutral-100);
