@@ -144,8 +144,26 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
     </SectionLayer1>
 
     <SectionLayer1 desktopImage={Section4Img} mobileImage={Section4ImgMob}>
-      <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
-      <div class="flex-1" slot="left"></div>
+      <div class="hidden lg:flex flex-1" slot="right"></div>
+      <div class="flex items-start flex-1" slot="left">
+        <div class="flex flex-col gap-10 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6 text-center lg:text-start">
+            <div class="rounded-round h-1 w-16 lg:h-18 lg:w-1 bg-linear-to-r lg:bg-linear-to-b from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+            <div class="flex flex-col items-center lg:items-start">
+              <span class="text-[#B0BAE3]">پرداخت آنی</span>
+              <h1 class="text-display-small text-white">دسترسی فوری به سرمایه در هر ساعت از شبانه روز</h1>
+            </div>
+          </div>
+          <p class="text-body-large font-medium leading-8 text-center lg:text-justify text-white">
+            با سرویس پرداخت آنی کارگزاری نهایت نگر ؛ در هر ساعت از شبانه روز به وجوه خود نزد کارگزار ی دسترسی داشته
+            باشید .
+          </p>
+          <button class="neo-button neo-button-icon neo-button-fill-primary neo-button-large mx-auto">
+            بیشتر
+            <ArrowLeft class="w-4 h-4 mr-2" />
+          </button>
+        </div>
+      </div>
     </SectionLayer1>
     <SectionLayer1 desktopImage={Section5Img} mobileImage={Section5ImgMob}>
       <div class="flex items-center self-center flex-1 gap-8" slot="right"></div>
