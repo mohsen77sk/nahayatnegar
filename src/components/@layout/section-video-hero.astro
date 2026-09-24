@@ -3,9 +3,10 @@ interface Props {
   desktopVideo: string;
   mobileVideo: any;
   poster?: any;
+  hasGap?: boolean;
 }
 
-const { desktopVideo, mobileVideo, poster } = Astro.props;
+const { desktopVideo, mobileVideo, poster, hasGap } = Astro.props;
 ---
 
 <section class="bg-center bg-cover bg-no-repeat relative flex min-h-225 py-8 lg:py-16 px-4 overflow-hidden">
@@ -23,9 +24,7 @@ const { desktopVideo, mobileVideo, poster } = Astro.props;
     <source src={mobileVideo} type="video/mp4" />
   </video>
 
-  <div class="absolute inset-0 bg-black/15 z-10"></div>
-
-  <div class="flex flex-col  gap-4 lg:top-30 max-w-lg mx-auto relative z-20">
+  <div class:list={["flex flex-col lg:flex-row max-w-lg w-full mx-auto relative", { "gap-4": hasGap }]}>
     <slot name="right" />
     <slot name="left" />
   </div>
