@@ -23,7 +23,7 @@ const menus = [
   {
     title: "کارگزاری",
     width: "322px",
-    link: "/broker",
+    link: "/brokerage",
   },
   {
     title: "مدیریت دارایی ",
@@ -54,7 +54,7 @@ const menus = [
       {
         title: "شماره حساب‌های کارگزاری",
         subTitle: "اطلاعات حساب‌های بانکی",
-        link: "/bank-accounts",
+        link: "/account-numbers",
         icon: Cards,
       },
       {
@@ -76,7 +76,7 @@ const mobileMenu = [
   {
     title: "کارگزاری",
     icon: Building,
-    link: "broker",
+    link: "brokerage",
   },
   {
     title: "مدیریت دارایی ",
@@ -101,7 +101,7 @@ const mobileMenu = [
   {
     title: "شماره حساب‌های کارگزاری",
     icon: Cards,
-    link: "bank-accounts",
+    link: "account-numbers",
   },
   {
     title: "شعب و دفاتر پیشخوان",
@@ -129,7 +129,7 @@ const mobileMenu = [
       <!-- Desktop Menu -->
       <nav class="hidden items-center gap-1 lg:flex lg:gap-2">
         {menus.map((menu, i) => {
-          const isExternal = "/^https?:\/\//i.test(item.href);";
+          const isExternal = menu.link && (/^https?:\/\//i.test(menu.link) || menu.link.startsWith("//"));
           return (
             <div class="group relative">
               <div class="menu-trigger flex gap-1.5 text-base items-center cursor-pointer rounded-md px-3 py-2 text-white transition-all duration-300 hover:bg-[#1C2754]">
