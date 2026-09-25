@@ -1,7 +1,33 @@
 ---
+import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+
+import Section1Img from "@assets/images/Asset Management/1-Naab/naab-hero.png";
+import Section1ImgMob from "@assets/images/Asset Management/1-Naab/naab-hero-mob.png";
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 ---
 
-<Layout title="Nab found">
-  <main></main>
+<Layout title="صندوق سرمایه‌گذاری ناب">
+  <main>
+    <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+        <h1 class="text-display-small text-white">صندوق سرمایه‌گذاری ناب</h1>
+        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+          با صندوق ناب، بدون نیاز به خرید، حمل و نگهداری طلای فیزیکی، می‌توانید از فرصت‌های بازار طلا برای حفظ ارزش
+          دارایی خود بهره‌مند شوید.
+        </p>
+        <div class="flex gap-4">
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+            خرید صندوق
+            <ArrowLeft aria-hidden="true" />
+          </a>
+          <a class="neo-button neo-button-outline-primary neo-button-large" href={siteUrl("/")}>
+            دریافت کد بورسی
+            <ArrowLeft aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </SectionLayer2>
+  </main>
 </Layout>

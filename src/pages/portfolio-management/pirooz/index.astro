@@ -1,7 +1,33 @@
 ---
+import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+
+import Section1Img from "@assets/images/Asset Management/2-Pirooz/pirooz-hero.png";
+import Section1ImgMob from "@assets/images/Asset Management/2-Pirooz/pirooz-hero-mob.png";
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 ---
 
-<Layout title="Pirooz found">
-  <main></main>
+<Layout title="صندوق سرمایه‌گذاری پیروز">
+  <main>
+    <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+        <h1 class="text-display-small text-white">صندوق سرمایه‌گذاری پیروز</h1>
+        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+          صندوق سرمایه‌گذاری سهامی پیروز، با ترکیب مزایای مدیریت حرفه‌ای و امکان خرید و فروش واحدها در بورس، راهکاری
+          منعطف برای سرمایه‌گذاری در بازار سهام است.
+        </p>
+        <div class="flex gap-4">
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+            خرید صندوق
+            <ArrowLeft aria-hidden="true" />
+          </a>
+          <a class="neo-button neo-button-outline-primary neo-button-large" href={siteUrl("/")}>
+            دریافت کد بورسی
+            <ArrowLeft aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </SectionLayer2>
+  </main>
 </Layout>
