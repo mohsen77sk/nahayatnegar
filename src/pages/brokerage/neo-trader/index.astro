@@ -1,5 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 
@@ -9,16 +11,21 @@ import HeroBgMobile from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero-
 import WatchlistBg from "@assets/images/Brokerage/1-Neo Trader/watchlist-section.png";
 import WatchlistBgMobile from "@assets/images/Brokerage/1-Neo Trader/watchlist-section-mob.png";
 
-import TechnicalBg from "@assets/images/Brokerage/1-Neo Trader/technical-section.png"
-import TechnicalBgMobile from "@assets/images/Brokerage/1-Neo Trader/technical-section-mob.png"
+import TechnicalBg from "@assets/images/Brokerage/1-Neo Trader/technical-section.png";
+import TechnicalBgMobile from "@assets/images/Brokerage/1-Neo Trader/technical-section-mob.png";
 
-import OptionBg from "@assets/images/Brokerage/1-Neo Trader/option-section.png"
-import OptionBgMobile from "@assets/images/Brokerage/1-Neo Trader/option-section-mob.png"
+import OptionBg from "@assets/images/Brokerage/1-Neo Trader/option-section.png";
+import OptionBgMobile from "@assets/images/Brokerage/1-Neo Trader/option-section-mob.png";
+
+import ScreenerBg from "@assets/images/Brokerage/1-Neo Trader/screener-section.png";
+import ScreenerBgMobile from "@assets/images/Brokerage/1-Neo Trader/screener-section-mob.png";
+
+import HeatMapBg from "@assets/images/Brokerage/1-Neo Trader/heatmap-bg.png";
 ---
 
 <Layout title="خانه">
   <main>
-    <SectionLayer1 desktopImage={HeroBg} mobileImage={HeroBgMobile} hasGap={false}>
+    <SectionLayer1 desktopImage={HeroBg} mobileImage={HeroBgMobile}>
       <div class="flex items-center justify-end flex-1" slot="left"></div>
 
       <div class="flex items-center flex-1" slot="right">
@@ -52,28 +59,48 @@ import OptionBgMobile from "@assets/images/Brokerage/1-Neo Trader/option-section
       </div>
     </SectionLayer1>
 
-    <SectionLayer1 desktopImage={WatchlistBg} mobileImage={WatchlistBgMobile} hasGap={false}>
+    <section>
+      <BreadCrumb
+        items={[
+          {
+            label: "کارگزاری",
+            href: "/brokerage",
+          },
+          {
+            label: "نئوتریدر",
+          },
+        ]}
+      />
+    </section>
+
+    <SectionLayer1 desktopImage={WatchlistBg} mobileImage={WatchlistBgMobile}>
       <div class="flex items-center justify-end flex-1" slot="left"></div>
 
-      <div class="flex items-center flex-1" slot="right">
-       
-      </div>
+      <div class="flex items-center flex-1" slot="right"></div>
     </SectionLayer1>
 
-    <SectionLayer1 desktopImage={TechnicalBg} mobileImage={TechnicalBgMobile} hasGap={false}>
+    <SectionLayer1 desktopImage={TechnicalBg} mobileImage={TechnicalBgMobile}>
       <div class="flex items-center justify-end flex-1" slot="left"></div>
 
-      <div class="flex items-center flex-1" slot="right">
-       
-      </div>
+      <div class="flex items-center flex-1" slot="right"></div>
     </SectionLayer1>
 
-    <SectionLayer1 desktopImage={OptionBg} mobileImage={OptionBgMobile} hasGap={false}>
+    <SectionLayer1 desktopImage={OptionBg} mobileImage={OptionBgMobile}>
       <div class="flex items-center justify-end flex-1" slot="left"></div>
 
-      <div class="flex items-center flex-1" slot="right">
-       
-      </div>
+      <div class="flex items-center flex-1" slot="right"></div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={ScreenerBg} mobileImage={ScreenerBgMobile}>
+      <div class="flex items-center justify-end flex-1" slot="left"></div>
+
+      <div class="flex items-center flex-1" slot="right"></div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={HeatMapBg} mobileImage={HeatMapBg}>
+      <div class="flex items-center justify-end flex-1" slot="left"></div>
+
+      <div class="flex items-center flex-1" slot="right"></div>
     </SectionLayer1>
   </main>
 </Layout>
