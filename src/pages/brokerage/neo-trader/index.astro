@@ -1,7 +1,45 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+import HeroBg from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero.png";
+import HeroBgMobile from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero-mob.png";
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 ---
 
-<Layout title="Neo Trader">
-  <main></main>
+<Layout title="خانه">
+  <main>
+    <SectionLayer1 desktopImage={HeroBg} mobileImage={HeroBgMobile} hasGap={false}>
+      <div class="flex items-center justify-end flex-1" slot="left"></div>
+
+      <div class="flex items-center flex-1" slot="right">
+        <div class="flex flex-col gap-8 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <div class="flex flex-col items-center lg:items-start">
+              <h1 class="text-display-small text-white">
+                <span class="block">نئوتریدر؛</span>
+                سامانه معاملات آنلاین کارگزاری نهایت‌نگر
+              </h1>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-8 items-center lg:items-start">
+            <p class="text-body-large text-body-large--font-weight leading-8 text-center text-white lg:text-justify">
+              نسل جدید معاملات آنلاین در بازار سرمایه
+            </p>
+
+            <div class="flex items-center gap-4">
+              <button class="neo-button neo-button-fill-primary neo-button-large">
+                افتتاح حساب
+                <ArrowLeft aria-hidden="true" />
+              </button>
+              <button class="neo-button neo-button-large neo-button-outline-primary">
+               ورود به سامانه
+                <ArrowLeft aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </SectionLayer1>
+  </main>
 </Layout>
