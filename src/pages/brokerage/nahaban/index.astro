@@ -1,7 +1,123 @@
 ---
+import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import Section1Img from "@assets/images/Brokerage/4-Nahaban/nahaban-hero.png";
+import Section1ImgMob from "@assets/images/Brokerage/4-Nahaban/nahaban-hero-mob.png";
+
+const BreadCrumbItem = [
+  {
+    label: "کارگزاری",
+    href: "/portfolio-management",
+  },
+  {
+    label: "نهابان",
+    href: "/portfolio-management/nab",
+  },
+];
 ---
 
 <Layout title="Nahaban">
-  <main></main>
+  <main>
+    <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+        <h1 class="text-display-small text-white">نهابان ؛ فراتر از یک بانک</h1>
+        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+          با نهابان ، سرمایه شما تا رسیدن فرصت بعدی خرید، بیکار نمی‌ماند و می‌تواند برایتان بازده روزشمار ایجاد کند.
+        </p>
+        <div class="flex flex-col gap-4 lg:flex-row">
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+            افتتاح حساب
+            <ArrowLeft aria-hidden="true" />
+          </a>
+          <a class="neo-button neo-button-outline-primary neo-button-large" href={siteUrl("/")}>
+            درخواست مشاوره
+            <ArrowLeft aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </SectionLayer2>
+
+    <section class="flex flex-col max-w-200 mx-auto gap-6">
+      <BreadCrumb items={BreadCrumbItem} />
+
+      <div>
+        <h2 class="text-heading-medium leading-10">چرا صندوق ناب؟</h2>
+        <div class="text-body-medium text-secondary leading-7">محافظت از سرمایه خود در برابر تورم</div>
+      </div>
+
+      <p class="text-body-large leading-8">
+        سرمایه‌گذاری در طلا همواره یکی از راهکارهای مورد توجه سرمایه‌گذاران برای حفظ ارزش دارایی بوده است. صندوق ناب این
+        امکان را فراهم می‌کند تا بدون پیچیدگی‌های خرید طلای فیزیکی، از مزایای سرمایه‌گذاری در این بازار بهره‌مند شوید.
+      </p>
+
+      <div></div>
+
+      <h2 class="text-heading-medium leading-10">صندوق ناب چگونه کار می‌کند؟</h2>
+
+      <p class="text-body-large leading-8">
+        دارایی‌های صندوق ناب عمدتاً در گواهی سپرده کالایی طلا سرمایه‌گذاری می‌شود. به همین دلیل، ارزش واحدهای صندوق
+        عمدتاً متناسب با تغییرات قیمت طلا تغییر می‌کند. شما بدون خرید طلای فیزیکی، در بازار طلا سرمایه‌گذاری می‌کنید و
+        هر زمان که بخواهید، می‌توانید واحدهای صندوق را از طریق بورس خرید یا فروش کنید.
+      </p>
+
+      <h2 class="text-heading-medium leading-10">مقایسه خرید فیزیکی طلا با خرید صندوق ناب</h2>
+
+      <div class="p-2 bg-fg-primary rounded-xl"></div>
+
+      <h2 class="text-heading-medium leading-10">چرا سرمایه‌گذاری در صندوق طلا؟</h2>
+
+      <p class="text-body-large leading-8">
+        صندوق‌های سرمایه‌گذاری مبتنی بر طلا، امکان سرمایه‌گذاری غیرمستقیم در این بازار را با شفافیت، امنیت و سهولت فراهم
+        می‌کنند. به جای خرید طلای فیزیکی، سرمایه شما در دارایی‌های مبتنی بر طلا سرمایه‌گذاری می‌شود و می‌توانید بدون
+        دغدغه نگهداری، از تغییرات ارزش این بازار بهره‌مند شوید.
+      </p>
+
+      <h2 class="text-heading-medium leading-10">نمودار بازدهی صندوق طلای ناب</h2>
+
+      <div class="p-2 bg-fg-primary rounded-xl"></div>
+
+      <h2 class="text-heading-medium leading-10">صندوق ناب مناسب چه کسانی است؟</h2>
+
+      <ul class="text-body-large leading-8 space-y-4">
+        <li>افرادی که به دنبال حفظ ارزش سرمایه در برابر تورم هستند.</li>
+        <li>سرمایه‌گذارانی که به آینده بازار طلا خوش‌بین هستند.</li>
+        <li>افرادی که تمایلی به نگهداری طلای فیزیکی ندارند.</li>
+        <li>کسانی که به دنبال سرمایه‌گذاری شفاف و تحت نظارت بازار سرمایه هستند.</li>
+        <li>سرمایه‌گذارانی که خرید و فروش آنلاین را به روش‌های سنتی ترجیح می‌دهند.</li>
+      </ul>
+
+      <div class="flex flex-col p-6 bg-fg-primary rounded-xl gap-6">
+        <h2 class="text-heading-medium leading-10">سرمایه‌گذاری در صندوق ناب در سه گام</h2>
+
+        <div class="flex flex-col gap-10 relative">
+          <div class="absolute right-6.5 h-full w-px border border-dashed border-secondary"></div>
+          <div class="flex flex-1 gap-4 z-10">
+            <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full"></div>
+            <div class="flex flex-col gap-2">
+              <span class="text-title-medium">ثبت‌نام در کارگزاری</span>
+              <span class="text-body-medium text-secondary">افتتاح حساب و دریافت کد بورسی</span>
+            </div>
+          </div>
+          <div class="flex flex-1 gap-4 z-10">
+            <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full"></div>
+            <div class="flex flex-col gap-2">
+              <span class="text-title-medium">ورود به سامانه معاملاتی</span>
+              <span class="text-body-medium text-secondary">جستجوی نماد ناب در سامانه معاملاتی نهایت‌نگر.</span>
+            </div>
+          </div>
+          <div class="flex flex-1 gap-4 z-10">
+            <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full"></div>
+            <div class="flex flex-col gap-2">
+              <span class="text-title-medium">خرید واحدهای صندوق</span>
+              <span class="text-body-medium text-secondary">ثبت سفارش خرید و آغاز سرمایه‌گذاری در صندوق ناب.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
