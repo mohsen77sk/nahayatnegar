@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
 import Banner from "@components/banner.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
 
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
@@ -22,6 +23,40 @@ import ScreenerBg from "@assets/images/Brokerage/1-Neo Trader/screener-section.p
 import ScreenerBgMobile from "@assets/images/Brokerage/1-Neo Trader/screener-section-mob.png";
 
 import HeatMapBg from "@assets/images/Brokerage/1-Neo Trader/heatmap-bg.png";
+
+import Global from "@assets/icons/iconsax/outline/global.svg";
+import Clock from "@assets/icons/iconsax/outline/wrist-clock.svg";
+import TickCircl from "@assets/icons/iconsax/outline/tick-circle.svg";
+import ProfileTick from "@assets/icons/iconsax/outline/profile-tick.svg";
+import Brush from "@assets/icons/iconsax/outline/brush-2.svg";
+import Profile2User from "@assets/icons/iconsax/outline/profile-2user.svg";
+
+const features = [
+  {
+    title: "همه ابزارهای مورد نیاز، در یک سامانه",
+    icon: TickCircl,
+  },
+  {
+    title: "سرعت در دسترسی، نه فقط در انجام معامله",
+    icon: Clock,
+  },
+  {
+    title: "سامانه‌ای در خدمت سبک معاملاتی شما",
+    icon: ProfileTick,
+  },
+  {
+    title: "طراحی مدرن، تجربه‌ای ساده‌تر",
+    icon: Brush,
+  },
+  {
+    title: "از مبتدی تا حرفه‌ای",
+    icon: Profile2User,
+  },
+  {
+    title: "سامانه تحت وب؛ همیشه در دسترس",
+    icon: Global,
+  },
+];
 ---
 
 <Layout title="خانه">
@@ -80,6 +115,11 @@ import HeatMapBg from "@assets/images/Brokerage/1-Neo Trader/heatmap-bg.png";
           اطلاعات کامل‌تر تصمیم‌گیری کنید.
         </h6>
       </Banner>
+
+      <div class="features my-10">
+        <h4 class="text-title-large py-5">چرا معامله‌گران NeoTrader را انتخاب می‌کنند؟</h4>
+        <FeaturesGrid features={features} rowPattern={[3, 3]} />
+      </div>
     </section>
 
     <SectionLayer1 desktopImage={WatchlistBg} mobileImage={WatchlistBgMobile}>

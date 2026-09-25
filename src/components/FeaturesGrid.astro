@@ -1,0 +1,65 @@
+---
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import FeatureCard from "./FeatureCard.astro";
+
+interface Props {
+    features: {
+        title: string;
+        description?: string;
+        icon: AstroComponentFactory;
+    }[];
+    rowPattern?: number[];
+}
+
+const { features, rowPattern = [3, 2] } = Astro.props;
+
+type Row = { items: typeof features; offset: boolean };
+
+const rows: Row[] = [];
+
+let featureIndex = 0;
+let patternIndex = 0;
+let previousSize: number | null = null;
+let offsetToggle = false;
+
+while (featureIndex < features.length) {
+    const rowSize = rowPattern[patternIndex % rowPattern.length];
+    const items = features.slice(featureIndex, featureIndex + rowSize);
+
+    let offset = false;
+    if (rowSize === previousSize) {
+        offsetToggle = !offsetToggle;
+        offset = offsetToggle;
+    } else {
+        offsetToggle = false;
+    }
+
+    rows.push({ items, offset });
+
+    previousSize = rowSize;
+    featureIndex += rowSize;
+    patternIndex++;
+}
+
+function getGridClass(size: number, offset: boolean) {
+    if (size === 2) {
+        return offset ? "lg:grid-cols-[1.3fr_1fr]" : "lg:grid-cols-2";
+    }
+    if (size === 3) {
+        return offset ? "lg:grid-cols-[1fr_1.4fr_1fr]" : "lg:grid-cols-3";
+    }
+    return "lg:grid-cols-1";
+}
+---
+
+<section class="bg-slate-100" dir="rtl">
+    <div class="mx-auto flex max-w-7xl flex-col gap-2">
+        {rows.map((row) => (
+            <div class:list={["grid grid-cols-1 gap-2", getGridClass(row.items.length, row.offset)]}>
+                {row.items.map((item) => (
+                    <FeatureCard title={item.title} description={item.description} icon={item.icon} />
+                ))}
+            </div>
+        ))}
+    </div>
+</section>

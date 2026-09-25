@@ -1,0 +1,23 @@
+---
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+interface Props {
+  title: string;
+  description?: string;
+  icon: AstroComponentFactory;
+}
+
+const { title, description, icon: Icon } = Astro.props;
+---
+
+<div class="flex h-full w-full flex-col rounded-lg gap-3 bg-white p-6">
+  <div class="flex">
+    <div class="flex items-center justify-center h-8 w-8 rounded-xl bg-[#0170F314]">
+      <Icon class="h-4.5 w-4.5 text-brand" aria-hidden="true" />
+    </div>
+  </div>
+
+  <h3 class="text-title-medium">{title}</h3>
+
+  {description && <p class="text-body-medium text-secondary">{description}</p>}
+</div>
