@@ -1,4 +1,5 @@
 ---
+import { siteUrl } from "@utils/url";
 import Home from "@assets/icons/iconsax/outline/home.svg";
 import ArrowLeft2 from "@assets/icons/iconsax/outline/arrow-left-2.svg";
 
@@ -22,18 +23,18 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 ---
 
-<nav class="flex max-w-lg w-full mx-auto h-12" aria-label="Breadcrumb">
+<nav class="flex max-w-lg px-3 w-full h-12" aria-label="Breadcrumb">
   <ol class="flex h-full items-center gap-2 text-sm">
     {breadcrumbs.map((item, index) => {
       const isLast = index === breadcrumbs.length - 1;
       return (
         <li class="flex items-center gap-2">
           {index === 0 ? (
-            <a href={item.href} aria-label={item.label} class="text-gray-500 transition-colors hover:text-gray-900">
+            <a href={siteUrl(item.href)} aria-label={item.label} class="text-gray-500 transition-colors hover:text-gray-900">
               <Home class="h-4.5 w-4.5 text-brand" aria-hidden="true" />
             </a>
           ) : item.href && !isLast ? (
-            <a href={item.href} class="text-body-large text-brand">
+            <a href={siteUrl(item.href)} class="text-body-large text-brand">
               {item.label}
             </a>
           ) : (
