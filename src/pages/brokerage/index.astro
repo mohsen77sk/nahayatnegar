@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { siteUrl } from "@utils/url";
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import Section1ImgMob from "@assets/images/Brokerage/brokerage-hero-mob.png";
 import Section1Img from "@assets/images/Brokerage/brokerage-hero.png";
@@ -58,7 +59,7 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                   پنل معاملاتی پیشرفته نهایت‌نگر که با ارائه امکانات حرفه‌ای و رابط کاربری روان، تجربه‌ای سریع، دقیق و
                   مطمئن را برای انجام معاملات در بازار سرمایه فراهم می‌کند.
                 </h3>
-                <a class="neo-button neo-button-icon neo-button-fill-primary neo-button-large mx-auto" href="/brokerage/neo-trader">
+                <a class="neo-button neo-button-icon neo-button-fill-primary neo-button-large mx-auto" href={siteUrl("/brokerage/neo-trader")}>
                   ورود به نئوتریدر
                   <ArrowLeft class="w-4 h-4 mr-2" />
                 </a>
