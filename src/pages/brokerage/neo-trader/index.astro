@@ -23,7 +23,8 @@ import OptionBgMobile from "@assets/images/Brokerage/1-Neo Trader/option-section
 import ScreenerBg from "@assets/images/Brokerage/1-Neo Trader/screener-section.png";
 import ScreenerBgMobile from "@assets/images/Brokerage/1-Neo Trader/screener-section-mob.png";
 
-import HeatMapBg from "@assets/images/Brokerage/1-Neo Trader/heatmap-bg.png";
+import MarketMapBg from "@assets/images/Brokerage/1-Neo Trader/heatmap-bg.png";
+import MarketMapObj from "@assets/images/Brokerage/1-Neo Trader/heatmap-object.png";
 
 import Global from "@assets/icons/iconsax/outline/global.svg";
 import Clock from "@assets/icons/iconsax/outline/wrist-clock.svg";
@@ -163,6 +164,7 @@ const features = [
       </div>
     </section>
 
+    <!-- begin::Watchlist -->
     <SectionLayer1 desktopImage={WatchlistBg} mobileImage={WatchlistBgMobile}>
       <div class="flex items-center flex-0 lg:flex-1 order-1 lg:order-2" slot="left">
         <div class="flex flex-col gap-6 flex-1">
@@ -170,7 +172,7 @@ const features = [
             <LineGradient />
             <div class="flex flex-col items-center lg:items-start">
               <h1 class="text-display-small text-white">دیده‌بان بازار</h1>
-              <span class="text-body-medium text-neutral-500">بازار را همان‌طور ببینید که برای شما اهمیت دارد</span>
+              <h6 class="text-body-medium text-neutral-500">بازار را همان‌طور ببینید که برای شما اهمیت دارد</h6>
             </div>
           </div>
 
@@ -186,7 +188,10 @@ const features = [
               </p>
             </div>
 
-            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/brokerage/watchlist")}>
+            <a
+              class="neo-button neo-button-fill-primary neo-button-meduim w-50 h-8.5 min-w-15 lg:w-auto"
+              href={siteUrl("/brokerage/watchlist")}
+            >
               مشاهده جزئیات
               <ArrowLeft aria-hidden="true" />
             </a>
@@ -196,13 +201,51 @@ const features = [
 
       <div class="flex items-center flex-0 lg:flex-1" slot="right"></div>
     </SectionLayer1>
+    <!-- end::Watchlist -->
 
+    <!-- begin::Technical -->
     <SectionLayer1 desktopImage={TechnicalBg} mobileImage={TechnicalBgMobile}>
       <div class="flex items-center justify-end flex-1" slot="left"></div>
 
-      <div class="flex items-center flex-1" slot="right"></div>
-    </SectionLayer1>
+      <div class="flex items-center flex-1" slot="right">
+        <div class="flex flex-col gap-6 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <LineGradient />
+            <div class="flex flex-col items-center gap-6 lg:gap-0 lg:items-start">
+              <h1 class="text-display-small text-center lg:text-right text-primary">
+                تحلیل تکنیکال و نمودارهای پیشرفته
+              </h1>
+              <h6 class="text-body-medium text-secondary">
+                قبل از معامله، نمودار را از زاویه‌ای که می‌خواهید بررسی کنید
+              </h6>
+            </div>
+          </div>
 
+          <div class="flex flex-col gap-4 items-center lg:items-start lg:pr-6">
+            <div>
+              <p class="text-body-large leading-[210%] text-center text-primary lg:text-justify">
+                بررسی روند قیمت، یکی از مهم‌ترین مراحل تحلیل بازار است. <br />
+                در ابزار تحلیل تکنیکال می‌توانید نمودار قیمت نمادها را در بازه‌های زمانی مختلف مشاهده کنید، از انواع
+                تعدیل‌های قیمتی استفاده کنید و چند نمودار را به‌صورت هم‌زمان کنار یکدیگر قرار دهید. <br />
+                ترکیب ابزارهای تحلیلی با اطلاعات کامل نماد، این امکان را فراهم می‌کند تا بدون خروج از سامانه، تحلیل
+                دقیق‌تری از وضعیت بازار داشته باشید.
+              </p>
+            </div>
+
+            <a
+              class="neo-button neo-button-fill-primary neo-button-meduim w-50 h-8.5 min-w-15 lg:w-auto"
+              href={siteUrl("/brokerage/chart")}
+            >
+              مشاهده جزئیات
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionLayer1>
+    <!-- end::Technical -->
+
+    <!-- begin::Option -->
     <SectionLayer1 desktopImage={OptionBg} mobileImage={OptionBgMobile}>
       <div class="flex items-center flex-0 lg:flex-1 order-1 lg:order-2" slot="left">
         <div class="flex flex-col gap-6 flex-1">
@@ -217,16 +260,19 @@ const features = [
           </div>
 
           <div class="flex flex-col gap-4 items-center lg:items-start lg:pr-6 pt-3 pb-3">
-              <p class="text-body-large leading-[210%] text-center text-white lg:text-right">
-                بازار اختیار معامله نیازمند بررسی هم‌زمان قراردادها، قیمت‌ها و استراتژی‌های مختلف است.
-                <br />
-                در این بخش می‌توانید زنجیره قراردادها را مشاهده کنید، اطلاعات هر قرارداد را بررسی کنید و استراتژی‌های
-                معاملاتی موردنظر خود را تعریف و مدیریت کنید. <br />
-                این امکانات به شما کمک می‌کند فرصت‌های بازار اختیار معامله را سریع‌تر شناسایی کرده و تصمیم‌های خود را با
-                اطلاعات کامل‌تری اتخاذ کنید.
-              </p>
+            <p class="text-body-large leading-[210%] text-center text-white lg:text-right">
+              بازار اختیار معامله نیازمند بررسی هم‌زمان قراردادها، قیمت‌ها و استراتژی‌های مختلف است.
+              <br />
+              در این بخش می‌توانید زنجیره قراردادها را مشاهده کنید، اطلاعات هر قرارداد را بررسی کنید و استراتژی‌های
+              معاملاتی موردنظر خود را تعریف و مدیریت کنید. <br />
+              این امکانات به شما کمک می‌کند فرصت‌های بازار اختیار معامله را سریع‌تر شناسایی کرده و تصمیم‌های خود را با
+              اطلاعات کامل‌تری اتخاذ کنید.
+            </p>
 
-            <a class="neo-button neo-button-fill-primary neo-button-meduim w-50 h-8.5 min-w-15 lg:w-auto" href={siteUrl("/brokerage/option")}>
+            <a
+              class="neo-button neo-button-fill-primary neo-button-meduim w-50 h-8.5 min-w-15 lg:w-auto"
+              href={siteUrl("/brokerage/option")}
+            >
               مشاهده جزئیات
               <ArrowLeft aria-hidden="true" />
             </a>
@@ -236,17 +282,82 @@ const features = [
 
       <div class="flex items-center flex-0 lg:flex-1" slot="right"></div>
     </SectionLayer1>
+    <!-- end::Option -->
 
+    <!-- begin::Screener -->
     <SectionLayer1 desktopImage={ScreenerBg} mobileImage={ScreenerBgMobile}>
-      <div class="flex items-center justify-end flex-1" slot="left"></div>
+      <div class="flex items-center flex-0 lg:flex-1 order-1 lg:order-2" slot="left">
+        <div class="flex flex-col gap-6 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <LineGradient />
+            <div class="flex flex-col items-center lg:items-start gap-2">
+              <h1 class="text-display-small text-white">اسکرینر (Screener)</h1>
+              <span class="text-body-medium text-neutral-500">
+                به‌جای جستجوی صدها نماد، اجازه دهید معیارهای شما جستجو کنند
+              </span>
+            </div>
+          </div>
 
-      <div class="flex items-center flex-1" slot="right"></div>
+          <div class="flex flex-col gap-4 items-center lg:items-start lg:pr-6 pt-3 pb-3">
+            <p class="text-body-large leading-[210%] text-center text-white lg:text-right">
+              بررسی دستی تمام نمادهای بازار، زمان‌بر و دشوار است.
+              <br />
+              اسکرینر این امکان را فراهم می‌کند تا نمادها را بر اساس معیارهای دلخواه یا فیلترهای آماده بررسی کنید و تنها
+              نمادهایی را مشاهده کنید که با استراتژی معاملاتی شما همخوانی دارند.
+            </p>
+
+            <a
+              class="neo-button neo-button-fill-primary neo-button-meduim w-50 h-8.5 min-w-15 lg:w-auto"
+              href={siteUrl("/brokerage/screener")}
+            >
+              مشاهده جزئیات
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center flex-0 lg:flex-1" slot="right"></div>
     </SectionLayer1>
+    <!-- end::Screener -->
 
-    <SectionLayer1 desktopImage={HeatMapBg} mobileImage={HeatMapBg}>
-      <div class="flex items-center justify-end flex-1" slot="left"></div>
+    <!-- begin::MarketMap -->
+    <SectionLayer1 desktopImage={MarketMapBg} mobileImage={MarketMapBg}>
+      <div class="flex items-center justify-end flex-1" slot="left">
+        <img src={MarketMapObj.src} alt="" aria-hidden="true" />
+      </div>
 
-      <div class="flex items-center flex-1" slot="right"></div>
+      <div class="flex items-center flex-1" slot="right">
+        <div class="flex flex-col gap-6 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <LineGradient />
+            <div class="flex flex-col items-center gap-6 lg:gap-0 lg:items-start">
+              <h1 class="text-display-small text-center lg:text-right text-white">نقشه بازار</h1>
+              <h6 class="text-body-medium text-neutral-500">وضعیت بازار را در یک نگاه ببینید</h6>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-4 items-center lg:items-start lg:pr-6">
+            <div>
+              <p class="text-body-large leading-[210%] text-center text-white lg:text-justify">
+                گاهی یک تصویر، اطلاعات بیشتری از چندین جدول در اختیار شما قرار می‌دهد.
+                <br />
+                نقشه بازار با نمایش گرافیکی وضعیت نمادها و گروه‌های مختلف، به شما کمک می‌کند روند کلی بازار، صنایع
+                تأثیرگذار و جریان معاملات را سریع‌تر درک کنید.
+              </p>
+            </div>
+
+            <a
+              class="neo-button neo-button-fill-primary neo-button-meduim w-50 h-8.5 min-w-15 lg:w-auto"
+              href={siteUrl("/brokerage/market-map")}
+            >
+              مشاهده جزئیات
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
     </SectionLayer1>
+    <!-- end::MarketMap -->
   </main>
 </Layout>
