@@ -1,9 +1,11 @@
 ---
 import { siteUrl } from "@utils/url";
+import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import SectionVideoHero from "@components/@layout/section-video-hero.astro";
 import LineGradient from "@components/line-gradient.astro";
+
 import SectionHero from "@assets/images/Asset Management/hero-section.mp4";
 import Section1Img from "@assets/images/Asset Management/gold-fund-section.png";
 import Section1ImgMob from "@assets/images/Asset Management/gold-fund-section-mob.png";
@@ -13,6 +15,7 @@ import Section3Img from "@assets/images/Asset Management/piroz-fund-section.png"
 import Section3ImgMob from "@assets/images/Asset Management/piroz-fund-section.png-mob.png";
 import Section4Img from "@assets/images/Asset Management/pouya-fund-section.png";
 import Section4ImgMob from "@assets/images/Asset Management/pouya-fund-section-mob.png";
+import Section5ImgObj from "@assets/images/Asset Management/portfolio-managment-object.png";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 ---
 
@@ -140,6 +143,32 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
               <ArrowLeft aria-hidden="true" />
             </a>
           </div>
+        </div>
+      </div>
+    </SectionLayer1>
+
+    <SectionLayer1 classes="bg-white">
+      <div class="grid grid-rows-2 items-center self-center flex-1 gap-8" slot="right">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col-reverse items-center text-center">
+            <div class="flex flex-col items-center">
+              <span class="text-secondary">مدیریت دارایی</span>
+              <h1 class="text-display-small">مدیریت اختصاصی دارایی، متناسب با اهداف شما</h1>
+              <div class="rounded-round h-1 w-16 mt-6 bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+            </div>
+          </div>
+          <p class="text-body-large font-medium leading-8 text-center lg:text-center text-secondary">
+            با خدمات سبد اختصاصی نهایت‌نگر، استراتژی سرمایه‌گذاری متناسب با اهداف، افق زمانی و میزان ریسک‌پذیری شما
+            طراحی می‌شود تا دارایی‌تان به‌صورت حرفه‌ای و شخصی‌سازی‌شده مدیریت شود.
+          </p>
+          <button class="neo-button neo-button-icon neo-button-fill-primary neo-button-large mx-auto">
+            اطلاعات بیشتر
+            <ArrowLeft class="w-4 h-4 mr-2" />
+          </button>
+        </div>
+
+        <div class="flex items-center justify-center" slot="left">
+          <Image src={Section5ImgObj} alt="مدیریت دارایی" class="lg:w-124 w-75 h-auto" loading="lazy" />
         </div>
       </div>
     </SectionLayer1>
