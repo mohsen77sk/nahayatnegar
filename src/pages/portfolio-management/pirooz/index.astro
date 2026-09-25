@@ -1,11 +1,23 @@
 ---
 import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 
 import Section1Img from "@assets/images/Asset Management/2-Pirooz/pirooz-hero.png";
 import Section1ImgMob from "@assets/images/Asset Management/2-Pirooz/pirooz-hero-mob.png";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+
+const BreadCrumbItem = [
+  {
+    label: "مدیریت دارایی",
+    href: "/portfolio-management",
+  },
+  {
+    label: "صندوق پیروز",
+    href: "/portfolio-management/pirooz",
+  },
+];
 ---
 
 <Layout title="صندوق سرمایه‌گذاری پیروز">
@@ -29,5 +41,9 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
         </div>
       </div>
     </SectionLayer2>
+
+    <section class="flex flex-col max-w-200 mx-auto gap-6">
+      <BreadCrumb items={BreadCrumbItem} />
+    </section>
   </main>
 </Layout>

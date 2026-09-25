@@ -1,11 +1,23 @@
 ---
 import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 
 import Section1Img from "@assets/images/Asset Management/4-Asil/asil-hero.png";
 import Section1ImgMob from "@assets/images/Asset Management/4-Asil/asil-hero-mob.png";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+
+const BreadCrumbItem = [
+  {
+    label: "مدیریت دارایی",
+    href: "/portfolio-management",
+  },
+  {
+    label: "صندوق اصیل",
+    href: "/portfolio-management/asil",
+  },
+];
 ---
 
 <Layout title="صندوق سرمایه‌گذاری اصیل">
@@ -29,5 +41,9 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
         </div>
       </div>
     </SectionLayer2>
+
+    <section class="flex flex-col max-w-200 mx-auto gap-6">
+      <BreadCrumb items={BreadCrumbItem} />
+    </section>
   </main>
 </Layout>
