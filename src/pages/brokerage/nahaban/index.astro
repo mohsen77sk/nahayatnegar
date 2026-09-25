@@ -3,19 +3,57 @@ import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
+import { Image } from "astro:assets";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
 
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 import Section1Img from "@assets/images/Brokerage/4-Nahaban/nahaban-hero.png";
 import Section1ImgMob from "@assets/images/Brokerage/4-Nahaban/nahaban-hero-mob.png";
+import SectionBanner1Img from "@assets/images/Brokerage/4-Nahaban/Mockups/mob.png";
+
+import Clock from "@assets/icons/iconsax/outline/clock.svg";
+import Candle from "@assets/icons/iconsax/outline/candle.svg";
+import DiscountCircle from "@assets/icons/iconsax/outline/discount-circle.svg";
+import Wallet3 from "@assets/icons/iconsax/outline/wallet-3.svg";
+import Verify from "@assets/icons/iconsax/outline/verify.svg";
+import TickCircl from "@assets/icons/iconsax/outline/tick-circle.svg";
+import Banner from "@components/banner.astro";
 
 const BreadCrumbItem = [
   {
     label: "کارگزاری",
-    href: "/portfolio-management",
+    href: "/brokerage",
   },
   {
     label: "نهابان",
-    href: "/portfolio-management/nab",
+  },
+];
+
+const features = [
+  {
+    title: "سرمایه همیشه آماده معامله",
+    description: "وجوه در حساب معاملاتی می‌ماند و هر لحظه برای معامله یا برداشت در دسترس است.",
+    icon: Candle,
+  },
+  {
+    title: "سود از همان روز نخست",
+    description: "سود به‌صورت روزانه محاسبه و در حساب اختصاصی شما ثبت می‌شود.",
+    icon: Clock,
+  },
+  {
+    title: "انتقال خودکار سود هنگام استفاده",
+    description: "با برداشت وجه یا خرید اوراق، سود متناظر به حساب معاملاتی شما منتقل می‌شود.",
+    icon: DiscountCircle,
+  },
+  {
+    title: "سود روزشمار برای موجودی نقد",
+    description: "موجودی نقد حساب معاملاتی شما تا زمان استفاده، مشمول سود روزشمار است.",
+    icon: Wallet3,
+  },
+  {
+    title: "سود روزشمار برای وجه تضمین اختیار",
+    description: "بازده مؤثر سرمایه‌گذاری شما در معاملات اختیار حفظ می‌شود.",
+    icon: Verify,
   },
 ];
 ---
@@ -45,50 +83,40 @@ const BreadCrumbItem = [
       <BreadCrumb items={BreadCrumbItem} />
 
       <div>
-        <h2 class="text-heading-medium leading-10">چرا صندوق ناب؟</h2>
-        <div class="text-body-medium text-secondary leading-7">محافظت از سرمایه خود در برابر تورم</div>
+        <h2 class="text-heading-medium leading-10">نهابان</h2>
+        <div class="text-body-medium text-secondary leading-7">
+          سود روزشمار برای موجودی نقد و وجه تضمین معاملات اختیار
+        </div>
       </div>
 
       <p class="text-body-large leading-8">
-        سرمایه‌گذاری در طلا همواره یکی از راهکارهای مورد توجه سرمایه‌گذاران برای حفظ ارزش دارایی بوده است. صندوق ناب این
-        امکان را فراهم می‌کند تا بدون پیچیدگی‌های خرید طلای فیزیکی، از مزایای سرمایه‌گذاری در این بازار بهره‌مند شوید.
+        نهابان سرویسی است که روی موجودی نقد حساب معاملاتی و همچنین وجه تضمین معاملات اختیار، سود روزشمار محاسبه و پرداخت
+        می‌کند. سود محاسبه‌شده به‌صورت روزانه در حساب اختصاصی نهابان شما ثبت و تجمیع می‌شود و هر زمان تمام یا بخشی از
+        موجودی خود را از طرح خارج کنید، سود متناظر آن نیز به حساب معاملاتی شما منتقل می شود .
       </p>
 
-      <div></div>
+      <Image src={SectionBanner1Img} alt="صندوق ناب" class="w-full h-auto" loading="lazy" />
 
-      <h2 class="text-heading-medium leading-10">صندوق ناب چگونه کار می‌کند؟</h2>
+      <div class="features mb-5">
+        <h2 class="text-heading-medium leading-10 pb-5">ویژگی‌های متمایز نهابان</h2>
+        <FeaturesGrid features={features} rowPattern={[2, 3]} />
+      </div>
+
+      <h2 class="text-heading-medium leading-10">نهابان چگونه کار می‌کند؟</h2>
 
       <p class="text-body-large leading-8">
-        دارایی‌های صندوق ناب عمدتاً در گواهی سپرده کالایی طلا سرمایه‌گذاری می‌شود. به همین دلیل، ارزش واحدهای صندوق
-        عمدتاً متناسب با تغییرات قیمت طلا تغییر می‌کند. شما بدون خرید طلای فیزیکی، در بازار طلا سرمایه‌گذاری می‌کنید و
-        هر زمان که بخواهید، می‌توانید واحدهای صندوق را از طریق بورس خرید یا فروش کنید.
+        اگر در حساب معاملاتی خود موجودی نقد داشته باشید یا برای معاملات اختیار، وجه تضمین نزد کارگزاری نگهداری کنید،
+        نهابان مطابق شرایط طرح، سود روزشمار این مبالغ را به‌صورت روزانه محاسبه و در حساب اختصاصی نهابان شما ثبت می‌کند.
+        این سود تا زمانی که وجوه در طرح باقی بمانند، به‌صورت روزانه افزایش می‌یابد. هر زمان که تمام یا بخشی از این وجوه
+        را برای خرید اوراق بهادار مصرف کنید یا از حساب معاملاتی خود برداشت نمایید، سود روزشمار محاسبه‌شده متناظر با مبلغ
+        خارج‌شده نیز به حساب معاملاتی شما منتقل می‌شود.
       </p>
 
-      <h2 class="text-heading-medium leading-10">مقایسه خرید فیزیکی طلا با خرید صندوق ناب</h2>
-
-      <div class="p-2 bg-fg-primary rounded-xl"></div>
-
-      <h2 class="text-heading-medium leading-10">چرا سرمایه‌گذاری در صندوق طلا؟</h2>
-
-      <p class="text-body-large leading-8">
-        صندوق‌های سرمایه‌گذاری مبتنی بر طلا، امکان سرمایه‌گذاری غیرمستقیم در این بازار را با شفافیت، امنیت و سهولت فراهم
-        می‌کنند. به جای خرید طلای فیزیکی، سرمایه شما در دارایی‌های مبتنی بر طلا سرمایه‌گذاری می‌شود و می‌توانید بدون
-        دغدغه نگهداری، از تغییرات ارزش این بازار بهره‌مند شوید.
-      </p>
-
-      <h2 class="text-heading-medium leading-10">نمودار بازدهی صندوق طلای ناب</h2>
-
-      <div class="p-2 bg-fg-primary rounded-xl"></div>
-
-      <h2 class="text-heading-medium leading-10">صندوق ناب مناسب چه کسانی است؟</h2>
-
-      <ul class="text-body-large leading-8 space-y-4">
-        <li>افرادی که به دنبال حفظ ارزش سرمایه در برابر تورم هستند.</li>
-        <li>سرمایه‌گذارانی که به آینده بازار طلا خوش‌بین هستند.</li>
-        <li>افرادی که تمایلی به نگهداری طلای فیزیکی ندارند.</li>
-        <li>کسانی که به دنبال سرمایه‌گذاری شفاف و تحت نظارت بازار سرمایه هستند.</li>
-        <li>سرمایه‌گذارانی که خرید و فروش آنلاین را به روش‌های سنتی ترجیح می‌دهند.</li>
-      </ul>
+      <Banner>
+        <h6 class="text-title-large text-blue-800 leading-relaxed">
+          حتی زمانی که معامله‌ای انجام نمی‌دهید، سرمایه شما می‌تواند برایتان بازده ایجاد کند.
+        </h6>
+      </Banner>
 
       <div class="flex flex-col p-6 bg-fg-primary rounded-xl gap-6">
         <h2 class="text-heading-medium leading-10">سرمایه‌گذاری در صندوق ناب در سه گام</h2>
