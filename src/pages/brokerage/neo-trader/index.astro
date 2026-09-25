@@ -32,6 +32,7 @@ import ProfileTick from "@assets/icons/iconsax/outline/profile-tick.svg";
 import Brush from "@assets/icons/iconsax/outline/brush-2.svg";
 import Profile2User from "@assets/icons/iconsax/outline/profile-2user.svg";
 import { siteUrl } from "@utils/url";
+import URLS from "../../../scripts/constants";
 
 const features = [
   {
@@ -83,14 +84,24 @@ const features = [
             </p>
 
             <div class="flex items-center gap-4">
-              <button class="neo-button neo-button-fill-primary neo-button-large">
+              <a
+                href={siteUrl(URLS.registerAddress)}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="neo-button neo-button-fill-primary neo-button-large"
+              >
                 افتتاح حساب
                 <ArrowLeft aria-hidden="true" />
-              </button>
-              <button class="neo-button neo-button-large neo-button-outline-primary">
+              </a>
+              <a
+                href={siteUrl(URLS.neoTraderAppAddress)}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="neo-button neo-button-large neo-button-outline-primary"
+              >
                 ورود به سامانه
                 <ArrowLeft aria-hidden="true" />
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -175,7 +186,7 @@ const features = [
               </p>
             </div>
 
-            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/learning")}>
+            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/brokerage/watchlist")}>
               مشاهده جزئیات
               <ArrowLeft aria-hidden="true" />
             </a>
