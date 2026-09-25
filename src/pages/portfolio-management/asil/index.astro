@@ -1,7 +1,33 @@
 ---
+import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+
+import Section1Img from "@assets/images/Asset Management/4-Asil/asil-hero.png";
+import Section1ImgMob from "@assets/images/Asset Management/4-Asil/asil-hero-mob.png";
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 ---
 
-<Layout title="Asil found">
-  <main></main>
+<Layout title="صندوق سرمایه‌گذاری اصیل">
+  <main>
+    <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+        <h1 class="text-display-small text-white">صندوق سرمایه‌گذاری اصیل</h1>
+        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+          اگر به دنبال سرمایه‌گذاری کم‌ریسک برای مدیریت سرمایه و کسب بازدهی باثبات هستید، صندوق اصیل راهکاری حرفه‌ای
+          برای سرمایه‌گذاری در اوراق بهادار با درآمد ثابت است.
+        </p>
+        <div class="flex gap-4">
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+            خرید صندوق
+            <ArrowLeft aria-hidden="true" />
+          </a>
+          <a class="neo-button neo-button-outline-primary neo-button-large" href={siteUrl("/")}>
+            دریافت کد بورسی
+            <ArrowLeft aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </SectionLayer2>
+  </main>
 </Layout>
