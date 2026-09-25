@@ -1,0 +1,15 @@
+---
+import BannerBg from "@assets/images/Brokerage/1-Neo Trader/banner.png";
+
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<section
+    class="relative bg-center bg-cover bg-no-repeat w-full h-32 rounded-t-[S] rounded-br-[S] rounded-bl-[70px] p-[6XL]"
+    style={`background-image: url("${BannerBg.src}")`}
+></section>
