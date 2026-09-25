@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
+import LineGradient from "@components/line-gradient.astro";
 import Banner from "@components/banner.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 
@@ -108,6 +109,34 @@ const features = [
         ]}
       />
 
+      <div class="mb-10">
+        <div class="flex flex-col-reverse lg:flex-row items-center gap-6 my-9">
+          <LineGradient />
+          <div class="flex flex-col items-center lg:items-start">
+            <span class="text-secondary">NeoTrader</span>
+            <h1 class="text-display-small">سامانه نئوتریدر</h1>
+          </div>
+        </div>
+
+        <div class="pr-6">
+          <p class="text-body-large leading-[210%] whitespace-pre-line">
+            NeoTrader نسل جدید سامانه معاملات آنلاین کارگزاری نهایت‌نگر است؛ سامانه‌ای که با هدف ایجاد تجربه‌ای بهتر از
+            معاملات آنلاین، بر پایه فناوری‌های روز و نیازهای واقعی سرمایه‌گذاران توسعه یافته است.
+          </p>
+
+          <p class="text-body-large leading-[210%] whitespace-pre-line">
+            در طراحی این سامانه، تلاش شده است تمام مراحل یک معامله، از بررسی وضعیت بازار و تحلیل نمادها تا ثبت سفارش،
+            مدیریت پرتفوی و مشاهده گزارش‌های معاملاتی، در یک محیط یکپارچه و کاربرپسند انجام شود.
+          </p>
+
+          <p class="text-body-large leading-[210%] whitespace-pre-line">
+            امکان انجام معاملات بورس اوراق بهادار، صندوق‌های سرمایه‌گذاری و اختیار معامله، در کنار ابزارهایی مانند
+            دیده‌بان بازار، تحلیل تکنیکال، اسکرینر، نقشه بازار و اطلاعات جامع نمادها، مجموعه‌ای کامل از امکانات مورد
+            نیاز برای معامله‌گران را در اختیار شما قرار می‌دهد.
+          </p>
+        </div>
+      </div>
+
       <Banner>
         <h6 class="text-title-large text-blue-800 leading-relaxed">
           <span class="block">NeoTrader تنها یک سامانه ثبت سفارش نیست؛</span>
@@ -116,8 +145,8 @@ const features = [
         </h6>
       </Banner>
 
-      <div class="features my-10">
-        <h4 class="text-title-large py-5">چرا معامله‌گران NeoTrader را انتخاب می‌کنند؟</h4>
+      <div class="features mb-9">
+        <h4 class="text-heading-medium py-9">چرا معامله‌گران NeoTrader را انتخاب می‌کنند؟</h4>
         <FeaturesGrid features={features} rowPattern={[3, 3]} />
       </div>
     </section>
