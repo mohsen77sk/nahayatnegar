@@ -31,6 +31,7 @@ import TickCircl from "@assets/icons/iconsax/outline/tick-circle.svg";
 import ProfileTick from "@assets/icons/iconsax/outline/profile-tick.svg";
 import Brush from "@assets/icons/iconsax/outline/brush-2.svg";
 import Profile2User from "@assets/icons/iconsax/outline/profile-2user.svg";
+import { siteUrl } from "@utils/url";
 
 const features = [
   {
@@ -152,7 +153,35 @@ const features = [
     </section>
 
     <SectionLayer1 desktopImage={WatchlistBg} mobileImage={WatchlistBgMobile}>
-      <div class="flex items-center justify-end flex-1" slot="left"></div>
+      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
+        <div class="flex flex-col gap-6 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <LineGradient />
+            <div class="flex flex-col items-center lg:items-start">
+              <h1 class="text-display-small text-white">دیده‌بان بازار</h1>
+              <span class="text-body-medium text-neutral-500">بازار را همان‌طور ببینید که برای شما اهمیت دارد</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-4 items-center lg:items-start lg:pr-6">
+            <div>
+              <p class="text-body-large leading-[210%] text-center text-white lg:text-justify">
+                دیده‌بان بازار این امکان را فراهم می‌کند تا نمادهای موردنظر خود را در فهرست‌های اختصاصی دسته‌بندی کنید و
+                تنها اطلاعاتی را مشاهده کنید که برای تصمیم‌گیری به آن‌ها نیاز دارید.
+              </p>
+              <p class="text-body-large leading-[210%] text-center text-white lg:text-justify">
+                در کنار دیده‌بان‌های شخصی، مجموعه‌ای از دیده‌بان‌های سیستمی نیز در اختیار شما قرار گرفته است تا بتوانید
+                گروه‌های مختلف بازار را بدون نیاز به ایجاد فهرست جدید دنبال کنید.
+              </p>
+            </div>
+
+            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/learning")}>
+              مشاهده جزئیات
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
 
       <div class="flex items-center flex-1" slot="right"></div>
     </SectionLayer1>
