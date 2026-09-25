@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
+import Banner from "@components/banner.astro";
 
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
@@ -59,7 +60,7 @@ import HeatMapBg from "@assets/images/Brokerage/1-Neo Trader/heatmap-bg.png";
       </div>
     </SectionLayer1>
 
-    <section>
+    <section class="flex max-w-lg w-full px-3 mx-auto">
       <BreadCrumb
         items={[
           {
@@ -71,6 +72,8 @@ import HeatMapBg from "@assets/images/Brokerage/1-Neo Trader/heatmap-bg.png";
           },
         ]}
       />
+
+      <!-- <Banner /> -->
     </section>
 
     <SectionLayer1 desktopImage={WatchlistBg} mobileImage={WatchlistBgMobile}>
