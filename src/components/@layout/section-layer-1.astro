@@ -2,16 +2,17 @@
 import type { ImageMetadata } from "astro";
 
 interface Props {
+  classes?: string;
   desktopImage?: ImageMetadata;
   mobileImage?: ImageMetadata;
   hasGap?: boolean;
 }
 
-const { desktopImage, mobileImage, hasGap = true } = Astro.props;
+const { desktopImage, mobileImage, hasGap = true, classes } = Astro.props;
 ---
 
 <section
-  class="flex min-h-225 py-8 lg:py-16 px-4 bg-center bg-cover bg-no-repeat"
+  class:list={["flex min-h-225 py-8 lg:py-16 px-4 bg-center bg-cover bg-no-repeat", classes]}
   style={`--desktop-bg: url('${desktopImage?.src}'); --mobile-bg: url('${mobileImage?.src}')`}
 >
   <div class:list={["flex flex-col lg:flex-row max-w-lg w-full mx-auto relative", { "gap-4": hasGap }]}>
