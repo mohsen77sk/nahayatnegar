@@ -1,7 +1,146 @@
 ---
+import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
+import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+import SectionVideoHero from "@components/@layout/section-video-hero.astro";
+import SectionHero from "@assets/images/Asset Management/hero-section.mp4";
+import Section1Img from "@assets/images/Asset Management/gold-fund-section.png";
+import Section1ImgMob from "@assets/images/Asset Management/gold-fund-section-mob.png";
+import Section2Img from "@assets/images/Asset Management/asil-fund-section.jpg";
+import Section2ImgMob from "@assets/images/Asset Management/asil-fund-section-mob.png";
+import Section3Img from "@assets/images/Asset Management/piroz-fund-section.png";
+import Section3ImgMob from "@assets/images/Asset Management/piroz-fund-section.png-mob.png";
+import Section4Img from "@assets/images/Asset Management/pouya-fund-section.png";
+import Section4ImgMob from "@assets/images/Asset Management/pouya-fund-section-mob.png";
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 ---
 
 <Layout title="Portfolio Management">
-  <main></main>
+  <main>
+    <SectionVideoHero desktopVideo={SectionHero} mobileVideo={SectionHero} />
+
+    <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <!-- right -->
+      <div class="flex-1 order-2 lg:order-1" slot="right"></div>
+      <!-- left -->
+      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
+        <div class="flex flex-col gap-10 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <div class="rounded-round h-1 w-16 lg:h-18 lg:w-1 bg-linear-to-r lg:bg-linear-to-b from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+              <span class="text-secondary lg:text-neutral-800">صندوق سرمایه‌گذاری</span>
+              <h1 class="text-display-small text-white">
+                سرمایه‌گذاری حرفه‌ای در بازار{" "}
+                <span class="text-transparent bg-clip-text bg-linear-to-r from-[#FF9151] to-[#FBCE35]">طلا</span>
+              </h1>
+            </div>
+          </div>
+          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
+            <p class="text-body-large leading-8 text-center text-white lg:text-justify">
+              با صندوق سرمایه‌گذاری ناب، به‌سادگی در طلا سرمایه‌گذاری کنید و ارزش دارایی خود را در برابر تورم حفظ کنید.
+            </p>
+            <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/portfolio-management/nab")}>
+              صندوق طلای نــاب
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
+      <!-- right -->
+      <div class="flex-1 order-2 lg:order-1" slot="right"></div>
+      <!-- left -->
+      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
+        <div class="flex flex-col gap-10 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <div class="rounded-round h-1 w-16 lg:h-18 lg:w-1 bg-linear-to-r lg:bg-linear-to-b from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+              <span class="text-secondary lg:text-neutral-800">صندوق سرمایه‌گذاری</span>
+              <h1 class="text-display-small text-white">
+                اصیل{" "}
+                <span class="text-transparent bg-clip-text bg-linear-to-r from-[#9C89EE] to-[#78BEF8]">درآمدثابت</span>
+              </h1>
+            </div>
+          </div>
+          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
+            <p class="text-body-large leading-8 text-center text-white lg:text-justify">اصیل</p>
+            <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/portfolio-management/asil")}>
+              صندوق درآمد ثابت اصیل
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={Section3Img} mobileImage={Section3ImgMob}>
+      <!-- right -->
+      <div class="flex items-center flex-1" slot="right">
+        <div class="flex flex-col gap-10 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <div class="rounded-round h-1 w-16 lg:h-18 lg:w-1 bg-linear-to-r lg:bg-linear-to-b from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+              <span class="text-secondary lg:text-neutral-800">صندوق سرمایه‌گذاری</span>
+              <h1 class="text-display-small">
+                سرمایه‌گذاری حرفه‌ای در بازار{" "}
+                <span class="text-transparent bg-clip-text bg-linear-to-r from-[#0B77D0] via-[#26C6DA] to-[#0B77D0]">
+                  سهام
+                </span>
+              </h1>
+            </div>
+          </div>
+          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
+            <p class="text-body-large leading-8 text-center lg:text-justify">
+              با صندوق قابل معامله (ETF) پیروز، به‌سادگی در سبدی از سهام منتخب سرمایه‌گذاری کنید و از فرصت‌های رشد بازار
+              سرمایه بهره‌مند شوید.
+            </p>
+            <a
+              class="neo-button neo-button-fill-primary neo-button-large"
+              href={siteUrl("/portfolio-management/pirooz")}
+            >
+              صندوق سهامی پیروز
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- left -->
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={Section4Img} mobileImage={Section4ImgMob}>
+      <!-- right -->
+      <div class="flex-1 order-2 lg:order-1" slot="right"></div>
+      <!-- left -->
+      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
+        <div class="flex flex-col gap-10 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <div class="rounded-round h-1 w-16 lg:h-18 lg:w-1 bg-linear-to-r lg:bg-linear-to-b from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+              <span class="text-secondary lg:text-neutral-800">صندوق سرمایه‌گذاری</span>
+              <h1 class="text-display-small text-white">
+                سرمایه‌گذاری هوشمند با رویکردی{" "}
+                <span class="text-transparent bg-clip-text bg-linear-to-r from-[#0ACEA2] to-[#77B900]">پـویا</span>
+              </h1>
+            </div>
+          </div>
+          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
+            <p class="text-body-large leading-8 text-center text-white lg:text-justify">
+              صندوق پویا با مدیریت تخصصی و تصمیم‌گیری فعال در بازار سهام، به دنبال خلق ارزش و کسب بازدهی متناسب با شرایط
+              بازار است.
+            </p>
+            <a
+              class="neo-button neo-button-fill-primary neo-button-large"
+              href={siteUrl("/portfolio-management/pooya")}
+            >
+              صندوق سهامی مشترک پویا
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionLayer1>
+  </main>
 </Layout>
