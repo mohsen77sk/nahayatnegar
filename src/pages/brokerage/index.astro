@@ -68,19 +68,21 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                   پنل معاملاتی پیشرفته نهایت‌نگر که با ارائه امکانات حرفه‌ای و رابط کاربری روان، تجربه‌ای سریع، دقیق و
                   مطمئن را برای انجام معاملات در بازار سرمایه فراهم می‌کند.
                 </h3>
-                <a
-                  class="neo-button neo-button-icon neo-button-fill-primary neo-button-large mx-auto"
-                  href={siteUrl("/brokerage/neo-trader")}
-                >
+                <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/brokerage/neo-trader")}>
                   ورود به نئوتریدر
-                  <ArrowLeft class="w-4 h-4 mr-2" />
+                  <ArrowLeft aria-hidden="true" />
                 </a>
               </div>
               <div class="flex-1 lg:hidden w-full self-stretch flex items-center justify-center pt-6 lg:pt-0">
-                <img src={NeoObjectMob.src} class="max-w-68.75 h-auto object-contain" />
+                <Image src={NeoObjectMob} alt="" class="max-w-68.75 h-auto object-contain" loading="lazy" />
               </div>
               <div class="hidden flex-1 w-full lg:flex items-center justify-center p-6">
-                <img src={NeoObjectImg.src} class="w-full h-auto lg:w-136.75 lg:h-83.5 object-contain" />
+                <Image
+                  src={NeoObjectImg}
+                  alt=""
+                  class="w-full h-auto lg:w-136.75 lg:h-83.5 object-contain"
+                  loading="lazy"
+                />
               </div>
             </div>
             <div class="sticky z-20 top-56 lg:top-48 -mt-12 lg:-mt-35 flex flex-col lg:flex-row-reverse gap-8 lg:gap-4 justify-center items-center text-center rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)] shadow-2xl">
@@ -90,18 +92,20 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                   سامانه معاملاتی اختصاصی تلفن همراه نهایت‌نگر که به شما امکان می‌دهد در هر زمان و هر مکان، با رابط
                   کاربری ساده و کاربرپسند، معاملات آنلاین خود را با سرعت و دقت بالا انجام دهید.
                 </h3>
-                <button class="neo-button neo-button-icon neo-button-fill-primary neo-button-large mx-auto">
+                <button class="neo-button neo-button-fill-primary neo-button-large">
                   ورود به موبوتریدر
-                  <ArrowLeft class="w-4 h-4 mr-2" />
+                  <ArrowLeft aria-hidden="true" />
                 </button>
               </div>
               <div class="flex-1 lg:hidden w-full self-stretch flex items-center justify-center pt-6 lg:pt-0">
-                <img src={MoboObjectMob.src} class="max-h-87.5 w-auto object-contain" />
+                <Image src={MoboObjectMob} alt="" class="max-h-87.5 w-auto object-contain" loading="lazy" />
               </div>
               <div class="hidden flex-1 w-full lg:flex items-center justify-center p-6">
-                <img
-                  src={MoboObjectImg.src}
-                  class="w-full max-w-[300px] h-auto lg:w-[384px] lg:h-[403px] object-contain"
+                <Image
+                  src={MoboObjectImg}
+                  alt=""
+                  class="w-full max-w-75 h-auto lg:w-96 lg:h-75 object-contain"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -234,9 +238,9 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
           <p class="text-body-large font-medium leading-8 text-center lg:text-center text-secondary">
             با کارت بانکی متصل به حساب نهایت‌نگر ، دسترسی سریع و آسان به سرمایه خود را تجربه کنید.
           </p>
-          <button class="neo-button neo-button-icon neo-button-fill-primary neo-button-large mx-auto">
+          <button class="neo-button neo-button-fill-primary neo-button-large">
             بیشتر
-            <ArrowLeft class="w-4 h-4 mr-2" />
+            <ArrowLeft aria-hidden="true" />
           </button>
         </div>
 
