@@ -5,17 +5,37 @@ interface Props {
   classes?: string;
   desktopImage?: ImageMetadata;
   mobileImage?: ImageMetadata;
+  desktopColor?: string;
+  mobileColor?: string;
   hasGap?: boolean;
 }
 
-const { desktopImage, mobileImage, hasGap = true, classes } = Astro.props;
+const {
+  desktopImage,
+  mobileImage,
+  desktopColor,
+  mobileColor,
+  hasGap = true,
+  classes,
+} = Astro.props;
 ---
 
 <section
-  class:list={["flex min-h-225 py-8 lg:py-16 px-4 bg-center bg-cover bg-no-repeat", classes]}
-  style={`--desktop-bg: url('${desktopImage?.src}'); --mobile-bg: url('${mobileImage?.src}')`}
+  class:list={[
+    "flex min-h-225 py-8 lg:py-16 px-4 bg-center bg-cover bg-no-repeat",
+    classes,
+  ]}
+  style={`
+    --desktop-bg: ${desktopImage ? `url('${desktopImage.src}')` : desktopColor ?? "transparent"};
+    --mobile-bg: ${mobileImage ? `url('${mobileImage.src}')` : mobileColor ?? "transparent"};
+  `}
 >
-  <div class:list={["flex flex-col lg:flex-row max-w-lg w-full mx-auto relative", { "gap-4": hasGap }]}>
+  <div
+    class:list={[
+      "flex flex-col lg:flex-row max-w-lg w-full mx-auto relative",
+      { "gap-4": hasGap },
+    ]}
+  >
     <slot name="right" />
     <slot name="left" />
   </div>
@@ -23,12 +43,12 @@ const { desktopImage, mobileImage, hasGap = true, classes } = Astro.props;
 
 <style>
   section {
-    background-image: var(--mobile-bg);
+    background: var(--mobile-bg);
   }
 
   @media (min-width: 1200px) {
     section {
-      background-image: var(--desktop-bg);
+      background: var(--desktop-bg);
     }
   }
 </style>

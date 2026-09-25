@@ -26,6 +26,9 @@ import ScreenerBgMobile from "@assets/images/Brokerage/1-Neo Trader/screener-sec
 import MarketMapBg from "@assets/images/Brokerage/1-Neo Trader/heatmap-bg.png";
 import MarketMapObj from "@assets/images/Brokerage/1-Neo Trader/heatmap-object.png";
 
+import PortfolioObj from "@assets/images/Brokerage/1-Neo Trader/portfolio-management-object.png";
+import SymbolInfoObj from "@assets/images/Brokerage/1-Neo Trader/Symbol-info--object.png";
+
 import Global from "@assets/icons/iconsax/outline/global.svg";
 import Clock from "@assets/icons/iconsax/outline/wrist-clock.svg";
 import TickCircl from "@assets/icons/iconsax/outline/tick-circle.svg";
@@ -211,7 +214,7 @@ const features = [
         <div class="flex flex-col gap-6 flex-1">
           <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
             <LineGradient />
-            <div class="flex flex-col items-center gap-6 lg:gap-0 lg:items-start">
+            <div class="flex flex-col items-center gap-6 lg:items-start">
               <h1 class="text-display-small text-center lg:text-right text-primary">
                 تحلیل تکنیکال و نمودارهای پیشرفته
               </h1>
@@ -284,6 +287,84 @@ const features = [
     </SectionLayer1>
     <!-- end::Option -->
 
+    <!-- begin::PortfolioManagment -->
+    <SectionLayer1 desktopColor="bg-white" mobileColor="bg-white">
+      <div class="flex items-center justify-end flex-1" slot="left">
+        <img class="w-89 h-87 lg:w-123 lg:h-125" src={SymbolInfoObj.src} alt="" aria-hidden="true" />
+      </div>
+
+      <div class="flex items-center flex-1" slot="right">
+        <div class="flex flex-col gap-6 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <LineGradient />
+            <div class="flex flex-col items-center gap-6 lg:items-start">
+              <h1 class="text-display-small text-center lg:text-right text-primary">اطلاعات نماد</h1>
+              <h6 class="text-body-medium text-neutral-800">هر آنچه برای بررسی یک نماد نیاز دارید</h6>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-4 items-center lg:items-start lg:pr-6">
+            <div>
+              <p class="text-body-large leading-[210%] text-center text-primary lg:text-justify">
+                برای تحلیل یک نماد، معمولاً لازم است اطلاعات مختلفی را از منابع متفاوت جمع‌آوری کنید.
+                <br />
+                در NeoTrader، اطلاعات لحظه‌ای بازار، سابقه معاملات، پیام‌های ناظر، معاملات حقوقی و سایر اطلاعات مورد
+                نیاز در یک صفحه در اختیار شما قرار می‌گیرد تا بتوانید با سرعت بیشتری شرایط نماد را بررسی کنید.
+              </p>
+            </div>
+
+            <a
+              class="neo-button neo-button-fill-primary neo-button-meduim w-50 h-8.5 min-w-15 lg:w-auto"
+              href={siteUrl("/brokerage/instrument-detail")}
+            >
+              مشاهده جزئیات
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionLayer1>
+    <!-- end::PortfolioManagment -->
+
+    <!-- begin::PortfolioManagment -->
+    <SectionLayer1 desktopColor="bg-white" mobileColor="bg-white">
+      <div class="flex items-center justify-end flex-1" slot="left">
+        <img class="w-89 h-87 lg:w-123 lg:h-125" src={PortfolioObj.src} alt="" aria-hidden="true" />
+      </div>
+
+      <div class="flex items-center flex-1" slot="right">
+        <div class="flex flex-col gap-6 flex-1">
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+            <LineGradient />
+            <div class="flex flex-col items-center gap-6 lg:items-start">
+              <h1 class="text-display-small text-center lg:text-right text-primary">مدیریت پرتفوی</h1>
+              <h6 class="text-body-medium text-neutral-800">بدانید سرمایه‌گذاری شما امروز چه وضعیتی دارد</h6>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-4 items-center lg:items-start lg:pr-6">
+            <div>
+              <p class="text-body-large leading-[210%] text-center text-primary lg:text-justify">
+                مدیریت پرتفوی تنها نمایش دارایی‌ها نیست؛ بلکه ابزاری برای ارزیابی عملکرد سرمایه‌گذاری است.
+                <br />
+                در این بخش می‌توانید ارزش روز دارایی‌ها، سود و زیان، عملکرد سرمایه‌گذاری در بازه‌های زمانی مختلف و
+                اطلاعات مرتبط با مجامع را مشاهده کنید و تصویر دقیق‌تری از وضعیت سرمایه خود داشته باشید.
+              </p>
+            </div>
+
+            <a
+              class="neo-button neo-button-fill-primary neo-button-meduim w-50 h-8.5 min-w-15 lg:w-auto"
+              href={siteUrl("/brokerage/portfolio")}
+            >
+              مشاهده جزئیات
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionLayer1>
+    <!-- end::PortfolioManagment -->
+
     <!-- begin::Screener -->
     <SectionLayer1 desktopImage={ScreenerBg} mobileImage={ScreenerBgMobile}>
       <div class="flex items-center flex-0 lg:flex-1 order-1 lg:order-2" slot="left">
@@ -331,7 +412,7 @@ const features = [
         <div class="flex flex-col gap-6 flex-1">
           <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
             <LineGradient />
-            <div class="flex flex-col items-center gap-6 lg:gap-0 lg:items-start">
+            <div class="flex flex-col items-center gap-6 lg:items-start">
               <h1 class="text-display-small text-center lg:text-right text-white">نقشه بازار</h1>
               <h6 class="text-body-medium text-neutral-500">وضعیت بازار را در یک نگاه ببینید</h6>
             </div>
