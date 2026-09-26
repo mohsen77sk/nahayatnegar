@@ -1,7 +1,37 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+
+import Section1Img from "@assets/images/Brokerage/3-credit/credit-hero.png";
+import Section1ImgMob from "@assets/images/Brokerage/3-credit/credit-hero-mob.png";
 ---
 
-<Layout title="Credit">
-  <main></main>
+<Layout title="اعتبار">
+  <main>
+    <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex items-center self-center flex-1" slot="right">
+        <div class="flex flex-col items-center self-center gap-8 lg:items-start">
+          <span class="text-display-small text-white">اعتبار هوشمند نهایت‌نگر</span>
+
+          <h1 class="text-body-large text-white text-center">
+            قدرت خرید خود را افزایش دهید و فرصت‌های بازار را از دست ندهید.
+          </h1>
+          <div class="flex flex-col lg:flex-row gap-4">
+            <a href="" class="neo-button neo-button-fill-primary neo-button-large">
+              افتتاح حساب
+              <ArrowLeft aria-hidden="true" />
+            </a>
+            <a href="" class="neo-button neo-button-outline-primary neo-button-large">
+              افتتاح حساب
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+  </main>
 </Layout>
