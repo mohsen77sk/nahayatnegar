@@ -68,7 +68,7 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                   پنل معاملاتی پیشرفته نهایت‌نگر که با ارائه امکانات حرفه‌ای و رابط کاربری روان، تجربه‌ای سریع، دقیق و
                   مطمئن را برای انجام معاملات در بازار سرمایه فراهم می‌کند.
                 </h3>
-                <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/brokerage/neo-trader")}>
+                <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl(URLS.neoTraderAppAddress)}>
                   ورود به نئوتریدر
                   <ArrowLeft aria-hidden="true" />
                 </a>
@@ -92,10 +92,13 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                   سامانه معاملاتی اختصاصی تلفن همراه نهایت‌نگر که به شما امکان می‌دهد در هر زمان و هر مکان، با رابط
                   کاربری ساده و کاربرپسند، معاملات آنلاین خود را با سرعت و دقت بالا انجام دهید.
                 </h3>
-                <button class="neo-button neo-button-fill-primary neo-button-large">
+                <a
+                  href={siteUrl(URLS.moboTraderAppAddress)}
+                  class="neo-button neo-button-fill-primary neo-button-large"
+                >
                   ورود به موبوتریدر
                   <ArrowLeft aria-hidden="true" />
-                </button>
+                </a>
               </div>
               <div class="flex-1 lg:hidden w-full self-stretch flex items-center justify-center pt-6 lg:pt-0">
                 <Image src={MoboObjectMob} alt="" class="max-h-87.5 w-auto object-contain" loading="lazy" />
@@ -132,10 +135,10 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
               با معاملات خود اعتبار بسازید و هر زمان نیاز داشتید، بدون تشریفات اضافی از طریق سامانه برخط از آن استفاده
               کنید.
             </p>
-            <button class="neo-button neo-button-fill-primary neo-button-large">
+            <a href={siteUrl("/brokerage/credit")} class="neo-button neo-button-fill-primary neo-button-large">
               بیشتر
               <ArrowLeft aria-hidden="true" />
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -157,7 +160,7 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
               به مانده نقدی حساب کارگزاری و حتی مبالغی که به‌عنوان وجه تضمین معاملات اختیار نگهداری می‌شوند، سود تعلق
               می‌گیرد ؛ سرمایه شما هیچ‌وقت بیکار نمی‌ماند.
             </p>
-            <a href={siteUrl('/brokerage/nahaban')} class="neo-button neo-button-fill-primary neo-button-large">
+            <a href={siteUrl("/brokerage/nahaban")} class="neo-button neo-button-fill-primary neo-button-large">
               بیشتر
               <ArrowLeft aria-hidden="true" />
             </a>

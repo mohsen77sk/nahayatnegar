@@ -27,6 +27,7 @@ import RefreshSquare from "@assets/icons/iconsax/outline/refresh-Square.svg";
 import WalletAdd from "@assets/icons/iconsax/outline/wallet-add.svg";
 import TickCircle from "@assets/icons/iconsax/outline/tick-circle.svg";
 import { siteUrl } from "@utils/url";
+import { URLS } from "../../../scripts/constants";
 
 const BreadCrumbItem = [
   {
@@ -128,7 +129,7 @@ const timeline = {
           قدرت خرید خود را افزایش دهید و فرصت‌های بازار را از دست ندهید.
         </p>
         <div class="flex gap-4">
-          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl(URLS.registerAddress)}>
             افتتاح حساب
             <ArrowLeft aria-hidden="true" />
           </a>
