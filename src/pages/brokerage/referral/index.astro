@@ -1,7 +1,185 @@
 ---
 import Layout from "@layouts/Layout.astro";
+
+// Components
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import Banner from "@components/banner.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+import Faq from "@components/faq.astro";
+import Section1Img from "@assets/images/Brokerage/8-Referral/referral-hero.png";
+import Section1ImgMob from "@assets/images/Brokerage/8-Referral/referral-hero-mob.png";
+import SectionBanner1Img from "@assets/images/Brokerage/8-Referral/referral-banner.png";
+import SectionBanner2Img from "@assets/images/Brokerage/8-Referral/banner.png";
+import SectionBanner2ImgMob from "@assets/images/Brokerage/8-Referral/banner-mob.png";
+
+import CloudPlus from "@assets/icons/iconsax/outline/cloud-plus.svg";
+import Coin from "@assets/icons/iconsax/outline/coin.svg";
+import UserAdd from "@assets/icons/iconsax/outline/user-add.svg";
+import DocumentText from "@assets/icons/iconsax/outline/document-text.svg";
+
+import Link from "@assets/icons/iconsax/outline/link.svg";
+import TwoUser from "@assets/icons/iconsax/outline/profile-2user.svg";
+import Cup from "@assets/icons/iconsax/outline/cup.svg";
+
+import { siteUrl } from "@utils/url";
+import URLS from "../../../scripts/constants";
+
+// Icons & Assets
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import { Image } from "astro:assets";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import TimeLine from "@components/time-line.astro";
+
+const BreadCrumbItem = [
+  {
+    label: "کارگزاری",
+    href: "/brokerage",
+  },
+  {
+    label: "معرفی مشتری",
+  },
+];
+
+const features = [
+  {
+    title: "معرفی کاملاً آنلاین",
+    icon: CloudPlus,
+    description: "دعوت از دوستان و آشنایان به‌صورت آنلاین انجام می‌شود.",
+  },
+  {
+    title: "پاداش برای هر معرفی موفق",
+    icon: Coin,
+    description: "با تحقق شرایط طرح، برای هر مشتری معرفی‌شده پاداش دریافت می‌کنید.",
+  },
+  {
+    title: "بدون محدودیت در تعداد معرفی",
+    icon: UserAdd,
+    description: "می‌توانید افراد بیشتری معرفی کنید و به همان نسبت پاداش بیشتری دریافت نمایید.",
+  },
+  {
+    title: "مشاهده وضعیت معرفی‌ها",
+    icon: DocumentText,
+    description: "وضعیت معرفی‌ها و پاداش‌های خود را به‌صورت شفاف مشاهده کنید.",
+  },
+];
+
+const timeline = {
+  title: "معرفی مشتری در سه گام",
+  steps: [
+    {
+      title: "دریافت لینک یا کد معرفی",
+      description: "لینک اختصاصی خود را دریافت کنید.",
+      icon: Link,
+    },
+    {
+      title: "ارسال به دوستان و آشنایان",
+      description: "لینک را برای افراد موردنظر ارسال کنید.",
+      icon: TwoUser,
+    },
+    {
+      title: " دریافت پاداش ، پس از شروع فعالیت",
+      description: "پس از ثبت نام و شروع فعالیت ، پاداش معرفی برای شما ثبت و قابل استفاده خواهد بود.",
+      icon: Cup,
+    },
+  ],
+};
+
+const faqs = [
+  {
+    title: "وضعیت معرفی‌های خود را چگونه مشاهده کنم؟",
+    description: "از طریق پنل کاربری، وضعیت هر معرفی و پاداش مربوط به آن قابل مشاهده است.",
+  },
+  {
+    title: "پاداش به چه صورت پرداخت می‌شود؟",
+    description: "مطابق شرایط طرح، پاداش به صورت نقدی به حساب یا کیف پول معرفی‌کننده واریز یا ثبت خواهد شد.",
+  },
+];
 ---
 
-<Layout title="Referral">
-  <main></main>
+<Layout title="مشتری">
+  <main>
+    <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+        <span class="text-display-small text-white">سود مشارکت ، فراتر از سرمایه‌گذاری </span>
+        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+          با معرفی دوستان و آشنایان به کارگزاری نهایت‌نگر، می‌توانید به ازای هر معرفی موفق، پاداش دریافت کنید.
+        </p>
+        <div class="flex gap-4">
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl(URLS.registerAddress)}>
+            افتتاح حساب
+            <ArrowLeft aria-hidden="true" />
+          </a>
+          <a class="neo-button neo-button-outline-primary neo-button-large" href={siteUrl("/")}>
+            دریافت مشاوره
+            <ArrowLeft aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </SectionLayer2>
+
+    <!-- Content Section -->
+
+    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
+      <BreadCrumb items={BreadCrumbItem} />
+      <div>
+        <h2 class="text-heading-medium leading-10">طرح معرفی مشتری چیست؟</h2>
+        <div class="text-body-medium text-secondary leading-7">پاداش برای هر معرفی موفق</div>
+      </div>
+      <p class="text-body-large leading-8">
+        طرح معرفی مشتری، سرویسی است که به شما امکان می‌دهد با معرفی افراد جدید به کارگزاری نهایت‌نگر، پاداش دریافت کنید.
+        پس از آغاز کار مشتری معرفی شده ، پاداش براساس فعالیت وی به شما تعلق می‌گیرد.
+      </p>
+
+      <div class="h-100 w-full bg-white p-2 rounded-xl shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
+        <div
+          class="h-full bg-cover bg-center bg-no-repeat rounded-xl"
+          style={{ backgroundImage: `url(${SectionBanner1Img.src})` }}
+        ></div>
+      </div>
+
+      <div class="features mb-5">
+        <h2 class="text-heading-medium leading-10 pb-5">ویژگی‌های متمایز اعتبار نهایت‌نگر</h2>
+        <FeaturesGrid features={features} rowPattern={[2, 2]} />
+      </div>
+      <div>
+        <h2 class="text-heading-medium leading-10">طرح معرفی مشتری چگونه کار می‌کند؟</h2>
+        <p class="text-body-medium text-secondary leading-7">
+          پس از دریافت لینک یا کد اختصاصی معرفی، آن را برای دوستان و آشنایان خود ارسال کنید. هرگاه فرد معرفی‌شده از طریق
+          همان لینک یا کد در کارگزاری ثبت‌نام کرده و فعالیت خود را آغاز کند، پاداش معرفی برای شما ثبت خواهد شد.
+        </p>
+      </div>
+
+      <Banner>
+        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">یک معرفی ساده، یک پاداش ارزشمند.</h6>
+      </Banner>
+
+      <div class="h-100 w-full bg-white p-2 rounded-xl shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
+        <div
+          class="h-full bg-cover bg-center bg-no-repeat rounded-xl"
+          style={{ backgroundImage: `url(${SectionBanner1Img.src})` }}
+        ></div>
+      </div>
+      <TimeLine steps={timeline.steps} title={timeline.title} />
+
+      <Faq faqs={faqs} />
+
+      <!-- Footer CTA -->
+      <div
+        class="flex flex-col p-8 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        style={`--bg-mobile: url('${SectionBanner2ImgMob.src}'); --bg-desktop: url('${SectionBanner2Img.src}');`}
+      >
+        <div class="text-white flex flex-col gap-4 lg:w-94">
+          <h1 class="text-heading-medium leading-10">دریافت پاداش</h1>
+          <p class="text-body-large leading-8">
+            همین امروز لینک اختصاصی خود را دریافت کنید، دوستانتان را به کارگزاری نهایت‌نگر معرفی کنید و با هر معرفی
+            موفق، پاداش دریافت نمایید.
+          </p>
+        </div>
+        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+          درخواست مشاوره
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </div>
+    </section>
+  </main>
 </Layout>
