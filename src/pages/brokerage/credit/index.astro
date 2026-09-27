@@ -1,25 +1,32 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+import { Image } from "astro:assets";
+
+// Components
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import Banner from "@components/banner.astro";
-import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import Faq from "@components/faq.astro";
+import TimeLine from "@components/time-line.astro";
 
+// Icons & Assets
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 import Section1Img from "@assets/images/Brokerage/3-credit/credit-hero.png";
 import Section1ImgMob from "@assets/images/Brokerage/3-credit/credit-hero-mob.png";
-
 import SectionBanner1Img from "@assets/images/Brokerage/3-credit/Mockups/web.png";
 import SectionBanner1ImgMob from "@assets/images/Brokerage/3-credit/Mockups/mob.png";
+import SectionBanner2Img from "@assets/images/Brokerage/3-credit/credit-banner.png";
+import SectionBanner2ImgMob from "@assets/images/Brokerage/3-credit/credit-banner-mob.png";
 
 import Candle from "@assets/icons/iconsax/outline/candle.svg";
 import Flash from "@assets/icons/iconsax/outline/flash.svg";
 import Chart from "@assets/icons/iconsax/outline/chart-2.svg";
 import Tick from "@assets/icons/iconsax/outline/tick-square.svg";
 import RefreshSquare from "@assets/icons/iconsax/outline/refresh-Square.svg";
-
-import { Image } from "astro:assets";
-import { describe } from "astro:schema";
+import WalletAdd from "@assets/icons/iconsax/outline/wallet-add.svg";
+import TickCircle from "@assets/icons/iconsax/outline/tick-circle.svg";
+import { siteUrl } from "@utils/url";
 
 const BreadCrumbItem = [
   {
@@ -54,50 +61,99 @@ const features = [
     description: "بدون ثبت درخواست یا تکمیل فرم‌های تکراری، هر زمان به اعتبار نیاز داشتید از آن استفاده کنید.",
   },
 ];
+
+const faqs = [
+  {
+    title: "چه کسانی می‌توانند اعتبار دریافت کنند؟",
+    description: "تمام مشتریان کارگزاری که شرایط اعتباری و ضوابط تعیین‌شده را احراز کنند.",
+  },
+  {
+    title: "مبلغ اعتبار چگونه تعیین می‌شود؟",
+    description: "بر اساس گردش معاملات ، ارزش روز دارایی‌ها، رتبه اعتباری و سایر معیارهای اعتبارسنجی.",
+  },
+  {
+    title: "آیا اعتبار نیاز به تسویه دارد؟",
+    description: "بله. اعتبار در پایان دوره تعیین‌شده باید مطابق شرایط قرارداد تسویه شود.",
+  },
+  {
+    title: "آیا امکان تمدید اعتبار وجود دارد؟",
+    description: "بله. در صورت احراز شرایط و مطابق ضوابط کارگزاری، اعتبار برای دوره بعد تمدید می‌شود.",
+  },
+  {
+    title: "در صورت کاهش ارزش دارایی چه اتفاقی می‌افتد؟",
+    description: "سقف اعتباری که مشتری می تواند بگیرد به تناسب کاهش خواهد یافت.",
+  },
+  {
+    title: "آیا برای دریافت اعتبار مراجعه حضوری لازم است؟",
+    description: "خیر تمام فرآیند ارزیابی و تعیین اعتبار به صورت غیرحضوری و خودکار انجام می شود.",
+  },
+];
+
+const timeline = {
+  title: "اعتبار شما در چهار گام ایجاد می‌شود:",
+  steps: [
+    {
+      title: "معامله می‌کنید",
+      description: "گردش معاملات شما به‌صورت روزانه ثبت و بررسی می‌شود.",
+      icon: Candle,
+    },
+    {
+      title: "گردش معاملات شما ارزیابی می‌شود",
+      description: "سامانه اعتباری، گردش معاملات دوماهه و سایر معیارهای اعتبارسنجی را محاسبه می‌کند.",
+      icon: RefreshSquare,
+    },
+    {
+      title: " اعتبار شما ایجاد می‌شود",
+      description: "بر اساس نتیجه اعتبارسنجی، سهمیه اعتبار قابل دریافت شما تعیین می‌شود.",
+      icon: WalletAdd,
+    },
+    {
+      title: "هر زمان نیاز داشته باشید، از اعتبار استفاده می‌کنید",
+      description:
+        "اعتبار تخصیص‌یافته در چارچوب ضوابط از طریق سامانه در اختیار شما قرار می‌گیرد تا قدرت خرید بیشتری داشته باشید.",
+      icon: TickCircle,
+    },
+  ],
+};
 ---
 
 <Layout title="اعتبار معاملاتی">
   <main>
-    <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
-      <div class="flex items-center self-center flex-1 lg:self-stretch" slot="right">
-        <div class="flex flex-col items-center self-center gap-8 lg:items-start">
-          <span class="text-display-small text-white">اعتبار هوشمند نهایت‌نگر</span>
+    <!-- Hero Section -->
 
-          <h1 class="text-body-large text-white text-center">
-            قدرت خرید خود را افزایش دهید و فرصت‌های بازار را از دست ندهید.
-          </h1>
-          <div class="flex flex-col lg:flex-row gap-4">
-            <a href="" class="neo-button neo-button-fill-primary neo-button-large">
-              افتتاح حساب
-              <ArrowLeft aria-hidden="true" />
-            </a>
-            <a href="" class="neo-button neo-button-outline-primary neo-button-large">
-              افتتاح حساب
-              <ArrowLeft aria-hidden="true" />
-            </a>
-          </div>
+    <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+        <span class="text-display-small text-white">اعتبار هوشمند نهایت‌نگر</span>
+        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+          قدرت خرید خود را افزایش دهید و فرصت‌های بازار را از دست ندهید.
+        </p>
+        <div class="flex gap-4">
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+            افتتاح حساب
+            <ArrowLeft aria-hidden="true" />
+          </a>
+          <a class="neo-button neo-button-outline-primary neo-button-large" href={siteUrl("/")}>
+            دریافت مشاوره
+            <ArrowLeft aria-hidden="true" />
+          </a>
         </div>
       </div>
+    </SectionLayer2>
 
-      <div class="flex-1" slot="left"></div>
-    </SectionLayer1>
+    <!-- Content Section -->
 
-    <section class="flex flex-col max-w-200 mx-auto gap-6">
+    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
       <BreadCrumb items={BreadCrumbItem} />
       <div>
         <h2 class="text-heading-medium leading-10">اعتبار معاملاتی نهایت‌نگر</h2>
-        <div class="text-body-medium text-secondary leading-7">
-          سود روزشمار برای موجودی نقد و وجه تضمین معاملات اعتباری که با معاملات خودتان ساخته می‌شود.
-        </div>
+        <div class="text-body-medium text-secondary leading-7">اعتباری که با معاملات خودتان ساخته می‌شود.</div>
       </div>
 
       <p class="text-body-large leading-8">
         اعتبار معاملاتی، مبلغی است که کارگزاری بر اساس گردش معاملات و میزان دارایی شما در اختیارتان قرار می‌دهد تا قدرت
         خرید بیشتری در معاملات داشته باشید.
-      </p>
-      <p class="text-body-large leading-8">
-        هرچه گردش معاملات و میزان دارایی شما بیشتر باشد، اعتبار قابل دریافت شما نیز افزایش می‌یابد؛ به بیان دیگر، اعتبار
-        شما با معاملات خودتان ساخته می‌شود.
+        <br /> هرچه گردش معاملات و میزان دارایی شما بیشتر باشد، اعتبار قابل دریافت شما نیز افزایش می‌یابد؛ به بیان دیگر،
+        اعتبار شما با معاملات خودتان ساخته می‌شود.
       </p>
 
       <Image src={SectionBanner1ImgMob} alt="" class="w-full h-auto" loading="lazy" />
@@ -106,67 +162,56 @@ const features = [
         <h2 class="text-heading-medium leading-10 pb-5">ویژگی‌های متمایز اعتبار نهایت‌نگر</h2>
         <FeaturesGrid features={features} rowPattern={[2, 2]} />
       </div>
-
-      <h2 class="text-heading-medium leading-10">اعتبار معاملاتی شما چگونه ایجاد می‌شود؟</h2>
-      <p class="text-body-large leading-8">
-        اعتبار شما به واسطه معاملات خودتان ایجاد می‌شود. سامانه اعتباری نهایت‌نگر، بر مبنای رویه اعتباری کارگزاری،
-        به‌صورت روزانه گردش معاملات شما را در بازه دوماهه منتهی به هر روز بررسی کرده و آن را به گردش مبنای اعتبار تبدیل
-        می‌کند. سپس با در نظر گرفتن گردش مورد انتظار و سایر معیارهای اعتبارسنجی، میزان اعتبار قابل دریافت شما محاسبه و
-        در اختیارتان قرار می‌گیرد. به همین دلیل، اعتبار شما به‌صورت پویا و متناسب با فعالیت معاملاتی‌تان شکل می‌گیرد.
-      </p>
-
-      <div class="flex flex-col p-6 bg-fg-primary rounded-xl gap-6">
-        <h2 class="text-heading-medium leading-10">اعتبار شما در چهار گام ایجاد می‌شود:</h2>
-
-        <div class="flex flex-col gap-10 relative">
-          <div class="absolute right-6.5 h-full w-px border border-dashed border-secondary"></div>
-          <div class="flex flex-1 gap-4 z-10">
-            <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full">
-              <Candle class="text-primary" />
-            </div>
-            <div class="flex flex-col gap-2">
-              <span class="text-title-medium"> معامله می‌کنید</span>
-              <span class="text-body-medium text-secondary">گردش معاملات شما به‌صورت روزانه ثبت و بررسی می‌شود.</span>
-            </div>
-          </div>
-          <div class="flex flex-1 gap-4 z-10">
-            <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full">
-              <RefreshSquare />
-            </div>
-            <div class="flex flex-col gap-2">
-              <span class="text-title-medium"> گردش معاملات شما ارزیابی می‌شود</span>
-              <span class="text-body-medium text-secondary">
-                سامانه اعتباری، گردش معاملات دوماهه و سایر معیارهای اعتبارسنجی را محاسبه می‌کند.
-              </span>
-            </div>
-          </div>
-          <div class="flex flex-1 gap-4 z-10">
-            <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full"></div>
-            <div class="flex flex-col gap-2">
-              <span class="text-title-medium"> اعتبار شما ایجاد می‌شود</span>
-              <span class="text-body-medium text-secondary">
-                بر اساس نتیجه اعتبارسنجی، سهمیه اعتبار قابل دریافت شما تعیین می‌شود.
-              </span>
-            </div>
-          </div>
-          <div class="flex flex-1 gap-4 z-10">
-            <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full"></div>
-            <div class="flex flex-col gap-2">
-              <span class="text-title-medium">هر زمان نیاز داشته باشید، از اعتبار استفاده می‌کنید</span>
-              <span class="text-body-medium text-secondary">
-                اعتبار تخصیص‌یافته در چارچوب ضوابط از طریق سامانه در اختیار شما قرار می‌گیرد تا قدرت خرید بیشتری داشته
-                باشید.
-              </span>
-            </div>
-          </div>
-        </div>
+      <div>
+        <h2 class="text-heading-medium leading-10">اعتبار معاملاتی شما چگونه ایجاد می‌شود؟</h2>
+        <p class="text-body-large leading-8">
+          اعتبار شما به واسطه معاملات خودتان ایجاد می‌شود. سامانه اعتباری نهایت‌نگر، بر مبنای رویه اعتباری کارگزاری،
+          به‌صورت روزانه گردش معاملات شما را در بازه دوماهه منتهی به هر روز بررسی کرده و آن را به گردش مبنای اعتبار
+          تبدیل می‌کند. سپس با در نظر گرفتن گردش مورد انتظار و سایر معیارهای اعتبارسنجی، میزان اعتبار قابل دریافت شما
+          محاسبه و در اختیارتان قرار می‌گیرد. به همین دلیل، اعتبار شما به‌صورت پویا و متناسب با فعالیت معاملاتی‌تان شکل
+          می‌گیرد.
+        </p>
       </div>
+      <TimeLine title={timeline.title} steps={timeline.steps} />
 
       <Banner>
-        <h6 class="text-title-large text-blue-800 leading-relaxed">
-          حتی زمانی که معامله‌ای انجام نمی‌دهید، سرمایه شما می‌تواند برایتان بازده ایجاد کند.
-        </h6>
+        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">گردش معاملات شما، اعتبار شماست.</h6>
       </Banner>
+
+      <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
+      <p class="text-body-large leading-8">
+        اعتبار تخصیص‌یافته برای یک دوره یک‌ماهه در اختیار شما قرار می‌گیرد. در پایان سررسید، سامانه به‌صورت خودکار شرایط
+        اعتباری شما را مجدداً ارزیابی می‌کند و در صورت تحقق گردش مورد انتظار و حفظ شرایط لازم، اعتبار شما برای دوره بعد
+        تمدید خواهد شد.
+      </p>
+      <div>
+        <h2 class="text-heading-medium leading-10">اعتبار اولیه برای مشتریان جدید</h2>
+        <p class="text-body-large leading-8">
+          گر به‌تازگی به کارگزاری نهایت‌نگر پیوسته‌اید و هنوز فرصت ایجاد سابقه معاملاتی نداشته‌اید، اعتبار اولیه شما بر
+          مبنای خالص ارزش روز دارایی‌ها و مطابق ضوابط کارگزاری تعیین می‌شود.
+          <br /> کافی است دارایی خود را به کارگزاری نهایت‌نگر منتقل کنید تا اعتبار بدو ورود به شما اختصاص یابد. با
+          استفاده از این اعتبار، می‌توانید از همان ابتدای فعالیت، قدرت خرید خود را افزایش داده و معاملاتتان را با ظرفیت
+          بیشتری آغاز کنید.
+        </p>
+      </div>
+      <Faq faqs={faqs} />
+
+      <!-- Footer CTA -->
+      <div
+        class="flex flex-col p-8 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        style={`--bg-mobile: url('${SectionBanner2ImgMob.src}'); --bg-desktop: url('${SectionBanner2Img.src}');`}
+      >
+        <div class="text-white flex flex-col gap-4 lg:w-94">
+          <h1 class="text-heading-medium leading-10">اعتبار معاملاتی</h1>
+          <p class="text-body-large leading-8">
+            اگر مایل به استفاده از اعتبار هستید کافی است فعالیت معاملاتی خود را در کارگزاری شروع کنید .
+          </p>
+        </div>
+        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+          درخواست مشاوره
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </div>
     </section>
   </main>
 </Layout>
