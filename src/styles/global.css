@@ -184,13 +184,13 @@
 }
 
 /* Base */
-@import "tailwind/base.css";
+@import "./tailwind/base.css";
 
 /* Components */
-@import "tailwind/components/button.css";
-@import "tailwind/components/card.css";
-@import "tailwind/components/input.css";
-@import "tailwind/components/tabs.css";
+@import "./tailwind/components/button.css";
+@import "./tailwind/components/card.css";
+@import "./tailwind/components/input.css";
+@import "./tailwind/components/tabs.css";
 
 /* Utils */
-@import "tailwind/utilities/other.css";
+@import "./tailwind/utilities/other.css";
