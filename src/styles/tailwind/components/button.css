@@ -1,6 +1,6 @@
 @layer components {
   .neo-button {
-    @apply flex cursor-pointer items-center justify-center gap-2 border border-transparent leading-normal transition duration-200 focus:outline-none;
+    @apply flex cursor-pointer items-center justify-center gap-2 border border-transparent leading-6 transition duration-200 focus:outline-none;
     /* medium */
     @apply h-8.5 rounded-md px-3 text-[13px] font-semibold;
 
@@ -17,7 +17,7 @@
     }
 
     &.neo-button-small {
-      @apply h-7 rounded-sm px-2 text-[12px] font-medium;
+      @apply h-7 rounded-sm px-2 text-[12px] leading-4.5 font-medium;
 
       &.neo-icon-button {
         @apply w-7 p-0;
@@ -29,7 +29,7 @@
     }
 
     &.neo-button-large {
-      @apply h-13 rounded-lg px-4 text-[14px] font-bold;
+      @apply h-13 rounded-lg px-4 text-[14px] leading-10.5 font-bold;
 
       &.neo-icon-button {
         @apply w-13 p-0;

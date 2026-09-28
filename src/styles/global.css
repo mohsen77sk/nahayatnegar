@@ -5,6 +5,7 @@
 @theme {
   --default-*: initial;
   --default-font-family: "IRANSansX", arial, sans-serif;
+  --default-font-feature: "ss02";
 
   --color-*: initial;
   /* pallets */

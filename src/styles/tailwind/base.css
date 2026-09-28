@@ -35,9 +35,9 @@
       font-size: var(--text-body-medium);
       font-weight: var(--text-body-medium--font-weight);
       line-height: var(--text-body-medium--line-height);
-      -moz-font-feature-settings: var(--neo-font-features);
-      -webkit-font-feature-settings: var(--neo-font-features);
-      font-feature-settings: var(--neo-font-features);
+      -moz-font-feature-settings: var(--default-font-feature);
+      -webkit-font-feature-settings: var(--default-font-feature);
+      font-feature-settings: var(--default-font-feature);
     }
   }
 
