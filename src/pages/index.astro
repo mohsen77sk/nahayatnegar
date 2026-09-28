@@ -14,6 +14,8 @@ import Section3Bg from "@assets/images/Home/chatGPT_image.png";
 import Section3Obj from "@assets/images/Home/chatGPT_image-object.png";
 import SectionLearningBg from "@assets/images/Home/learning-bg.png";
 import SectionLearningBgMob from "@assets/images/Home/learning-bg-mob.png";
+import FinancingBg from "@assets/images/Home/financing-bg.png";
+import FinancingObj from "@assets/images/Home/financing-obj.png";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 ---
 
@@ -106,6 +108,32 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
               <ArrowLeft aria-hidden="true" />
             </a>
           </div>
+        </div>
+      </div>
+    </SectionLayer1>
+
+    <SectionLayer1 desktopImage={FinancingBg} mobileImage={FinancingBg} classes="bg-white">
+      <div class="grid flex-1 grid-rows-2 items-center gap-8 self-center" slot="right">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col-reverse items-center text-center">
+            <div class="flex flex-col items-center">
+              <span class="text-secondary">تامین مالی</span>
+              <h1 class="text-display-small">راهکارهای نوین تأمین مالی برای توسعه کسب‌وکارها</h1>
+              <div class="mt-6 h-1 w-16 rounded-round bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+            </div>
+          </div>
+          <p class="text-center text-body-large leading-8 font-medium text-secondary lg:text-center">
+            با خدمات تأمین مالی نهایت‌نگر، از ظرفیت‌های بازار سرمایه برای توسعه کسب‌وکار و اجرای برنامه‌های رشد خود بهره‌مند شوید.
+          </p>
+          <div class="flex items-center justify-center">
+            <button class="neo-button neo-button-fill-primary cursor-auto neo-button-large w-37">
+              به زودی
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center" slot="left">
+          <Image src={FinancingObj} alt="مدیریت دارایی" class="h-auto w-75 lg:w-124" loading="lazy" />
         </div>
       </div>
     </SectionLayer1>
