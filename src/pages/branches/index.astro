@@ -164,25 +164,25 @@ const branches = [
   <main>
     <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
       <!-- right -->
-      <div class="flex items-center self-center flex-1" slot="right">
+      <div class="flex flex-1 items-center self-center" slot="right">
         <div class="flex flex-col items-center gap-8 lg:items-start">
           <span class="text-display-small text-white">شعب و دفاتر نمایندگی</span>
-          <h1 class="text-body-large text-white text-center">بیش از ۲۰ شعبه در سراسر ایران</h1>
+          <h1 class="text-center text-body-large text-white">بیش از ۲۰ شعبه در سراسر ایران</h1>
         </div>
       </div>
       <!-- left -->
       <div class="flex-1" slot="left"></div>
     </SectionLayer1>
 
-    <section class="flex py-8 lg:py-16 px-4 bg-fg-primary">
-      <div class="flex flex-col gap-8 max-w-lg w-full mx-auto relative">
-        <div class="flex flex-col lg:flex-row w-full lg:w-auto items-center flex-1 justify-between gap-4">
+    <section class="flex bg-fg-primary px-4 py-8 lg:py-16">
+      <div class="relative mx-auto flex w-full max-w-lg flex-col gap-8">
+        <div class="flex w-full flex-1 flex-col items-center justify-between gap-4 lg:w-auto lg:flex-row">
           <div class="neo-tabs w-full lg:w-auto">
-            <div class="neo-tab-label w-full lg:w-auto active">شعب</div>
+            <div class="neo-tab-label active w-full lg:w-auto">شعب</div>
             <div class="neo-tab-label w-full lg:w-auto">دفاتر نمایندگی</div>
             <div class="neo-tab-label w-full lg:w-auto">بازاریاب‌ها</div>
           </div>
-          <div class="flex w-full lg:w-80 relative">
+          <div class="relative flex w-full lg:w-80">
             <input
               class="flex-1 pl-10"
               type="search"
@@ -191,31 +191,31 @@ const branches = [
               aria-label="جستجوی شعبه"
               data-branch-search
             />
-            <IconSearch class="absolute left-3 top-2.5 w-4 h-4" />
+            <IconSearch class="absolute top-2.5 left-3 h-4 w-4" />
           </div>
         </div>
 
-        <div class="bg-fg-secondary rounded-xl gap-4 lg:gap-8 p-2 lg:p-8" data-branch-results>
-          {branches.map(({ city, branch }) => (
-            <div data-branch-city={city}>
-              <h4 class="text-heading-medium mb-3">{city}</h4>
-              <div class="flex flex-col flex-1 gap-4 mb-4">
-                {branch.map(({ title, number, address }) => (
-                  <div
-                    class="grid bg-fg-primary p-5 gap-4 rounded-xl"
-                    data-branch-card={`${city} ${title} ${address} ${number}`}
-                  >
-                    <span class="text-title-medium">{title}</span>
-                    <span class="text-body-medium">{address}</span>
-                    <span class="text-body-medium text-secondary">{number}</span>
-                  </div>
-                ))}
+        <div class="gap-4 rounded-xl bg-fg-secondary p-2 lg:gap-8 lg:p-8" data-branch-results>
+          {
+            branches.map(({ city, branch }) => (
+              <div data-branch-city={city}>
+                <h4 class="mb-3 text-heading-medium">{city}</h4>
+                <div class="mb-4 flex flex-1 flex-col gap-4">
+                  {branch.map(({ title, number, address }) => (
+                    <div
+                      class="grid gap-4 rounded-xl bg-fg-primary p-5"
+                      data-branch-card={`${city} ${title} ${address} ${number}`}
+                    >
+                      <span class="text-title-medium">{title}</span>
+                      <span class="text-body-medium">{address}</span>
+                      <span class="text-body-medium text-secondary">{number}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-          <p class="hidden text-center text-body-medium p-4" data-branch-empty>
-            شعبه‌ای پیدا نشد.
-          </p>
+            ))
+          }
+          <p class="hidden p-4 text-center text-body-medium" data-branch-empty>شعبه‌ای پیدا نشد.</p>
         </div>
       </div>
     </section>

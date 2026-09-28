@@ -36,14 +36,14 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
 <Layout title="کارگزاری">
   <main>
     <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
-      <div class="flex items-center self-center flex-1 gap-8" slot="right">
+      <div class="flex flex-1 items-center gap-8 self-center" slot="right">
         <div class="flex flex-col items-center gap-8 lg:items-start">
           <div class="text-display-small text-white">خدمات کارگزاری</div>
-          <h1 class="text-body-large text-white text-center">تمام آنچه برای یک سرمایه‌گذاری حرفه‌ای نیاز دارید</h1>
-          <div class="flex gap-2 flex-wrap items-center justify-center text-white text-body-large">
-            <div class="lex py-1 px-4 justify-start font-medium rounded-full bg-[#353C57]">سرویس‌های مالی</div>
-            <div class="lex py-1 px-4 justify-start font-medium rounded-full bg-[#353C57]">پلتفرم‌های معاملاتی</div>
-            <div class="lex py-1 px-4 justify-start font-medium rounded-full bg-[#353C57]">خدمات ویژه برای مشتریان</div>
+          <h1 class="text-center text-body-large text-white">تمام آنچه برای یک سرمایه‌گذاری حرفه‌ای نیاز دارید</h1>
+          <div class="flex flex-wrap items-center justify-center gap-2 text-body-large text-white">
+            <div class="lex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">سرویس‌های مالی</div>
+            <div class="lex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">پلتفرم‌های معاملاتی</div>
+            <div class="lex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">خدمات ویژه برای مشتریان</div>
           </div>
         </div>
       </div>
@@ -51,20 +51,22 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
     </SectionLayer1>
 
     <!-- introduce -->
-    <section class="flex min-h-225 py-8 lg:py-50 px-4 bg-center bg-cover bg-no-repeat">
-      <div class="flex flex-col lg:flex-row gap-4 max-w-lg w-full mx-auto relative">
+    <section class="flex min-h-225 bg-cover bg-center bg-no-repeat px-4 py-8 lg:py-50">
+      <div class="relative mx-auto flex w-full max-w-lg flex-col gap-4 lg:flex-row">
         <div class="flex flex-col gap-15">
-          <div class="flex flex-col gap-2 items-center text-center">
+          <div class="flex flex-col items-center gap-2 text-center">
             <h1 class="text-display-small">سامانه‌های معاملاتی نهایت‌نگر</h1>
-            <p class="text-secondary text-body-large">
+            <p class="text-body-large text-secondary">
               با پنل‌های نئوتریدر و موبوتریدر، تجربه‌ای سریع و حرفه‌ای از معاملات بازار سرمایه داشته باشید.
             </p>
-            <div class="rounded-round h-1 w-16 mt-6 bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+            <div class="mt-6 h-1 w-16 rounded-round bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
           </div>
 
           <div class="relative">
-            <div class="translate-y-0 scale-[0.94] origin-top sticky top-24 transition-transform duration-700 flex flex-col lg:flex-row-reverse p-6 gap-8 lg:gap-4 justify-center items-center text-center rounded-3xl bg-[linear-gradient(90deg,#00BFA5_0%,#004EA2_40%,#0A1628_100%)]">
-              <div class="flex-1 flex flex-col gap-8 self-سفشقف py-8 px-16 lg:py-0 lg:px-8 text-white">
+            <div
+              class="sticky top-24 flex origin-top translate-y-0 scale-[0.94] flex-col items-center justify-center gap-8 rounded-3xl bg-[linear-gradient(90deg,#00BFA5_0%,#004EA2_40%,#0A1628_100%)] p-6 text-center transition-transform duration-700 lg:flex-row-reverse lg:gap-4"
+            >
+              <div class="self-سفشقف flex flex-1 flex-col gap-8 px-16 py-8 text-white lg:px-8 lg:py-0">
                 <h1 class="text-heading-medium">سامانه‌ معاملاتی نئوتریدر</h1>
                 <h3 class="leading-8 font-normal">
                   پنل معاملاتی پیشرفته نهایت‌نگر که با ارائه امکانات حرفه‌ای و رابط کاربری روان، تجربه‌ای سریع، دقیق و
@@ -75,20 +77,22 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                   <ArrowLeft aria-hidden="true" />
                 </a>
               </div>
-              <div class="flex-1 lg:hidden w-full self-stretch flex items-center justify-center pt-6 lg:pt-0">
-                <Image src={NeoObjectMob} alt="" class="max-w-68.75 h-auto object-contain" loading="lazy" />
+              <div class="flex w-full flex-1 items-center justify-center self-stretch pt-6 lg:hidden lg:pt-0">
+                <Image src={NeoObjectMob} alt="" class="h-auto max-w-68.75 object-contain" loading="lazy" />
               </div>
-              <div class="hidden flex-1 w-full lg:flex items-center justify-center p-6">
+              <div class="hidden w-full flex-1 items-center justify-center p-6 lg:flex">
                 <Image
                   src={NeoObjectImg}
                   alt=""
-                  class="w-full h-auto lg:w-136.75 lg:h-83.5 object-contain"
+                  class="h-auto w-full object-contain lg:h-83.5 lg:w-136.75"
                   loading="lazy"
                 />
               </div>
             </div>
-            <div class="sticky z-1 lg:translate-y-18 scale-[0.96] origin-top transition-transform duration-700 flex flex-col lg:flex-row-reverse p-6 gap-8 lg:gap-4 justify-center items-center text-center lg:top-48 -mt-12 lg:-mt-35 rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)]">
-              <div class="flex-1 flex flex-col gap-8 self-center py-8 px-16 lg:py-0 lg:px-8 text-white">
+            <div
+              class="sticky z-1 -mt-12 flex origin-top scale-[0.96] flex-col items-center justify-center gap-8 rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)] p-6 text-center transition-transform duration-700 lg:top-48 lg:-mt-35 lg:translate-y-18 lg:flex-row-reverse lg:gap-4"
+            >
+              <div class="flex flex-1 flex-col gap-8 self-center px-16 py-8 text-white lg:px-8 lg:py-0">
                 <h1 class="text-heading-medium">سامانه‌ معاملاتی موبوتریدر</h1>
                 <h3 class="leading-8 font-normal">
                   سامانه معاملاتی اختصاصی تلفن همراه نهایت‌نگر که به شما امکان می‌دهد در هر زمان و هر مکان، با رابط
@@ -102,14 +106,14 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                   <ArrowLeft aria-hidden="true" />
                 </a>
               </div>
-              <div class="flex-1 lg:hidden w-full self-stretch flex items-center justify-center pt-6 lg:pt-0">
+              <div class="flex w-full flex-1 items-center justify-center self-stretch pt-6 lg:hidden lg:pt-0">
                 <Image src={MoboObjectMob} alt="" class="max-h-87.5 w-auto object-contain" loading="lazy" />
               </div>
-              <div class="hidden flex-1 w-full lg:flex items-center justify-center p-6">
+              <div class="hidden w-full flex-1 items-center justify-center p-6 lg:flex">
                 <Image
                   src={MoboObjectImg}
                   alt=""
-                  class="w-full max-w-75 h-auto lg:w-96 lg:h-75 object-contain"
+                  class="h-auto w-full max-w-75 object-contain lg:h-75 lg:w-96"
                   loading="lazy"
                 />
               </div>
@@ -121,19 +125,19 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
 
     <!-- credit -->
     <SectionLayer1 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
-      <div class="flex-1 order-2 lg:order-1" slot="right"></div>
+      <div class="order-2 flex-1 lg:order-1" slot="right"></div>
 
-      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
-        <div class="flex flex-col gap-10 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="order-1 flex flex-1 items-center lg:order-2" slot="left">
+        <div class="flex flex-1 flex-col gap-10">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
-            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+            <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary">اعتبار هوشمند</span>
               <h1 class="text-display-small text-white">اعتبار معاملاتی خودکار</h1>
             </div>
           </div>
-          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
-            <p class="text-body-large leading-8 text-center text-white lg:text-justify">
+          <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
+            <p class="text-center text-body-large leading-8 text-white lg:text-justify">
               با معاملات خود اعتبار بسازید و هر زمان نیاز داشتید، بدون تشریفات اضافی از طریق سامانه برخط از آن استفاده
               کنید.
             </p>
@@ -148,17 +152,17 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
 
     <!-- nahaban -->
     <SectionLayer1 desktopImage={Section3Img} mobileImage={Section3ImgMob}>
-      <div class="flex items-center flex-1" slot="right">
-        <div class="flex flex-col gap-10 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="flex flex-1 items-center" slot="right">
+        <div class="flex flex-1 flex-col gap-10">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
-            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+            <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary">سرمایه شما همیشه سود می سازد</span>
               <h1 class="text-display-small">نهابان مثل یک بانک</h1>
             </div>
           </div>
-          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
-            <p class="text-body-large leading-8 text-center lg:text-justify">
+          <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
+            <p class="text-center text-body-large leading-8 lg:text-justify">
               به مانده نقدی حساب کارگزاری و حتی مبالغی که به‌عنوان وجه تضمین معاملات اختیار نگهداری می‌شوند، سود تعلق
               می‌گیرد ؛ سرمایه شما هیچ‌وقت بیکار نمی‌ماند.
             </p>
@@ -175,19 +179,19 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
 
     <!-- withdraw -->
     <SectionLayer1 desktopImage={Section4Img} mobileImage={Section4ImgMob}>
-      <div class="flex-1 order-2 lg:order-1" slot="right"></div>
+      <div class="order-2 flex-1 lg:order-1" slot="right"></div>
 
-      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
-        <div class="flex flex-col gap-10 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="order-1 flex flex-1 items-center lg:order-2" slot="left">
+        <div class="flex flex-1 flex-col gap-10">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
-            <div class="flex flex-col items-center text-center gap-2 lg:items-start lg:text-start">
+            <div class="flex flex-col items-center gap-2 text-center lg:items-start lg:text-start">
               <span class="text-neutral-800">پرداخت آنی</span>
               <h1 class="text-display-small text-white">دسترسی فوری به سرمایه در هر ساعت از شبانه روز</h1>
             </div>
           </div>
-          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
-            <p class="text-body-large leading-8 text-center text-white lg:text-justify">
+          <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
+            <p class="text-center text-body-large leading-8 text-white lg:text-justify">
               با سرویس پرداخت آنی کارگزاری نهایت نگر ؛ در هر ساعت از شبانه روز به وجوه خود نزد کارگزار ی دسترسی داشته
               باشید .
             </p>
@@ -202,17 +206,17 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
 
     <!-- discount -->
     <SectionLayer1 desktopImage={Section5Img} mobileImage={Section5ImgMob}>
-      <div class="flex items-center flex-1" slot="right">
-        <div class="flex flex-col gap-10 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="flex flex-1 items-center" slot="right">
+        <div class="flex flex-1 flex-col gap-10">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
-            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+            <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary">طرح های تخفیف کارمزد</span>
               <h1 class="text-display-small">تخفیف کارمزد ، هزینه کمتر و بازده بیشتر</h1>
             </div>
           </div>
-          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
-            <p class="text-body-large leading-8 text-center lg:text-justify text-secondary">
+          <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
+            <p class="text-center text-body-large leading-8 text-secondary lg:text-justify">
               با طرح های تخفیف کارمزد نهایت نگر ، هزینه معاملات خود را کاهش دهید و بازده بیشتری از سرمایه گذاری تان بدست
               آورید
             </p>
@@ -224,23 +228,23 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
         </div>
       </div>
 
-      <div class="flex items-center justify-center flex-1" slot="left">
-        <Image src={Section5ImgObj} alt="تخفیف کارمزد" class="lg:w-126 w-75 h-auto object-cover" loading="lazy" />
+      <div class="flex flex-1 items-center justify-center" slot="left">
+        <Image src={Section5ImgObj} alt="تخفیف کارمزد" class="h-auto w-75 object-cover lg:w-126" loading="lazy" />
       </div>
     </SectionLayer1>
 
     <!-- card -->
     <SectionLayer1 desktopImage={Section6Img} mobileImage={Section6ImgMob}>
-      <div class="grid grid-rows-2 items-center self-center flex-1 gap-8" slot="right">
+      <div class="grid flex-1 grid-rows-2 items-center gap-8 self-center" slot="right">
         <div class="flex flex-col gap-6">
           <div class="flex flex-col-reverse items-center text-center">
             <div class="flex flex-col items-center">
               <span class="text-secondary">کارت بانکی نهایت‌نگر</span>
               <h1 class="text-display-small">سرمایه‌تان ، همیشه همراه شما</h1>
-              <div class="rounded-round h-1 w-16 mt-6 bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+              <div class="mt-6 h-1 w-16 rounded-round bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
             </div>
           </div>
-          <p class="text-body-large font-medium leading-8 text-center lg:text-center text-secondary">
+          <p class="text-center text-body-large leading-8 font-medium text-secondary lg:text-center">
             با کارت بانکی متصل به حساب نهایت‌نگر ، دسترسی سریع و آسان به سرمایه خود را تجربه کنید.
           </p>
           <button class="neo-button neo-button-fill-primary neo-button-large mx-auto">
@@ -250,23 +254,23 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
         </div>
 
         <div class="flex items-center justify-center" slot="left">
-          <Image src={Section6ImgObj} alt="کارت بانکی نهایت‌نگر" class="w-auto h-auto" loading="lazy" />
+          <Image src={Section6ImgObj} alt="کارت بانکی نهایت‌نگر" class="h-auto w-auto" loading="lazy" />
         </div>
       </div>
     </SectionLayer1>
 
     <SectionLayer1 classes="bg-white">
-      <div class="flex items-center flex-1" slot="right">
-        <div class="flex flex-col gap-10 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="flex flex-1 items-center" slot="right">
+        <div class="flex flex-1 flex-col gap-10">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
-            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+            <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary">باهم رشد کنیم</span>
               <h1 class="text-display-small">سود مشارکت ، فراتر از سرمایه‌گذاری</h1>
             </div>
           </div>
-          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
-            <p class="text-body-large leading-8 text-center lg:text-justify text-secondary">
+          <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
+            <p class="text-center text-body-large leading-8 text-secondary lg:text-justify">
               دوستان خود را به نهایت‌نگر دعوت کنید و از مزایای معرفی ، تخفیف‌های اختصاصی و خدمات ویژه بهره‌مند شوید .
             </p>
             <button class="neo-button neo-button-fill-primary neo-button-large">
@@ -277,8 +281,8 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
         </div>
       </div>
 
-      <div class="flex items-center justify-center flex-1" slot="left">
-        <Image src={Section7ImgObj} alt="سود مشارکت" class="lg:w-126 w-75 h-auto object-cover" loading="lazy" />
+      <div class="flex flex-1 items-center justify-center" slot="left">
+        <Image src={Section7ImgObj} alt="سود مشارکت" class="h-auto w-75 object-cover lg:w-126" loading="lazy" />
       </div>
     </SectionLayer1>
   </main>

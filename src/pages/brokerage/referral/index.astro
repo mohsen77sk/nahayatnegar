@@ -103,9 +103,9 @@ const faqs = [
 <Layout title="مشتری">
   <main>
     <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
-      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+      <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
         <span class="text-display-small text-white">سود مشارکت ، فراتر از سرمایه‌گذاری </span>
-        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+        <p class="text-center text-body-large leading-8 text-white lg:text-start">
           با معرفی دوستان و آشنایان به کارگزاری نهایت‌نگر، می‌توانید به ازای هر معرفی موفق، پاداش دریافت کنید.
         </p>
         <div class="flex gap-4">
@@ -123,45 +123,47 @@ const faqs = [
 
     <!-- Content Section -->
 
-    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
+    <section class="mx-auto flex max-w-200 flex-col gap-6 p-4">
       <BreadCrumb items={BreadCrumbItem} />
       <div>
         <h2 class="text-heading-medium leading-10">طرح معرفی مشتری چیست؟</h2>
-        <div class="text-body-medium text-secondary leading-7">پاداش برای هر معرفی موفق</div>
+        <div class="text-body-medium leading-7 text-secondary">پاداش برای هر معرفی موفق</div>
       </div>
       <p class="text-body-large leading-8">
         طرح معرفی مشتری، سرویسی است که به شما امکان می‌دهد با معرفی افراد جدید به کارگزاری نهایت‌نگر، پاداش دریافت کنید.
         پس از آغاز کار مشتری معرفی شده ، پاداش براساس فعالیت وی به شما تعلق می‌گیرد.
       </p>
 
-      <div class="h-100 w-full bg-white p-2 rounded-xl shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
+      <div class="h-100 w-full rounded-xl bg-white p-2 shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
         <div
-          class="h-full bg-cover bg-center bg-no-repeat rounded-xl"
+          class="h-full rounded-xl bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${SectionBanner1Img.src})` }}
-        ></div>
+        >
+        </div>
       </div>
 
       <div class="features mb-5">
-        <h2 class="text-heading-medium leading-10 pb-5">ویژگی‌های متمایز اعتبار نهایت‌نگر</h2>
+        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های متمایز اعتبار نهایت‌نگر</h2>
         <FeaturesGrid features={features} rowPattern={[2, 2]} />
       </div>
       <div>
         <h2 class="text-heading-medium leading-10">طرح معرفی مشتری چگونه کار می‌کند؟</h2>
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           پس از دریافت لینک یا کد اختصاصی معرفی، آن را برای دوستان و آشنایان خود ارسال کنید. هرگاه فرد معرفی‌شده از طریق
           همان لینک یا کد در کارگزاری ثبت‌نام کرده و فعالیت خود را آغاز کند، پاداش معرفی برای شما ثبت خواهد شد.
         </p>
       </div>
 
       <Banner>
-        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">یک معرفی ساده، یک پاداش ارزشمند.</h6>
+        <h6 class="text-center text-title-large leading-relaxed text-blue-800">یک معرفی ساده، یک پاداش ارزشمند.</h6>
       </Banner>
 
-      <div class="h-100 w-full bg-white p-2 rounded-xl shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
+      <div class="h-100 w-full rounded-xl bg-white p-2 shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
         <div
-          class="h-full bg-cover bg-center bg-no-repeat rounded-xl"
+          class="h-full rounded-xl bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${SectionBanner1Img.src})` }}
-        ></div>
+        >
+        </div>
       </div>
       <TimeLine steps={timeline.steps} title={timeline.title} />
 
@@ -169,10 +171,10 @@ const faqs = [
 
       <!-- Footer CTA -->
       <div
-        class="flex flex-col p-8 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        class="flex h-72 flex-col justify-between gap-8 rounded-xl bg-fg-primary bg-(image:--bg-mobile) bg-cover bg-center p-8 lg:bg-(image:--bg-desktop)"
         style={`--bg-mobile: url('${SectionBanner2ImgMob.src}'); --bg-desktop: url('${SectionBanner2Img.src}');`}
       >
-        <div class="text-white flex flex-col gap-4 lg:w-94">
+        <div class="flex flex-col gap-4 text-white lg:w-94">
           <h1 class="text-heading-medium leading-10">دریافت پاداش</h1>
           <p class="text-body-large leading-8">
             همین امروز لینک اختصاصی خود را دریافت کنید، دوستانتان را به کارگزاری نهایت‌نگر معرفی کنید و با هر معرفی

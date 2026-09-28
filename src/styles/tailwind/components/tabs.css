@@ -1,9 +1,9 @@
 @layer components {
   .neo-tabs {
-    @apply bg-fg-secondary flex cursor-pointer items-center gap-3 rounded-xl px-3 py-1 transition duration-200;
+    @apply flex cursor-pointer items-center gap-3 rounded-xl bg-fg-secondary px-3 py-1 transition duration-200;
 
     .neo-tab-label {
-      @apply text-title-small hover:bg-fg-primary flex items-center justify-center rounded-md px-2 py-1 transition duration-200;
+      @apply flex items-center justify-center rounded-md px-2 py-1 text-title-small transition duration-200 hover:bg-fg-primary;
 
       &.active {
         @apply bg-brand text-white;

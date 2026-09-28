@@ -13,23 +13,25 @@ export interface Props {
 const { title, steps } = Astro.props;
 ---
 
-<div class="flex flex-col p-6 bg-fg-primary rounded-xl gap-6">
+<div class="flex flex-col gap-6 rounded-xl bg-fg-primary p-6">
   <h2 class="text-heading-medium leading-10">{title}</h2>
-  <div class="flex flex-col gap-10 relative">
+  <div class="relative flex flex-col gap-10">
     <div class="absolute right-6.5 h-full w-px border border-dashed border-secondary"></div>
-    {steps.map((step) => {
-      const IconComponent = step.icon;
-      return (
-        <div class="flex flex-1 gap-4 z-10">
-          <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full">
-            <IconComponent class="text-brand" />
+    {
+      steps.map((step) => {
+        const IconComponent = step.icon;
+        return (
+          <div class="z-10 flex flex-1 gap-4">
+            <div class="flex h-13 w-13 items-center justify-center rounded-full bg-blue-100">
+              <IconComponent class="text-brand" />
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="text-title-medium"> {step.title}</span>
+              <span class="text-body-medium text-secondary">{step.description}</span>
+            </div>
           </div>
-          <div class="flex flex-col gap-2">
-            <span class="text-title-medium"> {step.title}</span>
-            <span class="text-body-medium text-secondary">{step.description}</span>
-          </div>
-        </div>
-      );
-    })}
+        );
+      })
+    }
   </div>
 </div>

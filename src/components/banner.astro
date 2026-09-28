@@ -3,10 +3,10 @@ import BannerBg from "@assets/images/Brokerage/1-Neo Trader/banner.png";
 ---
 
 <section
- class="relative w-full min-h-[160x] rounded-t-[S] rounded-br-[S] rounded-bl-[70px] bg-cover bg-center bg-no-repeat px-4 py-8 md:px-[37px] md:py-[37px]"
+  class="relative min-h-[160x] w-full rounded-t-[S] rounded-br-[S] rounded-bl-[70px] bg-cover bg-center bg-no-repeat px-4 py-8 md:px-[37px] md:py-[37px]"
   style={`background-image: url("${BannerBg.src}")`}
 >
   <div class="w-full max-w-full text-center md:text-right">
-    <slot></slot>
+    <slot />
   </div>
 </section>

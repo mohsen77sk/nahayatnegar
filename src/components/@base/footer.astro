@@ -36,10 +36,12 @@ const columns = [
 ];
 ---
 
-<footer class="flex w-full justify-center px-2 bg-fg-secondary">
+<footer class="flex w-full justify-center bg-fg-secondary px-2">
   <div class="flex w-full max-w-lg flex-col items-center gap-8">
     <!-- Support -->
-    <div class="flex w-full flex-col gap-4 border-b border-secondary py-10 sm:flex-row sm:items-center sm:justify-between">
+    <div
+      class="flex w-full flex-col gap-4 border-b border-secondary py-10 sm:flex-row sm:items-center sm:justify-between"
+    >
       <div class="flex items-center justify-center gap-3 rounded-full bg-blue-100 px-4 py-2 leading-8 sm:px-6">
         <span>مشاوره و پاسخگویی</span>
         <span class="h-5 w-px bg-blue-300" aria-hidden="true"></span>
@@ -71,17 +73,16 @@ const columns = [
             <Logo aria-hidden="true" />
           </a>
           <div class="flex flex-col gap-4">
-            <address class="flex flex-col gap-4 text-sm not-italic">
+            <address class="text-sm flex flex-col gap-4 not-italic">
               <p class="flex gap-2">
-                <span>آدرس:</span> <span>تهران، خیابان ملاصدرا، شیخ بهایی جنوبی، پلاک ۳۱</span>
+                <span>آدرس:</span>
+                <span>تهران، خیابان ملاصدرا، شیخ بهایی جنوبی، پلاک ۳۱</span>
               </p>
               <p class="flex gap-2">
                 <span>تماس:</span>
                 <span class="ltr">
                   ۰۲۱-{" "}
-                  <a href={`tel:${phone}`} class="text-brand">
-                    ۸۴۴۵۰
-                  </a>
+                  <a href={`tel:${phone}`} class="text-brand"> ۸۴۴۵۰ </a>
                 </span>
               </p>
             </address>
@@ -92,7 +93,8 @@ const columns = [
               rel="noopener noreferrer"
               aria-label="مسیریابی روی نقشه"
             >
-              <Map aria-hidden="true" /> <span class="ltr">مسیریابی رو نقشه</span>
+              <Map aria-hidden="true" />
+              <span class="ltr">مسیریابی رو نقشه</span>
             </a>
             <div class="flex gap-2">
               <a class="neo-button neo-icon-button neo-button-primary" href="/" aria-label="واتساپ">
@@ -105,19 +107,21 @@ const columns = [
           </div>
         </div>
         <!-- Quick links -->
-        {columns.map(({ title, links }) => (
-          <div class="flex flex-col items-start gap-4">
-            <span class="font-semibold text-brand">{title}</span>
+        {
+          columns.map(({ title, links }) => (
+            <div class="flex flex-col items-start gap-4">
+              <span class="font-semibold text-brand">{title}</span>
 
-            <nav class="flex flex-col font-bold">
-              {links.map(({ label, href }) => (
-                <a class="py-4" href={siteUrl(href)}>
-                  {label}
-                </a>
-              ))}
-            </nav>
-          </div>
-        ))}
+              <nav class="flex flex-col font-bold">
+                {links.map(({ label, href }) => (
+                  <a class="py-4" href={siteUrl(href)}>
+                    {label}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          ))
+        }
       </div>
       <!-- Copyright -->
       <div class="border-t border-secondary py-3 text-body-large font-normal text-secondary">

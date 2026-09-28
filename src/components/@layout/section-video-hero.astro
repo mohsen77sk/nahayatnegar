@@ -9,10 +9,10 @@ interface Props {
 const { desktopVideo, mobileVideo, poster, hasGap } = Astro.props;
 ---
 
-<section class="bg-center bg-cover bg-no-repeat relative flex min-h-225 py-8 lg:py-16 px-4 overflow-hidden">
+<section class="relative flex min-h-225 overflow-hidden bg-cover bg-center bg-no-repeat px-4 py-8 lg:py-16">
   <!-- Background video -->
   <video
-    class="absolute inset-0 h-full w-full object-cover z-0"
+    class="absolute inset-0 z-0 h-full w-full object-cover"
     autoplay
     muted
     loop
@@ -24,7 +24,7 @@ const { desktopVideo, mobileVideo, poster, hasGap } = Astro.props;
     <source src={mobileVideo} type="video/mp4" />
   </video>
 
-  <div class:list={["flex flex-col lg:flex-row max-w-lg w-full mx-auto relative", { "gap-4": hasGap }]}>
+  <div class:list={["relative mx-auto flex w-full max-w-lg flex-col lg:flex-row", { "gap-4": hasGap }]}>
     <slot name="right" />
     <slot name="left" />
   </div>

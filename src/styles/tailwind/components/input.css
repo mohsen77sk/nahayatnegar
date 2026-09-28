@@ -1,7 +1,7 @@
 @layer components {
   input,
   textarea {
-    @apply border-secondary hover:border-brand active:border-brand focus:border-brand rounded-lg border bg-white px-4 py-1.5 transition duration-100;
+    @apply rounded-lg border border-secondary bg-white px-4 py-1.5 transition duration-100 hover:border-brand focus:border-brand active:border-brand;
 
     &.neo-input-large {
       @apply px-4 py-3;

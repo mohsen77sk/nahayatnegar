@@ -162,14 +162,14 @@ const accountGroups = [
   <main>
     <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
       <!-- right -->
-      <div class="flex items-center self-center flex-1" slot="right">
+      <div class="flex flex-1 items-center self-center" slot="right">
         <div class="flex flex-col items-center gap-8 lg:items-start">
-          <h1 class="text-display-small text-white text-center">شماره حساب‌های نهایت‌نگر</h1>
-          <div class="flex gap-2 flex-wrap items-center justify-center text-white text-body-large">
-            <div class="flex py-1 px-4 justify-start font-medium rounded-full bg-[#353C57]">بورس اوراق بهادار</div>
-            <div class="flex py-1 px-4 justify-start font-medium rounded-full bg-[#353C57]">بورس کالا</div>
-            <div class="flex py-1 px-4 justify-start font-medium rounded-full bg-[#353C57]">بورس انرژی</div>
-            <div class="flex py-1 px-4 justify-start font-medium rounded-full bg-[#353C57]">اختیار معامله</div>
+          <h1 class="text-center text-display-small text-white">شماره حساب‌های نهایت‌نگر</h1>
+          <div class="flex flex-wrap items-center justify-center gap-2 text-body-large text-white">
+            <div class="flex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">بورس اوراق بهادار</div>
+            <div class="flex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">بورس کالا</div>
+            <div class="flex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">بورس انرژی</div>
+            <div class="flex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">اختیار معامله</div>
           </div>
         </div>
       </div>
@@ -177,11 +177,11 @@ const accountGroups = [
       <div class="flex-1" slot="left"></div>
     </SectionLayer1>
 
-    <section class="flex py-8 lg:py-16 px-4 bg-fg-primary">
-      <div class="flex flex-col gap-8 max-w-lg w-full mx-auto relative">
-        <div class="flex flex-col lg:flex-row w-full lg:w-auto items-center flex-1 justify-between gap-4">
+    <section class="flex bg-fg-primary px-4 py-8 lg:py-16">
+      <div class="relative mx-auto flex w-full max-w-lg flex-col gap-8">
+        <div class="flex w-full flex-1 flex-col items-center justify-between gap-4 lg:w-auto lg:flex-row">
           <div class="neo-tabs w-full lg:w-auto">
-            <button class="neo-tab-label w-full lg:w-auto active" type="button" data-account-tab="securities">
+            <button class="neo-tab-label active w-full lg:w-auto" type="button" data-account-tab="securities">
               حساب اوراق
             </button>
             <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="commodity">
@@ -190,11 +190,9 @@ const accountGroups = [
             <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="brokerage">
               کارگزاری
             </button>
-            <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="energy">
-              بورس انرژی
-            </button>
+            <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="energy"> بورس انرژی </button>
           </div>
-          <div class="flex w-full lg:w-80 relative">
+          <div class="relative flex w-full lg:w-80">
             <input
               class="flex-1 pl-10"
               type="search"
@@ -204,81 +202,81 @@ const accountGroups = [
               aria-controls="account-list"
               data-account-search
             />
-            <IconSearch class="absolute left-3 top-2.5 w-4 h-4" />
+            <IconSearch class="absolute top-2.5 left-3 h-4 w-4" />
           </div>
         </div>
 
         <div
           id="account-list"
-          class="grid grid-cols-1 lg:grid-cols-2 bg-fg-secondary rounded-xl gap-4 lg:gap-8 p-2 lg:p-8"
+          class="grid grid-cols-1 gap-4 rounded-xl bg-fg-secondary p-2 lg:grid-cols-2 lg:gap-8 lg:p-8"
         >
-          {accountGroups.flatMap(({ key, accounts }) =>
-            accounts.map(({ bankImg, bankName, accountType, accountNumber, iban }) => (
-              <div
-                class:list={["grid bg-fg-primary p-5 gap-4 rounded-xl", { hidden: key !== "securities" }]}
-                data-account-card
-                data-account-category={key}
-                data-search-text={`${bankName} ${accountType} ${accountNumber} ${iban}`}
-              >
-                <div class="flex justify-between items-center">
-                  <div class="flex items-center gap-4">
-                    <div class="rounded-full w-13 h-13 border overflow-hidden">
-                      <Image class="w-full h-full object-none" src={bankImg} alt={bankName} loading="lazy" />
+          {
+            accountGroups.flatMap(({ key, accounts }) =>
+              accounts.map(({ bankImg, bankName, accountType, accountNumber, iban }) => (
+                <div
+                  class:list={["grid gap-4 rounded-xl bg-fg-primary p-5", { hidden: key !== "securities" }]}
+                  data-account-card
+                  data-account-category={key}
+                  data-search-text={`${bankName} ${accountType} ${accountNumber} ${iban}`}
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                      <div class="h-13 w-13 overflow-hidden rounded-full border">
+                        <Image class="h-full w-full object-none" src={bankImg} alt={bankName} loading="lazy" />
+                      </div>
+                      <div class="flex flex-col gap-1">
+                        <span class="text-title-large">{bankName}</span>
+                        <span class="text-body-large text-secondary">{accountType}</span>
+                      </div>
                     </div>
-                    <div class="flex flex-col gap-1">
-                      <span class="text-title-large">{bankName}</span>
-                      <span class="text-body-large text-secondary">{accountType}</span>
-                    </div>
+                    <div />
                   </div>
-                  <div></div>
-                </div>
 
-                <div class="flex flex-col gap-2 text-body-medium">
-                  <div class="flex items-center justify-between">
-                    <span class="text-secondary">شماره حساب</span>
-                    <div class="flex items-center gap-2">
-                      <span class="font-medium">{accountNumber}</span>
-                      <button
-                        class="neo-button neo-icon-button neo-button-neutral neo-button-small"
-                        type="button"
-                        data-copy-value={accountNumber}
-                        aria-label={`کپی شماره حساب ${bankName}`}
-                      >
-                        <span class="copy-icon">
-                          <IconCopy />
-                        </span>
-                        <span class="check-icon hidden">
-                          <IconCheck />
-                        </span>
-                      </button>
+                  <div class="flex flex-col gap-2 text-body-medium">
+                    <div class="flex items-center justify-between">
+                      <span class="text-secondary">شماره حساب</span>
+                      <div class="flex items-center gap-2">
+                        <span class="font-medium">{accountNumber}</span>
+                        <button
+                          class="neo-button neo-icon-button neo-button-neutral neo-button-small"
+                          type="button"
+                          data-copy-value={accountNumber}
+                          aria-label={`کپی شماره حساب ${bankName}`}
+                        >
+                          <span class="copy-icon">
+                            <IconCopy />
+                          </span>
+                          <span class="check-icon hidden">
+                            <IconCheck />
+                          </span>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <span class="text-secondary">شماره شبا</span>
-                    <div class="flex items-center gap-2">
-                      <span class="font-medium">{iban}</span>
-                      <button
-                        class="neo-button neo-icon-button neo-button-neutral neo-button-small"
-                        type="button"
-                        data-copy-value={iban}
-                        aria-label={`کپی شماره شبا ${bankName}`}
-                      >
-                        <span class="copy-icon">
-                          <IconCopy />
-                        </span>
-                        <span class="check-icon hidden">
-                          <IconCheck />
-                        </span>
-                      </button>
+                    <div class="flex items-center justify-between">
+                      <span class="text-secondary">شماره شبا</span>
+                      <div class="flex items-center gap-2">
+                        <span class="font-medium">{iban}</span>
+                        <button
+                          class="neo-button neo-icon-button neo-button-neutral neo-button-small"
+                          type="button"
+                          data-copy-value={iban}
+                          aria-label={`کپی شماره شبا ${bankName}`}
+                        >
+                          <span class="copy-icon">
+                            <IconCopy />
+                          </span>
+                          <span class="check-icon hidden">
+                            <IconCheck />
+                          </span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )),
-          )}
-          <p class="col-span-2 hidden text-center text-body-medium p-4" data-no-results>
-            نتیجه‌ای پیدا نشد.
-          </p>
+              )),
+            )
+          }
+          <p class="col-span-2 hidden p-4 text-center text-body-medium" data-no-results>نتیجه‌ای پیدا نشد.</p>
         </div>
       </div>
     </section>

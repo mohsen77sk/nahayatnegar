@@ -24,34 +24,36 @@ const breadcrumbs: BreadcrumbItem[] = [
 ---
 
 <nav class="flex h-12" aria-label="Breadcrumb">
-  <ol class="flex h-full items-center gap-2 text-sm">
-    {breadcrumbs.map((item, index) => {
-      const isLast = index === breadcrumbs.length - 1;
-      return (
-        <li class="flex items-center gap-2">
-          {index === 0 ? (
-            <a
-              href={siteUrl(item.href)}
-              aria-label={item.label}
-              class="text-gray-500 transition-colors hover:text-gray-900"
-            >
-              <Home class="h-4.5 w-4.5 text-brand" aria-hidden="true" />
-            </a>
-          ) : item.href && !isLast ? (
-            <a href={siteUrl(item.href)} class="text-body-large text-brand">
-              {item.label}
-            </a>
-          ) : (
-            <span
-              class:list={["font-medium", isLast ? "text-gray-900" : "text-gray-500"]}
-              aria-current={isLast ? "page" : undefined}
-            >
-              {item.label}
-            </span>
-          )}
-          {!isLast && <ArrowLeft2 class="h-4 w-4 text-secondary" aria-hidden="true" />}
-        </li>
-      );
-    })}
+  <ol class="text-sm flex h-full items-center gap-2">
+    {
+      breadcrumbs.map((item, index) => {
+        const isLast = index === breadcrumbs.length - 1;
+        return (
+          <li class="flex items-center gap-2">
+            {index === 0 ? (
+              <a
+                href={siteUrl(item.href)}
+                aria-label={item.label}
+                class="text-gray-500 hover:text-gray-900 transition-colors"
+              >
+                <Home class="h-4.5 w-4.5 text-brand" aria-hidden="true" />
+              </a>
+            ) : item.href && !isLast ? (
+              <a href={siteUrl(item.href)} class="text-body-large text-brand">
+                {item.label}
+              </a>
+            ) : (
+              <span
+                class:list={["font-medium", isLast ? "text-gray-900" : "text-gray-500"]}
+                aria-current={isLast ? "page" : undefined}
+              >
+                {item.label}
+              </span>
+            )}
+            {!isLast && <ArrowLeft2 class="h-4 w-4 text-secondary" aria-hidden="true" />}
+          </li>
+        );
+      })
+    }
   </ol>
 </nav>
