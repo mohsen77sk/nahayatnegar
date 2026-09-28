@@ -12,23 +12,14 @@ const { desktopImage, mobileImage, hasGap = true, classes } = Astro.props;
 ---
 
 <section
-  class:list={["flex min-h-225 bg-cover bg-center bg-no-repeat px-4 py-8 lg:py-16", classes]}
-  style={`--desktop-bg: url('${desktopImage?.src}'); --mobile-bg: url('${mobileImage?.src}')`}
+  class:list={[
+    "flex min-h-225 bg-(image:--bg-mobile) bg-cover bg-center bg-no-repeat px-4 py-8 lg:bg-(image:--bg-desktop) lg:py-16",
+    classes,
+  ]}
+  style={`--bg-desktop: url('${desktopImage?.src}'); --bg-mobile: url('${mobileImage?.src}')`}
 >
   <div class:list={["relative mx-auto flex w-full max-w-lg flex-col lg:flex-row", { "gap-4": hasGap }]}>
     <slot name="right" />
     <slot name="left" />
   </div>
 </section>
-
-<style>
-  section {
-    background-image: var(--mobile-bg);
-  }
-
-  @media (min-width: 1200px) {
-    section {
-      background-image: var(--desktop-bg);
-    }
-  }
-</style>

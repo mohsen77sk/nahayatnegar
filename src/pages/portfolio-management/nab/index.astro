@@ -2,7 +2,9 @@
 import { siteUrl } from "@utils/url";
 import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
+import BannerCard from "@components/bannerCard.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import TimeLine from "@components/time-line.astro";
 import Faq from "@components/faq.astro";
@@ -14,6 +16,12 @@ import SectionBanner2Img from "@assets/images/Asset Management/1-Naab/naab-pic2.
 import SectionBanner3Img from "@assets/images/Asset Management/1-Naab/banner.png";
 import SectionBanner3ImgMob from "@assets/images/Asset Management/1-Naab/banner-mob.png";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import DiagramIcon from "@assets/icons/iconsax/outline/diagram.svg";
+import SecurityIcon from "@assets/icons/iconsax/outline/security.svg";
+import ShoppingCartIcon from "@assets/icons/iconsax/outline/shopping-cart.svg";
+import WalletIcon from "@assets/icons/iconsax/outline/wallet-1.svg";
+import ProfileIcon from "@assets/icons/iconsax/outline/profile-2user.svg";
+import DocumentIcon from "@assets/icons/iconsax/outline/document-text-1.svg";
 import LinkIcon from "@assets/icons/iconsax/outline/link.svg";
 import ArchiveIcon from "@assets/icons/iconsax/outline/archive.svg";
 import SearchIcon from "@assets/icons/iconsax/outline/search-normal.svg";
@@ -26,6 +34,39 @@ const BreadCrumbItem = [
   {
     label: "صندوق ناب",
     href: "/portfolio-management/nab",
+  },
+];
+
+const features = [
+  {
+    icon: DiagramIcon,
+    title: "حفظ ارزش سرمایه",
+    description: "بهره‌مندی از ظرفیت بازار طلا برای حفظ ارزش دارایی در برابر تورم و کاهش قدرت خرید.",
+  },
+  {
+    icon: SecurityIcon,
+    title: "بدون دغدغه نگهداری طلا",
+    description: "بدون نگرانی از سرقت، مفقودی، هزینه نگهداری یا تشخیص اصالت طلای فیزیکی.",
+  },
+  {
+    icon: ShoppingCartIcon,
+    title: "سرمایه‌گذاری آسان",
+    description: "خرید و فروش واحدهای صندوق همانند سایر صندوق‌های قابل معامله (ETF) از طریق سامانه معاملاتی.",
+  },
+  {
+    icon: WalletIcon,
+    title: "نقدشوندگی مناسب",
+    description: "امکان خرید و فروش واحدهای صندوق در روزهای معاملاتی بورس.",
+  },
+  {
+    icon: ProfileIcon,
+    title: "مدیریت حرفه‌ای",
+    description: "مدیریت دارایی‌های صندوق توسط تیم متخصص و در چارچوب مقررات بازار سرمایه.",
+  },
+  {
+    icon: DocumentIcon,
+    title: "شفافیت اطلاعات",
+    description: "انتشار مستمر ارزش خالص دارایی‌ها (NAV)، ترکیب دارایی‌ها و گزارش‌های صندوق.",
   },
 ];
 
@@ -61,7 +102,8 @@ const faqs = [
   },
   {
     title: "تفاوت صندوق ناب با خرید طلای فیزیکی چیست؟",
-    description: "در صندوق ناب نیازی به خرید، حمل و نگهداری طلای فیزیکی ندارید و سرمایه‌گذاری شما از طریق بازار سرمایه و با شفافیت بیشتر انجام می‌شود.",
+    description:
+      "در صندوق ناب نیازی به خرید، حمل و نگهداری طلای فیزیکی ندارید و سرمایه‌گذاری شما از طریق بازار سرمایه و با شفافیت بیشتر انجام می‌شود.",
   },
   {
     title: "NAV صندوق چیست؟",
@@ -73,7 +115,8 @@ const faqs = [
   },
   {
     title: "سرمایه صندوق در چه دارایی‌هایی سرمایه‌گذاری می‌شود؟",
-    description: "بخش عمده دارایی‌های صندوق در گواهی سپرده کالایی طلا و سایر دارایی‌های مجاز مندرج در امیدنامه صندوق سرمایه‌گذاری می‌شود.",
+    description:
+      "بخش عمده دارایی‌های صندوق در گواهی سپرده کالایی طلا و سایر دارایی‌های مجاز مندرج در امیدنامه صندوق سرمایه‌گذاری می‌شود.",
   },
 ];
 ---
@@ -113,7 +156,7 @@ const faqs = [
         امکان را فراهم می‌کند تا بدون پیچیدگی‌های خرید طلای فیزیکی، از مزایای سرمایه‌گذاری در این بازار بهره‌مند شوید.
       </p>
 
-      <div></div>
+      <FeaturesGrid features={features} rowPattern={[3, 3]} />
 
       <div class="rounded-xl bg-fg-primary p-2 shadow-primary">
         <Image src={SectionBanner1Img} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
@@ -161,6 +204,27 @@ const faqs = [
 
       <Faq faqs={faqs} />
 
+      <div class="flex">
+        <a class="neo-button neo-button-primary" href="./">
+          <span>وبسایت صندوق</span>
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </div>
+
+      <!-- Footer CTA -->
+      <BannerCard desktopImage={SectionBanner3Img} mobileImage={SectionBanner3ImgMob}>
+        <div class="flex flex-col gap-4 text-white lg:w-2/3">
+          <h1 class="text-heading-medium leading-10">سرمایه‌گذاری در طلا، آسان‌تر از همیشه</h1>
+          <p class="text-body-large leading-8 text-neutral-500">
+            اگر به دنبال راهکاری مطمئن، شفاف و آسان برای حفظ ارزش سرمایه خود در برابر تورم هستید، صندوق سرمایه‌گذاری در
+            گواهی سپرده کالایی طلا ناب می‌تواند انتخابی مناسب برای شما باشد.
+          </p>
+        </div>
+        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+          خرید صندوق
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </BannerCard>
     </section>
   </main>
 </Layout>

@@ -12,13 +12,10 @@ const { desktopImage, mobileImage, classes } = Astro.props;
 
 <section
   class:list={[
-    "flex min-h-150 bg-(image:--bg-mobile) bg-cover bg-center bg-no-repeat px-4 py-8 lg:bg-(image:--bg-desktop) lg:py-16",
+    "flex min-h-72 flex-col justify-between gap-8 rounded-xl bg-fg-primary bg-(image:--bg-mobile) bg-cover bg-center p-8 lg:bg-(image:--bg-desktop)",
     classes,
   ]}
   style={`--bg-desktop: url('${desktopImage?.src}'); --bg-mobile: url('${mobileImage?.src}')`}
 >
-  <div class="relative mx-auto flex w-full max-w-lg flex-col lg:flex-row">
-    <slot />
-    <div class="hidden flex-1 lg:flex"></div>
-  </div>
+  <slot />
 </section>

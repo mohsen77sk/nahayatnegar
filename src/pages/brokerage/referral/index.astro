@@ -8,6 +8,7 @@ import Layout from "@layouts/Layout.astro";
 // Components
 import Banner from "@components/banner.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
+import BannerCard from "@components/bannerCard.astro";
 import Faq from "@components/faq.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
@@ -170,11 +171,8 @@ const faqs = [
       <Faq faqs={faqs} />
 
       <!-- Footer CTA -->
-      <div
-        class="flex h-72 flex-col justify-between gap-8 rounded-xl bg-fg-primary bg-(image:--bg-mobile) bg-cover bg-center p-8 lg:bg-(image:--bg-desktop)"
-        style={`--bg-mobile: url('${SectionBanner2ImgMob.src}'); --bg-desktop: url('${SectionBanner2Img.src}');`}
-      >
-        <div class="flex flex-col gap-4 text-white lg:w-94">
+      <BannerCard desktopImage={SectionBanner2Img} mobileImage={SectionBanner2ImgMob}>
+        <div class="flex w-1/2 flex-col gap-4 text-white">
           <h1 class="text-heading-medium leading-10">دریافت پاداش</h1>
           <p class="text-body-large leading-8">
             همین امروز لینک اختصاصی خود را دریافت کنید، دوستانتان را به کارگزاری نهایت‌نگر معرفی کنید و با هر معرفی
@@ -185,7 +183,7 @@ const faqs = [
           درخواست مشاوره
           <ArrowLeft aria-hidden="true" />
         </a>
-      </div>
+      </BannerCard>
     </section>
   </main>
 </Layout>
