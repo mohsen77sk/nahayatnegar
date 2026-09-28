@@ -4,6 +4,8 @@ import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import TimeLine from "@components/time-line.astro";
+import Faq from "@components/faq.astro";
 
 import Section1Img from "@assets/images/Asset Management/1-Naab/naab-hero.png";
 import Section1ImgMob from "@assets/images/Asset Management/1-Naab/naab-hero-mob.png";
@@ -24,6 +26,54 @@ const BreadCrumbItem = [
   {
     label: "صندوق ناب",
     href: "/portfolio-management/nab",
+  },
+];
+
+const timeline = {
+  title: "سرمایه‌گذاری در صندوق ناب در سه گام",
+  steps: [
+    {
+      title: "ثبت‌نام در کارگزاری",
+      description: "افتتاح حساب و دریافت کد بورسی",
+      icon: LinkIcon,
+    },
+    {
+      title: "ورود به سامانه معاملاتی",
+      description: "جستجوی نماد ناب در سامانه معاملاتی نهایت‌نگر.",
+      icon: SearchIcon,
+    },
+    {
+      title: "خرید واحدهای صندوق",
+      description: "ثبت سفارش خرید و آغاز سرمایه‌گذاری در صندوق ناب.",
+      icon: ArchiveIcon,
+    },
+  ],
+};
+
+const faqs = [
+  {
+    title: "آیا صندوق ناب سود تضمین‌شده دارد؟",
+    description: "خیر. بازده صندوق به عملکرد دارایی‌های آن و تغییرات قیمت طلا وابسته است و سود تضمین‌شده ندارد.",
+  },
+  {
+    title: "آیا هر زمان بخواهم می‌توانم واحدهای صندوق را بفروشم؟",
+    description: "بله، در روزهای معاملاتی بورس امکان خرید و فروش واحدهای صندوق وجود دارد.",
+  },
+  {
+    title: "تفاوت صندوق ناب با خرید طلای فیزیکی چیست؟",
+    description: "در صندوق ناب نیازی به خرید، حمل و نگهداری طلای فیزیکی ندارید و سرمایه‌گذاری شما از طریق بازار سرمایه و با شفافیت بیشتر انجام می‌شود.",
+  },
+  {
+    title: "NAV صندوق چیست؟",
+    description: "NAV یا ارزش خالص دارایی‌ها، ارزش واقعی هر واحد صندوق است که به‌صورت مستمر محاسبه و منتشر می‌شود.",
+  },
+  {
+    title: "حداقل مبلغ سرمایه‌گذاری چقدر است؟",
+    description: "حتی با 100 هزارتومان هم می توان در صندوق طلای ناب سرمایه گذاری کرد.",
+  },
+  {
+    title: "سرمایه صندوق در چه دارایی‌هایی سرمایه‌گذاری می‌شود؟",
+    description: "بخش عمده دارایی‌های صندوق در گواهی سپرده کالایی طلا و سایر دارایی‌های مجاز مندرج در امیدنامه صندوق سرمایه‌گذاری می‌شود.",
   },
 ];
 ---
@@ -142,67 +192,10 @@ const BreadCrumbItem = [
         </div>
       </div>
 
-      <div class="flex gap-3">
-        <div class="my-2 h-5 rounded-md border-2 border-blue-400"></div>
-        <div class="flex flex-col gap-1">
-          <div class="text-heading-medium leading-10">آیا صندوق ناب سود تضمین‌شده دارد؟</div>
-          <div class="text-body-large leading-8">
-            خیر. بازده صندوق به عملکرد دارایی‌های آن و تغییرات قیمت طلا وابسته است و سود تضمین‌شده ندارد.
-          </div>
-        </div>
-      </div>
+      <TimeLine steps={timeline.steps} title={timeline.title} />
 
-      <div class="flex gap-3">
-        <div class="my-2 h-5 rounded-md border-2 border-blue-400"></div>
-        <div class="flex flex-col gap-1">
-          <div class="text-heading-medium leading-10">آیا هر زمان بخواهم می‌توانم واحدهای صندوق را بفروشم؟</div>
-          <div class="text-body-large leading-8">
-            بله، در روزهای معاملاتی بورس امکان خرید و فروش واحدهای صندوق وجود دارد.
-          </div>
-        </div>
-      </div>
+      <Faq faqs={faqs} />
 
-      <div class="flex gap-3">
-        <div class="my-2 h-5 rounded-md border-2 border-blue-400"></div>
-        <div class="flex flex-col gap-1">
-          <div class="text-heading-medium leading-10">تفاوت صندوق ناب با خرید طلای فیزیکی چیست؟</div>
-          <div class="text-body-large leading-8">
-            در صندوق ناب نیازی به خرید، حمل و نگهداری طلای فیزیکی ندارید و سرمایه‌گذاری شما از طریق بازار سرمایه و با
-            شفافیت بیشتر انجام می‌شود.
-          </div>
-        </div>
-      </div>
-
-      <div class="flex gap-3">
-        <div class="my-2 h-5 rounded-md border-2 border-blue-400"></div>
-        <div class="flex flex-col gap-1">
-          <div class="text-heading-medium leading-10">NAV صندوق چیست؟</div>
-          <div class="text-body-large leading-8">
-            NAV یا ارزش خالص دارایی‌ها، ارزش واقعی هر واحد صندوق است که به‌صورت مستمر محاسبه و منتشر می‌شود.
-          </div>
-        </div>
-      </div>
-
-      <div class="flex gap-3">
-        <div class="my-2 h-5 rounded-md border-2 border-blue-400"></div>
-        <div class="flex flex-col gap-1">
-          <div class="text-heading-medium leading-10">حداقل مبلغ سرمایه‌گذاری چقدر است؟</div>
-          <div class="text-body-large leading-8">
-            حتی با 100 هزارتومان هم می توان در صندوق طلای ناب سرمایه گذاری کرد.
-          </div>
-        </div>
-      </div>
-
-      <div class="flex gap-3">
-        <div class="my-2 h-5 rounded-md border-2 border-blue-400"></div>
-        <div class="flex flex-col gap-1">
-          <div class="text-heading-medium leading-10">سرمایه صندوق در چه دارایی‌هایی سرمایه‌گذاری می‌شود؟</div>
-          <div class="text-body-large leading-8">
-            بخش عمده دارایی‌های صندوق در گواهی سپرده کالایی طلا و سایر دارایی‌های مجاز مندرج در امیدنامه صندوق
-            سرمایه‌گذاری می‌شود.
-          </div>
-        </div>
-      </div>
     </section>
   </main>
 </Layout>
