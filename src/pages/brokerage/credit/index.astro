@@ -1,6 +1,8 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
+import { siteUrl } from "@utils/url";
+import { URLS } from "../../../scripts/constants";
 
 // Components
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
@@ -11,7 +13,6 @@ import Faq from "@components/faq.astro";
 import TimeLine from "@components/time-line.astro";
 
 // Icons & Assets
-import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 import Section1Img from "@assets/images/Brokerage/3-Credit/credit-hero.png";
 import Section1ImgMob from "@assets/images/Brokerage/3-Credit/credit-hero-mob.png";
 import SectionBanner1Img from "@assets/images/Brokerage/3-Credit/Mockups/web.png";
@@ -23,11 +24,10 @@ import Candle from "@assets/icons/iconsax/outline/candle.svg";
 import Flash from "@assets/icons/iconsax/outline/flash.svg";
 import Chart from "@assets/icons/iconsax/outline/chart-2.svg";
 import Tick from "@assets/icons/iconsax/outline/tick-square.svg";
-import RefreshSquare from "@assets/icons/iconsax/outline/refresh-Square.svg";
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import RefreshSquare from "@assets/icons/iconsax/outline/refresh-square.svg";
 import WalletAdd from "@assets/icons/iconsax/outline/wallet-add.svg";
 import TickCircle from "@assets/icons/iconsax/outline/tick-circle.svg";
-import { siteUrl } from "@utils/url";
-import { URLS } from "../../../scripts/constants";
 
 const BreadCrumbItem = [
   {
