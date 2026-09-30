@@ -1,7 +1,258 @@
 ---
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import Layout from "@layouts/Layout.astro";
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero.png";
+import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero-mob.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/laptop.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/imac.png";
+import FooterBannerImg from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner.png";
+import FooterBannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner-mob.png";
+import BreadCrumb from "@components/bread-crumb.astro";
+import { siteUrl } from "@utils/url";
+import URLS from "../../../scripts/constants";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+
+import Bezier from "@assets/icons/iconsax/outline/bezier.svg";
+import Activity from "@assets/icons/iconsax/outline/activity.svg";
+import FavoriteChart from "@assets/icons/iconsax/outline/favorite-chart.svg";
+import Clock from "@assets/icons/iconsax/outline/clock.svg";
+import ChartSuccess from "@assets/icons/iconsax/outline/chart-success.svg";
+import Grid from "@assets/icons/iconsax/outline/grid-8.svg";
+import Cloud from "@assets/icons/iconsax/outline/cloud-plus.svg";
+import Search from "@assets/icons/iconsax/outline/search-normal.svg";
+import Computing from "@assets/icons/iconsax/outline/computing.svg";
+import Eye from "@assets/icons/iconsax/outline/eye.svg";
+import Banner from "@components/banner.astro";
+import TimeLine from "@components/time-line.astro";
+import Faq from "@components/faq.astro";
+import FeatureCard from "@components/FeatureCard.astro";
+
+const BreadCrumbItem = [
+  {
+    label: "خانه",
+    href: "/",
+  },
+  {
+    label: "نئوتریدر",
+    href: "/",
+  },
+  {
+    label: "تحلیل تکنیکال و نمودارهای پیشرفته",
+  },
+];
+
+const features = [
+  {
+    title: "اندیکاتورها و اسیلاتورها",
+    description:
+      "مجموعه‌ای از اندیکاتورها و اسیلاتورها در اختیار شماست تا بتوانید متناسب با روش تحلیل خود، داده‌های نمودار را بررسی و از ابزارهای موردنیازتان استفاده کنید.",
+    icon: Bezier,
+  },
+  {
+    title: "نمودار لحظه‌ای",
+    description:
+      "نمودارها با اطلاعات لحظه‌ای بازار به‌روزرسانی می‌شوند تا تغییرات قیمت را هم‌زمان با جریان معاملات مشاهده کنید.",
+    icon: Activity,
+  },
+  {
+    title: "نمودارهای تعدیل‌شده",
+    description:
+      "سابقه قیمت را با در نظر گرفتن رویدادهای مؤثر بررسی کنید.امکان مشاهده نمودار با انواع تعدیل‌های قیمتی وجود دارد تا بتوانید سابقه قیمت را متناسب با نوع تحلیل خود بررسی کنید.همچنین نتایج مجامع شرکت موردنظر شما هم روی نمودار مشخص می‌شوند تا رویدادهای مهم اثرگذار بر سابقه قیمت را در کنار داده‌های نموداری مشاهده کنید.",
+    icon: FavoriteChart,
+  },
+  {
+    title: "تایم‌فریم‌های مختلف",
+    description:
+      "با انتخاب تایم‌فریم‌های مختلف، می‌توانید رفتار قیمت را در بازه‌های زمانی متفاوت بررسی کنید و نمودار را متناسب با نوع تحلیل خود مشاهده کنید.",
+    icon: Clock,
+  },
+  {
+    title: "ثبت معاملات روی نمودار",
+    description:
+      "نقاط خرید و فروش انجام‌شده توسط شما روی نمودار مشخص می‌شوند.به این ترتیب، حتی بعد از گذشت زمان می‌توانید به نمودار یک نماد مراجعه کنید و ببینید معاملات خود را در چه نقاطی انجام داده‌اید و وضعیت قیمت در آن زمان چگونه بوده است.",
+    icon: ChartSuccess,
+  },
+  {
+    title: "مشاهده هم‌زمان چند نمودار",
+    description:
+      "تحلیل‌هایی که روی نمودار انجام می‌دهید به‌صورت خودکار ذخیره می‌شوند.بنابراین هر زمان دوباره به یک نماد مراجعه کنید، می‌توانید آخرین تحلیل خود را مشاهده کنید و بدون شروع مجدد، بررسی خود را از همان نقطه ادامه دهید.",
+    icon: Grid,
+  },
+  {
+    title: "مزیت برای معامله‌گر",
+    description:
+      "تحلیل تکنیکال زمانی کاربرد بیشتری دارد که بتوانید نتیجه آن را در کنار اطلاعات واقعی بازار و معاملات خود ببینید.در این ابزار، نمودار لحظه‌ای، ابزارهای تحلیل، معاملات انجام‌شده و تحلیل‌های قبلی شما در یک محیط در دسترس هستند. بنابراین برای بررسی یک نماد، تحلیل آن و مراجعه دوباره به تحلیل‌های گذشته، نیاز نیست میان ابزارها و محیط‌های مختلف جابه‌جا شوید.تحلیل خود را یک‌بار انجام دهید و هر زمان که به آن نماد بازگشتید، آن را ادامه دهید.",
+    icon: Cloud,
+  },
+];
+
+const timeline = {
+  title: "نحوه استفاده و کاربرد",
+  steps: [
+    {
+      title: "نماد دلخواه خود را جستجو کنید",
+      description:
+        "از نمودار یک نماد شروع کنید و با انتخاب بازه زمانی مناسب، تصویر موردنظر خود از رفتار قیمت را به دست آورید. سپس می‌توانید ابزارهای تحلیلی مختلف را متناسب با روش بررسی خود به نمودار اضافه کنید و اطلاعات را در همان محیط کنار یکدیگر قرار دهید.",
+      icon: Search,
+    },
+    {
+      title: "نمادها را در کنار یکدیگر بررسی کنید",
+      description:
+        "وقتی چند نماد را هم‌زمان دنبال می‌کنید، می‌توانید نمودار آن‌ها را در یک صفحه مشاهده کنید. این قابلیت بررسی و مقایسه چند نماد را ساده‌تر می‌کند؛ برای مثال زمانی که چند گزینه از یک صنعت یا چند نماد مورد توجه خود را زیر نظر دارید.",
+      icon: Computing,
+    },
+    {
+      title: "از نماهای مختلف به بازار نگاه کنید",
+      description:
+        "با تغییر تایم‌فریم و استفاده از انواع تعدیل‌های قیمتی، می‌توانید نمودار را از زوایای مختلف بررسی کنید و متناسب با نوع تحلیل خود، نمای مناسب‌تری از سابقه قیمت در اختیار داشته باشید.",
+      icon: Eye,
+    },
+  ],
+};
+
+const faqs = [
+  {
+    title: "آیا برای استفاده از ابزار تحلیل تکنیکال نیاز به نصب نرم‌افزار جداگانه‌ای دارم؟",
+    description:
+      "خیر. ابزار تحلیل تکنیکال در محیط سامانه در دسترس شماست و برای استفاده از آن نیازی به نصب نرم‌افزار جداگانه ندارید.",
+  },
+  {
+    title: "آیا می‌توانم تحلیل یک نماد را بعداً روی دستگاه دیگری هم مشاهده کنم؟",
+    description:
+      "تحلیل‌های شما در سامانه ذخیره می‌شوند؛ بنابراین با ورود به حساب کاربری خود می‌توانید به تحلیل ذخیره‌شده نمادها دسترسی داشته باشید.",
+  },
+  {
+    title: "آیا تحلیل‌هایی که روی یک نماد انجام داده‌ام با تغییر قیمت یا اطلاعات بازار از بین می‌روند؟",
+    description: "خیر. تحلیل شما به‌صورت خودکار ذخیره می‌شود و تغییرات لحظه‌ای بازار باعث حذف آن نمی‌شود.",
+  },
+  {
+    title: "آیا می‌توانم چند اندیکاتور را به‌صورت هم‌زمان روی یک نمودار استفاده کنم؟",
+    description:
+      "بله. ابزار نمودار امکان استفاده از اندیکاتورها و اسیلاتورهای مختلف را برای تحلیل فراهم می‌کند و می‌توانید ابزارهای موردنیاز خود را روی نمودار به کار بگیرید.",
+  },
+  {
+    title: "آیا تحلیل‌های من برای سایر کاربران قابل مشاهده است؟",
+    description:
+      "خیر. تحلیل‌هایی که در حساب کاربری خود انجام می‌دهید، مربوط به حساب شماست و برای سایر کاربران نمایش داده نمی‌شود.",
+  },
+];
 ---
 
 <Layout title="Chart">
-  <main></main>
+  <main>
+    <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
+      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+        <span class="text-display-small text-white">تحلیل تکنیکال و نمودارهای پیشرفته </span>
+        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+          قیمت‌ها را به‌صورت لحظه‌ای دنبال کنید، با استفاده از اندیکاتورها و اسیلاتورها بازار را بررسی کنید و تحلیل‌های
+          خود را روی نمودار ثبت و ذخیره کنید؛ همه در محیطی یکپارچه با سامانه معاملات.
+        </p>
+        <div class="flex gap-4">
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl(URLS.registerAddress)}>
+            ورود به نئوتریدر <ArrowLeft aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </SectionLayer2>
+
+    <!-- Content Section -->
+
+    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
+      <BreadCrumb items={BreadCrumbItem} />
+      <div>
+        <h2 class="text-heading-medium leading-10">ابزار تحلیل تکنیکال چیست؟</h2>
+
+        <p class="text-body-large leading-8">
+          برای بسیاری از معامله‌گران، بررسی رفتار قیمت بخشی از فرآیند تصمیم‌گیری برای معامله است. ابزار تحلیل تکنیکال در
+          NeoTrader محیطی در اختیار شما قرار می‌دهد که می‌توانید در آن سابقه و تغییرات لحظه‌ای قیمت را بررسی کنید،
+          ابزارهای مختلف تحلیل تکنیکال را به کار بگیرید و نتیجه تحلیل خود را روی نمودار نگهداری کنید.
+        </p>
+        <p class="text-body-large leading-8">
+          این ابزار بر پایه TradingView ارائه شده و امکانات متنوعی برای بررسی نمودار در اختیار شما قرار می‌دهد؛ از
+          تایم‌فریم‌های مختلف و انواع تعدیل قیمتی گرفته تا اندیکاتورها، اسیلاتورها و نمایش رویدادهای مهم معاملاتی.
+        </p>
+      </div>
+      <div class="h-100 w-full bg-white p-2 rounded-xl shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
+        <div
+          class="h-full bg-cover bg-center bg-no-repeat rounded-xl"
+          style={{ backgroundImage: `url(${SectionBanner1Img.src})` }}
+        ></div>
+      </div>
+
+      <div class="features mb-5">
+        <h2 class="text-heading-medium leading-10 pb-5">ویژگی‌های متمایز اعتبار نهایت‌نگر</h2>
+        <div class="mx-auto flex max-w-7xl flex-col gap-2">
+          <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr_1.4fr] gap-2 items-stretch">
+            <div class="lg:col-start-1 lg:row-start-1">
+              <FeatureCard title={features[0].title} description={features[0].description} icon={features[0].icon} />
+            </div>
+            <div class="lg:col-start-2 lg:row-start-1">
+              <FeatureCard title={features[1].title} description={features[1].description} icon={features[1].icon} />
+            </div>
+            <div class="lg:col-start-1 lg:row-start-2">
+              <FeatureCard title={features[3].title} description={features[3].description} icon={features[3].icon} />
+            </div>
+            <div class="lg:col-start-2 lg:row-start-2 lg:row-span-2 flex">
+              <FeatureCard title={features[2].title} description={features[2].description} icon={features[2].icon} />
+            </div>
+            <div class="lg:col-start-1 lg:row-start-3">
+              <FeatureCard title={features[4].title} description={features[4].description} icon={features[4].icon} />
+            </div>
+            <div class="lg:col-start-1 lg:row-start-4">
+              <FeatureCard title={features[5].title} description={features[5].description} icon={features[5].icon} />
+            </div>
+            <div class="lg:col-start-2 lg:row-start-4">
+              <FeatureCard title={features[6].title} description={features[6].description} icon={features[6].icon} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-heading-medium leading-10">طرح معرفی مشتری چگونه کار می‌کند؟</h2>
+        <p class="text-body-medium text-secondary leading-7">
+          پس از دریافت لینک یا کد اختصاصی معرفی، آن را برای دوستان و آشنایان خود ارسال کنید. هرگاه فرد معرفی‌شده از طریق
+          همان لینک یا کد در کارگزاری ثبت‌نام کرده و فعالیت خود را آغاز کند، پاداش معرفی برای شما ثبت خواهد شد.
+        </p>
+      </div>
+
+      <Banner>
+        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">از تحلیل تا معامله، در یک محیط</h6>
+      </Banner>
+
+      <div class="h-100 w-full bg-white p-2 rounded-xl shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
+        <div
+          class="h-full bg-cover bg-center bg-no-repeat rounded-xl"
+          style={{ backgroundImage: `url(${SectionBanner1Img.src})` }}
+        ></div>
+      </div>
+      <TimeLine steps={timeline.steps} title={timeline.title} />
+
+      <div class="h-100 w-full bg-white p-2 rounded-xl shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
+        <div
+          class="h-full bg-cover bg-center bg-no-repeat rounded-xl"
+          style={{ backgroundImage: `url(${SectionBanner2Img.src})` }}
+        ></div>
+      </div>
+
+      <Faq faqs={faqs} />
+
+      <!-- Footer CTA -->
+      <div
+        class="flex flex-col p-8 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        style={`--bg-mobile: url('${FooterBannerImg.src}'); --bg-desktop: url('${FooterBannerImgMob.src}');`}
+      >
+        <div class="text-white flex flex-col gap-4 lg:w-94">
+          <h1 class="text-heading-medium leading-10">تحلیل کنید، تصمیم بگیرید، معامله کنید</h1>
+          <p class="text-body-large leading-8">
+            ابزارهای تحلیل تکنیکال، نمودارهای لحظه‌ای و تحلیل‌های خود را در کنار سامانه معاملات در اختیار داشته باشید.
+          </p>
+        </div>
+        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+          ورود به نئوتریدر
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </div>
+    </section>
+  </main>
 </Layout>
