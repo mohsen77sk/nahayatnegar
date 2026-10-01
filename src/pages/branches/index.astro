@@ -148,7 +148,7 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت کالا",
-        number: "",
+        data: [{ city: "تهران", number: ["09125207135    محمود قاسمیان"] }],
       },
     ],
   },
@@ -157,7 +157,7 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [{ city: "ارومیه", number: ["09142121314    هیمن محمودی جلدیان"] }],
       },
     ],
   },
@@ -165,12 +165,18 @@ const marketers = [
     city: "اصفهان",
     branch: [
       {
-        title: "زمینه فعالیت کالا",
-        number: "",
-      },
-      {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [
+          {
+            city: "اصفهان",
+            number: [
+              "09131142843    خداداد ماوندادی",
+              "09132324081    لیلا دوستی گندمانی",
+              "09131012238    مهدی مهدوی",
+            ],
+          },
+          { city: "مباركه", number: ["09133343102    محمد کبیری"] },
+        ],
       },
     ],
   },
@@ -179,7 +185,7 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [{ city: "بندرعباس", number: ["09177166131    مجتبی منوچهری "] }],
       },
     ],
   },
@@ -188,7 +194,7 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [{ city: "زنجان", number: ["09022414451    رضا بیات "] }],
       },
     ],
   },
@@ -197,7 +203,7 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [{ city: "سمنان", number: ["09122316613    مجید دوست محمدی"] }],
       },
     ],
   },
@@ -206,7 +212,7 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [{ city: "سنندج", number: ["09188717044    امیر مالک "] }],
       },
     ],
   },
@@ -215,7 +221,24 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [
+          {
+            city: "شیراز",
+            number: ["09171904317    جعفر طیبی نیا "],
+          },
+          {
+            city: "علامرودشت",
+            number: ["090227603748    عبداله احمدزاده "],
+          },
+          {
+            city: "فسا",
+            number: ["09177311080    محمدمهدی صادقی "],
+          },
+          {
+            city: "لارستان",
+            number: ["090227603748    فاروق کاظم اف "],
+          },
+        ],
       },
     ],
   },
@@ -224,7 +247,7 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [{ city: "قم", number: ["09123531318    حسین جهانگیرنیا"] }],
       },
     ],
   },
@@ -233,7 +256,7 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [{ city: "کرمانشاه", number: ["09183581466    میثم امیری"] }],
       },
     ],
   },
@@ -242,7 +265,7 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [{ city: "گنبد كاووس", number: ["09112726975    حمید کرامتی یزدی "] }],
       },
     ],
   },
@@ -251,7 +274,7 @@ const marketers = [
     branch: [
       {
         title: "زمینه فعالیت اوراق بهادار",
-        number: "",
+        data: [{ city: "مشهد", number: ["09151119020     سعید مهدی زاده"] }],
       },
     ],
   },
@@ -282,42 +305,70 @@ const accountGroups = [
       <div class="relative mx-auto flex w-full max-w-lg flex-col gap-8">
         <div class="flex w-full flex-1 flex-col items-center justify-between gap-4 lg:w-auto lg:flex-row">
           <div class="neo-tabs w-full lg:w-auto">
-            <div class="neo-tab-label active w-full lg:w-auto">شعب</div>
-            <div class="neo-tab-label w-full lg:w-auto">دفاتر نمایندگی</div>
-            <div class="neo-tab-label w-full lg:w-auto">بازاریاب‌ها</div>
+            <button class="neo-tab-label active w-full lg:w-auto" type="button" data-branch-tab="branches">
+              شعب
+            </button>
+            <button class="neo-tab-label w-full lg:w-auto" type="button" data-branch-tab="representativeOffices">
+              دفاتر نمایندگی
+            </button>
+            <button class="neo-tab-label w-full lg:w-auto" type="button" data-branch-tab="marketers">
+              بازاریاب‌ها
+            </button>
           </div>
           <div class="relative flex w-full lg:w-80">
             <input
               class="flex-1 pl-10"
               type="search"
               name="search"
-              placeholder="جستجوی شعبه"
-              aria-label="جستجوی شعبه"
+              placeholder="جستجوی شهر، نشانی و ..."
+              aria-label="جستجوی شهر، نشانی و ..."
+              aria-controls="branch-list"
               data-branch-search
             />
             <IconSearch class="absolute top-2.5 left-3 h-4 w-4" />
           </div>
         </div>
 
-        <div class="gap-4 rounded-xl bg-fg-secondary p-2 lg:gap-8 lg:p-8" data-branch-results>
+        <div id="branch-list" class="gap-4 rounded-xl bg-fg-secondary p-2 lg:gap-8 lg:p-8">
           {
-            branches.map(({ city, branch }) => (
-              <div data-branch-city={city}>
-                <h4 class="mb-3 text-heading-medium">{city}</h4>
-                <div class="mb-4 flex flex-1 flex-col gap-4">
-                  {branch.map(({ title, number, address }) => (
-                    <div
-                      class="grid gap-4 rounded-xl bg-fg-primary p-5"
-                      data-branch-card={`${city} ${title} ${address} ${number}`}
-                    >
-                      <span class="text-title-medium">{title}</span>
-                      <span class="text-body-medium">{address}</span>
-                      <span class="text-body-medium text-secondary">{number}</span>
-                    </div>
-                  ))}
+            accountGroups.flatMap(({ key, accounts }) =>
+              accounts.map(({ city, branch }) => (
+                <div class:list={[{ hidden: key !== "branches" }]} data-branch-category={key} data-branch-city={city}>
+                  <h4 class="mb-3 text-heading-medium">{city}</h4>
+                  <div class="mb-4 flex flex-1 flex-col gap-4">
+                    {branch.map((branchItem) => {
+                      const { title } = branchItem;
+                      const number = (branchItem as { number?: string }).number ?? "";
+                      const address = (branchItem as { address?: string }).address ?? "";
+                      const data = (branchItem as { data?: { city: string; number: string[] }[] }).data ?? [];
+                      const dataSearchText = data
+                        .map(({ city: dataCity, number: dataNumbers }) => `${dataCity} ${dataNumbers.join(" ")}`)
+                        .join(" ");
+
+                      return (
+                        <div
+                          class="grid gap-4 rounded-xl bg-fg-primary p-5"
+                          data-branch-card
+                          data-search-text={`${city} ${title} ${address} ${number} ${dataSearchText}`}
+                        >
+                          <span class="text-title-medium">{title}</span>
+                          {address && <span class="text-body-medium">{address}</span>}
+                          {number && <span class="text-body-medium whitespace-pre-wrap text-secondary">{number}</span>}
+                          {data.map(({ city: dataCity, number: dataNumbers }) => (
+                            <div class="grid gap-2">
+                              <span class="text-body-medium font-semibold">{dataCity}</span>
+                              {dataNumbers.map((dataNumber) => (
+                                <span class="text-body-medium whitespace-pre-wrap text-secondary">{dataNumber}</span>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            ))
+              )),
+            )
           }
           <p class="hidden p-4 text-center text-body-medium" data-branch-empty>شعبه‌ای پیدا نشد.</p>
         </div>
@@ -328,23 +379,31 @@ const accountGroups = [
 
 <script>
   const searchInput = document.querySelector<HTMLInputElement>("[data-branch-search]");
+  const branchTabs = document.querySelectorAll<HTMLButtonElement>("[data-branch-tab]");
+  const branchGroups = document.querySelectorAll<HTMLElement>("[data-branch-category]");
   const cityGroups = document.querySelectorAll<HTMLElement>("[data-branch-city]");
   const emptyMessage = document.querySelector<HTMLElement>("[data-branch-empty]");
+  let activeCategory = "branches";
 
   const normalize = (value: string) => value.trim().toLocaleLowerCase().replace(/ي/g, "ی").replace(/ك/g, "ک");
 
-  searchInput?.addEventListener("input", () => {
-    const query = normalize(searchInput.value);
+  const updateBranchList = () => {
+    const query = normalize(searchInput?.value ?? "");
     let visibleBranches = 0;
 
+    branchGroups.forEach((group) => {
+      group.classList.toggle("hidden", group.dataset.branchCategory !== activeCategory);
+    });
+
     cityGroups.forEach((cityGroup) => {
+      const belongsToCategory = cityGroup.dataset.branchCategory === activeCategory;
       const cityName = normalize(cityGroup.dataset.branchCity ?? "");
       const cards = cityGroup.querySelectorAll<HTMLElement>("[data-branch-card]");
       let visibleCityBranches = 0;
 
       cards.forEach((card) => {
         const matches =
-          !query || normalize(card.dataset.branchCard ?? `${cityName} ${card.textContent}`).includes(query);
+          belongsToCategory && normalize(card.dataset.searchText ?? `${cityName} ${card.textContent}`).includes(query);
         card.classList.toggle("hidden", !matches);
         visibleCityBranches += matches ? 1 : 0;
       });
@@ -354,5 +413,15 @@ const accountGroups = [
     });
 
     emptyMessage?.classList.toggle("hidden", visibleBranches > 0);
+  };
+
+  branchTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activeCategory = tab.dataset.branchTab ?? "branches";
+      branchTabs.forEach((item) => item.classList.toggle("active", item === tab));
+      updateBranchList();
+    });
   });
+
+  searchInput?.addEventListener("input", updateBranchList);
 </script>
