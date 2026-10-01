@@ -21,8 +21,8 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 
 <Layout title="Portfolio Management">
   <main>
-    <section class="flex h-100 py-8 lg:py-16 px-4 bg-[#000]">
-      <div class="flex flex-col flex-1 gap-3 justify-end items-center">
+    <section class="flex h-100 bg-[#000] px-4 py-8 lg:py-16">
+      <div class="flex flex-1 flex-col items-center justify-end gap-3">
         <h1 class="text-display-large text-white">مـدیریت دارایـی</h1>
         <h3 class="text-heading-large text-white">شکوفایی سرمایه، از یک انتخاب هوشمند شروع می‌شود.</h3>
         <button class="neo-button neo-button-outline-primary neo-button-large">درخواست مشاوره</button>
@@ -33,22 +33,22 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 
     <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
       <!-- right -->
-      <div class="flex-1 order-2 lg:order-1" slot="right"></div>
+      <div class="order-2 flex-1 lg:order-1" slot="right"></div>
       <!-- left -->
-      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
-        <div class="flex flex-col gap-10 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="order-1 flex flex-1 items-center lg:order-2" slot="left">
+        <div class="flex flex-1 flex-col gap-10">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
-            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+            <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary lg:text-neutral-800">صندوق سرمایه‌گذاری</span>
               <h1 class="text-display-small text-white">
                 سرمایه‌گذاری حرفه‌ای در بازار{" "}
-                <span class="text-transparent bg-clip-text bg-linear-to-r from-[#FF9151] to-[#FBCE35]">طلا</span>
+                <span class="bg-linear-to-r from-[#FF9151] to-[#FBCE35] bg-clip-text text-transparent">طلا</span>
               </h1>
             </div>
           </div>
-          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
-            <p class="text-body-large leading-8 text-center text-white lg:text-justify">
+          <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
+            <p class="text-center text-body-large leading-8 text-white lg:text-justify">
               با صندوق سرمایه‌گذاری ناب، به‌سادگی در طلا سرمایه‌گذاری کنید و ارزش دارایی خود را در برابر تورم حفظ کنید.
             </p>
             <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/portfolio-management/nab")}>
@@ -62,22 +62,22 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 
     <SectionLayer1 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
       <!-- right -->
-      <div class="flex-1 order-2 lg:order-1" slot="right"></div>
+      <div class="order-2 flex-1 lg:order-1" slot="right"></div>
       <!-- left -->
-      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
-        <div class="flex flex-col gap-10 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="order-1 flex flex-1 items-center lg:order-2" slot="left">
+        <div class="flex flex-1 flex-col gap-10">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
-            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+            <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary lg:text-neutral-800">صندوق سرمایه‌گذاری</span>
               <h1 class="text-display-small text-white">
                 اصیل{" "}
-                <span class="text-transparent bg-clip-text bg-linear-to-r from-[#9C89EE] to-[#78BEF8]">درآمدثابت</span>
+                <span class="bg-linear-to-r from-[#9C89EE] to-[#78BEF8] bg-clip-text text-transparent">درآمدثابت</span>
               </h1>
             </div>
           </div>
-          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
-            <p class="text-body-large leading-8 text-center text-white lg:text-justify">اصیل</p>
+          <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
+            <p class="text-center text-body-large leading-8 text-white lg:text-justify">اصیل</p>
             <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/portfolio-management/asil")}>
               صندوق درآمد ثابت اصیل
               <ArrowLeft aria-hidden="true" />
@@ -89,22 +89,22 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 
     <SectionLayer1 desktopImage={Section3Img} mobileImage={Section3ImgMob}>
       <!-- right -->
-      <div class="flex items-center flex-1" slot="right">
-        <div class="flex flex-col gap-10 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="flex flex-1 items-center" slot="right">
+        <div class="flex flex-1 flex-col gap-10">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
-            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+            <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary lg:text-neutral-800">صندوق سرمایه‌گذاری</span>
               <h1 class="text-display-small">
                 سرمایه‌گذاری حرفه‌ای در بازار{" "}
-                <span class="text-transparent bg-clip-text bg-linear-to-r from-[#0B77D0] via-[#26C6DA] to-[#0B77D0]">
+                <span class="bg-linear-to-r from-[#0B77D0] via-[#26C6DA] to-[#0B77D0] bg-clip-text text-transparent">
                   سهام
                 </span>
               </h1>
             </div>
           </div>
-          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
-            <p class="text-body-large leading-8 text-center lg:text-justify">
+          <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
+            <p class="text-center text-body-large leading-8 lg:text-justify">
               با صندوق قابل معامله (ETF) پیروز، به‌سادگی در سبدی از سهام منتخب سرمایه‌گذاری کنید و از فرصت‌های رشد بازار
               سرمایه بهره‌مند شوید.
             </p>
@@ -124,22 +124,22 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 
     <SectionLayer1 desktopImage={Section4Img} mobileImage={Section4ImgMob}>
       <!-- right -->
-      <div class="flex-1 order-2 lg:order-1" slot="right"></div>
+      <div class="order-2 flex-1 lg:order-1" slot="right"></div>
       <!-- left -->
-      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
-        <div class="flex flex-col gap-10 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="order-1 flex flex-1 items-center lg:order-2" slot="left">
+        <div class="flex flex-1 flex-col gap-10">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
-            <div class="flex flex-col items-center text-center gap-2 lg:items-start">
+            <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary lg:text-neutral-800">صندوق سرمایه‌گذاری</span>
               <h1 class="text-display-small text-white">
                 سرمایه‌گذاری هوشمند با رویکردی{" "}
-                <span class="text-transparent bg-clip-text bg-linear-to-r from-[#0ACEA2] to-[#77B900]">پـویا</span>
+                <span class="bg-linear-to-r from-[#0ACEA2] to-[#77B900] bg-clip-text text-transparent">پـویا</span>
               </h1>
             </div>
           </div>
-          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
-            <p class="text-body-large leading-8 text-center text-white lg:text-justify">
+          <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
+            <p class="text-center text-body-large leading-8 text-white lg:text-justify">
               صندوق پویا با مدیریت تخصصی و تصمیم‌گیری فعال در بازار سهام، به دنبال خلق ارزش و کسب بازدهی متناسب با شرایط
               بازار است.
             </p>
@@ -156,27 +156,29 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
     </SectionLayer1>
 
     <SectionLayer1 classes="bg-white">
-      <div class="grid grid-rows-2 items-center self-center flex-1 gap-8" slot="right">
+      <div class="grid flex-1 grid-rows-2 items-center gap-8 self-center" slot="right">
         <div class="flex flex-col gap-6">
           <div class="flex flex-col-reverse items-center text-center">
             <div class="flex flex-col items-center">
               <span class="text-secondary">مدیریت دارایی</span>
               <h1 class="text-display-small">مدیریت اختصاصی دارایی، متناسب با اهداف شما</h1>
-              <div class="rounded-round h-1 w-16 mt-6 bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+              <div class="mt-6 h-1 w-16 rounded-round bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
             </div>
           </div>
-          <p class="text-body-large font-medium leading-8 text-center lg:text-center text-secondary">
+          <p class="text-center text-body-large leading-8 font-medium text-secondary lg:text-center">
             با خدمات سبد اختصاصی نهایت‌نگر، استراتژی سرمایه‌گذاری متناسب با اهداف، افق زمانی و میزان ریسک‌پذیری شما
             طراحی می‌شود تا دارایی‌تان به‌صورت حرفه‌ای و شخصی‌سازی‌شده مدیریت شود.
           </p>
-          <button class="neo-button neo-button-fill-primary neo-button-large">
-            اطلاعات بیشتر
-            <ArrowLeft aria-hidden="true" />
-          </button>
+          <div class="flex justify-center">
+            <button class="neo-button neo-button-fill-primary neo-button-large">
+              اطلاعات بیشتر
+              <ArrowLeft aria-hidden="true" />
+            </button>
+          </div>
         </div>
 
         <div class="flex items-center justify-center" slot="left">
-          <Image src={Section5ImgObj} alt="مدیریت دارایی" class="lg:w-124 w-75 h-auto" loading="lazy" />
+          <Image src={Section5ImgObj} alt="مدیریت دارایی" class="h-auto w-75 lg:w-124" loading="lazy" />
         </div>
       </div>
     </SectionLayer1>

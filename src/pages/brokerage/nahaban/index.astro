@@ -61,9 +61,9 @@ const features = [
 <Layout title="Nahaban">
   <main>
     <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
-      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+      <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
         <h1 class="text-display-small text-white">نهابان ؛ فراتر از یک بانک</h1>
-        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+        <p class="text-center text-body-large leading-8 text-white lg:text-start">
           با نهابان ، سرمایه شما تا رسیدن فرصت بعدی خرید، بیکار نمی‌ماند و می‌تواند برایتان بازده روزشمار ایجاد کند.
         </p>
         <div class="flex flex-col gap-4 lg:flex-row">
@@ -79,12 +79,12 @@ const features = [
       </div>
     </SectionLayer2>
 
-    <section class="flex flex-col max-w-200 mx-auto gap-6">
+    <section class="mx-auto flex max-w-200 flex-col gap-6">
       <BreadCrumb items={BreadCrumbItem} />
 
       <div>
         <h2 class="text-heading-medium leading-10">نهابان</h2>
-        <div class="text-body-medium text-secondary leading-7">
+        <div class="text-body-medium leading-7 text-secondary">
           سود روزشمار برای موجودی نقد و وجه تضمین معاملات اختیار
         </div>
       </div>
@@ -95,10 +95,10 @@ const features = [
         موجودی خود را از طرح خارج کنید، سود متناظر آن نیز به حساب معاملاتی شما منتقل می شود .
       </p>
 
-      <Image src={SectionBanner1Img} alt="صندوق ناب" class="w-full h-auto" loading="lazy" />
+      <Image src={SectionBanner1Img} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
 
       <div class="features mb-5">
-        <h2 class="text-heading-medium leading-10 pb-5">ویژگی‌های متمایز نهابان</h2>
+        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های متمایز نهابان</h2>
         <FeaturesGrid features={features} rowPattern={[2, 3]} />
       </div>
 
@@ -113,32 +113,32 @@ const features = [
       </p>
 
       <Banner>
-        <h6 class="text-title-large text-blue-800 leading-relaxed">
+        <h6 class="text-title-large leading-relaxed text-blue-800">
           حتی زمانی که معامله‌ای انجام نمی‌دهید، سرمایه شما می‌تواند برایتان بازده ایجاد کند.
         </h6>
       </Banner>
 
-      <div class="flex flex-col p-6 bg-fg-primary rounded-xl gap-6">
+      <div class="flex flex-col gap-6 rounded-xl bg-fg-primary p-6">
         <h2 class="text-heading-medium leading-10">سرمایه‌گذاری در صندوق ناب در سه گام</h2>
 
-        <div class="flex flex-col gap-10 relative">
+        <div class="relative flex flex-col gap-10">
           <div class="absolute right-6.5 h-full w-px border border-dashed border-secondary"></div>
-          <div class="flex flex-1 gap-4 z-10">
-            <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full"></div>
+          <div class="z-10 flex flex-1 gap-4">
+            <div class="flex h-13 w-13 items-center justify-center rounded-full bg-blue-100"></div>
             <div class="flex flex-col gap-2">
               <span class="text-title-medium">ثبت‌نام در کارگزاری</span>
               <span class="text-body-medium text-secondary">افتتاح حساب و دریافت کد بورسی</span>
             </div>
           </div>
-          <div class="flex flex-1 gap-4 z-10">
-            <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full"></div>
+          <div class="z-10 flex flex-1 gap-4">
+            <div class="flex h-13 w-13 items-center justify-center rounded-full bg-blue-100"></div>
             <div class="flex flex-col gap-2">
               <span class="text-title-medium">ورود به سامانه معاملاتی</span>
               <span class="text-body-medium text-secondary">جستجوی نماد ناب در سامانه معاملاتی نهایت‌نگر.</span>
             </div>
           </div>
-          <div class="flex flex-1 gap-4 z-10">
-            <div class="flex items-center justify-center w-13 h-13 bg-blue-100 rounded-full"></div>
+          <div class="z-10 flex flex-1 gap-4">
+            <div class="flex h-13 w-13 items-center justify-center rounded-full bg-blue-100"></div>
             <div class="flex flex-col gap-2">
               <span class="text-title-medium">خرید واحدهای صندوق</span>
               <span class="text-body-medium text-secondary">ثبت سفارش خرید و آغاز سرمایه‌گذاری در صندوق ناب.</span>

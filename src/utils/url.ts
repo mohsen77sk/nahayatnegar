@@ -1,7 +1,7 @@
 export function siteUrl(path = ""): string {
- if (!path) return import.meta.env.BASE_URL || '';
+  if (!path) return import.meta.env.BASE_URL || "";
 
- const isExternal = /^https?:\/\//i.test(path) || path.startsWith("//");
+  const isExternal = /^https?:\/\//i.test(path) || path.startsWith("//");
 
   if (isExternal) {
     return path;

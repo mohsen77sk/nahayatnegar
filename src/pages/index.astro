@@ -1,10 +1,11 @@
 ---
 import { siteUrl } from "@utils/url";
+import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
+
 import SectionVideoHero from "@components/@layout/section-video-hero.astro";
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import LineGradient from "@components/line-gradient.astro";
-
 import HeroVideo from "@assets/images/Home/Sunrise over Earth.mp4";
 import BrokerageBg from "@assets/images/Home/brokerage-bg.png";
 import BrokerageBgMob from "@assets/images/Home/brokerage-bg-mob.png";
@@ -13,59 +14,61 @@ import Section3Bg from "@assets/images/Home/chatGPT_image.png";
 import Section3Obj from "@assets/images/Home/chatGPT_image-object.png";
 import SectionLearningBg from "@assets/images/Home/learning-bg.png";
 import SectionLearningBgMob from "@assets/images/Home/learning-bg-mob.png";
+import FinancingBg from "@assets/images/Home/financing-bg.png";
+import FinancingObj from "@assets/images/Home/financing-obj.png";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 ---
 
 <Layout title="خانه">
   <main>
     <SectionVideoHero desktopVideo={HeroVideo} mobileVideo={HeroVideo}>
-      <div slot="right" class="flex flex-col items-center justify-center text-center h-150 w-full">
-        <h1 class="text-display-large text-white mb-2">گروه مالی نهایت‌نگر</h1>
-        <p class="text-heading-large text-white mb-6">ارائه دهنده انواع سرویس‌ها و خدمات معاملاتی بازار سرمایه</p>
-        <div class="flex gap-3 justify-center">
+      <div slot="right" class="flex h-150 w-full flex-col items-center justify-center text-center">
+        <h1 class="mb-2 text-display-large text-white">گروه مالی نهایت‌نگر</h1>
+        <p class="mb-6 text-heading-large text-white">ارائه دهنده انواع سرویس‌ها و خدمات معاملاتی بازار سرمایه</p>
+        <div class="flex justify-center gap-3">
           <button class="neo-button neo-button-large neo-button-fill-primary">ثبت‌نام در بورس</button>
           <button class="neo-button neo-button-large neo-button-outline-primary">درخواست مشاوره</button>
         </div>
       </div>
 
-      <div slot="left" class="lg:hidden h-75"></div>
+      <div slot="left" class="h-75 lg:hidden"></div>
     </SectionVideoHero>
 
     <SectionLayer1 desktopImage={BrokerageBg} mobileImage={BrokerageBgMob}>
       <!-- right -->
-      <div class="flex items-center flex-1 order-2 lg:order-1" slot="right">
-        <img src={BrokerageObj.src} alt="" aria-hidden="true" />
+      <div class="order-2 flex flex-1 items-center lg:order-1" slot="right">
+        <Image src={BrokerageObj} alt="نهایت‌نگر" class="h-auto w-full" loading="lazy" />
       </div>
 
       <!-- left -->
-      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
-        <div class="flex flex-col gap-6 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="order-1 flex flex-1 items-center lg:order-2" slot="left">
+        <div class="flex flex-1 flex-col gap-6">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
             <div class="flex flex-col items-center gap-2 lg:items-start">
-              <h1 class="text-display-small text-center">یک کارگزاری تمام بازار سرمایه</h1>
+              <h1 class="text-center text-display-small">یک کارگزاری تمام بازار سرمایه</h1>
               <div class="flex flex-row-reverse items-center gap-2">
-                <span class="py-1 px-3 rounded-full inline-flex items-center justify-center text-secondary bg-blue-100 text-body-medium whitespace-nowrap">
+                <span class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-body-medium whitespace-nowrap text-secondary">
                   انرژی
                 </span>
 
-                <span class="py-1 px-3.5 inline-flex items-center justify-center rounded-full text-secondary bg-blue-100 text-body-medium whitespace-nowrap">
+                <span class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3.5 py-1 text-body-medium whitespace-nowrap text-secondary">
                   کالا
                 </span>
 
-                <span class="py-1 px-3 inline-flex items-center justify-center rounded-full text-secondary bg-blue-100 text-body-medium whitespace-nowrap">
+                <span class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-body-medium whitespace-nowrap text-secondary">
                   فرابورس
                 </span>
 
-                <span class="py-1 px-3 inline-flex items-center justify-center rounded-full text-secondary bg-blue-100 text-body-medium whitespace-nowrap">
+                <span class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-body-medium whitespace-nowrap text-secondary">
                   بورس اوراق بهادار
                 </span>
               </div>
             </div>
           </div>
 
-          <div class="flex flex-col items-center lg:items-start gap-4 pt-3 pb-3 pr-6">
-            <p class="text-body-large font-medium leading-8 text-center lg:text-justify">
+          <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
+            <p class="text-center text-body-large leading-8 font-medium lg:text-justify">
               با نهایت‌نگر، به همه بازارها و ابزارهای سرمایه‌گذاری دسترسی داشته باشید.
             </p>
 
@@ -79,13 +82,13 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
     </SectionLayer1>
 
     <SectionLayer1 desktopImage={Section3Bg} mobileImage={Section3Bg} hasGap={false}>
-      <div class="flex items-center justify-end flex-1" slot="left">
-        <img src={Section3Obj.src} alt="" class="w-83.25 h-125 md:w-125 md:h-187.5" aria-hidden="true" />
+      <div class="order-2 flex flex-1 items-center" slot="left">
+        <Image src={Section3Obj} alt="نهایت‌نگر" class="h-auto w-full" loading="lazy" />
       </div>
 
-      <div class="flex items-center flex-1" slot="right">
-        <div class="flex flex-col gap-6 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="order-1 flex flex-1 items-center" slot="right">
+        <div class="flex flex-1 flex-col gap-6">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
             <div class="flex flex-col items-center lg:items-start">
               <h1 class="text-display-small text-white">مدیریت دارایی حرفه‌ای</h1>
@@ -95,8 +98,8 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
             </div>
           </div>
 
-          <div class="flex flex-col gap-4 items-center lg:items-start lg:pr-6">
-            <p class="text-body-large font-medium leading-8 text-center text-white lg:text-justify">
+          <div class="flex flex-col items-center gap-4 lg:items-start lg:pr-6">
+            <p class="text-center text-body-large leading-8 font-medium text-white lg:text-justify">
               مدیریت سرمایه خود را به متخصصان نهایت‌نگر بسپارید و با آرامش خاطر از فرصت‌های بازار سرمایه بهره‌مند شوید.
             </p>
 
@@ -109,14 +112,40 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
       </div>
     </SectionLayer1>
 
+    <SectionLayer1 desktopImage={FinancingBg} mobileImage={FinancingBg} classes="bg-white">
+      <div class="grid flex-1 grid-rows-2 items-center gap-8 self-center" slot="right">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col-reverse items-center text-center">
+            <div class="flex flex-col items-center">
+              <h1 class="text-display-small">تامین مالی</h1>
+              <h6 class="text-secondary">راهکارهای نوین تأمین مالی برای توسعه کسب‌وکارها</h6>
+              <div class="mt-6 h-1 w-16 rounded-round bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
+            </div>
+          </div>
+          <p class="text-center text-body-large leading-8 font-medium text-secondary lg:text-center">
+            با خدمات تأمین مالی نهایت‌نگر، از ظرفیت‌های بازار سرمایه برای توسعه کسب‌وکار و اجرای برنامه‌های رشد خود بهره‌مند شوید.
+          </p>
+          <div class="flex items-center justify-center">
+            <button class="neo-button neo-button-fill-primary cursor-auto neo-button-large w-37">
+              به زودی
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center" slot="left">
+          <Image src={FinancingObj} alt="مدیریت دارایی" class="h-auto w-75 lg:w-124" loading="lazy" />
+        </div>
+      </div>
+    </SectionLayer1>
+
     <SectionLayer1 desktopImage={SectionLearningBg} mobileImage={SectionLearningBgMob}>
       <!-- right -->
-      <div class="flex items-center flex-1 order-2 lg:order-1" slot="right"></div>
+      <div class="order-2 flex flex-1 items-center lg:order-1" slot="right"></div>
 
       <!-- left -->
-      <div class="flex items-center flex-1 order-1 lg:order-2" slot="left">
-        <div class="flex flex-col gap-6 flex-1">
-          <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+      <div class="order-1 flex flex-1 items-center lg:order-2" slot="left">
+        <div class="flex flex-1 flex-col gap-6">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
             <div class="flex flex-col items-center lg:items-start">
               <h1 class="text-display-small text-white">آموزش</h1>
@@ -126,8 +155,8 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
             </div>
           </div>
 
-          <div class="flex flex-col gap-4 items-center lg:items-start lg:pr-6">
-            <p class="text-body-large font-medium leading-8 text-center text-white lg:text-justify">
+          <div class="flex flex-col items-center gap-4 lg:items-start lg:pr-6">
+            <p class="text-center text-body-large leading-8 font-medium text-white lg:text-justify">
               با دسترسی به اطلاعات و دانش مالی، آگاهانه‌تر تصمیم بگیرید و در بازار سرمایه ، حرفه‌ای‌ سرمایه‌گذاری کنید.
             </p>
 

@@ -8,12 +8,14 @@ interface Props {
 const { faqs } = Astro.props;
 ---
 
-{faqs.map((faq) => (
-  <div class="flex gap-3">
-    <div class="rounded-md border-2 border-blue-400 h-5 my-2"></div>
-    <div class="flex flex-col gap-1">
-      <div class="text-heading-medium leading-10">{faq.title}</div>
-      <div class="text-body-large leading-8">{faq.description}</div>
+{
+  faqs.map((faq) => (
+    <div class="flex gap-3">
+      <div class="my-2 h-5 rounded-md border-2 border-blue-400" />
+      <div class="flex flex-col gap-1">
+        <div class="text-heading-medium leading-10">{faq.title}</div>
+        <div class="text-body-large leading-8">{faq.description}</div>
+      </div>
     </div>
-  </div>
-))}
+  ))
+}
