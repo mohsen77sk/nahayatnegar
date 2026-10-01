@@ -27,6 +27,7 @@ import Banner from "@components/banner.astro";
 import TimeLine from "@components/time-line.astro";
 import Faq from "@components/faq.astro";
 import FeatureCard from "@components/FeatureCard.astro";
+import { Image } from "astro:assets";
 
 const BreadCrumbItem = [
   {
@@ -74,16 +75,16 @@ const features = [
     icon: ChartSuccess,
   },
   {
-    title: "مشاهده هم‌زمان چند نمودار",
+    title: "ذخیره خودکار تحلیل‌ها",
     description:
       "تحلیل‌هایی که روی نمودار انجام می‌دهید به‌صورت خودکار ذخیره می‌شوند.بنابراین هر زمان دوباره به یک نماد مراجعه کنید، می‌توانید آخرین تحلیل خود را مشاهده کنید و بدون شروع مجدد، بررسی خود را از همان نقطه ادامه دهید.",
-    icon: Grid,
+    icon: Cloud,
   },
   {
-    title: "مزیت برای معامله‌گر",
+    title: "مشاهده هم‌زمان چند نمودار",
     description:
-      "تحلیل تکنیکال زمانی کاربرد بیشتری دارد که بتوانید نتیجه آن را در کنار اطلاعات واقعی بازار و معاملات خود ببینید.در این ابزار، نمودار لحظه‌ای، ابزارهای تحلیل، معاملات انجام‌شده و تحلیل‌های قبلی شما در یک محیط در دسترس هستند. بنابراین برای بررسی یک نماد، تحلیل آن و مراجعه دوباره به تحلیل‌های گذشته، نیاز نیست میان ابزارها و محیط‌های مختلف جابه‌جا شوید.تحلیل خود را یک‌بار انجام دهید و هر زمان که به آن نماد بازگشتید، آن را ادامه دهید.",
-    icon: Cloud,
+      "امکان مشاهده چند نمودار در یک صفحه، بررسی هم‌زمان نمادهای مختلف را ساده‌تر می‌کند؛ به‌خصوص زمانی که بخواهید چند نماد، صنعت یا گزینه معاملاتی را با یکدیگر مقایسه کنید.",
+    icon: Grid,
   },
 ];
 
@@ -139,7 +140,7 @@ const faqs = [
 ];
 ---
 
-<Layout title="Chart">
+<Layout title="تحلیل تکنیکال و نمودارهای پیشرفته">
   <main>
     <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
       <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
@@ -149,7 +150,7 @@ const faqs = [
           خود را روی نمودار ثبت و ذخیره کنید؛ همه در محیطی یکپارچه با سامانه معاملات.
         </p>
         <div class="flex gap-4">
-          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl(URLS.registerAddress)}>
+          <a href={siteUrl("/brokerage/neo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
             ورود به نئوتریدر <ArrowLeft aria-hidden="true" />
           </a>
         </div>
@@ -173,67 +174,64 @@ const faqs = [
           تایم‌فریم‌های مختلف و انواع تعدیل قیمتی گرفته تا اندیکاتورها، اسیلاتورها و نمایش رویدادهای مهم معاملاتی.
         </p>
       </div>
-      <div class="h-100 w-full bg-white p-2 rounded-xl shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
-        <div
-          class="h-full bg-cover bg-center bg-no-repeat rounded-xl"
-          style={{ backgroundImage: `url(${SectionBanner1Img.src})` }}
-        ></div>
-      </div>
+
+      <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
 
       <div class="features mb-5">
         <h2 class="text-heading-medium leading-10 pb-5">ویژگی‌های متمایز اعتبار نهایت‌نگر</h2>
         <div class="mx-auto flex max-w-7xl flex-col gap-2">
-          <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr_1.4fr] gap-2 items-stretch">
-            <div class="lg:col-start-1 lg:row-start-1">
+          <div
+            dir="ltr"
+            class="grid
+            grid-cols-1
+    lg:grid-cols-[1fr_0.45fr_1.1fr]
+    lg:grid-rows-[auto_auto_auto_auto]
+    gap-2"
+          >
+            <div class="lg:col-start-1 lg:col-span-2 lg:row-start-1" dir="rtl">
               <FeatureCard title={features[0].title} description={features[0].description} icon={features[0].icon} />
             </div>
-            <div class="lg:col-start-2 lg:row-start-1">
+            <div class="lg:col-start-3 lg:row-start-1" dir="rtl">
               <FeatureCard title={features[1].title} description={features[1].description} icon={features[1].icon} />
             </div>
-            <div class="lg:col-start-1 lg:row-start-2">
-              <FeatureCard title={features[3].title} description={features[3].description} icon={features[3].icon} />
-            </div>
-            <div class="lg:col-start-2 lg:row-start-2 lg:row-span-2 flex">
+            <div class="lg:col-start-1 lg:row-start-2 lg:row-span-2" dir="rtl">
               <FeatureCard title={features[2].title} description={features[2].description} icon={features[2].icon} />
             </div>
-            <div class="lg:col-start-1 lg:row-start-3">
+            <div class="col-start-2 col-span-2 row-start-2" dir="rtl">
+              <FeatureCard title={features[3].title} description={features[3].description} icon={features[3].icon} />
+            </div>
+            <div class="lg:col-start-2 lg:col-span-2 lg:row-start-3" dir="rtl">
               <FeatureCard title={features[4].title} description={features[4].description} icon={features[4].icon} />
             </div>
-            <div class="lg:col-start-1 lg:row-start-4">
+            <div class="lg:col-start-1 lg:col-span-2 lg:row-start-4" dir="rtl">
               <FeatureCard title={features[5].title} description={features[5].description} icon={features[5].icon} />
             </div>
-            <div class="lg:col-start-2 lg:row-start-4">
+            <div class="lg:col-start-3 lg:row-start-4" dir="rtl">
               <FeatureCard title={features[6].title} description={features[6].description} icon={features[6].icon} />
             </div>
           </div>
         </div>
       </div>
       <div>
-        <h2 class="text-heading-medium leading-10">طرح معرفی مشتری چگونه کار می‌کند؟</h2>
+        <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
         <p class="text-body-medium text-secondary leading-7">
-          پس از دریافت لینک یا کد اختصاصی معرفی، آن را برای دوستان و آشنایان خود ارسال کنید. هرگاه فرد معرفی‌شده از طریق
-          همان لینک یا کد در کارگزاری ثبت‌نام کرده و فعالیت خود را آغاز کند، پاداش معرفی برای شما ثبت خواهد شد.
+          تحلیل تکنیکال زمانی کاربرد بیشتری دارد که بتوانید نتیجه آن را در کنار اطلاعات واقعی بازار و معاملات خود
+          ببینید.
         </p>
+        <p>
+          در این ابزار، نمودار لحظه‌ای، ابزارهای تحلیل، معاملات انجام‌شده و تحلیل‌های قبلی شما در یک محیط در دسترس
+          هستند. بنابراین برای بررسی یک نماد، تحلیل آن و مراجعه دوباره به تحلیل‌های گذشته، نیاز نیست میان ابزارها و
+          محیط‌های مختلف جابه‌جا شوید.
+        </p>
+        <p>تحلیل خود را یک‌بار انجام دهید و هر زمان که به آن نماد بازگشتید، آن را ادامه دهید.</p>
       </div>
 
       <Banner>
         <h6 class="text-title-large text-center text-blue-800 leading-relaxed">از تحلیل تا معامله، در یک محیط</h6>
       </Banner>
 
-      <div class="h-100 w-full bg-white p-2 rounded-xl shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
-        <div
-          class="h-full bg-cover bg-center bg-no-repeat rounded-xl"
-          style={{ backgroundImage: `url(${SectionBanner1Img.src})` }}
-        ></div>
-      </div>
       <TimeLine steps={timeline.steps} title={timeline.title} />
-
-      <div class="h-100 w-full bg-white p-2 rounded-xl shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
-        <div
-          class="h-full bg-cover bg-center bg-no-repeat rounded-xl"
-          style={{ backgroundImage: `url(${SectionBanner2Img.src})` }}
-        ></div>
-      </div>
+      <Image src={SectionBanner2Img} alt="" class="w-full h-auto" loading="lazy" />
 
       <Faq faqs={faqs} />
 
@@ -248,7 +246,10 @@ const faqs = [
             ابزارهای تحلیل تکنیکال، نمودارهای لحظه‌ای و تحلیل‌های خود را در کنار سامانه معاملات در اختیار داشته باشید.
           </p>
         </div>
-        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+        <a
+          href={siteUrl("/brokerage/neo-trader")}
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+        >
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />
         </a>
