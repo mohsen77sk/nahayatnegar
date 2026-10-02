@@ -25,7 +25,9 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
       <div class="flex flex-1 flex-col items-center justify-end gap-3">
         <h1 class="text-display-large text-white">مـدیریت دارایـی</h1>
         <h3 class="text-heading-large text-white">شکوفایی سرمایه، از یک انتخاب هوشمند شروع می‌شود.</h3>
-        <button class="neo-button neo-button-outline-primary neo-button-large">درخواست مشاوره</button>
+        <button class="neo-button neo-button-outline-primary neo-button-large" data-consultation-modal-trigger>
+          درخواست مشاوره
+        </button>
       </div>
     </section>
 
@@ -169,10 +171,15 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
             با خدمات سبد اختصاصی نهایت‌نگر، استراتژی سرمایه‌گذاری متناسب با اهداف، افق زمانی و میزان ریسک‌پذیری شما
             طراحی می‌شود تا دارایی‌تان به‌صورت حرفه‌ای و شخصی‌سازی‌شده مدیریت شود.
           </p>
-          <button class="neo-button neo-button-fill-primary neo-button-large">
-            اطلاعات بیشتر
-            <ArrowLeft aria-hidden="true" />
-          </button>
+          <div class="flex justify-center">
+            <a
+              class="neo-button neo-button-fill-primary neo-button-large"
+              href={siteUrl("/portfolio-management/asset-management")}
+            >
+              اطلاعات بیشتر
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
         </div>
 
         <div class="flex items-center justify-center" slot="left">

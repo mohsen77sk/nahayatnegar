@@ -15,17 +15,21 @@ const { title, steps } = Astro.props;
 
 <div class="flex flex-col gap-6 rounded-xl bg-fg-primary p-6">
   <h2 class="text-heading-medium leading-10">{title}</h2>
-  <div class="relative flex flex-col gap-10">
-    <div class="absolute right-6.5 h-full w-px border border-dashed border-secondary"></div>
+  <div class="flex flex-col">
     {
       steps.map((step) => {
         const IconComponent = step.icon;
         return (
-          <div class="z-10 flex flex-1 gap-4">
-            <div class="flex h-13 w-13 items-center justify-center rounded-full bg-blue-100">
-              <IconComponent class="text-brand" />
+          <div class="group relative flex items-start gap-4 pb-10 last:pb-0">
+            <div class="z-10 flex items-start gap-4">
+              <div class="absolute top-6.5 right-6.5 -bottom-10 w-px -translate-x-1/2 border-r border-dashed border-secondary group-last:hidden" />
+
+              <div class="z-10 flex h-13 w-13 shrink-0 items-center justify-center rounded-full bg-blue-100">
+                <IconComponent class="text-brand" />
+              </div>
             </div>
-            <div class="flex flex-col gap-2">
+
+            <div class="flex min-w-0 flex-col gap-2">
               <span class="text-title-medium"> {step.title}</span>
               <span class="text-body-medium text-secondary">{step.description}</span>
             </div>

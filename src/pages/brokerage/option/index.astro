@@ -1,7 +1,269 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { siteUrl } from "@utils/url";
+
+// Layout & Custom Components
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+import Banner from "@components/banner.astro";
+import Faq from "@components/faq.astro";
+import FeatureCard from "@components/FeatureCard.astro";
+
+// Icons
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import Link from "@assets/icons/iconsax/outline/link.svg";
+import LampCharge from "@assets/icons/iconsax/outline/lamp-charge.svg";
+import RulerPen from "@assets/icons/iconsax/outline/ruler-pen.svg";
+import SecurityTime from "@assets/icons/iconsax/outline/security-time.svg";
+import Layer from "@assets/icons/iconsax/outline/layer.svg";
+
+// Images
+import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Option/option-hero.png";
+import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Option/option-hero-mob.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Mockups/laptop.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Mockups/imac.png";
+import Section3BannerImg from "@assets/images/Brokerage/1-Neo Trader/Option/banner.png";
+import Section3BannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Option/Banner.png";
+
+const breadCrumbItems = [{ label: "خانه", href: "/" }, { label: "نئوتریدر", href: "/" }, { label: "اختیار معامله" }];
+
+const features = [
+  {
+    title: "زنجیره قرارداد اختیار معامله",
+    description: `<p class="leading-7">زنجیره قرارداد، نمای کاملی از قراردادهای اختیار معامله را بر اساس سررسید و قیمت اعمال نمایش می‌دهد.در این بخش می‌توانید اطلاعات مهم قراردادها شامل موارد زیر را مشاهده کنید:</p>
+    <ul class="list-native-circle  leading-7">
+    <li>قیمت خرید و فروش</li>
+    <li>حجم و ارزش معاملات</li>
+    <li>قیمت نظری</li>
+    <li>قیمت پایانی</li>
+    <li>قیمت پایانی پایه</li>
+    <li>اسپرد</li>
+    <li>موقعیت باز</li>
+    <li>تاریخ اعمال و روزهای باقی‌مانده</li>
+    <li>قیمت اعمال</li>
+    <li>تلاطم ضمنی (IV)</li>
+    <li>معیارهای یونانی شامل Delta، Gamma، Theta، Vega و Rho</li>
+    </ul>
+    <p class="leading-7">همچنین اطلاعات نماد پایه مانند قیمت تابلو، قیمت پایانی و حجم معاملات در کنار قراردادها نمایش داده می‌شود تا بررسی ارتباط قرارداد با دارایی پایه ساده‌تر باشد.</p>`,
+    icon: Link,
+  },
+  {
+    title: "تحلیل پارامترهای اختیار معامله",
+    description: `<p class="leading-7">برای بررسی دقیق‌تر قراردادهای اختیار معامله، اطلاعات تحلیلی مختلفی در اختیار شما قرار دارد.
+معیارهای یونانی، تلاطم ضمنی (IV)، قیمت نظری بلک‌شولز، سود و زیان موقعیت‌ها و نقطه سربه‌سر از جمله اطلاعاتی هستند که به ارزیابی بهتر قراردادها کمک می‌کنند.
+</p>
+<p class="leading-7">ماشین حساب بلک‌شولز نیز امکان محاسبه قیمت نظری، یونانی‌ها و IV را فراهم می‌کند.
+</p>`,
+    icon: LampCharge,
+  },
+  {
+    title: "ساخت استراتژی‌های اختیار معامله",
+    description: `<p class="leading-7">معاملات اختیار معامله تنها به خرید یا فروش یک قرارداد محدود نمی‌شود. با ابزار استراتژی می‌توانید ترکیب‌های مختلف قراردادها را ایجاد و نتیجه احتمالی آن‌ها را بررسی کنید.
+</p>
+<p class="leading-7">استراتژی‌های قابل تعریف شامل:</p>
+<ul class="list-native-circle leading-7">
+<li>Covered Call </li>
+<li>Bearish Put Spread </li>
+<li>	Bullish Call Spread </li>
+<li>	Bear Call Spread </li>
+<li>	Bull Put Spread </li>
+<li>Short Straddle </li>
+<li>	Short Strangle </li>
+<li>	Long Butterfly Call Spread </li>
+<li>	Long Butterfly Put Spread </li>
+<li>Short Butterfly Call Spread </li>
+<li>Short Butterfly Put Spread</li>
+</ul>`,
+    icon: RulerPen,
+  },
+  {
+    title: "مدیریت موقعیت‌های باز اختیار معامله",
+    description: `
+    <p class="leading-7">برای موقعیت‌های اختیار معامله، اطلاعات موردنیاز برای مدیریت سرمایه و بررسی عملکرد نمایش داده می‌شود.مواردی مانند:</p>
+<ul class="list-native-circle leading-7 [&>li]:display-list-item [&>li::before]:hidden"">
+<li>	سود و زیان کل موقعیت‌ها </li>
+<li>ارزش فعلی کل موقعیت‌ها</li>
+<li>وجه مسدودی </li>
+<li>Delta کل </li>
+<li>Vega کل </li>
+<li>IV موقعیت‌ها</li>
+</ul>
+<p class="leading-7">به شما کمک می‌کند وضعیت کلی معاملات اختیار خود را جهت اعمال یا بستن موقعیت، بهتر ارزیابی کنید. </p>`,
+    icon: SecurityTime,
+  },
+  {
+    title: "حساب اوراق و حساب اختیار",
+    description: `<p class="font-bold leading-10">مدیریت جداگانه منابع مالی معاملات</p>
+    <p class="leading-7"> در NeoTrader، حساب اوراق و حساب اختیار معامله از یکدیگر تفکیک شده‌اند تا مدیریت منابع مالی معاملات اختیار با شفافیت بیشتری انجام شود.</p>
+    <p class="leading-7">امکان انتقال وجه بین دو حساب در اختیار شماست؛ بنابراین می‌توانید متناسب با نیاز معاملاتی خود، بخشی از موجودی حساب اوراق را به حساب اختیار منتقل کرده و از آن برای تأمین وجه تضمین موقعیت‌های معاملاتی استفاده کنید.</p>
+    <p class="leading-7">این تفکیک به شما کمک می‌کند منابع اختصاص‌یافته به معاملات اختیار را مستقل از موجودی معاملات اوراق مدیریت کنید و دید دقیق‌تری نسبت به سرمایه درگیر در هر بخش داشته باشید.</p>
+    <p class="font-bold leading-10">مدیریت انعطاف‌پذیر وجه تضمین</p>
+    <p class="leading-7">با انتقال وجه بین حساب‌ها، می‌توانید منابع موردنیاز برای وجه تضمین موقعیت‌های فروش اختیار را مدیریت کنید و در صورت نیاز، موجودی هر حساب را متناسب با فعالیت معاملاتی خود تغییر دهید.</p>`,
+    icon: Layer,
+  },
+];
+
+const faqs = [
+  {
+    title: "اختیار خرید چیست؟",
+    description:
+      "اختیار خرید قراردادی است که به خریدار آن حق می‌دهد، در صورت تمایل، دارایی پایه را با قیمت اعمال مشخص و تا تاریخ سررسید تعیین‌شده خریداری کند. خریدار برای به‌دست‌آوردن این حق، مبلغی به نام پرمیوم پرداخت می‌کند.",
+  },
+  {
+    title: "اختیار فروش چیست؟",
+    description:
+      "اختیار فروش قراردادی است که به خریدار آن حق می‌دهد، در صورت تمایل، دارایی پایه را با قیمت اعمال مشخص و تا تاریخ سررسید تعیین‌شده به فروش برساند. برای این حق نیز خریدار مبلغی به نام پرمیوم پرداخت می‌کند.",
+  },
+  {
+    title: "معاملات اختیار معامله از نظر ریسک و بازده چگونه است؟",
+    description:
+      "ریسک و بازده در معاملات اختیار معامله به نوع موقعیت، قیمت اعمال، قیمت قرارداد، زمان باقی‌مانده تا سررسید و شرایط بازار بستگی دارد. همچنین با استفاده از ترکیب موقعیت‌های مختلف می‌توان ساختارهای متفاوتی از ریسک و بازده ایجاد کرد؛ به همین دلیل بررسی شرایط هر قرارداد و استراتژی پیش از معامله اهمیت دارد.",
+  },
+  {
+    title: "برای فروش اختیار معامله به مجوز جداگانه نیاز دارم؟",
+    description:
+      "برای ایجاد برخی موقعیت‌های فروش اختیار معامله، داشتن مجوز مربوط به فروش فزاینده الزامی است. همچنین در برخی استراتژی‌های اختیار معامله، امکان ایجاد موقعیت فروش بر اساس ساختار استراتژی وجود دارد.",
+  },
+  {
+    title: "آیا می‌توانم نتیجه یک استراتژی اختیار معامله را قبل از ثبت سفارش بررسی کنم؟",
+    description:
+      "بله. پس از ایجاد استراتژی، می‌توانید سود و زیان احتمالی و نقطه سربه‌سر آن را بررسی کنید و سپس نسبت به اجرای سفارش‌های مربوط به استراتژی تصمیم بگیرید.",
+  },
+];
 ---
 
-<Layout title="Options">
-  <main></main>
+<Layout title="اختیار معامله">
+  <main>
+    <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
+      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+        <span class="text-display-small text-white text-center lg:text-start">معاملات اختیار معامله</span>
+        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+          NeoTrader امکانات موردنیاز معاملات اختیار معامله را از بررسی قراردادها و تحلیل شرایط بازار تا ساخت
+          استراتژی‌های معاملاتی در اختیار معامله‌گران قرار می‌دهد.
+        </p>
+        <div class="flex gap-4">
+          <a href={siteUrl("/brokerage/neo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
+            ورود به نئوتریدر <ArrowLeft aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </SectionLayer2>
+
+    <!-- Content Section -->
+
+    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
+      <BreadCrumb items={breadCrumbItems} />
+      <div>
+        <h2 class="text-heading-medium leading-10">معاملات اختیار معامله چیست؟</h2>
+
+        <p class="text-body-large leading-8">
+          اختیار معامله قراردادی است که به خریدار حق خرید یا فروش یک دارایی پایه را با قیمت مشخص و تا زمان معینی می‌دهد.
+          قراردادهای اختیار معامله با قیمت‌های اعمال و سررسیدهای مختلف در بازار معامله می‌شوند و هر قرارداد، شرایط و
+          ویژگی‌های خاص خود را دارد.
+        </p>
+        <p class="text-body-large leading-8">
+          بررسی این قراردادها به اطلاعاتی مانند قیمت اعمال، سررسید، قیمت قرارداد، تلاطم ضمنی و سایر معیارهای تحلیلی نیاز
+          دارد؛ به همین دلیل، دسترسی به اطلاعات دقیق قرارداد و ابزارهای مناسب تحلیل، بخش مهمی از معاملات اختیار معامله
+          است.
+        </p>
+      </div>
+
+      <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
+
+      <!-- Features Section -->
+      <section class="features mb-5">
+        <h2 class="text-heading-medium pb-5 leading-10">ویژگی‌های اصلی</h2>
+        <div class="mx-auto flex max-w-7xl flex-col gap-2">
+          <div class="flex flex-col">
+            {features.map((feature) => (
+              <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Benefits Section -->
+
+      <article class="flex flex-col gap-3">
+        <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
+        <p class="text-body-medium text-secondary leading-7">
+          در معاملات اختیار معامله، تنها مشاهده قیمت قرارداد برای تصمیم‌گیری کافی نیست و عوامل مختلفی مانند زمان
+          باقی‌مانده تا سررسید، نوسان ضمنی و پارامترهای تحلیلی اهمیت دارند.
+        </p>
+        <p class="text-body-medium text-secondary leading-8">
+          NeoTrader با ارائه اطلاعات کامل قراردادها، ابزارهای تحلیل اختیار و امکانات ساخت استراتژی، به معامله‌گران کمک
+          می‌کند فرصت‌های معاملاتی را بهتر بررسی کنند و تصمیم‌های خود را بر اساس داده‌های بیشتری انجام دهند.
+        </p>
+        <p class="text-body-medium text-secondary leading-8">
+          سادگی استفاده از زنجیره قرارداد، دسترسی سریع به اطلاعات تحلیلی و فرآیندهای ساده‌تر برای مدیریت قراردادها،
+          تجربه معامله اختیار معامله را برای کاربران حرفه‌ای بهبود می‌دهد.
+        </p>
+      </article>
+
+      <Banner>
+        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">
+          همه ابزارهای مورد نیاز معامله گران اختیار، در یک محیط واحد
+        </h6>
+      </Banner>
+
+      <article class="flex flex-col">
+        <h2 class="text-heading-medium leading-10">نحوه استفاده و کاربرد</h2>
+        <p class="text-body-medium text-secondary leading-7">
+          معامله‌گران اختیار معامله می‌توانند قراردادهای مختلف را در زنجیره قرارداد بررسی کنند، شرایط آن‌ها را با
+          استفاده از اطلاعات تحلیلی موجود مقایسه کنند و متناسب با دیدگاه معاملاتی خود، قرارداد یا استراتژی موردنظر را
+          انتخاب کنند.
+        </p>
+        <p class="text-body-medium text-secondary leading-8">
+          برای معامله‌گران حرفه‌ای، امکان بررسی هم‌زمان چند پارامتر مانند قیمت قرارداد، سررسید، IV، یونانی‌ها و موقعیت
+          باز، دید کامل‌تری نسبت به شرایط بازار اختیار ایجاد می‌کند.
+        </p>
+        <p class="text-body-medium text-secondary leading-8">
+          همچنین امکان بررسی موقعیت‌های معاملاتی موجود، محاسبه معیارهای کلیدی و مدیریت بهتر قراردادهای اختیار فراهم شده
+          است.
+        </p>
+      </article>
+
+      <Image src={SectionBanner2Img} alt="" class="w-full h-auto" loading="lazy" />
+
+      <Faq faqs={faqs} />
+
+      <!-- Footer CTA -->
+      <div
+        class="flex flex-col p-6 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
+      >
+        <div class="text-white flex flex-col gap-2 lg:w-94">
+          <h1 class="text-heading-medium leading-10">معاملات اختیار معامله را حرفه‌ای‌تر تجربه کنید</h1>
+          <p class="text-body-large leading-8">
+            قراردادها را بررسی کنید، استراتژی‌های معاملاتی خود را بسازید و با ابزارهای تحلیلی حرفه‌ای تصمیم‌های دقیق‌تری
+            بگیرید.
+          </p>
+        </div>
+        <a
+          href={siteUrl("/brokerage/neo-trader")}
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+        >
+          ورود به نئوتریدر
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<style is:global>
+  ul.list-native-circle {
+    list-style-type: disc !important;
+    padding-inline-start: 1.25rem;
+
+    li {
+      display: list-item;
+
+      &::before {
+        display: none !important;
+        content: none !important;
+      }
+    }
+  }
+</style>

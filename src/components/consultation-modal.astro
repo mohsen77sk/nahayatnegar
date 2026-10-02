@@ -1,0 +1,82 @@
+<dialog
+  id="consultation-modal"
+  dir="rtl"
+  aria-labelledby="consultation-modal-title"
+  aria-describedby="consultation-modal-description"
+>
+  <div class="mb-4 flex items-center justify-between gap-4">
+    <h2 id="consultation-modal-title" class="text-title-large">درخواست مشاوره</h2>
+    <button
+      id="consultation-modal__close"
+      class="neo-button neo-icon-button neo-button-neutral"
+      type="button"
+      aria-label="بستن پنجره"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor">
+        <path d="m6 6 12 12M18 6 6 18"></path>
+      </svg>
+    </button>
+  </div>
+
+  <p id="consultation-modal-description" class="my-3 text-body-small leading-6">
+    برای دریافت مشاوره اختصاصی کافی است اطلاعات تماس خود را ثبت کنید. مشاوران ما در کوتاه‌ترین زمان ممکن با شما تماس
+    می‌گیرند.
+  </p>
+
+  <form class="grid grid-cols-1 gap-4 pt-3 lg:grid-cols-2">
+    <div class="flex flex-col gap-1">
+      <span class="text-body-small text-secondary">نام و نام‌خانوادگی</span>
+      <input class="neo-input-medium" type="text" name="name" placeholder="محل نوشتار" required />
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-body-small text-secondary">شماره تماس</span>
+      <input class="neo-input-medium" type="tel" name="phone" placeholder="۰۹۱********" required />
+    </div>
+
+    <div class="flex flex-col gap-1 lg:col-span-2">
+      <span class="text-body-small text-secondary">موضوع مشاوره (اختیاری)</span>
+      <textarea class="neo-input-medium" name="message" rows="4" placeholder="موضوع مشاوره را بنویسید (اختیاری)">
+      </textarea>
+    </div>
+
+    <div class="flex justify-end lg:col-span-2">
+      <button class="neo-button neo-button-medium neo-button-fill-primary mt-4 min-w-24" type="button"> ارسال </button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+  const modal = document.querySelector<HTMLDialogElement>("#consultation-modal");
+
+  if (modal) {
+    document.querySelectorAll<HTMLElement>("[data-consultation-modal-trigger]").forEach((trigger) => {
+      trigger.addEventListener("click", () => modal.showModal());
+    });
+
+    modal.querySelector("#consultation-modal__close")?.addEventListener("click", () => modal.close());
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) modal.close();
+    });
+  }
+</script>
+
+<style>
+  dialog {
+    width: min(500px, calc(100% - 32px));
+    max-width: none;
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    padding: 12px;
+    overflow-y: auto;
+    border: 0;
+    border-radius: var(--radius-2xl);
+    background: var(--background-color-fg-primary);
+    box-shadow: var(--shadow-tertiary);
+  }
+
+  dialog::backdrop {
+    background: rgb(0 0 0 / 58%);
+    backdrop-filter: blur(2px);
+  }
+</style>

@@ -1,12 +1,31 @@
 ---
 import { siteUrl } from "@utils/url";
+import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
+import BannerCard from "@components/bannerCard.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import TimeLine from "@components/time-line.astro";
+import Faq from "@components/faq.astro";
+
+import SectionBanner1Img from "@assets/images/Asset Management/2-Pirooz/pirooz-pic1.png";
+import SectionBanner2Img from "@assets/images/Asset Management/2-Pirooz/pirooz-pic2.png";
+import SectionBanner3Img from "@assets/images/Asset Management/2-Pirooz/Banner.png";
+import SectionBanner3ImgMob from "@assets/images/Asset Management/2-Pirooz/Banner-mob.png";
 
 import Section1Img from "@assets/images/Asset Management/2-Pirooz/pirooz-hero.png";
 import Section1ImgMob from "@assets/images/Asset Management/2-Pirooz/pirooz-hero-mob.png";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import ShoppingCartIcon from "@assets/icons/iconsax/outline/shopping-cart.svg";
+import ProfileIcon from "@assets/icons/iconsax/outline/profile-2user.svg";
+import ClockIcon from "@assets/icons/iconsax/outline/clock.svg";
+import ChartIcon from "@assets/icons/iconsax/outline/chart-2.svg";
+import WalletIcon from "@assets/icons/iconsax/outline/wallet-add.svg";
+import DocumentIcon from "@assets/icons/iconsax/outline/document-text-1.svg";
+import LinkIcon from "@assets/icons/iconsax/outline/link.svg";
+import ArchiveIcon from "@assets/icons/iconsax/outline/archive.svg";
+import SearchIcon from "@assets/icons/iconsax/outline/search-normal.svg";
 
 const BreadCrumbItem = [
   {
@@ -16,6 +35,117 @@ const BreadCrumbItem = [
   {
     label: "صندوق پیروز",
     href: "/portfolio-management/pirooz",
+  },
+];
+
+const features = [
+  {
+    icon: ShoppingCartIcon,
+    title: "خرید و فروش آسان",
+    description: "امکان خرید و فروش واحدهای صندوق در ساعات معاملات بورس، همانند سهام.",
+  },
+  {
+    icon: ClockIcon,
+    title: "کنترل زمان سرمایه‌گذاری",
+    description: "تصمیم‌گیری درباره زمان ورود یا خروج از سرمایه‌گذاری، متناسب با شرایط بازار.",
+  },
+  {
+    icon: ProfileIcon,
+    title: "مدیریت حرفه‌ای",
+    description: "انتخاب و مدیریت سبد سهام توسط مدیر صندوق و تیم تحلیل بازار سرمایه.",
+  },
+  {
+    icon: ChartIcon,
+    title: "سبدی متنوع از سهام",
+    description: "سرمایه‌گذاری در مجموعه‌ای از صنایع و شرکت‌های مختلف برای کاهش ریسک غیرسیستماتیک",
+  },
+  {
+    icon: WalletIcon,
+    title: "نقدشوندگی مناسب",
+    description: "امکان معامله واحدهای صندوق در بازار سرمایه طی ساعات معاملات.",
+  },
+  {
+    icon: DocumentIcon,
+    title: "شفافیت اطلاعات",
+    description: "دسترسی به NAV، ترکیب دارایی‌ها و گزارش‌های عملکرد صندوق.",
+  },
+];
+
+const different = [
+  {
+    fund: "خرید یک صندوق با سبدی متنوع",
+    comparison: "روش سرمایه‌گذاری",
+    physical: "خرید و مدیریت چندین سهم",
+  },
+  {
+    fund: "پرتفوی آماده و مدیریت‌شده",
+    comparison: "مدیریت پرتفو",
+    physical: "نیاز به تشکیل پرتفوی",
+  },
+  {
+    fund: "مدیریت حرفه‌ای دارایی‌ها",
+    comparison: "مدیریت",
+    physical: "تحلیل تک‌تک شرکت‌ها",
+  },
+  {
+    fund: "تنوع‌بخشی در سبد سرمایه‌گذاری",
+    comparison: "انعطاف",
+    physical: "ریسک تمرکز روی چند سهم",
+  },
+  {
+    fund: "معامله تنها یک نماد در بورس",
+    comparison: "سرمایه‌گذاری",
+    physical: "خرید و فروش سهام مختلف",
+  },
+];
+
+const timeline = {
+  title: "سرمایه‌گذاری در صندوق پیروز در سه گام",
+  steps: [
+    {
+      title: "ثبت‌نام در کارگزاری",
+      description: "افتتاح حساب و دریافت کد بورسی",
+      icon: LinkIcon,
+    },
+    {
+      title: "ورود به سامانه معاملاتی",
+      description: "جستجوی نماد پیروز در سامانه معاملاتی نهایت‌نگر.",
+      icon: SearchIcon,
+    },
+    {
+      title: "خرید واحدهای صندوق",
+      description: "ثبت سفارش خرید و آغاز سرمایه‌گذاری در صندوق پیروز.",
+      icon: ArchiveIcon,
+    },
+  ],
+};
+
+const faqs = [
+  {
+    title: "حداقل مبلغ سرمایه‌گذاری چقدر است؟",
+    description: "مطابق مقررات معاملات صندوق‌های قابل معامله در بورس",
+  },
+  {
+    title: "آیا می‌توانم هر زمان واحدهای صندوق را معامله کنم؟",
+    description: "بله، در ساعات معاملات بورس امکان خرید و فروش واحدهای صندوق وجود دارد.",
+  },
+  {
+    title: "آیا صندوق پیروز سود تضمین‌شده دارد؟",
+    description: "خیر. بازده صندوق به عملکرد بازار سهام و دارایی‌های صندوق وابسته است.",
+  },
+  {
+    title: "NAV چه کاربردی دارد؟",
+    description: "NAV ارزش خالص دارایی‌های صندوق را نشان می‌دهد و یکی از معیارهای ارزیابی قیمت واحدهای صندوق است.",
+  },
+  {
+    title: "آیا صندوق پیروز برای سرمایه‌گذاری کوتاه‌مدت مناسب است؟",
+    description:
+      "به دلیل قابلیت معامله در بورس، سرمایه‌گذاران می‌توانند متناسب با استراتژی خود درباره زمان نگهداری واحدها تصمیم بگیرند؛ با این حال، میزان ریسک و بازده تابع شرایط بازار است.",
+  },
+  {
+    title: "اطلاعات صندوق را از کجا مشاهده کنم؟",
+    description:
+      "گزارش‌های عملکرد، NAV و ترکیب دارایی‌های صندوق از طریق وب‌سایت صندوق و سامانه‌های رسمی بازار سرمایه منتشر می‌شود.",
   },
 ];
 ---
@@ -42,8 +172,118 @@ const BreadCrumbItem = [
       </div>
     </SectionLayer2>
 
-    <section class="mx-auto flex max-w-200 flex-col gap-6">
+    <section class="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
       <BreadCrumb items={BreadCrumbItem} />
+
+      <div>
+        <h2 class="text-heading-medium leading-10">چرا صندوق پیروز؟</h2>
+        <div class="text-body-medium leading-7 text-secondary">سادگی معامله، قدرت یک صندوق</div>
+      </div>
+
+      <p class="text-body-large leading-8">
+        صندوق پیروز برای سرمایه‌گذارانی طراحی شده است که می‌خواهند علاوه بر بهره‌مندی از مدیریت حرفه‌ای، زمان ورود و
+        خروج از سرمایه‌گذاری را نیز خودشان تعیین کنند.
+      </p>
+
+      <FeaturesGrid features={features} rowPattern={[3, 3]} />
+
+      <div class="rounded-xl bg-fg-primary p-2 shadow-primary">
+        <Image src={SectionBanner1Img} alt="صندوق پیروز" class="h-auto w-full rounded-xl" loading="lazy" />
+      </div>
+
+      <h2 class="text-heading-medium leading-10">صندوق پیروز چگونه سرمایه‌گذاری می‌کند؟</h2>
+
+      <p class="text-body-large leading-8">
+        صندوق سرمایه‌گذاری قابل معامله در سهام پیروز، بخش عمده دارایی‌های خود را در سهام شرکت‌های پذیرفته‌شده در بورس و
+        فرابورس سرمایه‌گذاری می‌کند. ترکیب دارایی‌های صندوق به صورت مستمر توسط مدیر صندوق و تیم تحلیل مورد بازبینی قرار
+        می‌گیرد تا سرمایه‌گذاران بدون نیاز به مدیریت مستقیم سرمایه، از فرصت‌های بازار سهام بهره‌مند شوند.
+      </p>
+
+      <h2 class="text-heading-medium leading-10">مقایسه خرید مستقیم سهام با صندوق پیروز</h2>
+
+      <div class="rounded-xl bg-fg-primary p-2">
+        <table class="w-full table-fixed text-center text-body-medium">
+          <colgroup>
+            <col class="w-[40%]" />
+            <col class="w-[20%]" />
+            <col class="w-[40%]" />
+          </colgroup>
+          <thead class="bg-blue-900 text-white">
+            <tr>
+              <th scope="col" class="h-11 rounded-r-lg px-4 py-2 text-start">صندوق ناب</th>
+              <th scope="col" class="h-11 px-4 py-2">مقایسه</th>
+              <th scope="col" class="h-11 rounded-l-lg px-4 py-2 text-end">خرید طلای فیزیکی</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              different.map((item, index) => (
+                <tr class:list={[{ "border-b": index < different.length - 1 }]}>
+                  <td class="p-4 text-start">{item.fund}</td>
+                  <th scope="row" class="py-4 font-medium">
+                    <span class="inline-block rounded-md bg-blue-100 px-2 py-1 text-brand lg:px-3">
+                      {item.comparison}
+                    </span>
+                  </th>
+                  <td class="p-4 text-end">{item.physical}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-heading-medium leading-10">چرا صندوق ETF؟</h2>
+
+      <p class="text-body-large leading-8">
+        صندوق‌های قابل معامله (ETF) امکان سرمایه‌گذاری در یک سبد متنوع از دارایی‌ها را فراهم می‌کنند، در حالی که خرید و
+        فروش آن‌ها همانند سهام و در ساعات معاملات بورس انجام می‌شود. این ویژگی، سرمایه‌گذاری را ساده‌تر و منعطف‌تر
+        می‌کند.
+      </p>
+
+      <h2 class="text-heading-medium leading-10">نمودار بازدهی صندوق پیروز</h2>
+
+      <div class="rounded-xl bg-fg-primary p-2"></div>
+
+      <h2 class="text-heading-medium leading-10">صندوق پیروز مناسب چه کسانی است؟</h2>
+
+      <ul class="space-y-4 text-body-large leading-8">
+        <li>سرمایه‌گذارانی که می‌خواهند زمان خرید و فروش را خودشان مدیریت کنند.</li>
+        <li>افرادی که به دنبال سرمایه‌گذاری در بازار سهام از طریق یک صندوق هستند.</li>
+        <li>سرمایه‌گذارانی که نقدشوندگی برای آن‌ها اهمیت دارد.</li>
+        <li>افرادی که به دنبال تنوع‌بخشی به سبد سرمایه‌گذاری خود هستند.</li>
+        <li>کسانی که می‌خواهند از مدیریت حرفه‌ای صندوق نیز بهره‌مند شوند.</li>
+      </ul>
+
+      <div class="rounded-xl bg-fg-primary p-2 shadow-primary">
+        <Image src={SectionBanner2Img} alt="صندوق پیروز" class="h-auto w-full rounded-xl" loading="lazy" />
+      </div>
+
+      <TimeLine steps={timeline.steps} title={timeline.title} />
+
+      <Faq faqs={faqs} />
+
+      <div class="flex">
+        <a class="neo-button neo-button-primary" href="./">
+          <span>وبسایت صندوق</span>
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </div>
+
+      <!-- Footer CTA -->
+      <BannerCard desktopImage={SectionBanner3Img} mobileImage={SectionBanner3ImgMob}>
+        <div class="flex flex-col gap-4 text-white lg:w-1/2">
+          <h1 class="text-heading-medium leading-10">فرصت‌های بازار را در اختیار بگیرید.</h1>
+          <p class="text-body-large leading-8 text-neutral-500">
+            با صندوق سرمایه‌گذاری ETF پیروز، از مدیریت حرفه‌ای یک صندوق سهامی بهره‌مند شوید و هم‌زمان، انعطاف خرید و
+            فروش واحدهای صندوق را همانند سهام در اختیار داشته باشید.
+          </p>
+        </div>
+        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+          خرید صندوق
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </BannerCard>
     </section>
   </main>
 </Layout>

@@ -9,6 +9,7 @@ import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import Banner from "@components/banner.astro";
+import BannerCard from "@components/bannerCard.astro";
 import Faq from "@components/faq.astro";
 import TimeLine from "@components/time-line.astro";
 
@@ -133,17 +134,21 @@ const timeline = {
             افتتاح حساب
             <ArrowLeft aria-hidden="true" />
           </a>
-          <a class="neo-button neo-button-outline-primary neo-button-large" href={siteUrl("/")}>
+          <button
+            class="neo-button neo-button-outline-primary neo-button-large"
+            type="button"
+            data-consultation-modal-trigger
+          >
             دریافت مشاوره
             <ArrowLeft aria-hidden="true" />
-          </a>
+          </button>
         </div>
       </div>
     </SectionLayer2>
 
     <!-- Content Section -->
 
-    <section class="mx-auto flex max-w-200 flex-col gap-6 p-4">
+    <section class="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
       <BreadCrumb items={BreadCrumbItem} />
       <div>
         <h2 class="text-heading-medium leading-10">اعتبار معاملاتی نهایت‌نگر</h2>
@@ -198,21 +203,22 @@ const timeline = {
       <Faq faqs={faqs} />
 
       <!-- Footer CTA -->
-      <div
-        class="flex h-72 flex-col justify-between gap-8 rounded-xl bg-fg-primary bg-(image:--bg-mobile) bg-cover bg-center p-8 lg:bg-(image:--bg-desktop)"
-        style={`--bg-mobile: url('${SectionBanner2ImgMob.src}'); --bg-desktop: url('${SectionBanner2Img.src}');`}
-      >
-        <div class="flex flex-col gap-4 text-white lg:w-94">
+      <BannerCard desktopImage={SectionBanner2Img} mobileImage={SectionBanner2ImgMob}>
+        <div class="flex flex-col gap-4 text-white lg:w-1/2">
           <h1 class="text-heading-medium leading-10">اعتبار معاملاتی</h1>
           <p class="text-body-large leading-8">
             اگر مایل به استفاده از اعتبار هستید کافی است فعالیت معاملاتی خود را در کارگزاری شروع کنید .
           </p>
         </div>
-        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+        <button
+          type="button"
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+          data-consultation-modal-trigger
+        >
           درخواست مشاوره
           <ArrowLeft aria-hidden="true" />
-        </a>
-      </div>
+        </button>
+      </BannerCard>
     </section>
   </main>
 </Layout>

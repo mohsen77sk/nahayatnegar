@@ -2,7 +2,9 @@
 import { siteUrl } from "@utils/url";
 import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
+import BannerCard from "@components/bannerCard.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import TimeLine from "@components/time-line.astro";
 import Faq from "@components/faq.astro";
@@ -11,9 +13,15 @@ import Section1Img from "@assets/images/Asset Management/1-Naab/naab-hero.png";
 import Section1ImgMob from "@assets/images/Asset Management/1-Naab/naab-hero-mob.png";
 import SectionBanner1Img from "@assets/images/Asset Management/1-Naab/naab-pic1.png";
 import SectionBanner2Img from "@assets/images/Asset Management/1-Naab/naab-pic2.png";
-import SectionBanner3Img from "@assets/images/Asset Management/1-Naab/banner.png";
-import SectionBanner3ImgMob from "@assets/images/Asset Management/1-Naab/banner-mob.png";
+import SectionBanner3Img from "@assets/images/Asset Management/1-Naab/Banner.png";
+import SectionBanner3ImgMob from "@assets/images/Asset Management/1-Naab/Banner-mob.png";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import DiagramIcon from "@assets/icons/iconsax/outline/diagram.svg";
+import SecurityIcon from "@assets/icons/iconsax/outline/security.svg";
+import ShoppingCartIcon from "@assets/icons/iconsax/outline/shopping-cart.svg";
+import WalletIcon from "@assets/icons/iconsax/outline/wallet-1.svg";
+import ProfileIcon from "@assets/icons/iconsax/outline/profile-2user.svg";
+import DocumentIcon from "@assets/icons/iconsax/outline/document-text-1.svg";
 import LinkIcon from "@assets/icons/iconsax/outline/link.svg";
 import ArchiveIcon from "@assets/icons/iconsax/outline/archive.svg";
 import SearchIcon from "@assets/icons/iconsax/outline/search-normal.svg";
@@ -26,6 +34,67 @@ const BreadCrumbItem = [
   {
     label: "صندوق ناب",
     href: "/portfolio-management/nab",
+  },
+];
+
+const features = [
+  {
+    icon: DiagramIcon,
+    title: "حفظ ارزش سرمایه",
+    description: "بهره‌مندی از ظرفیت بازار طلا برای حفظ ارزش دارایی در برابر تورم و کاهش قدرت خرید.",
+  },
+  {
+    icon: SecurityIcon,
+    title: "بدون دغدغه نگهداری طلا",
+    description: "بدون نگرانی از سرقت، مفقودی، هزینه نگهداری یا تشخیص اصالت طلای فیزیکی.",
+  },
+  {
+    icon: ShoppingCartIcon,
+    title: "سرمایه‌گذاری آسان",
+    description: "خرید و فروش واحدهای صندوق همانند سایر صندوق‌های قابل معامله (ETF) از طریق سامانه معاملاتی.",
+  },
+  {
+    icon: WalletIcon,
+    title: "نقدشوندگی مناسب",
+    description: "امکان خرید و فروش واحدهای صندوق در روزهای معاملاتی بورس.",
+  },
+  {
+    icon: ProfileIcon,
+    title: "مدیریت حرفه‌ای",
+    description: "مدیریت دارایی‌های صندوق توسط تیم متخصص و در چارچوب مقررات بازار سرمایه.",
+  },
+  {
+    icon: DocumentIcon,
+    title: "شفافیت اطلاعات",
+    description: "انتشار مستمر ارزش خالص دارایی‌ها (NAV)، ترکیب دارایی‌ها و گزارش‌های صندوق.",
+  },
+];
+
+const different = [
+  {
+    fund: "بدون نیاز به نگهداری طلا",
+    comparison: "امنیت",
+    physical: "نیاز به نگهداری و حفاظت",
+  },
+  {
+    fund: "دارایی‌های تحت نظارت بازار سرمایه",
+    comparison: "اصالت",
+    physical: "نگرانی از اصالت",
+  },
+  {
+    fund: "بدون دغدغه اجرت ساخت و نگهداری",
+    comparison: "هزینه",
+    physical: "احتمال هزینه‌های جانبی",
+  },
+  {
+    fund: "معامله آنلاین از طریق بورس",
+    comparison: "خرید و فروش",
+    physical: "خرید و فروش سنتی",
+  },
+  {
+    fund: "خرید و فروش آسان در بورس",
+    comparison: "نقدشوندگی",
+    physical: "نقدشوندگی وابسته به بازار فیزیکی",
   },
 ];
 
@@ -61,7 +130,8 @@ const faqs = [
   },
   {
     title: "تفاوت صندوق ناب با خرید طلای فیزیکی چیست؟",
-    description: "در صندوق ناب نیازی به خرید، حمل و نگهداری طلای فیزیکی ندارید و سرمایه‌گذاری شما از طریق بازار سرمایه و با شفافیت بیشتر انجام می‌شود.",
+    description:
+      "در صندوق ناب نیازی به خرید، حمل و نگهداری طلای فیزیکی ندارید و سرمایه‌گذاری شما از طریق بازار سرمایه و با شفافیت بیشتر انجام می‌شود.",
   },
   {
     title: "NAV صندوق چیست؟",
@@ -73,7 +143,8 @@ const faqs = [
   },
   {
     title: "سرمایه صندوق در چه دارایی‌هایی سرمایه‌گذاری می‌شود؟",
-    description: "بخش عمده دارایی‌های صندوق در گواهی سپرده کالایی طلا و سایر دارایی‌های مجاز مندرج در امیدنامه صندوق سرمایه‌گذاری می‌شود.",
+    description:
+      "بخش عمده دارایی‌های صندوق در گواهی سپرده کالایی طلا و سایر دارایی‌های مجاز مندرج در امیدنامه صندوق سرمایه‌گذاری می‌شود.",
   },
 ];
 ---
@@ -100,7 +171,7 @@ const faqs = [
       </div>
     </SectionLayer2>
 
-    <section class="mx-auto flex max-w-200 flex-col gap-6">
+    <section class="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
       <BreadCrumb items={BreadCrumbItem} />
 
       <div>
@@ -113,10 +184,10 @@ const faqs = [
         امکان را فراهم می‌کند تا بدون پیچیدگی‌های خرید طلای فیزیکی، از مزایای سرمایه‌گذاری در این بازار بهره‌مند شوید.
       </p>
 
-      <div></div>
+      <FeaturesGrid features={features} rowPattern={[3, 3]} />
 
       <div class="rounded-xl bg-fg-primary p-2 shadow-primary">
-        <Image src={SectionBanner1Img} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
+        <Image src={SectionBanner1Img} alt="صندوق ناب" class="h-auto w-full rounded-xl" loading="lazy" />
       </div>
 
       <h2 class="text-heading-medium leading-10">صندوق ناب چگونه کار می‌کند؟</h2>
@@ -129,7 +200,37 @@ const faqs = [
 
       <h2 class="text-heading-medium leading-10">مقایسه خرید فیزیکی طلا با خرید صندوق ناب</h2>
 
-      <div class="rounded-xl bg-fg-primary p-2"></div>
+      <div class="overflow-hidden rounded-xl bg-fg-primary p-2">
+        <table class="w-full table-fixed text-center text-body-medium">
+          <colgroup>
+            <col class="w-[40%]" />
+            <col class="w-[20%]" />
+            <col class="w-[40%]" />
+          </colgroup>
+          <thead class="bg-blue-900 text-white">
+            <tr>
+              <th scope="col" class="h-11 rounded-r-lg px-4 py-2 text-start">صندوق ناب</th>
+              <th scope="col" class="h-11 px-4 py-2">مقایسه</th>
+              <th scope="col" class="h-11 rounded-l-lg px-4 py-2 text-end">خرید طلای فیزیکی</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              different.map((item, index) => (
+                <tr class:list={[{ "border-b": index < different.length - 1 }]}>
+                  <td class="p-4 text-start">{item.fund}</td>
+                  <th scope="row" class="py-4 font-medium">
+                    <span class="inline-block rounded-md bg-blue-100 px-2 py-1 text-brand lg:px-3">
+                      {item.comparison}
+                    </span>
+                  </th>
+                  <td class="p-4 text-end">{item.physical}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
 
       <h2 class="text-heading-medium leading-10">چرا سرمایه‌گذاری در صندوق طلا؟</h2>
 
@@ -154,13 +255,34 @@ const faqs = [
       </ul>
 
       <div class="rounded-xl bg-fg-primary p-2 shadow-primary">
-        <Image src={SectionBanner2Img} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
+        <Image src={SectionBanner2Img} alt="صندوق ناب" class="h-auto w-full rounded-xl" loading="lazy" />
       </div>
 
       <TimeLine steps={timeline.steps} title={timeline.title} />
 
       <Faq faqs={faqs} />
 
+      <div class="flex">
+        <a class="neo-button neo-button-primary" href="./">
+          <span>وبسایت صندوق</span>
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </div>
+
+      <!-- Footer CTA -->
+      <BannerCard desktopImage={SectionBanner3Img} mobileImage={SectionBanner3ImgMob}>
+        <div class="flex flex-col gap-4 text-white lg:w-2/3">
+          <h1 class="text-heading-medium leading-10">سرمایه‌گذاری در طلا، آسان‌تر از همیشه</h1>
+          <p class="text-body-large leading-8 text-neutral-500">
+            اگر به دنبال راهکاری مطمئن، شفاف و آسان برای حفظ ارزش سرمایه خود در برابر تورم هستید، صندوق سرمایه‌گذاری در
+            گواهی سپرده کالایی طلا ناب می‌تواند انتخابی مناسب برای شما باشد.
+          </p>
+        </div>
+        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+          خرید صندوق
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </BannerCard>
     </section>
   </main>
 </Layout>

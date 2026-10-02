@@ -58,7 +58,7 @@ const menus = [
         icon: Cards,
       },
       {
-        title: "شعب و دفاتر پیشخوان",
+        title: "شعب و نمایندگی‌ها",
         subTitle: "آدرس و اطلاعات شعب",
         link: "/branches",
         icon: Location,
@@ -106,7 +106,7 @@ const mobileMenu = [
   {
     title: "شعب و دفاتر پیشخوان",
     icon: Location,
-    link: "",
+    link: "branches",
   },
 ];
 ---
@@ -255,7 +255,7 @@ const mobileMenu = [
         mobileMenu.map((menu) => {
           const Icon = menu.icon;
           return (
-            <li>
+            <li class="before:hidden">
               <a class="flex items-center gap-3 rounded-xl px-5 py-3 transition-colors" href={siteUrl(menu.link)}>
                 {Icon && <Icon class="shrink-0 text-brand" />}
                 <span class="text-title-medium">{menu.title}</span>
