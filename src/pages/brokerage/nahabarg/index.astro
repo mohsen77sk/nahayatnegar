@@ -1,7 +1,205 @@
 ---
+import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+import { Image } from "astro:assets";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import Banner from "@components/banner.astro";
+import TimeLine from "@components/time-line.astro";
+import BannerCard from "@components/bannerCard.astro";
+import Faq from "@components/faq.astro";
+
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import Section1Img from "@assets/images/Brokerage/6-Nahabarg/nahabarg-hero.png";
+import Section1ImgMob from "@assets/images/Brokerage/6-Nahabarg/nahabarg-hero-mob.png";
+import MockupImageMob from "@assets/images/Brokerage/6-Nahabarg/Mockups/mob.png";
+import MockupImageWeb from "@assets/images/Brokerage/6-Nahabarg/Mockups/web.png";
+import BannerWeb from "@assets/images/Brokerage/6-Nahabarg/Banner.png";
+import BannerMob from "@assets/images/Brokerage/6-Nahabarg/Banner-mob.png";
+
+import Coin from "@assets/icons/iconsax/outline/coin-1.svg";
+import DiscountCircle from "@assets/icons/iconsax/outline/discount-circle.svg";
+import ArrowCircleDown from "@assets/icons/iconsax/outline/arrow-circle-down-2.svg";
+import WalletAdd from "@assets/icons/iconsax/outline/wallet-add-1.svg";
+import Candle from "@assets/icons/iconsax/outline/candle.svg";
+
+const BreadCrumbItem = [
+  {
+    label: "کارگزاری",
+    href: "/brokerage",
+  },
+  {
+    label: "نهابرگ نهایت‌نگر",
+  },
+];
+
+const features = [
+  {
+    title: "تخفیف کارمزد ذخیره‌شده",
+    description:
+      "تخفیف کارمزد معاملات شما در حساب اختصاصی «نهابرگ» ذخیره می‌شود تا هر زمان بخواهید از آن استفاده کنید.",
+    icon: DiscountCircle,
+  },
+  {
+    title: "تبدیل به وجه نقد",
+    description: "موجودی نهابرگ را هر زمان بخواهید به حساب معاملاتی منتقل کرده و برای معامله یا برداشت استفاده کنید.",
+    icon: Coin,
+  },
+  {
+    title: "کاهش هزینه اعتبار معاملاتی",
+    description: "از موجودی نهابرگ برای پرداخت بخشی از هزینه اعتبار معاملاتی و کاهش هزینه تأمین اعتبار استفاده کنید.",
+    icon: ArrowCircleDown,
+  },
+  {
+    title: "افزایش موجودی با هر معامله",
+    description: "با هر معامله، بخشی از کارمزد پرداختی به موجودی نهابرگ شما اضافه می‌شود.",
+    icon: WalletAdd,
+  },
+];
+
+const timeline = {
+  title: "نهابرگ در سه گام",
+  steps: [
+    {
+      title: "معامله انجام می‌دهید",
+      description:
+        "با افتتاح حساب و شروع معاملات در کارگزاری نهایت‌نگر، از همان نخستین معامله، تخفیف کارمزد شما در حساب نهابرگ ثبت می‌شود تا بتوانید در آینده از آن بهره‌مند شوید.",
+      icon: Candle,
+    },
+    {
+      title: "تخفیف کارمزد در نهابرگ ثبت می‌شود",
+      description: "سامانه نهابرگ، تخفیف کارمزد قابل تعلق را محاسبه و در حساب اختصاصی شما ثبت می‌کند.",
+      icon: DiscountCircle,
+    },
+    {
+      title: "موجودی نهابرگ شما افزایش می‌یابد",
+      description: "موجودی نهابرگ به‌صورت مستمر تجمیع می‌شود تا هر زمان که بخواهید، از آن استفاده کنید.",
+      icon: WalletAdd,
+    },
+  ],
+};
+
+const faqs = [
+  {
+    title: "آیا نهابرگ تاریخ انقضا دارد؟",
+    description:
+      "خیر. موجودی نهابرگ در حساب شما باقی می‌ماند تا هر زمان که بخواهید، مطابق شرایط سرویس از آن استفاده کنید.",
+  },
+  {
+    title: "از موجودی نهابرگ چگونه می‌توان استفاده کرد؟",
+    description:
+      "موجودی نهابرگ را می‌توانید به حساب معاملاتی خود منتقل کنید یا برای کاهش هزینه اعتبار معاملاتی به کار ببرید.",
+  },
+  {
+    title: "آیا نهابرگ قابل برداشت است؟",
+    description:
+      "بله. با انتقال موجودی نهابرگ به حساب معاملاتی، امکان استفاده از آن در معاملات یا برداشت وجه مطابق ضوابط وجود دارد.",
+  },
+  {
+    title: "آیا همه مشتریان نهایت‌نگر از نهابرگ استفاده می‌کنند؟",
+    description: "مطابق شرایط و ضوابط طرح، مشتریان مشمول می‌توانند از مزایای نهابرگ بهره‌مند شوند.",
+  },
+  {
+    title: "آیا برای استفاده از نهابرگ باید درخواست جداگانه ثبت کنم؟",
+    description:
+      "خیر. پس از فعال‌سازی سرویس، ثبت و تجمیع تخفیف‌های کارمزدی به‌صورت خودکار انجام می‌شود و هر زمان بخواهید می‌توانید از موجودی خود استفاده کنید.",
+  },
+];
 ---
 
-<Layout title="Nahabarg">
-  <main></main>
+<Layout title="نهابرگ">
+  <main>
+    <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
+        <h1 class="text-display-small text-white">نهابرگ نهایت‌نگر</h1>
+        <p class="text-center text-body-large leading-8 text-white lg:text-start">
+          تخفیف کارمزد معاملات شما در حساب اختصاصی «نهابرگ» ثبت و تجمیع می‌شود تا هر زمان که بخواهید، از آن استفاده
+          کنید.
+        </p>
+        <div class="flex flex-col gap-4 lg:flex-row">
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+            افتتاح حساب
+            <ArrowLeft aria-hidden="true" />
+          </a>
+          <button
+            class="neo-button neo-button-outline-primary neo-button-large"
+            type="button"
+            data-consultation-modal-trigger
+          >
+            درخواست مشاوره
+            <ArrowLeft aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+    </SectionLayer2>
+
+    <section class="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
+      <BreadCrumb items={BreadCrumbItem} />
+
+      <div>
+        <h2 class="text-heading-medium leading-10">نهابرگ چیست؟</h2>
+        <div class="text-body-medium leading-7 text-secondary">تخفیف کارمزد معاملات؛ نهابرگ</div>
+      </div>
+
+      <p class="text-body-large leading-8">
+        تخفیف کارمزد معاملات، مزیتی است که کارگزاری نهایت‌نگر متناسب با فعالیت معاملاتی شما در اختیارتان قرار می‌دهد.
+        مبلغ این تخفیف در حساب اختصاصی شما با عنوان «نهابرگ» ثبت و تجمیع می‌شود تا هر زمان که بخواهید، بتوانید از آن
+        استفاده کنید.
+      </p>
+
+      <Image src={MockupImageMob} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
+
+      <div class="features mb-5">
+        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های متمایز نهابرگ</h2>
+        <FeaturesGrid features={features} rowPattern={[2, 2]} />
+      </div>
+
+      <h2 class="text-heading-medium leading-10">نهابرگ چگونه ایجاد می‌شود؟</h2>
+
+      <p class="text-body-large leading-8">
+        پس از انجام هر معامله، سامانه نهابرگ میزان تخفیف کارمزد قابل تعلق به شما را بر اساس ضوابط کارگزاری محاسبه و در
+        حساب اختصاصی نهابرگ ثبت می‌کند.<br />
+        موجودی نهابرگ به‌صورت مستمر به‌روزرسانی می‌شود و همواره نشان‌دهنده مجموع تخفیف‌های کارمزدی قابل استفاده شماست.
+      </p>
+
+      <Banner>
+        <h6 class="text-right text-title-large leading-relaxed text-blue-800 lg:text-center">
+          کارمزدتان را دوباره به سرمایه تبدیل کنید.
+        </h6>
+      </Banner>
+
+      <TimeLine title={timeline.title} steps={timeline.steps} />
+
+      <h2 class="text-heading-medium leading-10">از نهابرگ چگونه استفاده کنید؟</h2>
+
+      <p class="text-body-large leading-8">
+        پس از انجام هر معامله، سامانه نهابرگ میزان تخفیف کارمزد قابل تعلق به شما را بر اساس ضوابط کارگزاری محاسبه و در
+        حساب اختصاصی نهابرگ ثبت می‌کند. <br />
+        موجودی نهابرگ به‌صورت مستمر به‌روزرسانی می‌شود و همواره نشان‌دهنده مجموع تخفیف‌های کارمزدی قابل استفاده شماست.
+      </p>
+
+      <Image src={MockupImageWeb} alt="" class="h-auto w-full" loading="lazy" />
+
+      <Faq faqs={faqs} />
+
+      <BannerCard desktopImage={BannerWeb} mobileImage={BannerMob} classes={"lg:h-72"}>
+        <div class="flex max-w-94 flex-col gap-4 text-white lg:w-94">
+          <h1 class="text-heading-medium leading-10">نهابرگ</h1>
+          <p class="text-body-meduim leading-8 text-neutral-500">
+            با فعال‌سازی نهابرگ، تخفیف کارمزد معاملات شما به موجودی قابل استفاده تبدیل می‌شود تا هر زمان که بخواهید، آن
+            را به وجه نقد تبدیل کنید یا برای کاهش هزینه اعتبار معاملاتی به کار بگیرید.
+          </p>
+        </div>
+        <button
+          type="button"
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+          data-consultation-modal-trigger
+        >
+          درخواست مشاوره
+          <ArrowLeft aria-hidden="true" />
+        </button>
+      </BannerCard>
+    </section>
+  </main>
 </Layout>
