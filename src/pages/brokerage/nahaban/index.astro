@@ -5,11 +5,18 @@ import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
 import { Image } from "astro:assets";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
+import Banner from "@components/banner.astro";
+import TimeLine from "@components/time-line.astro";
+import BannerCard from "@components/bannerCard.astro";
+import Faq from "@components/faq.astro";
 
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 import Section1Img from "@assets/images/Brokerage/4-Nahaban/nahaban-hero.png";
 import Section1ImgMob from "@assets/images/Brokerage/4-Nahaban/nahaban-hero-mob.png";
-import SectionBanner1Img from "@assets/images/Brokerage/4-Nahaban/Mockups/mob.png";
+import MockupImageMob from "@assets/images/Brokerage/4-Nahaban/Mockups/mob.png";
+import MockupImageWeb from "@assets/images/Brokerage/4-Nahaban/Mockups/web.png";
+import BannerWeb from "@assets/images/Brokerage/4-Nahaban/Banner.png";
+import BannerMob from "@assets/images/Brokerage/4-Nahaban/Banner-mob.png";
 
 import Clock from "@assets/icons/iconsax/outline/clock.svg";
 import Candle from "@assets/icons/iconsax/outline/candle.svg";
@@ -17,7 +24,8 @@ import DiscountCircle from "@assets/icons/iconsax/outline/discount-circle.svg";
 import Wallet3 from "@assets/icons/iconsax/outline/wallet-3.svg";
 import Verify from "@assets/icons/iconsax/outline/verify.svg";
 import TickCircl from "@assets/icons/iconsax/outline/tick-circle.svg";
-import Banner from "@components/banner.astro";
+import Timer from "@assets/icons/iconsax/outline/timer.svg";
+import Moneys from "@assets/icons/iconsax/outline/moneys.svg";
 
 const BreadCrumbItem = [
   {
@@ -57,21 +65,42 @@ const features = [
   },
 ];
 
-const rows = [
+const timeline = {
+  title: "نهابان در سه گام",
+  steps: [
+    {
+      title: "ورود وجوه به طرح نهابان",
+      description:
+        "درصورت ماندن وجوه نزد کارگزاری، موجودی نقد حساب یا وجه تضمین معاملات اختیار شما وارد طرح نهابان می‌شود.",
+      icon: TickCircl,
+    },
+    {
+      title: "محاسبه و ثبت سود روزشمار",
+      description: "سامانه نهابان، سود روزشمار را روزانه محاسبه و در حساب اختصاصی شما ثبت می‌کند.",
+      icon: Timer,
+    },
+    {
+      title: "انتقال سود به هنگام استفاده از وجوه",
+      description: "با برداشت وجه یا خرید اوراق بهادار، سود روزشمار متناظر به حساب معاملاتی شما منتقل می‌شود.",
+      icon: Moneys,
+    },
+  ],
+};
+
+const faqs = [
   {
-    title: "ورود وجوه به طرح نهابان",
-    subTitle: "درصورت ماندن وجوه نزد کارگزاری، موجودی نقد حساب یا وجه تضمین معاملات اختیار شما وارد طرح نهابان می‌شود.",
-    icon: TickCircl,
+    title: "آیا سود هر روز پرداخت می‌شود؟",
+    description:
+      "خیر. سود به‌صورت روزانه محاسبه و در حساب نهابان نگهداری می‌شود و هنگام خروج تمام یا بخشی از وجوه از طرح، سود متناظر آن به حساب معاملاتی شما منتقل می‌شود.",
   },
   {
-    title: "محاسبه و ثبت سود روزشمار",
-    subTitle: "سامانه نهابان، سود روزشمار را روزانه محاسبه و در حساب اختصاصی شما ثبت می‌کند.",
-    icon: "",
+    title: "آیا سود نهابان قابل برداشت است؟",
+    description: "بله. با خروج تمام یا بخشی از وجوه از طرح، سود روزشمار متناظر نیز به حساب معاملاتی شما منتقل می‌شود.",
   },
   {
-    title: "انتقال سود به هنگام استفاده از وجوه",
-    subTitle: "با برداشت وجه یا خرید اوراق بهادار، سود روزشمار متناظر به حساب معاملاتی شما منتقل می‌شود.",
-    icon: "",
+    title: "آیا در مدت استفاده از نهابان، سرمایه من برای معامله در دسترس است؟",
+    description:
+      "بله. وجوه شما در حساب معاملاتی باقی می‌ماند و هر زمان که بخواهید می‌توانید از آن برای انجام معاملات یا برداشت وجه استفاده کنید.",
   },
 ];
 ---
@@ -101,7 +130,7 @@ const rows = [
       </div>
     </SectionLayer2>
 
-    <section class="mx-auto flex max-w-200 flex-col gap-6">
+    <section class="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
       <BreadCrumb items={BreadCrumbItem} />
 
       <div>
@@ -117,7 +146,7 @@ const rows = [
         موجودی خود را از طرح خارج کنید، سود متناظر آن نیز به حساب معاملاتی شما منتقل می شود .
       </p>
 
-      <Image src={SectionBanner1Img} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
+      <Image src={MockupImageMob} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
 
       <div class="features mb-5">
         <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های متمایز نهابان</h2>
@@ -141,27 +170,29 @@ const rows = [
         </h6>
       </Banner>
 
-      <div class="flex flex-col gap-6 rounded-xl bg-fg-primary p-5">
-        <h2 class="text-heading-medium leading-10">نهابان در سه گام</h2>
+      <TimeLine title={timeline.title} steps={timeline.steps} />
 
-        <div class="relative flex flex-col gap-10">
-          <div class="absolute right-6.5 h-full w-px border border-dashed border-secondary"></div>
-          {
-            rows.map(({ title, subTitle, icon: Icon }) => (
-              <div class="z-10 flex flex-1 gap-4">
-                <div class="flex size-13 items-center justify-center rounded-full bg-blue-100">
-                  {Icon && <Icon aria-hidden="true" class="text-brand" />}
-                </div>
+      <Image src={MockupImageWeb} alt="" class="h-auto w-full" loading="lazy" />
 
-                <div class="flex flex-col gap-2">
-                  <span class="text-title-large">{title}</span>
-                  <span class="text-body-large text-secondary">{subTitle}</span>
-                </div>
-              </div>
-            ))
-          }
+      <Faq faqs={faqs} />
+
+      <BannerCard desktopImage={BannerWeb} mobileImage={BannerMob} classes={"lg:h-72"}>
+        <div class="flex max-w-94 flex-col gap-4 text-white lg:w-1/2">
+          <h1 class="text-heading-medium leading-10">طرح نهابان</h1>
+          <p class="text-body-meduim leading-8 text-neutral-500">
+            سرمایه خود را در نهابان قرار دهید تا موجودی نقد حساب و وجه تضمین معاملات اختیار شما، مشمول سود روزشمار شوند
+            و تا زمان رسیدن فرصت بعدی بازار، برایتان بازده ایجاد کنند.
+          </p>
         </div>
-      </div>
+        <button
+          type="button"
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+          data-consultation-modal-trigger
+        >
+          درخواست مشاوره
+          <ArrowLeft aria-hidden="true" />
+        </button>
+      </BannerCard>
     </section>
   </main>
 </Layout>
