@@ -1,7 +1,185 @@
 ---
+import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+import { Image } from "astro:assets";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import Banner from "@components/banner.astro";
+import TimeLine from "@components/time-line.astro";
+import BannerCard from "@components/bannerCard.astro";
+import Faq from "@components/faq.astro";
+
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import Section1Img from "@assets/images/Brokerage/5-Instant Withdraw/instant-withdraw-hero.png";
+import Section1ImgMob from "@assets/images/Brokerage/5-Instant Withdraw/instant-withdraw-hero-mob.png";
+import MockupImage from "@assets/images/Brokerage/5-Instant Withdraw/Mockups/web.png";
+import MockupImageMob from "@assets/images/Brokerage/5-Instant Withdraw/Mockups/mob.png";
+import BannerWeb from "@assets/images/Brokerage/5-Instant Withdraw/Banner.png";
+import BannerMob from "@assets/images/Brokerage/5-Instant Withdraw/Banner-mob.png";
+
+import Flashy from "@assets/icons/iconsax/outline/flashy.svg";
+import Refresh from "@assets/icons/iconsax/outline/refresh.svg";
+import MoneyTick from "@assets/icons/iconsax/outline/money-tick.svg";
+import Timer from "@assets/icons/iconsax/outline/timer.svg";
+import Timer1 from "@assets/icons/iconsax/outline/timer-1.svg";
+import CardReceive from "@assets/icons/iconsax/outline/card-receive.svg";
+import MonitorMobbil from "@assets/icons/iconsax/outline/monitor-mobbile.svg";
+
+const BreadCrumbItem = [
+  {
+    label: "کارگزاری",
+    href: "/brokerage",
+  },
+  {
+    label: "برداشت آنی",
+  },
+];
+
+const features = [
+  {
+    title: "دسترسی به وجه در هر زمان",
+    description: "هر زمان به وجه نقد نیاز داشته باشید، می‌توانید درخواست برداشت ثبت کنید.",
+    icon: MoneyTick,
+  },
+  {
+    title: "بدون انتظار برای زمان‌های پرداخت",
+    description: "نیازی نیست منتظر زمان‌های معمول پرداخت وجه بمانید.",
+    icon: Timer,
+  },
+  {
+    title: "ثبت درخواست در چند ثانیه",
+    description: "درخواست برداشت به‌صورت آنلاین و تنها با چند کلیک ثبت می‌شود.",
+    icon: Timer1,
+  },
+  {
+    title: "پرداخت سریع",
+    description: "پس از ثبت درخواست و انجام کنترل‌های لازم، پرداخت در کوتاه‌ترین زمان ممکن انجام می‌شود.",
+    icon: Flashy,
+  },
+];
+
+const timeline = {
+  title: "برداشت آنی در سه گام",
+  steps: [
+    {
+      title: "ثبت درخواست",
+      description: "از طریق سامانه معاملات، درخواست برداشت آنی را ثبت کنید.",
+      icon: MonitorMobbil,
+    },
+    {
+      title: "بررسی خودکار",
+      description: "سامانه شرایط برداشت را به‌صورت خودکار کنترل می‌کند.",
+      icon: Refresh,
+    },
+    {
+      title: "واریز وجه",
+      description: "در صورت تأیید، وجه در کوتاه‌ترین زمان ممکن به حساب بانکی شما واریز می‌شود.",
+      icon: CardReceive,
+    },
+  ],
+};
+
+const faqs = [
+  {
+    title: "چه کسانی می‌توانند از برداشت آنی استفاده کنند؟",
+    description: "تمام مشتریانی که دارای مانده قابل پرداخت باشند.",
+  },
+  {
+    title: "آیا می‌توان در هر ساعت درخواست ثبت کرد؟",
+    description:
+      "بله. امکان ثبت درخواست در هر زمان وجود دارد. زمان انجام پرداخت تابع شرایط طرح و محدودیت‌های شبکه بانکی است.",
+  },
+  {
+    title: "آیا برای برداشت آنی محدودیت مبلغ وجود دارد؟",
+    description: "بله، حداکثر مبلغ برداشت مطابق شرایط طرح تعیین می‌شود.",
+  },
+];
 ---
 
-<Layout title="instant withdraw">
-  <main></main>
+<Layout title="برداشت آنی">
+  <main>
+    <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
+        <h1 class="text-display-small text-white">برداشت آنی</h1>
+        <p class="text-center text-body-large leading-8 text-white lg:text-start">
+          با برداشت آنی، هر زمان به وجه نقد خود نیاز داشته باشید، می‌توانید بدون انتظار برای سیکل‌های تسویه و در
+          کوتاه‌ترین زمان ممکن وجه خود را دریافت نمایید.
+        </p>
+        <div class="flex flex-col gap-4 lg:flex-row">
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+            افتتاح حساب
+            <ArrowLeft aria-hidden="true" />
+          </a>
+          <button
+            class="neo-button neo-button-outline-primary neo-button-large"
+            type="button"
+            data-consultation-modal-trigger
+          >
+            درخواست مشاوره
+            <ArrowLeft aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+    </SectionLayer2>
+
+    <section class="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
+      <BreadCrumb items={BreadCrumbItem} />
+
+      <div>
+        <h2 class="text-heading-medium leading-10">برداشت آنی چیست؟</h2>
+        <div class="text-body-medium leading-7 text-secondary">دسترسی سریع به وجه، بدون انتظار</div>
+      </div>
+
+      <p class="text-body-large leading-8">
+        برداشت آنی سرویسی است که امکان دریافت وجه از حساب معاملاتی را در هر زمان فراهم می‌کند. پس از ثبت درخواست، فرآیند
+        پرداخت به‌صورت فوری آغاز شده و وجه درخواستی در کوتاه‌ترین زمان ممکن به حساب شما منتقل می شود.<br /> با برداشت آنی،
+        دیگر لازم نیست برای دریافت وجه خود تا زمان‌های مشخص پرداخت یا سیکل‌های معمول تسویه منتظر بمانید.
+      </p>
+
+      <Image src={MockupImage} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
+
+      <div class="features mb-5">
+        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های متمایز برداشت آنی</h2>
+        <FeaturesGrid features={features} rowPattern={[2, 2]} />
+      </div>
+
+      <h2 class="text-heading-medium leading-10">برداشت آنی چگونه کار می‌کند؟</h2>
+
+      <p class="text-body-large leading-8">
+        پس از ثبت درخواست برداشت، سامانه درخواست شما را بررسی می‌کند. در صورت احراز شرایط طرح، فرآیند پرداخت بلافاصله
+        آغاز شده و وجه در کوتاه‌ترین زمان ممکن به حساب بانکی معرفی‌شده واریز می‌شود.
+      </p>
+
+      <Banner>
+        <h6 class="text-right text-title-large leading-relaxed text-blue-800 lg:text-center">
+          هر زمان که بخواهی پول به حسابت واریز میشه
+        </h6>
+      </Banner>
+
+      <TimeLine title={timeline.title} steps={timeline.steps} />
+
+      <Image src={MockupImageMob} alt="" class="h-auto w-full" loading="lazy" />
+
+      <Faq faqs={faqs} />
+
+      <BannerCard desktopImage={BannerWeb} mobileImage={BannerMob} classes={"lg:h-72"}>
+        <div class="flex max-w-94 flex-col gap-4 text-white lg:w-94">
+          <h1 class="text-heading-medium leading-10">برداشت آنی</h1>
+          <p class="text-body-meduim leading-8 text-neutral-500">
+            هر زمان به وجه نقد نیاز داشتید، بدون انتظار درخواست برداشت آنی ثبت کنید و در کوتاه‌ترین زمان ممکن وجه خود را
+            دریافت نمایید.
+          </p>
+        </div>
+        <button
+          type="button"
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+          data-consultation-modal-trigger
+        >
+          درخواست مشاوره
+          <ArrowLeft aria-hidden="true" />
+        </button>
+      </BannerCard>
+    </section>
+  </main>
 </Layout>
