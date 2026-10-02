@@ -134,10 +134,14 @@ const timeline = {
             افتتاح حساب
             <ArrowLeft aria-hidden="true" />
           </a>
-          <a class="neo-button neo-button-outline-primary neo-button-large" href={siteUrl("/")}>
+          <button
+            class="neo-button neo-button-outline-primary neo-button-large"
+            type="button"
+            data-consultation-modal-trigger
+          >
             دریافت مشاوره
             <ArrowLeft aria-hidden="true" />
-          </a>
+          </button>
         </div>
       </div>
     </SectionLayer2>
@@ -206,10 +210,14 @@ const timeline = {
             اگر مایل به استفاده از اعتبار هستید کافی است فعالیت معاملاتی خود را در کارگزاری شروع کنید .
           </p>
         </div>
-        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+        <button
+          type="button"
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+          data-consultation-modal-trigger
+        >
           درخواست مشاوره
           <ArrowLeft aria-hidden="true" />
-        </a>
+        </button>
       </BannerCard>
     </section>
   </main>

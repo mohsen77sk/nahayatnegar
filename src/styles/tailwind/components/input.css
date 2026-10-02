@@ -1,10 +1,10 @@
 @layer components {
   input,
   textarea {
-    @apply rounded-lg border border-secondary bg-white px-4 py-1.5 transition duration-100 hover:border-brand focus:border-brand active:border-brand;
+    @apply rounded-lg border border-secondary bg-white px-4 py-1.5 text-body-medium transition duration-100 hover:border-brand focus:border-brand active:border-brand;
 
     &.neo-input-large {
-      @apply px-4 py-3;
+      @apply px-4 py-3 text-body-large;
     }
   }
 }
