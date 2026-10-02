@@ -1,7 +1,201 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { siteUrl } from "@utils/url";
+
+// Layout & Custom Components
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import Banner from "@components/banner.astro";
+import TimeLine from "@components/time-line.astro";
+import Faq from "@components/faq.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+
+// Icons
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import Graph from "@assets/icons/menu/graph.svg";
+import Diagram from "@assets/icons/iconsax/outline/diagram.svg";
+import MoneyTime from "@assets/icons/iconsax/outline/money-time.svg";
+import DocumentDownload from "@assets/icons/iconsax/outline/document-download.svg";
+import SearchStatus from "@assets/icons/iconsax/outline/search-status.svg";
+import Search from "@assets/icons/iconsax/outline/search-normal.svg";
+import Eye from "@assets/icons/iconsax/outline/eye.svg";
+
+// Images
+import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Portfolio-hero.png";
+import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Portfolio-hero-mob.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Mockups/laptop.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Mockups/imac.png";
+import Section3BannerImg from "@assets/images/Brokerage/1-Neo Trader/Portfolio/banner.png";
+import Section3BannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/banner-mob.png";
+
+const breadCrumbItems = [{ label: "خانه", href: "/" }, { label: "نئوتریدر", href: "/" }, { label: "مدیریت پرتفوی" }];
+
+const features = [
+  {
+    title: "ارزش دارایی‌ها و سود و زیان لحظه‌ای",
+    description:
+      "در هر لحظه ارزش جاری پرتفوی و سود یا زیان جاری خود را مشاهده کنید و از وضعیت فعلی سرمایه‌گذاری‌هایتان باخبر باشید.",
+    icon: Graph,
+  },
+  {
+    title: "تحلیل عملکرد بر اساس صنعت",
+    description:
+      "سود و زیان سرمایه‌گذاری‌ها را بر اساس صنعت بررسی کنید و عملکرد بخش‌های مختلف پرتفوی را با یکدیگر مقایسه کنید.",
+    icon: Diagram,
+  },
+  {
+    title: "بررسی عملکرد در بازه زمانی دلخواه",
+    description:
+      "یک دوره زمانی مشخص را انتخاب کنید و عملکرد پرتفوی را در همان بازه بررسی کنید؛ قابلیتی که امکان مقایسه وضعیت سرمایه‌گذاری در دوره‌های مختلف را فراهم می‌کند.",
+    icon: MoneyTime,
+  },
+  {
+    title: "محاسبه عملکرد با درنظر گرفتن مجامع",
+    description:
+      "برای بررسی دقیق‌تر عملکرد یک سرمایه‌گذاری، نتایج مجامع نیز در محاسبات سود و زیان بازه انتخابی لحاظ می‌شوند.",
+    icon: SearchStatus,
+  },
+  {
+    title: "دریافت خروجی و اشتراک‌گذاری پرتفوی",
+    description:
+      "اطلاعات و گزارش‌های پرتفوی خود را در قالب PDF یا Excel دریافت کنید و در صورت نیاز، آن را برای بررسی، ارائه یا اشتراک‌گذاری با دیگران در اختیار داشته باشید.",
+    icon: DocumentDownload,
+  },
+];
+
+const timeline = {
+  title: "کاربرد مدیریت پرتفوی",
+  steps: [
+    {
+      title: "بفهمید سود و زیان از کجا آمده است",
+      description:
+        "وقتی عملکرد نمادها به‌صورت جداگانه و همچنین بر اساس صنعت قابل بررسی باشد، پیدا کردن بخش‌هایی که بیشترین تأثیر را بر نتیجه پرتفوی داشته‌اند ساده‌تر می‌شود.",
+      icon: Search,
+    },
+    {
+      title: "یک دوره را با دوره دیگری مقایسه کنید",
+      description:
+        "عملکرد پرتفوی را به یک روز یا وضعیت فعلی بازار محدود نکنید. با انتخاب بازه‌های زمانی مختلف، می‌توانید روند عملکرد سرمایه‌گذاری خود را در دوره‌های متفاوت بررسی کنید.",
+      icon: Eye,
+    },
+  ],
+};
+
+const faqs = [
+  {
+    title: "ارزش پرتفوی با چه قیمتی محاسبه می‌شود؟",
+    description:
+      "ارزش پرتفوی بر اساس ارزش جاری دارایی‌های موجود در آن محاسبه می‌شود؛ بنابراین با تغییر قیمت نمادهای موجود در پرتفوی، ارزش آن نیز تغییر می‌کند.",
+  },
+  {
+    title: "منظور از سود و زیان تحقق‌یافته و تحقق‌نیافته چیست؟",
+    description:
+      "سود یا زیان تحقق‌یافته مربوط به معاملاتی است که با فروش دارایی نهایی شده‌اند؛ اما سود یا زیان تحقق‌نیافته مربوط به تغییر ارزش دارایی‌هایی است که همچنان در پرتفوی شما قرار دارند.",
+  },
+  {
+    title: "بررسی سود و زیان بر اساس صنعت چه کمکی می‌کند؟",
+    description:
+      "این تفکیک نشان می‌دهد عملکرد سرمایه‌گذاری‌های شما در صنایع مختلف چگونه بوده و کدام بخش‌ها سهم بیشتری در نتیجه کلی پرتفوی داشته‌اند.",
+  },
+  {
+    title: "منظور از محاسبه سود و زیان با درنظر گرفتن مجامع چیست؟",
+    description:
+      "در این حالت، نتیجه مجامع هماننده سهام جایزه تخصیص داده شده، سود نقدی واریز شده نیز در محاسبه عملکرد سرمایه‌گذاری طی بازه زمانی انتخاب‌شده لحاظ می‌شود تا ارزیابی عملکرد تنها بر اساس تغییر قیمت سهم نباشد.",
+  },
+  {
+    title: "آیا اطلاعات سود و زیان پرتفوی به‌صورت لحظه‌ای به‌روزرسانی می‌شود؟",
+    description: "بله، اطلاعات سود و زیان متناسب با تغییرات بازار به‌صورت لحظه‌ای به‌روزرسانی می‌شود.",
+  },
+];
 ---
 
-<Layout title="Portfolio">
-  <main></main>
+<Layout title="مدیریت پرتفوی">
+  <main>
+    <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
+      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+        <span class="text-display-small text-white text-center lg:text-start">مدیریت پرتفوی </span>
+        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+          از ارزش لحظه‌ای دارایی‌ها تا عملکرد سرمایه‌گذاری در بازه‌های زمانی مختلف؛ وضعیت پرتفوی خود را با جزئیات بیشتری
+          بررسی کنید و اثر مجامع را نیز در محاسبات سود و زیان در نظر بگیرید.
+        </p>
+        <div class="flex gap-4">
+          <a href={siteUrl("/brokerage/neo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
+            ورود به نئوتریدر <ArrowLeft aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </SectionLayer2>
+
+    <!-- Content Section -->
+
+    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
+      <BreadCrumb items={breadCrumbItems} />
+      <div>
+        <h2 class="text-heading-medium leading-10">مدیریت پرتفوی چیست؟</h2>
+
+        <p class="text-body-large leading-8">
+          پرتفوی فقط مجموعه‌ای از سهم‌هایی نیست که در اختیار دارید؛ عملکرد هر یک از این دارایی‌ها در نهایت نتیجه
+          سرمایه‌گذاری شما را شکل می‌دهد.
+        </p>
+        <p class="text-body-large leading-8">
+          مدیریت پرتفوی در نئوتریدر ابزارهایی در اختیار شما قرار می‌دهد تا بتوانید وضعیت سرمایه‌گذاری خود را از زوایای
+          مختلف بررسی کنید؛ از ارزش فعلی دارایی‌ها و سود و زیان هر سهم گرفته تا عملکرد صنایع و تغییرات پرتفوی در یک دوره
+          زمانی مشخص.
+        </p>
+      </div>
+
+      <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
+
+      <!-- Features Section -->
+      <FeaturesGrid features={features} rowPattern={[2, 3]} />
+      <!-- Benefits Section -->
+
+      <article class="flex flex-col gap-3">
+        <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
+        <p class="text-body-medium text-secondary leading-7">یک عدد، تمام داستان پرتفوی نیست .</p>
+
+        <p class="text-body-medium text-secondary leading-7">
+          ممکن است ارزش پرتفوی شما افزایش پیدا کرده باشد، اما بخشی از این تغییر حاصل عملکرد چند نماد خاص باشد؛ یا در یک
+          صنعت سود مناسبی ایجاد شده باشد و صنعت دیگری عملکرد ضعیف‌تری داشته باشد.
+        </p>
+        <p class="text-body-medium text-secondary leading-7">
+          نئوتریدر به شما امکان می‌دهد به‌جای نگاه کردن به یک عدد کلی، عملکرد پرتفوی را تفکیک، مقایسه و در طول زمان
+          بررسی کنید. این نگاه جزئی‌تر کمک می‌کند بدانید سرمایه‌گذاری شما دقیقاً چگونه عمل کرده و چه بخش‌هایی بیشترین
+          نقش را در نتیجه نهایی داشته‌اند.
+        </p>
+      </article>
+
+      <Banner>
+        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">
+          پرتفوی خود را فقط نبینید؛ عملکرد آن را بسنجید
+        </h6>
+      </Banner>
+
+      <TimeLine steps={timeline.steps} description={timeline.description} title={timeline.title} />
+      <Image src={SectionBanner2Img} alt="" class="w-full h-auto" loading="lazy" />
+
+      <Faq faqs={faqs} />
+
+      <!-- Footer CTA -->
+      <div
+        class="flex flex-col p-6 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
+      >
+        <div class="text-white flex flex-col gap-2 lg:w-94">
+          <h1 class="text-heading-medium leading-10">عملکرد سرمایه‌گذاری خود را بهتر بشناسید</h1>
+          <p class="text-body-large leading-8">
+            ارزش پرتفوی و عملکرد سرمایه‌گذاری‌های خود را بررسی کنید و ببینید سرمایه شما در طول زمان چگونه عمل کرده است.
+          </p>
+        </div>
+        <a
+          href={siteUrl("/brokerage/neo-trader")}
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+        >
+          ورود به نئوتریدر
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </div>
+    </section>
+  </main>
 </Layout>
