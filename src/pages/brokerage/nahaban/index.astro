@@ -56,6 +56,24 @@ const features = [
     icon: Verify,
   },
 ];
+
+const rows = [
+  {
+    title: "ورود وجوه به طرح نهابان",
+    subTitle: "درصورت ماندن وجوه نزد کارگزاری، موجودی نقد حساب یا وجه تضمین معاملات اختیار شما وارد طرح نهابان می‌شود.",
+    icon: TickCircl,
+  },
+  {
+    title: "محاسبه و ثبت سود روزشمار",
+    subTitle: "سامانه نهابان، سود روزشمار را روزانه محاسبه و در حساب اختصاصی شما ثبت می‌کند.",
+    icon: "",
+  },
+  {
+    title: "انتقال سود به هنگام استفاده از وجوه",
+    subTitle: "با برداشت وجه یا خرید اوراق بهادار، سود روزشمار متناظر به حساب معاملاتی شما منتقل می‌شود.",
+    icon: "",
+  },
+];
 ---
 
 <Layout title="Nahaban">
@@ -106,44 +124,38 @@ const features = [
 
       <p class="text-body-large leading-8">
         اگر در حساب معاملاتی خود موجودی نقد داشته باشید یا برای معاملات اختیار، وجه تضمین نزد کارگزاری نگهداری کنید،
-        نهابان مطابق شرایط طرح، سود روزشمار این مبالغ را به‌صورت روزانه محاسبه و در حساب اختصاصی نهابان شما ثبت می‌کند.
-        این سود تا زمانی که وجوه در طرح باقی بمانند، به‌صورت روزانه افزایش می‌یابد. هر زمان که تمام یا بخشی از این وجوه
-        را برای خرید اوراق بهادار مصرف کنید یا از حساب معاملاتی خود برداشت نمایید، سود روزشمار محاسبه‌شده متناظر با مبلغ
-        خارج‌شده نیز به حساب معاملاتی شما منتقل می‌شود.
+        نهابان مطابق شرایط طرح، سود روزشمار این مبالغ را به‌صورت روزانه محاسبه و در حساب اختصاصی نهابان شما ثبت می‌کند.<br
+        />
+        این سود تا زمانی که وجوه در طرح باقی بمانند، به‌صورت روزانه افزایش می‌یابد. هر زمان که تمام یا بخشی از این وجوه را
+        برای خرید اوراق بهادار مصرف کنید یا از حساب معاملاتی خود برداشت نمایید، سود روزشمار محاسبه‌شده متناظر با مبلغ خارج‌شده
+        نیز به حساب معاملاتی شما منتقل می‌شود.
       </p>
 
       <Banner>
-        <h6 class="text-title-large leading-relaxed text-blue-800">
+        <h6 class="text-right text-title-large leading-relaxed text-blue-800 lg:text-center">
           حتی زمانی که معامله‌ای انجام نمی‌دهید، سرمایه شما می‌تواند برایتان بازده ایجاد کند.
         </h6>
       </Banner>
 
-      <div class="flex flex-col gap-6 rounded-xl bg-fg-primary p-6">
-        <h2 class="text-heading-medium leading-10">سرمایه‌گذاری در صندوق ناب در سه گام</h2>
+      <div class="flex flex-col gap-6 rounded-xl bg-fg-primary p-5">
+        <h2 class="text-heading-medium leading-10">نهابان در سه گام</h2>
 
         <div class="relative flex flex-col gap-10">
           <div class="absolute right-6.5 h-full w-px border border-dashed border-secondary"></div>
-          <div class="z-10 flex flex-1 gap-4">
-            <div class="flex h-13 w-13 items-center justify-center rounded-full bg-blue-100"></div>
-            <div class="flex flex-col gap-2">
-              <span class="text-title-medium">ثبت‌نام در کارگزاری</span>
-              <span class="text-body-medium text-secondary">افتتاح حساب و دریافت کد بورسی</span>
-            </div>
-          </div>
-          <div class="z-10 flex flex-1 gap-4">
-            <div class="flex h-13 w-13 items-center justify-center rounded-full bg-blue-100"></div>
-            <div class="flex flex-col gap-2">
-              <span class="text-title-medium">ورود به سامانه معاملاتی</span>
-              <span class="text-body-medium text-secondary">جستجوی نماد ناب در سامانه معاملاتی نهایت‌نگر.</span>
-            </div>
-          </div>
-          <div class="z-10 flex flex-1 gap-4">
-            <div class="flex h-13 w-13 items-center justify-center rounded-full bg-blue-100"></div>
-            <div class="flex flex-col gap-2">
-              <span class="text-title-medium">خرید واحدهای صندوق</span>
-              <span class="text-body-medium text-secondary">ثبت سفارش خرید و آغاز سرمایه‌گذاری در صندوق ناب.</span>
-            </div>
-          </div>
+          {
+            rows.map(({ title, subTitle, icon: Icon }) => (
+              <div class="z-10 flex flex-1 gap-4">
+                <div class="flex size-13 items-center justify-center rounded-full bg-blue-100">
+                  {Icon && <Icon aria-hidden="true" class="text-brand" />}
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <span class="text-title-large">{title}</span>
+                  <span class="text-body-large text-secondary">{subTitle}</span>
+                </div>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
