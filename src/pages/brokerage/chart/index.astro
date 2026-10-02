@@ -6,12 +6,10 @@ import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/technic
 import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero-mob.png";
 import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/laptop.png";
 import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/imac.png";
-import FooterBannerImg from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner.png";
-import FooterBannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner-mob.png";
+import Section3BannerImg from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner.png";
+import Section3BannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner-mob.png";
 import BreadCrumb from "@components/bread-crumb.astro";
 import { siteUrl } from "@utils/url";
-import URLS from "../../../scripts/constants";
-import FeaturesGrid from "@components/FeaturesGrid.astro";
 
 import Bezier from "@assets/icons/iconsax/outline/bezier.svg";
 import Activity from "@assets/icons/iconsax/outline/activity.svg";
@@ -182,8 +180,7 @@ const faqs = [
         <div class="mx-auto flex max-w-7xl flex-col gap-2">
           <div
             dir="ltr"
-            class="grid
-            grid-cols-1
+            class="flex flex-col lg:grid
     lg:grid-cols-[1fr_0.45fr_1.1fr]
     lg:grid-rows-[auto_auto_auto_auto]
     gap-2"
@@ -238,7 +235,7 @@ const faqs = [
       <!-- Footer CTA -->
       <div
         class="flex flex-col p-8 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
-        style={`--bg-mobile: url('${FooterBannerImg.src}'); --bg-desktop: url('${FooterBannerImgMob.src}');`}
+        style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
       >
         <div class="text-white flex flex-col gap-4 lg:w-94">
           <h1 class="text-heading-medium leading-10">تحلیل کنید، تصمیم بگیرید، معامله کنید</h1>
