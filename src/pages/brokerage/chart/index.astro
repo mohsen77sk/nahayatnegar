@@ -1,16 +1,18 @@
 ---
-import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import Layout from "@layouts/Layout.astro";
-import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
-import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero.png";
-import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero-mob.png";
-import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/laptop.png";
-import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/imac.png";
-import Section3BannerImg from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner.png";
-import Section3BannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner-mob.png";
-import BreadCrumb from "@components/bread-crumb.astro";
+import { Image } from "astro:assets";
 import { siteUrl } from "@utils/url";
 
+// Layout & Custom Components
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+import Banner from "@components/banner.astro";
+import TimeLine from "@components/time-line.astro";
+import Faq from "@components/faq.astro";
+import FeatureCard from "@components/FeatureCard.astro";
+
+// Icons
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 import Bezier from "@assets/icons/iconsax/outline/bezier.svg";
 import Activity from "@assets/icons/iconsax/outline/activity.svg";
 import FavoriteChart from "@assets/icons/iconsax/outline/favorite-chart.svg";
@@ -21,24 +23,19 @@ import Cloud from "@assets/icons/iconsax/outline/cloud-plus.svg";
 import Search from "@assets/icons/iconsax/outline/search-normal.svg";
 import Computing from "@assets/icons/iconsax/outline/computing.svg";
 import Eye from "@assets/icons/iconsax/outline/eye.svg";
-import Banner from "@components/banner.astro";
-import TimeLine from "@components/time-line.astro";
-import Faq from "@components/faq.astro";
-import FeatureCard from "@components/FeatureCard.astro";
-import { Image } from "astro:assets";
 
-const BreadCrumbItem = [
-  {
-    label: "خانه",
-    href: "/",
-  },
-  {
-    label: "نئوتریدر",
-    href: "/",
-  },
-  {
-    label: "تحلیل تکنیکال و نمودارهای پیشرفته",
-  },
+// Images
+import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero.png";
+import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero-mob.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/laptop.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/imac.png";
+import Section3BannerImg from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner.png";
+import Section3BannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner-mob.png";
+
+const breadCrumbItems = [
+  { label: "خانه", href: "/" },
+  { label: "نئوتریدر", href: "/" },
+  { label: "تحلیل تکنیکال و نمودارهای پیشرفته" },
 ];
 
 const features = [
@@ -47,42 +44,49 @@ const features = [
     description:
       "مجموعه‌ای از اندیکاتورها و اسیلاتورها در اختیار شماست تا بتوانید متناسب با روش تحلیل خود، داده‌های نمودار را بررسی و از ابزارهای موردنیازتان استفاده کنید.",
     icon: Bezier,
+    gridClass: "lg:col-start-1 lg:col-span-2 lg:row-start-1",
   },
   {
     title: "نمودار لحظه‌ای",
     description:
       "نمودارها با اطلاعات لحظه‌ای بازار به‌روزرسانی می‌شوند تا تغییرات قیمت را هم‌زمان با جریان معاملات مشاهده کنید.",
     icon: Activity,
+    gridClass: "lg:col-start-3 lg:row-start-1",
   },
   {
     title: "نمودارهای تعدیل‌شده",
     description:
       "سابقه قیمت را با در نظر گرفتن رویدادهای مؤثر بررسی کنید.امکان مشاهده نمودار با انواع تعدیل‌های قیمتی وجود دارد تا بتوانید سابقه قیمت را متناسب با نوع تحلیل خود بررسی کنید.همچنین نتایج مجامع شرکت موردنظر شما هم روی نمودار مشخص می‌شوند تا رویدادهای مهم اثرگذار بر سابقه قیمت را در کنار داده‌های نموداری مشاهده کنید.",
     icon: FavoriteChart,
+    gridClass: "lg:col-start-1 lg:row-start-2 lg:row-span-2",
   },
   {
     title: "تایم‌فریم‌های مختلف",
     description:
       "با انتخاب تایم‌فریم‌های مختلف، می‌توانید رفتار قیمت را در بازه‌های زمانی متفاوت بررسی کنید و نمودار را متناسب با نوع تحلیل خود مشاهده کنید.",
     icon: Clock,
+    gridClass: "lg:col-start-2 lg:col-span-2 lg:row-start-2",
   },
   {
     title: "ثبت معاملات روی نمودار",
     description:
       "نقاط خرید و فروش انجام‌شده توسط شما روی نمودار مشخص می‌شوند.به این ترتیب، حتی بعد از گذشت زمان می‌توانید به نمودار یک نماد مراجعه کنید و ببینید معاملات خود را در چه نقاطی انجام داده‌اید و وضعیت قیمت در آن زمان چگونه بوده است.",
     icon: ChartSuccess,
+    gridClass: "lg:col-start-2 lg:col-span-2 lg:row-start-3",
   },
   {
     title: "ذخیره خودکار تحلیل‌ها",
     description:
       "تحلیل‌هایی که روی نمودار انجام می‌دهید به‌صورت خودکار ذخیره می‌شوند.بنابراین هر زمان دوباره به یک نماد مراجعه کنید، می‌توانید آخرین تحلیل خود را مشاهده کنید و بدون شروع مجدد، بررسی خود را از همان نقطه ادامه دهید.",
     icon: Cloud,
+    gridClass: "lg:col-start-1 lg:col-span-2 lg:row-start-4",
   },
   {
     title: "مشاهده هم‌زمان چند نمودار",
     description:
       "امکان مشاهده چند نمودار در یک صفحه، بررسی هم‌زمان نمادهای مختلف را ساده‌تر می‌کند؛ به‌خصوص زمانی که بخواهید چند نماد، صنعت یا گزینه معاملاتی را با یکدیگر مقایسه کنید.",
     icon: Grid,
+    gridClass: "lg:col-start-3 lg:row-start-4",
   },
 ];
 
@@ -142,7 +146,7 @@ const faqs = [
   <main>
     <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
       <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
-        <span class="text-display-small text-white">تحلیل تکنیکال و نمودارهای پیشرفته </span>
+        <span class="text-display-small text-white text-center lg:text-start">تحلیل تکنیکال و نمودارهای پیشرفته </span>
         <p class="text-body-large text-white text-center leading-8 lg:text-start">
           قیمت‌ها را به‌صورت لحظه‌ای دنبال کنید، با استفاده از اندیکاتورها و اسیلاتورها بازار را بررسی کنید و تحلیل‌های
           خود را روی نمودار ثبت و ذخیره کنید؛ همه در محیطی یکپارچه با سامانه معاملات.
@@ -158,7 +162,7 @@ const faqs = [
     <!-- Content Section -->
 
     <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
-      <BreadCrumb items={BreadCrumbItem} />
+      <BreadCrumb items={breadCrumbItems} />
       <div>
         <h2 class="text-heading-medium leading-10">ابزار تحلیل تکنیکال چیست؟</h2>
 
@@ -175,53 +179,40 @@ const faqs = [
 
       <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
 
-      <div class="features mb-5">
-        <h2 class="text-heading-medium leading-10 pb-5">ویژگی‌های متمایز اعتبار نهایت‌نگر</h2>
+      <!-- Features Section -->
+      <section class="features mb-5">
+        <h2 class="text-heading-medium pb-5 leading-10">ویژگی‌های ابزار تحلیل تکنیکال</h2>
         <div class="mx-auto flex max-w-7xl flex-col gap-2">
           <div
             dir="ltr"
-            class="flex flex-col lg:grid
-    lg:grid-cols-[1fr_0.45fr_1.1fr]
-    lg:grid-rows-[auto_auto_auto_auto]
-    gap-2"
+            class="flex flex-col gap-2 lg:grid lg:grid-cols-[1fr_0.45fr_1.1fr] lg:grid-rows-[auto_auto_auto_auto]"
           >
-            <div class="w-full lg:col-start-1 lg:col-span-2 lg:row-start-1 flex" dir="rtl">
-              <FeatureCard title={features[0].title} description={features[0].description} icon={features[0].icon} />
-            </div>
-            <div class="w-full lg:col-start-3 lg:row-start-1 flex" dir="rtl">
-              <FeatureCard title={features[1].title} description={features[1].description} icon={features[1].icon} />
-            </div>
-            <div class="w-full lg:col-start-1 lg:row-start-2 lg:row-span-2 flex" dir="rtl">
-              <FeatureCard title={features[2].title} description={features[2].description} icon={features[2].icon} />
-            </div>
-            <div class="w-full col-start-2 col-span-2 row-start-2 flex" dir="rtl">
-              <FeatureCard title={features[3].title} description={features[3].description} icon={features[3].icon} />
-            </div>
-            <div class="w-full lg:col-start-2 lg:col-span-2 lg:row-start-3 flex" dir="rtl">
-              <FeatureCard title={features[4].title} description={features[4].description} icon={features[4].icon} />
-            </div>
-            <div class="w-full lg:col-start-1 lg:col-span-2 lg:row-start-4 flex" dir="rtl">
-              <FeatureCard title={features[5].title} description={features[5].description} icon={features[5].icon} />
-            </div>
-            <div class="w-full lg:col-start-3 lg:row-start-4 flex" dir="rtl">
-              <FeatureCard title={features[6].title} description={features[6].description} icon={features[6].icon} />
-            </div>
+            {features.map((feature) => (
+              <div class={`flex w-full ${feature.gridClass}`} dir="rtl">
+                <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-      <div>
+      </section>
+
+      <!-- Benefits Section -->
+
+      <article class="flex flex-col gap-3">
         <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
         <p class="text-body-medium text-secondary leading-7">
           تحلیل تکنیکال زمانی کاربرد بیشتری دارد که بتوانید نتیجه آن را در کنار اطلاعات واقعی بازار و معاملات خود
           ببینید.
         </p>
-        <p>
+        <p class="text-body-medium leading-8">
           در این ابزار، نمودار لحظه‌ای، ابزارهای تحلیل، معاملات انجام‌شده و تحلیل‌های قبلی شما در یک محیط در دسترس
           هستند. بنابراین برای بررسی یک نماد، تحلیل آن و مراجعه دوباره به تحلیل‌های گذشته، نیاز نیست میان ابزارها و
           محیط‌های مختلف جابه‌جا شوید.
         </p>
-        <p>تحلیل خود را یک‌بار انجام دهید و هر زمان که به آن نماد بازگشتید، آن را ادامه دهید.</p>
-      </div>
+        <p class="text-body-medium leading-8">
+          تحلیل خود را یک‌بار انجام دهید و هر زمان که به آن نماد بازگشتید، آن را ادامه دهید.
+        </p>
+      </article>
 
       <Banner>
         <h6 class="text-title-large text-center text-blue-800 leading-relaxed">از تحلیل تا معامله، در یک محیط</h6>
@@ -234,10 +225,10 @@ const faqs = [
 
       <!-- Footer CTA -->
       <div
-        class="flex flex-col p-8 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        class="flex flex-col p-6 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
         style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
       >
-        <div class="text-white flex flex-col gap-4 lg:w-94">
+        <div class="text-white flex flex-col gap-2 lg:w-94">
           <h1 class="text-heading-medium leading-10">تحلیل کنید، تصمیم بگیرید، معامله کنید</h1>
           <p class="text-body-large leading-8">
             ابزارهای تحلیل تکنیکال، نمودارهای لحظه‌ای و تحلیل‌های خود را در کنار سامانه معاملات در اختیار داشته باشید.
