@@ -311,18 +311,6 @@ const mobileMenu = [
   const dIcon = document.querySelector(".d-icon-nav");
   const mIcon = document.querySelector(".m-icon-nav");
 
-  function toggleMenu(button) {
-    const content = button.nextElementSibling;
-    const li = button.closest("li");
-    li.classList.toggle("expanded");
-
-    content.classList.toggle("max-h-0");
-    content.classList.toggle("max-h-[1000px]");
-
-    const svg = button.querySelector("svg");
-    svg.classList.toggle("rotate-270");
-  }
-
   // منوی موبایل
   const drawer = document.getElementById("mobile-drawer");
   const backdrop = document.getElementById("mobile-drawer-backdrop");
