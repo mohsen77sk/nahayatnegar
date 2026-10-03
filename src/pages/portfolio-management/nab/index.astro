@@ -5,6 +5,7 @@ import Layout from "@layouts/Layout.astro";
 import BannerCard from "@components/bannerCard.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
+import FundChart from "@components/FundChart.astro";
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import TimeLine from "@components/time-line.astro";
 import Faq from "@components/faq.astro";
@@ -242,7 +243,7 @@ const faqs = [
 
       <h2 class="text-heading-medium leading-10">نمودار بازدهی صندوق طلای ناب</h2>
 
-      <div class="rounded-xl bg-fg-primary p-2"></div>
+      <FundChart apiUrl="https://landing-api.nahayatnegar.com/assetDailyInfo" />
 
       <h2 class="text-heading-medium leading-10">صندوق ناب مناسب چه کسانی است؟</h2>
 

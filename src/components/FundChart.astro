@@ -1,0 +1,349 @@
+---
+// src/components/DynamicFundChart.astro
+
+export interface Props {
+  apiUrl: string; // آدرس پایه API (مثلا: /api/fund-data)
+  defaultTimeframe?: string;
+}
+
+const { apiUrl, defaultTimeframe = "YEARLY" } = Astro.props;
+
+const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<dynamic-fund-chart class="fund-card" data-chart-id={chartId} data-api-url={apiUrl}>
+  <!-- API filter -->
+  <div class="flex">
+    <div class="neo-tabs w-full rounded-full border bg-fg-primary px-4 lg:w-auto">
+      <button class="neo-tab-label" type="button" data-value="MONTHLY3">۳ ماهه</button>
+      <button class="neo-tab-label" type="button" data-value="MONTHLY6">۶ ماهه</button>
+      <button class="neo-tab-label active" type="button" data-value="YEARLY">یکساله</button>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between gap-4">
+    <!-- legend -->
+    <div class="flex items-center gap-4" id={`legend-${chartId}`}></div>
+    <!-- badge -->
+    <div class="flex items-center gap-1 text-body-small">
+      <span class="">بازدهی صندوق</span>
+      <span class="flex rounded-lg bg-green-100 px-2 py-1 text-green-500" id={`return-rate-${chartId}`}>--٪</span>
+    </div>
+  </div>
+
+  <div class="chart-wrapper">
+    <!-- یک لودینگ ساده در حین دریافت دیتا -->
+    <div id={`loading-${chartId}`} class="loading-overlay">در حال دریافت اطلاعات...</div>
+    <canvas id={chartId}></canvas>
+  </div>
+</dynamic-fund-chart>
+
+<script>
+  import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip } from "chart.js";
+  Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
+
+  const toFarsiDigits = (num: number | string) => num.toString().replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[+d]);
+
+  const chartColors: Record<string, string> = {
+    naab: "#3B82F6",
+    dollar: "#10B981",
+    seke: "#EF4444",
+    shemsh: "#8b5cf6",
+    gold: "#F59E0B",
+  };
+
+  class DynamicFundChart extends HTMLElement {
+    private chartInstance: Chart | null = null;
+    private chartId: string;
+    private apiUrl: string;
+
+    connectedCallback() {
+      this.chartId = this.dataset.chartId!;
+      this.apiUrl = this.dataset.apiUrl!;
+
+      const buttons = this.querySelectorAll<HTMLButtonElement>(".neo-tab-label");
+
+      // بایند کردن ایونت کلیک برای دکمه‌های بازه زمانی
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          buttons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          const timeframe = btn.dataset.value!;
+          this.fetchAndRenderData(timeframe);
+        });
+      });
+
+      // لود اولیه (مثلاً حالت یکساله پیش‌فرض)
+      const defaultActive = this.querySelector<HTMLButtonElement>(".neo-tab-label.active");
+      const defaultTf = defaultActive ? defaultActive.dataset.value : "YEARLY";
+      this.fetchAndRenderData(defaultTf!);
+    }
+
+    async fetchAndRenderData(timeframe: string) {
+      const loading = this.querySelector(`#loading-${this.chartId}`) as HTMLElement;
+      loading.style.display = "flex";
+
+      try {
+        const response = await fetch(`${this.apiUrl}?timeFrame=${timeframe}`);
+        const apiData = await response.json();
+
+        // ۱. ساخت محور زمانی مرجع (استخراج تمام تاریخ‌های یکتا)
+        const allTimestamps = new Set<number>();
+        Object.values(apiData.items).forEach((dataset: any) => {
+          dataset.forEach((item: any) => allTimestamps.add(item.event_date));
+        });
+
+        // ۲. مرتب‌سازی تاریخ‌ها از قدیم به جدید
+        const sortedTimestamps = Array.from(allTimestamps).sort((a, b) => a - b);
+
+        // ۳. تبدیل تاریخ‌های مرجع به لیبل‌های شمسی برای محور X و تولتیپ
+        const exactDateLabels = sortedTimestamps.map((ts) =>
+          new Intl.DateTimeFormat("fa-IR", { year: "numeric", month: "2-digit", day: "2-digit" }).format(
+            new Date(ts * 1000),
+          ),
+        );
+
+        // ۴. همگام‌سازی دیتای هر نماد با محور زمانی مرجع
+        const chartDatasets = Object.entries(apiData.items).map(([key, dataArray]: [string, any]) => {
+          const color = chartColors[key] || "#9ca3af";
+
+          // ساخت یک Map برای جستجوی سریع دیتای این نماد
+          const dataMap = new Map();
+          dataArray.forEach((item: any) => dataMap.set(item.event_date, item.turnover));
+
+          // اگر برای تاریخ مرجع دیتایی داشتیم آن را می‌گذاریم، در غیر این صورت null
+          const alignedData = sortedTimestamps.map((ts) => {
+            return dataMap.has(ts) ? dataMap.get(ts) : null;
+          });
+
+          return {
+            label: apiData.data[key] || key,
+            color: color,
+            data: alignedData, // دیتای همگام‌سازی شده با مقادیر null
+            spanGaps: true, // متصل کردن خطوط در صورت وجود دیتای null (بسیار مهم)
+            borderColor: color,
+            borderWidth: 2,
+            tension: 0.35,
+            pointRadius: 0,
+            pointHoverRadius: 6,
+            pointHoverBackgroundColor: color,
+            pointHoverBorderColor: "#ffffff",
+            pointHoverBorderWidth: 2,
+          };
+        });
+
+        // ادامه عملیات رندر (بدون تغییر)
+        this.renderLegends(chartDatasets);
+
+        const returnRateEl = this.querySelector(`#return-rate-${this.chartId}`);
+        if (returnRateEl) returnRateEl.textContent = toFarsiDigits("0") + "٪";
+
+        this.updateChart(exactDateLabels, sortedTimestamps, chartDatasets);
+      } catch (error) {
+        console.error("خطا در دریافت اطلاعات چارت", error);
+      } finally {
+        loading.style.display = "none";
+      }
+    }
+
+    renderLegends(datasets: any[]) {
+      const legendContainer = this.querySelector(`#legend-${this.chartId}`);
+      if (!legendContainer) return;
+
+      // ۱. ساخت HTML راهنما به همراه data-index برای تشخیص اینکه کدام خط کلیک شده است
+      legendContainer.innerHTML = datasets
+        .map(
+          (ds, index) => `
+        <div class="legend-item flex items-center gap-1 cursor-pointer transition-opacity duration-200" data-index="${index}">
+          <span class="w-2 h-2 rounded-full" style="background-color:${ds.color};"></span>
+          <span class="text-body-small" style="color:${ds.color};">${ds.label}</span>
+        </div>
+      `,
+        )
+        .join("");
+
+      // ۲. اضافه کردن رویداد کلیک برای خاموش/روشن کردن خطوط نمودار
+      const legendElements = legendContainer.querySelectorAll(".legend-item");
+
+      legendElements.forEach((el) => {
+        el.addEventListener("click", () => {
+          if (!this.chartInstance) return;
+          const datasetIndex = parseInt(el.getAttribute("data-index")!);
+          const isVisible = this.chartInstance.isDatasetVisible(datasetIndex);
+
+          this.chartInstance.setDatasetVisibility(datasetIndex, !isVisible);
+          this.chartInstance.update();
+
+          if (isVisible) {
+            el.style.opacity = "0.4";
+            el.style.filter = "grayscale(100%)";
+          } else {
+            el.style.opacity = "1";
+            el.style.filter = "none";
+          }
+        });
+      });
+    }
+
+    updateChart(labels: string[], timestamps: number[], datasets: any[]) {
+      const canvas = this.querySelector<HTMLCanvasElement>(`#${this.chartId}`);
+      if (!canvas) return;
+
+      // اگر چارت از قبل ساخته شده، فقط دیتای آن را آپدیت می‌کنیم (برای انیمیشن نرم و پرفورمنس)
+      if (this.chartInstance) {
+        this.chartInstance.data.labels = labels;
+        this.chartInstance.data.datasets = datasets;
+
+        this.chartInstance.options.scales!.x!.ticks!.callback = function (value, index) {
+          const ts = timestamps[index];
+          return new Intl.DateTimeFormat("fa-IR", { month: "long", year: "2-digit" }).format(new Date(ts * 1000));
+        };
+
+        this.chartInstance.update();
+        return;
+      }
+
+      // اگر چارت وجود نداشت (لود اولیه)، آن را می‌سازیم
+      this.chartInstance = new Chart(canvas, {
+        type: "line",
+        data: { labels, datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              enabled: false,
+              itemSort: (a, b) => b.parsed.y - a.parsed.y,
+              external: function (context) {
+                const { chart, tooltip } = context;
+                let tooltipEl = document.getElementById("custom-chart-tooltip");
+
+                if (!tooltipEl) {
+                  tooltipEl = document.createElement("div");
+                  tooltipEl.id = "custom-chart-tooltip";
+                  tooltipEl.style.position = "absolute";
+                  tooltipEl.style.pointerEvents = "none";
+                  tooltipEl.style.transition = "all 0.15s ease";
+                  tooltipEl.style.zIndex = "999";
+                  document.body.appendChild(tooltipEl);
+                }
+
+                if (tooltip.opacity === 0) {
+                  tooltipEl.style.opacity = "0";
+                  return;
+                }
+
+                if (tooltip.body) {
+                  const titleLines = tooltip.title || [];
+                  const dataPoints = tooltip.dataPoints;
+
+                  let innerHtml = `
+                    <div class="bg-fg-primary rounded-xl shadow-primary py-2 px-4 flex flex-col gap-2 min-w-[140px]" dir="rtl">
+                  `;
+
+                  titleLines.forEach((title) => {
+                    innerHtml += `<div class="text-body-small text-secondary text-center mb-1">${title}</div>`;
+                  });
+
+                  dataPoints.forEach((dataPoint) => {
+                    const label = dataPoint.dataset.label || "";
+                    const val = toFarsiDigits(dataPoint.parsed.y);
+                    const color = dataPoint.dataset.borderColor;
+
+                    innerHtml += `
+                      <div class="flex items-center justify-between gap-4 text-body-small">
+                        <div class="flex items-center gap-1.5">
+                          <span class="w-2 h-2 rounded-full" style="background-color: ${color};"></span>
+                          <span>${label}</span>
+                        </div>
+                        <span style="color: ${color};" dir="ltr">${val}٪</span>
+                      </div>
+                    `;
+                  });
+
+                  innerHtml += `</div>`;
+                  tooltipEl.innerHTML = innerHtml;
+                }
+
+                const { left, top } = chart.canvas.getBoundingClientRect();
+
+                tooltipEl.style.opacity = "1";
+                tooltipEl.style.left = left + window.scrollX + tooltip.caretX + "px";
+                tooltipEl.style.top = top + window.scrollY + tooltip.caretY + "px";
+                tooltipEl.style.transform = "translate(-50%, calc(-100% - 12px))";
+              },
+            },
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: {
+                font: { family: '"IRANSansX", arial, sans-serif' },
+                color: "#131722",
+                maxTicksLimit: 12,
+                maxRotation: 0,
+                callback: function (value, index) {
+                  const ts = timestamps[index];
+                  if (!ts) return "";
+                  return new Intl.DateTimeFormat("fa-IR", { month: "long", year: "2-digit" }).format(
+                    new Date(ts * 1000),
+                  );
+                },
+              },
+            },
+            y: {
+              position: "left",
+              border: { dash: [4, 4] },
+              grid: { color: "#f4edef" },
+              ticks: {
+                font: { family: '"IRANSansX", arial, sans-serif' },
+                color: "#131722",
+                callback: (value) => toFarsiDigits(value),
+              },
+            },
+          },
+        },
+      });
+    }
+  }
+
+  if (!customElements.get("dynamic-fund-chart")) {
+    customElements.define("dynamic-fund-chart", DynamicFundChart);
+  }
+</script>
+
+<style>
+  .fund-card {
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 16px;
+  }
+
+  .loading-overlay {
+    inset: 0;
+    position: absolute;
+    direction: rtl;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: var(--color-brand);
+    z-index: 10;
+  }
+
+  .chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    direction: ltr;
+    padding: 24px 16px;
+    border-radius: 8px;
+    background-color: var(--background-color-fg-primary);
+    font-family: var(--default-font-family);
+  }
+</style>
