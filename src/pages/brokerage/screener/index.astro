@@ -144,7 +144,10 @@ const faqs = [
       <Image src={SectionBanner1Img} alt="" class="h-auto w-full" loading="lazy" />
 
       <!-- Features Section -->
-      <FeaturesGrid features={features} rowPattern={[2, 2]} />
+      <div class="features mb-5">
+        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های اصلی</h2>
+        <FeaturesGrid features={features} rowPattern={[2, 2]} />
+      </div>
       <!-- Benefits Section -->
 
       <article class="flex flex-col gap-3">
@@ -190,7 +193,7 @@ const faqs = [
         </div>
         <a
           href={siteUrl("/brokerage/neo-trader")}
-          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 w-40"
         >
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />
