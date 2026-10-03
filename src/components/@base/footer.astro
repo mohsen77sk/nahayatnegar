@@ -14,7 +14,6 @@ const columns = [
       { label: "سامانه معاملاتی نئوتردیدر", href: "/" },
       { label: "سامانه معاملاتی پرو تریدر", href: "/" },
       { label: "آموزش", href: "/" },
-      { label: "کد بورسی و سجام", href: "/" },
     ],
   },
   {
@@ -97,10 +96,10 @@ const columns = [
               <span class="ltr">مسیریابی رو نقشه</span>
             </a>
             <div class="flex gap-2">
-              <a class="neo-button neo-icon-button neo-button-primary" href="/" aria-label="واتساپ">
+              <a class="neo-button neo-icon-button neo-button-neutral" href="/" aria-label="واتساپ">
                 <Whatsapp aria-hidden="true" />
               </a>
-              <a class="neo-button neo-icon-button neo-button-primary" href="/" aria-label="اینستاگرام">
+              <a class="neo-button neo-icon-button neo-button-neutral" href="/" aria-label="اینستاگرام">
                 <Instagram aria-hidden="true" />
               </a>
             </div>
@@ -112,9 +111,9 @@ const columns = [
             <div class="flex flex-col items-start gap-4">
               <span class="font-semibold text-brand">{title}</span>
 
-              <nav class="flex flex-col font-bold">
+              <nav class="flex flex-col gap-4 font-bold">
                 {links.map(({ label, href }) => (
-                  <a class="py-4" href={siteUrl(href)}>
+                  <a class="neo-button neo-button-neutral justify-start" href={siteUrl(href)}>
                     {label}
                   </a>
                 ))}
