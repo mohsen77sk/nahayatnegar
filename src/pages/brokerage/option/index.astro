@@ -21,12 +21,19 @@ import Layer from "@assets/icons/iconsax/outline/layer.svg";
 // Images
 import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Option/option-hero.png";
 import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Option/option-hero-mob.png";
-import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Mockups/laptop.png";
-import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Mockups/imac.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/option/Mockups/laptop.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/option/Mockups/imac.png";
 import Section3BannerImg from "@assets/images/Brokerage/1-Neo Trader/Option/banner.png";
 import Section3BannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Option/Banner.png";
 
-const breadCrumbItems = [{ label: "خانه", href: "/" }, { label: "نئوتریدر", href: "/" }, { label: "اختیار معامله" }];
+const breadCrumbItems = [
+  {
+    label: "کارگزاری",
+    href: "/brokerage",
+  },
+  { label: "نئوتریدر", href: "/brokerage/neo-trader" },
+  { label: "اختیار معامله" },
+];
 
 const features = [
   {
@@ -175,7 +182,7 @@ const faqs = [
       <section class="features mb-5">
         <h2 class="text-heading-medium pb-5 leading-10">ویژگی‌های اصلی</h2>
         <div class="mx-auto flex max-w-7xl flex-col gap-2">
-          <div class="flex flex-col">
+          <div class="flex flex-col gap-3">
             {features.map((feature) => (
               <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
             ))}
@@ -230,10 +237,10 @@ const faqs = [
 
       <!-- Footer CTA -->
       <div
-        class="flex flex-col p-6 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        class="flex flex-col p-6 lg:h-72 justify-start bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
         style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
       >
-        <div class="text-white flex flex-col gap-2 lg:w-94">
+        <div class="text-white flex flex-col gap-2">
           <h1 class="text-heading-medium leading-10">معاملات اختیار معامله را حرفه‌ای‌تر تجربه کنید</h1>
           <p class="text-body-large leading-8">
             قراردادها را بررسی کنید، استراتژی‌های معاملاتی خود را بسازید و با ابزارهای تحلیلی حرفه‌ای تصمیم‌های دقیق‌تری
@@ -242,7 +249,7 @@ const faqs = [
         </div>
         <a
           href={siteUrl("/brokerage/neo-trader")}
-          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 w-40"
         >
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />

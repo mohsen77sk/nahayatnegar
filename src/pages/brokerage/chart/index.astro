@@ -28,14 +28,17 @@ import Eye from "@assets/icons/iconsax/outline/eye.svg";
 // Images
 import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero.png";
 import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero-mob.png";
-import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Mockups/laptop.png";
-import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Mockups/imac.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/laptop.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/imac.png";
 import Section3BannerImg from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner.png";
 import Section3BannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner-mob.png";
 
 const breadCrumbItems = [
-  { label: "خانه", href: "/" },
-  { label: "نئوتریدر", href: "/" },
+  {
+    label: "کارگزاری",
+    href: "/brokerage",
+  },
+  { label: "نئوتریدر", href: "/brokerage/neo-trader" },
   { label: "تحلیل تکنیکال و نمودارهای پیشرفته" },
 ];
 
@@ -56,8 +59,10 @@ const features = [
   },
   {
     title: "نمودارهای تعدیل‌شده",
-    description:
-      "سابقه قیمت را با در نظر گرفتن رویدادهای مؤثر بررسی کنید.امکان مشاهده نمودار با انواع تعدیل‌های قیمتی وجود دارد تا بتوانید سابقه قیمت را متناسب با نوع تحلیل خود بررسی کنید.همچنین نتایج مجامع شرکت موردنظر شما هم روی نمودار مشخص می‌شوند تا رویدادهای مهم اثرگذار بر سابقه قیمت را در کنار داده‌های نموداری مشاهده کنید.",
+    description: `<p class="leading-7">سابقه قیمت را با در نظر گرفتن رویدادهای مؤثر بررسی کنید.</p>
+    <p class="leading-7">امکان مشاهده نمودار با انواع تعدیل‌های قیمتی وجود دارد تا بتوانید سابقه قیمت را متناسب با نوع تحلیل خود بررسی کنید.</p>
+    <p class="leading-7">همچنین نتایج مجامع شرکت موردنظر شما هم روی نمودار مشخص می‌شوند تا رویدادهای مهم اثرگذار بر سابقه قیمت را در کنار داده‌های نموداری مشاهده کنید.
+</p>`,
     icon: FavoriteChart,
     gridClass: "lg:col-start-1 lg:row-start-2 lg:row-span-2",
   },
@@ -70,8 +75,8 @@ const features = [
   },
   {
     title: "ثبت معاملات روی نمودار",
-    description:
-      "نقاط خرید و فروش انجام‌شده توسط شما روی نمودار مشخص می‌شوند.به این ترتیب، حتی بعد از گذشت زمان می‌توانید به نمودار یک نماد مراجعه کنید و ببینید معاملات خود را در چه نقاطی انجام داده‌اید و وضعیت قیمت در آن زمان چگونه بوده است.",
+    description: `<p class="leading-7">نقاط خرید و فروش انجام‌شده توسط شما روی نمودار مشخص می‌شوند.</p>
+    <p class="leading-7">به این ترتیب، حتی بعد از گذشت زمان می‌توانید به نمودار یک نماد مراجعه کنید و ببینید معاملات خود را در چه نقاطی انجام داده‌اید و وضعیت قیمت در آن زمان چگونه بوده است.   </p>`,
     icon: ChartSuccess,
     gridClass: "lg:col-start-2 lg:col-span-2 lg:row-start-3",
   },
@@ -164,7 +169,7 @@ const faqs = [
 
     <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
       <BreadCrumb items={breadCrumbItems} />
-      <div>
+      <article>
         <h2 class="text-heading-medium leading-10">ابزار تحلیل تکنیکال چیست؟</h2>
 
         <p class="text-body-large leading-8">
@@ -176,7 +181,7 @@ const faqs = [
           این ابزار بر پایه TradingView ارائه شده و امکانات متنوعی برای بررسی نمودار در اختیار شما قرار می‌دهد؛ از
           تایم‌فریم‌های مختلف و انواع تعدیل قیمتی گرفته تا اندیکاتورها، اسیلاتورها و نمایش رویدادهای مهم معاملاتی.
         </p>
-      </div>
+      </article>
 
       <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
 
@@ -238,7 +243,7 @@ const faqs = [
         </div>
         <a
           href={siteUrl("/brokerage/neo-trader")}
-          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 w-40"
         >
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />

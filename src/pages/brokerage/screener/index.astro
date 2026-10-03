@@ -1,7 +1,201 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { siteUrl } from "@utils/url";
+
+// Layout & Custom Components
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import Banner from "@components/banner.astro";
+import TimeLine from "@components/time-line.astro";
+import Faq from "@components/faq.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+
+// Icons
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import DocumentFilter from "@assets/icons/iconsax/outline/document-filter.svg";
+import FilterEdit from "@assets/icons/iconsax/outline/filter-edit.svg";
+import FilterAdd from "@assets/icons/iconsax/outline/filter-add.svg";
+import Box from "@assets/icons/iconsax/outline/box-2.svg";
+import Search from "@assets/icons/iconsax/outline/search-normal.svg";
+
+// Images
+import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Screener/Screener-hero.png";
+import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Screener/Screener-hero-mob.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Screener/Mockups/laptop.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Screener/Mockups/imac.png";
+import Section3BannerImg from "@assets/images/Brokerage/1-Neo Trader/Screener/banner.png";
+import Section3BannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Screener/banner-mob.png";
+
+const breadCrumbItems = [
+  {
+    label: "کارگزاری",
+    href: "/brokerage",
+  },
+  { label: "نئوتریدر", href: "/brokerage/neo-trader" },
+  { label: "اسکرینر" },
+];
+
+const features = [
+  {
+    title: "فیلترهای آماده برای شروع سریع",
+    description:
+      "برای موقعیت‌هایی که می‌خواهید بدون ساختن فیلتر از ابتدا بازار را بررسی کنید، فیلترهای آماده در اختیار شما قرار دارند و می‌توانید با استفاده از آن‌ها سریع‌تر به مجموعه نمادهای موردنظر برسید.",
+    icon: DocumentFilter,
+  },
+  {
+    title: "ترکیب پارامترها و ساخت فیلتر اختصاصی",
+    description:
+      "معیارهای مختلف موجود در اسکرینر را در کنار یکدیگر قرار دهید و فیلتر مخصوص خودتان را بسازید. به این ترتیب، جست‌وجوی بازار می‌تواند دقیقاً بر اساس معیارهایی شکل بگیرد که برای روش تحلیل و معاملات شما اهمیت دارند.",
+    icon: FilterEdit,
+  },
+  {
+    title: "ذخیره فیلترهای شخصی",
+    description:
+      "فیلترهایی که ساخته‌اید را ذخیره کنید و در بررسی‌های بعدی دوباره به آن‌ها دسترسی داشته باشید. به این ترتیب، لازم نیست ترکیب موردنظر خود را هر بار از ابتدا ایجاد کنید.",
+    icon: FilterAdd,
+  },
+  {
+    title: "اسکرینر اختصاصی برای بازارهای مختلف",
+    description:
+      "برای هر بازار، معیارهای متناسب با همان بازار را در اختیار داشته باشید؛ از سهام و صندوق‌های سرمایه‌گذاری تا اختیار معامله.",
+    icon: Box,
+  },
+];
+
+const timeline = {
+  title: "کاربرد اسکرینر",
+  steps: [
+    {
+      title: "ایده معاملاتی خود را به یک جست‌وجو تبدیل کنید",
+      description:
+        "ممکن است به دنبال مجموعه‌ای از نمادها با شرایط مشخص باشید. به‌جای بررسی تک‌تک نمادها، معیارهای موردنظر را در اسکرینر تعریف کنید و نتیجه را در قالب فهرستی از نمادهای منطبق ببینید.",
+      icon: Search,
+    },
+  ],
+};
+
+const faqs = [
+  {
+    title: "اگر هیچ فیلتر آماده‌ای متناسب با نیاز من نباشد، چه کار کنم؟",
+    description:
+      "می‌توانید به‌جای استفاده از فیلترهای آماده، پارامترهای موجود را با یکدیگر ترکیب کنید و فیلتر اختصاصی خودتان را بسازید.",
+  },
+  {
+    title: "اگر یک فیلتر را برای بررسی روزانه بازار ساخته باشم، باید هر روز دوباره آن را تنظیم کنم؟",
+    description: "خیر، فیلترهای ساخته‌شده قابلیت ذخیره دارند و می‌توانید در مراجعات بعدی از همان فیلتر استفاده کنید.",
+  },
+  {
+    title: "نتیجه اسکرینر ثابت است یا با تغییر اطلاعات بازار تغییر می‌کند؟",
+    description:
+      "اگر پارامترهای مورد استفاده در فیلتر از اطلاعات جاری بازار باشند، با تغییر داده‌های بازار ممکن است نمادهای موجود در نتیجه اسکرینر نیز تغییر کنند.",
+  },
+  {
+    title: "چرا یک نماد که قبلاً در نتیجه فیلتر بوده، بعداً از نتایج حذف می‌شود؟",
+    description:
+      "زیرا ممکن است اطلاعات آن نماد تغییر کرده و دیگر شرایط تعیین‌شده در فیلتر را نداشته باشد. اسکرینر بر اساس شرایط فعلی داده‌ها، نمادهای منطبق را نمایش می‌دهد.",
+  },
+  {
+    title: "آیا می‌توانم برای پیدا کردن فرصت‌های معاملاتی از اسکرینر استفاده کنم؟",
+    description:
+      "بله. اسکرینر برای غربال کردن نمادها بر اساس معیارهای موردنظر شماست؛ نتیجه آن می‌تواند نقطه شروعی برای بررسی دقیق‌تر نمادها و تصمیم‌گیری معاملاتی باشد، نه جایگزین تحلیل معامله‌گر.",
+  },
+];
 ---
 
-<Layout title="Screener">
-  <main></main>
+<Layout title="اسکرینر">
+  <main>
+    <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
+      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
+        <span class="text-display-small text-white text-center lg:text-start">اسکرینر بازار</span>
+        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+          بجای جستجوی صدها نماد، اجازه دهید معیارهای شما جستجو کند از بین تعداد زیادی از نمادهای بازار، گزینه‌هایی را
+          پیدا کنید که با معیارهای موردنظر شما مطابقت دارند؛ با فیلترهای آماده یا ترکیبی که خودتان می‌سازید.
+        </p>
+        <div class="flex gap-4">
+          <a href={siteUrl("/brokerage/neo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
+            ورود به نئوتریدر <ArrowLeft aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </SectionLayer2>
+
+    <!-- Content Section -->
+
+    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
+      <BreadCrumb items={breadCrumbItems} />
+      <div>
+        <h2 class="text-heading-medium leading-10">اسکرینر بازار چیست؟</h2>
+
+        <p class="text-body-large leading-8">
+          وقتی تعداد زیادی نماد برای بررسی وجود دارد، پیدا کردن گزینه‌های مناسب با جست‌وجوی دستی زمان زیادی می‌گیرد.
+          اسکرینر بازار این فرآیند را به یک جست‌وجوی هدفمند تبدیل می‌کند.
+        </p>
+        <p class="text-body-large leading-8">
+          در نئوتریدر می‌توانید از فیلترهای آماده استفاده کنید یا از میان پارامترهای موجود، ترکیب دلخواه خود را بسازید و
+          نمادهایی را پیدا کنید که با مجموعه شرایط انتخابی شما مطابقت دارند.
+        </p>
+        <p class="text-body-large leading-8">
+          فیلترهای ساخته‌شده نیز قابل ذخیره هستند تا معیارهایی که برای بررسی‌های مکرر بازار تعریف کرده‌اید، همیشه آماده
+          استفاده باشند.
+        </p>
+      </div>
+
+      <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
+
+      <!-- Features Section -->
+      <FeaturesGrid features={features} rowPattern={[2, 2]} />
+      <!-- Benefits Section -->
+
+      <article class="flex flex-col gap-3">
+        <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
+        <p class="text-body-medium text-secondary leading-7">به‌جای جست‌وجوی دستی، بازار را غربال کنید</p>
+
+        <p class="text-body-medium text-secondary leading-7">
+          در بازاری با تعداد زیادی نماد، بررسی تک‌تک گزینه‌ها روش کارآمدی برای پیدا کردن موقعیت‌های موردنظر نیست.
+        </p>
+        <p class="text-body-medium text-secondary leading-7">
+          اسکرینر به شما اجازه می‌دهد معیارهای جست‌وجو را خودتان تعریف کنید و دامنه بررسی را کوچک‌تر کنید. مهم‌تر از آن،
+          فیلتر شما محدود به یک معیار نیست؛ می‌توانید چند پارامتر را با هم ترکیب کنید تا نتیجه به شرایطی که در ذهن دارید
+          نزدیک‌تر شود.
+        </p>
+        <p class="text-body-medium text-secondary leading-7">
+          در نتیجه، اسکرینر از یک ابزار ساده برای پیدا کردن نمادها فراتر می‌رود و به بخشی از فرآیند تحلیل و جست‌وجوی
+          معاملاتی شما تبدیل می‌شود.
+        </p>
+      </article>
+
+      <Banner>
+        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">
+          بجای جستجوی صدها نماد، اجازه دهید معیارهای شما جستجو کند
+        </h6>
+      </Banner>
+
+      <TimeLine steps={timeline.steps} title={timeline.title} />
+      <Image src={SectionBanner2Img} alt="" class="w-full h-auto" loading="lazy" />
+
+      <Faq faqs={faqs} />
+
+      <!-- Footer CTA -->
+      <div
+        class="flex flex-col p-6 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
+      >
+        <div class="text-white flex flex-col gap-2 lg:w-94">
+          <h1 class="text-heading-medium leading-10">بازار را با معیارهای خودتان جست‌وجو کنید</h1>
+          <p class="text-body-large leading-8">
+            شرایط موردنظر خود را تعریف کنید، فیلتر اختصاصی بسازید و از میان نمادهای بازار، گزینه‌های منطبق با معیارهای
+            خود را سریع‌تر پیدا کنید.
+          </p>
+        </div>
+        <a
+          href={siteUrl("/brokerage/neo-trader")}
+          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
+        >
+          ورود به نئوتریدر
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </div>
+    </section>
+  </main>
 </Layout>
