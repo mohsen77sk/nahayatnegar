@@ -141,9 +141,9 @@ const faqs = [
 <Layout title="دیده‌بان">
   <main>
     <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
-      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
-        <span class="text-display-small text-white text-center lg:text-start">دیده‌بان بازار </span>
-        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+      <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
+        <span class="text-center text-display-small text-white lg:text-start">دیده‌بان بازار </span>
+        <p class="text-center text-body-large leading-8 text-white lg:text-start">
           دیده‌بان بازار به شما امکان می‌دهد نمادهای موردنظر خود را در فهرست‌های شخصی یا دسته‌بندی‌های آماده قرار دهید و
           اطلاعات آن‌ها را به‌صورت لحظه‌ای دنبال کنید.
         </p>
@@ -157,7 +157,7 @@ const faqs = [
 
     <!-- Content Section -->
 
-    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
+    <section class="mx-auto flex max-w-200 flex-col gap-6 p-4">
       <BreadCrumb items={breadCrumbItems} />
       <div>
         <h2 class="text-heading-medium leading-10">دیده‌بان بازار چیست؟</h2>
@@ -172,18 +172,20 @@ const faqs = [
         </p>
       </div>
 
-      <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
+      <Image src={SectionBanner1Img} alt="" class="h-auto w-full" loading="lazy" />
 
       <!-- Features Section -->
       <section class="features mb-5">
-        <h2 class="text-heading-medium pb-5 leading-10">ویژگی‌های اصلی</h2>
-        <div class="mx-auto flex max-w-7xl flex-col gap-2">
+        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های اصلی</h2>
+        <div class="max-w-7xl mx-auto flex flex-col gap-2">
           <div class="flex flex-col gap-2 lg:grid lg:grid-cols-[1fr_0.45fr_1.1fr] lg:grid-rows-[auto_auto_auto_auto]">
-            {features.map((feature) => (
-              <div class={`flex w-full ${feature.gridClass}`} dir="rtl">
-                <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
-              </div>
-            ))}
+            {
+              features.map((feature) => (
+                <div class={`flex w-full ${feature.gridClass}`} dir="rtl">
+                  <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
+                </div>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -192,38 +194,38 @@ const faqs = [
 
       <article class="flex flex-col gap-3">
         <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
-        <p class="text-body-medium text-secondary leading-7">اطلاعات موردنظر، بدون جست‌وجوی مداوم.</p>
+        <p class="text-body-medium leading-7 text-secondary">اطلاعات موردنظر، بدون جست‌وجوی مداوم.</p>
 
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           وقتی چندین نماد را دنبال می‌کنید، جابه‌جایی میان صفحات مختلف برای بررسی آن‌ها می‌تواند زمان‌بر باشد.
         </p>
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           دیده‌بان، نمادهای موردنظر شما و اطلاعات مهم آن‌ها را در یک محیط جمع می‌کند تا بتوانید تغییرات بازار را سریع‌تر
           دنبال کنید و در صورت نیاز، مستقیماً به اطلاعات هر نماد دسترسی داشته باشید.
         </p>
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           در کنار دیده‌بان‌های شخصی، فهرست‌های سیستمی نیز کمک می‌کنند بدون ایجاد و مدیریت دستی فهرست‌ها، گروه‌های مختلف
           بازار را دنبال کنید.
         </p>
       </article>
 
       <Banner>
-        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">
+        <h6 class="text-center text-title-large leading-relaxed text-blue-800">
           بازار را همانطور ببینید که برای شما اهمیت دارد
         </h6>
       </Banner>
 
       <TimeLine steps={timeline.steps} description={timeline.description} title={timeline.title} />
-      <Image src={SectionBanner2Img} alt="" class="w-full h-auto" loading="lazy" />
+      <Image src={SectionBanner2Img} alt="" class="h-auto w-full" loading="lazy" />
 
       <Faq faqs={faqs} />
 
       <!-- Footer CTA -->
       <div
-        class="flex flex-col p-6 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        class="flex h-72 flex-col justify-between gap-8 rounded-xl bg-fg-primary bg-(image:--bg-mobile) bg-cover bg-center p-6 lg:bg-(image:--bg-desktop)"
         style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
       >
-        <div class="text-white flex flex-col gap-2 lg:w-94">
+        <div class="flex flex-col gap-2 text-white lg:w-94">
           <h1 class="text-heading-medium leading-10">بازار را ساده‌تر دنبال کنید</h1>
           <p class="text-body-large leading-8">
             نمادهای موردنظر خود را در دیده‌بان قرار دهید و اطلاعات بازار را در یک محیط یکپارچه و لحظه‌ای دنبال کنید.

@@ -22,8 +22,8 @@ import Search from "@assets/icons/iconsax/outline/search-normal.svg";
 import Eye from "@assets/icons/iconsax/outline/eye.svg";
 
 // Images
-import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Portfolio-hero.png";
-import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Portfolio-hero-mob.png";
+import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/portfolio-hero.png";
+import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/portfolio-hero-mob.png";
 import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Mockups/laptop.png";
 import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Mockups/imac.png";
 import Section3BannerImg from "@assets/images/Brokerage/1-Neo Trader/Portfolio/banner.png";
@@ -120,9 +120,9 @@ const faqs = [
 <Layout title="مدیریت پرتفوی">
   <main>
     <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
-      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
-        <span class="text-display-small text-white text-center lg:text-start">مدیریت پرتفوی </span>
-        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+      <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
+        <span class="text-center text-display-small text-white lg:text-start">مدیریت پرتفوی </span>
+        <p class="text-center text-body-large leading-8 text-white lg:text-start">
           از ارزش لحظه‌ای دارایی‌ها تا عملکرد سرمایه‌گذاری در بازه‌های زمانی مختلف؛ وضعیت پرتفوی خود را با جزئیات بیشتری
           بررسی کنید و اثر مجامع را نیز در محاسبات سود و زیان در نظر بگیرید.
         </p>
@@ -136,7 +136,7 @@ const faqs = [
 
     <!-- Content Section -->
 
-    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
+    <section class="mx-auto flex max-w-200 flex-col gap-6 p-4">
       <BreadCrumb items={breadCrumbItems} />
       <div>
         <h2 class="text-heading-medium leading-10">مدیریت پرتفوی چیست؟</h2>
@@ -152,7 +152,7 @@ const faqs = [
         </p>
       </div>
 
-      <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
+      <Image src={SectionBanner1Img} alt="" class="h-auto w-full" loading="lazy" />
 
       <!-- Features Section -->
       <FeaturesGrid features={features} rowPattern={[2, 3]} />
@@ -160,13 +160,13 @@ const faqs = [
 
       <article class="flex flex-col gap-3">
         <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
-        <p class="text-body-medium text-secondary leading-7">یک عدد، تمام داستان پرتفوی نیست .</p>
+        <p class="text-body-medium leading-7 text-secondary">یک عدد، تمام داستان پرتفوی نیست .</p>
 
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           ممکن است ارزش پرتفوی شما افزایش پیدا کرده باشد، اما بخشی از این تغییر حاصل عملکرد چند نماد خاص باشد؛ یا در یک
           صنعت سود مناسبی ایجاد شده باشد و صنعت دیگری عملکرد ضعیف‌تری داشته باشد.
         </p>
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           نئوتریدر به شما امکان می‌دهد به‌جای نگاه کردن به یک عدد کلی، عملکرد پرتفوی را تفکیک، مقایسه و در طول زمان
           بررسی کنید. این نگاه جزئی‌تر کمک می‌کند بدانید سرمایه‌گذاری شما دقیقاً چگونه عمل کرده و چه بخش‌هایی بیشترین
           نقش را در نتیجه نهایی داشته‌اند.
@@ -174,22 +174,22 @@ const faqs = [
       </article>
 
       <Banner>
-        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">
+        <h6 class="text-center text-title-large leading-relaxed text-blue-800">
           پرتفوی خود را فقط نبینید؛ عملکرد آن را بسنجید
         </h6>
       </Banner>
 
       <TimeLine steps={timeline.steps} description={timeline.description} title={timeline.title} />
-      <Image src={SectionBanner2Img} alt="" class="w-full h-auto" loading="lazy" />
+      <Image src={SectionBanner2Img} alt="" class="h-auto w-full" loading="lazy" />
 
       <Faq faqs={faqs} />
 
       <!-- Footer CTA -->
       <div
-        class="flex flex-col p-6 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        class="flex h-72 flex-col justify-between gap-8 rounded-xl bg-fg-primary bg-(image:--bg-mobile) bg-cover bg-center p-6 lg:bg-(image:--bg-desktop)"
         style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
       >
-        <div class="text-white flex flex-col gap-2 lg:w-94">
+        <div class="flex flex-col gap-2 text-white lg:w-94">
           <h1 class="text-heading-medium leading-10">عملکرد سرمایه‌گذاری خود را بهتر بشناسید</h1>
           <p class="text-body-large leading-8">
             ارزش پرتفوی و عملکرد سرمایه‌گذاری‌های خود را بررسی کنید و ببینید سرمایه شما در طول زمان چگونه عمل کرده است.

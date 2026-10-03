@@ -151,9 +151,9 @@ const faqs = [
 <Layout title="تحلیل تکنیکال و نمودارهای پیشرفته">
   <main>
     <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
-      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
-        <span class="text-display-small text-white text-center lg:text-start">تحلیل تکنیکال و نمودارهای پیشرفته </span>
-        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+      <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
+        <span class="text-center text-display-small text-white lg:text-start">تحلیل تکنیکال و نمودارهای پیشرفته </span>
+        <p class="text-center text-body-large leading-8 text-white lg:text-start">
           قیمت‌ها را به‌صورت لحظه‌ای دنبال کنید، با استفاده از اندیکاتورها و اسیلاتورها بازار را بررسی کنید و تحلیل‌های
           خود را روی نمودار ثبت و ذخیره کنید؛ همه در محیطی یکپارچه با سامانه معاملات.
         </p>
@@ -167,7 +167,7 @@ const faqs = [
 
     <!-- Content Section -->
 
-    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
+    <section class="mx-auto flex max-w-200 flex-col gap-6 p-4">
       <BreadCrumb items={breadCrumbItems} />
       <article>
         <h2 class="text-heading-medium leading-10">ابزار تحلیل تکنیکال چیست؟</h2>
@@ -183,21 +183,23 @@ const faqs = [
         </p>
       </article>
 
-      <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
+      <Image src={SectionBanner1Img} alt="" class="h-auto w-full" loading="lazy" />
 
       <!-- Features Section -->
       <section class="features mb-5">
-        <h2 class="text-heading-medium pb-5 leading-10">ویژگی‌های ابزار تحلیل تکنیکال</h2>
-        <div class="mx-auto flex max-w-7xl flex-col gap-2">
+        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های ابزار تحلیل تکنیکال</h2>
+        <div class="max-w-7xl mx-auto flex flex-col gap-2">
           <div
             dir="ltr"
             class="flex flex-col gap-2 lg:grid lg:grid-cols-[1fr_0.45fr_1.1fr] lg:grid-rows-[auto_auto_auto_auto]"
           >
-            {features.map((feature) => (
-              <div class={`flex w-full ${feature.gridClass}`} dir="rtl">
-                <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
-              </div>
-            ))}
+            {
+              features.map((feature) => (
+                <div class={`flex w-full ${feature.gridClass}`} dir="rtl">
+                  <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
+                </div>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -206,36 +208,36 @@ const faqs = [
 
       <article class="flex flex-col gap-3">
         <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           تحلیل تکنیکال زمانی کاربرد بیشتری دارد که بتوانید نتیجه آن را در کنار اطلاعات واقعی بازار و معاملات خود
           ببینید.
         </p>
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           در این ابزار، نمودار لحظه‌ای، ابزارهای تحلیل، معاملات انجام‌شده و تحلیل‌های قبلی شما در یک محیط در دسترس
           هستند. بنابراین برای بررسی یک نماد، تحلیل آن و مراجعه دوباره به تحلیل‌های گذشته، نیاز نیست میان ابزارها و
           محیط‌های مختلف جابه‌جا شوید.
         </p>
 
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           تحلیل خود را یک‌بار انجام دهید و هر زمان که به آن نماد بازگشتید، آن را ادامه دهید.
         </p>
       </article>
 
       <Banner>
-        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">از تحلیل تا معامله، در یک محیط</h6>
+        <h6 class="text-center text-title-large leading-relaxed text-blue-800">از تحلیل تا معامله، در یک محیط</h6>
       </Banner>
 
       <TimeLine steps={timeline.steps} title={timeline.title} />
-      <Image src={SectionBanner2Img} alt="" class="w-full h-auto" loading="lazy" />
+      <Image src={SectionBanner2Img} alt="" class="h-auto w-full" loading="lazy" />
 
       <Faq faqs={faqs} />
 
       <!-- Footer CTA -->
       <div
-        class="flex flex-col p-6 h-72 justify-between bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        class="flex h-72 flex-col justify-between gap-8 rounded-xl bg-fg-primary bg-(image:--bg-mobile) bg-cover bg-center p-6 lg:bg-(image:--bg-desktop)"
         style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
       >
-        <div class="text-white flex flex-col gap-2 lg:w-94">
+        <div class="flex flex-col gap-2 text-white lg:w-94">
           <h1 class="text-heading-medium leading-10">تحلیل کنید، تصمیم بگیرید، معامله کنید</h1>
           <p class="text-body-large leading-8">
             ابزارهای تحلیل تکنیکال، نمودارهای لحظه‌ای و تحلیل‌های خود را در کنار سامانه معاملات در اختیار داشته باشید.
@@ -243,7 +245,7 @@ const faqs = [
         </div>
         <a
           href={siteUrl("/brokerage/neo-trader")}
-          class="neo-button neo-button-fill-primary neo-button-large min-w-25 w-40"
+          class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25"
         >
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />

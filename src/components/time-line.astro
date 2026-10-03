@@ -18,24 +18,26 @@ const { title, description, steps } = Astro.props;
   <h2 class="text-heading-medium leading-10">{title}</h2>
   {description && <p class="text-body-medium text-secondary">{description}</p>}
   <div class="flex flex-col">
-    {steps.map((step) => {
-      const IconComponent = step.icon;
-      return (
-        <div class="group relative flex items-start gap-4 pb-10 last:pb-0">
-          <div class="z-10 flex items-start gap-4">
-            <div class="absolute top-6.5 right-6.5 -bottom-10 w-px -translate-x-1/2 border-r border-dashed border-secondary group-last:hidden" />
+    {
+      steps.map((step) => {
+        const IconComponent = step.icon;
+        return (
+          <div class="group relative flex items-start gap-4 pb-10 last:pb-0">
+            <div class="z-10 flex items-start gap-4">
+              <div class="absolute top-6.5 right-6.5 -bottom-10 w-px -translate-x-1/2 border-r border-dashed border-secondary group-last:hidden" />
 
-            <div class="z-10 flex h-13 w-13 shrink-0 items-center justify-center rounded-full bg-blue-100">
-              <IconComponent class="text-brand" />
+              <div class="z-10 flex h-13 w-13 shrink-0 items-center justify-center rounded-full bg-blue-100">
+                <IconComponent class="text-brand" />
+              </div>
+            </div>
+
+            <div class="flex min-w-0 flex-col gap-2">
+              <span class="text-title-medium"> {step.title}</span>
+              <span class="text-body-medium text-secondary">{step.description}</span>
             </div>
           </div>
-
-          <div class="flex min-w-0 flex-col gap-2">
-            <span class="text-title-medium"> {step.title}</span>
-            <span class="text-body-medium text-secondary">{step.description}</span>
-          </div>
-        </div>
-      );
-    })}
+        );
+      })
+    }
   </div>
 </div>

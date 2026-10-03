@@ -128,87 +128,89 @@ const mobileMenu = [
 
       <!-- Desktop Menu -->
       <nav class="hidden items-center gap-1 lg:flex lg:gap-2">
-        {menus.map((menu, i) => {
-          const isExternal = menu.link && (/^https?:\/\//i.test(menu.link) || menu.link.startsWith("//"));
-          return (
-            <div class="group relative">
-              <div class="menu-trigger text-base flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-2 text-white transition-all duration-300 hover:bg-[#1C2754]">
-                <a
-                  href={siteUrl(menu.link)}
-                  target={isExternal ? "_blank" : undefined}
-                  rel={isExternal ? "noopener noreferrer" : undefined}
-                >
-                  <span> {menu.title} </span>
-                </a>
-                {menu.subMenus && menu.subMenus.length > 0 && (
-                  <DownArrow class="block h-4 w-4 transition duration-300 group-hover:rotate-180" />
+        {
+          menus.map((menu, i) => {
+            const isExternal = menu.link && (/^https?:\/\//i.test(menu.link) || menu.link.startsWith("//"));
+            return (
+              <div class="group relative">
+                <div class="menu-trigger text-base flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-2 text-white transition-all duration-300 hover:bg-[#1C2754]">
+                  <a
+                    href={siteUrl(menu.link)}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                  >
+                    <span> {menu.title} </span>
+                  </a>
+                  {menu.subMenus && menu.subMenus.length > 0 && (
+                    <DownArrow class="block h-4 w-4 transition duration-300 group-hover:rotate-180" />
+                  )}
+                </div>
+
+                {menu?.subMenus && menu?.subMenus.length > 0 && (
+                  <div
+                    class="max-w[500px] pointer-events-none invisible absolute top-full right-0 flex w-max flex-col gap-4 rounded-2xl bg-white p-4 opacity-0 transition-[opacity,transform,visibility] duration-300 ease-out group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100"
+                    style={`min-width: ${menu.width}`}
+                  >
+                    <div class="absolute -top-2 right-10 h-2 w-4 border-r-7 border-b-7 border-l-7 border-r-transparent border-l-transparent" />
+
+                    <div class="grid grid-cols-2 gap-x-10">
+                      {menu.subMenus.map((sub, j) => {
+                        const Icon = sub.icon;
+                        return (
+                          <a
+                            href={siteUrl(sub.link)}
+                            target={isExternal ? "_blank" : undefined}
+                            rel={isExternal ? "noopener noreferrer" : undefined}
+                            class="flex min-h-12 min-w-0 items-center gap-3 rounded-lg px-4 py-3 text-body-small leading-5.25 transition-colors duration-150 hover:bg-hover-primary focus-visible:outline-none"
+                          >
+                            {Icon && <Icon class="shrink-0 text-brand" />}
+                            <span class="text-title-medium">{sub.title}</span>
+                          </a>
+                        );
+                      })}
+                    </div>
+                    <div class="text-xs space-y-3 rounded-lg bg-fg-secondary px-4 py-3 pt-4">
+                      <div class="flex items-center gap-3">
+                        <div class="font-bold">دفتر مرکزی کارگزاری</div>
+                      </div>
+
+                      <div class="flex items-stretch gap-6">
+                        <div class="flex flex-col gap-1">
+                          <div class="flex items-start gap-2.5 p-2">
+                            <Location class="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                            <span class="text-body-small wrap-normal">
+                              تهران، خیابان ملاصدرا، شیخ بهایی جنوبی، پلاک ۳۱
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-2.5 p-2">
+                            <Phone class="h-4 w-4 shrink-0 text-brand" />
+                            <a href="tel:02184450" class="ltr text-body-small">
+                              ۰۲۱ ۸۴۴۵۰
+                            </a>
+                          </div>
+                          <div class="flex items-center gap-2.5 p-2">
+                            <Sms class="h-4 w-4 shrink-0 text-brand" />
+                            <a href="mailto:info@nahayatnegar.com" class="text-body-small">
+                              Info@nahayatnegar.com
+                            </a>
+                          </div>
+                        </div>
+                        <div class="align-stretch relative w-56 shrink-0 justify-center overflow-hidden rounded-lg">
+                          <Image
+                            src={AboutUsMenuImg}
+                            alt="دفتر مرکزی نهایت‌نگر"
+                            class="h-full w-full object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
-
-              {menu?.subMenus && menu?.subMenus.length > 0 && (
-                <div
-                  class="max-w[500px] pointer-events-none invisible absolute top-full right-0 flex w-max flex-col gap-4 rounded-2xl bg-white p-4 opacity-0 transition-[opacity,transform,visibility] duration-300 ease-out group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100"
-                  style={`min-width: ${menu.width}`}
-                >
-                  <div class="absolute -top-2 right-10 h-2 w-4 border-r-7 border-b-7 border-l-7 border-r-transparent border-l-transparent" />
-
-                  <div class="grid grid-cols-2 gap-x-10">
-                    {menu.subMenus.map((sub, j) => {
-                      const Icon = sub.icon;
-                      return (
-                        <a
-                          href={siteUrl(sub.link)}
-                          target={isExternal ? "_blank" : undefined}
-                          rel={isExternal ? "noopener noreferrer" : undefined}
-                          class="flex min-h-12 min-w-0 items-center gap-3 rounded-lg px-4 py-3 text-body-small leading-5.25 transition-colors duration-150 hover:bg-hover-primary focus-visible:outline-none"
-                        >
-                          {Icon && <Icon class="shrink-0 text-brand" />}
-                          <span class="text-title-medium">{sub.title}</span>
-                        </a>
-                      );
-                    })}
-                  </div>
-                  <div class="text-xs space-y-3 rounded-lg bg-fg-secondary px-4 py-3 pt-4">
-                    <div class="flex items-center gap-3">
-                      <div class="font-bold">دفتر مرکزی کارگزاری</div>
-                    </div>
-
-                    <div class="flex items-stretch gap-6">
-                      <div class="flex flex-col gap-1">
-                        <div class="flex items-start gap-2.5 p-2">
-                          <Location class="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                          <span class="text-body-small wrap-normal">
-                            تهران، خیابان ملاصدرا، شیخ بهایی جنوبی، پلاک ۳۱
-                          </span>
-                        </div>
-                        <div class="flex items-center gap-2.5 p-2">
-                          <Phone class="h-4 w-4 shrink-0 text-brand" />
-                          <a href="tel:02184450" class="ltr text-body-small">
-                            ۰۲۱ ۸۴۴۵۰
-                          </a>
-                        </div>
-                        <div class="flex items-center gap-2.5 p-2">
-                          <Sms class="h-4 w-4 shrink-0 text-brand" />
-                          <a href="mailto:info@nahayatnegar.com" class="text-body-small">
-                            Info@nahayatnegar.com
-                          </a>
-                        </div>
-                      </div>
-                      <div class="align-stretch relative w-56 shrink-0 justify-center overflow-hidden rounded-lg">
-                        <Image
-                          src={AboutUsMenuImg}
-                          alt="دفتر مرکزی نهایت‌نگر"
-                          class="h-full w-full object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
+            );
+          })
+        }
       </nav>
 
       <!-- Desktop CTA -->
@@ -252,17 +254,19 @@ const mobileMenu = [
   <!-- Drawer Content -->
   <div class="flex-1 space-y-6 overflow-y-auto px-4 py-4">
     <ul class="space-y-1">
-      {mobileMenu.map((menu) => {
-        const Icon = menu.icon;
-        return (
-          <li class="before:hidden">
-            <a class="flex items-center gap-3 rounded-xl px-5 py-3 transition-colors" href={siteUrl(menu.link)}>
-              {Icon && <Icon class="shrink-0 text-brand" />}
-              <span class="text-title-medium">{menu.title}</span>
-            </a>
-          </li>
-        );
-      })}
+      {
+        mobileMenu.map((menu) => {
+          const Icon = menu.icon;
+          return (
+            <li class="before:hidden">
+              <a class="flex items-center gap-3 rounded-xl px-5 py-3 transition-colors" href={siteUrl(menu.link)}>
+                {Icon && <Icon class="shrink-0 text-brand" />}
+                <span class="text-title-medium">{menu.title}</span>
+              </a>
+            </li>
+          );
+        })
+      }
     </ul>
 
     <!-- Contact / Info Section -->

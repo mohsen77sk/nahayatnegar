@@ -143,9 +143,9 @@ const faqs = [
 <Layout title="اختیار معامله">
   <main>
     <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
-      <div class="flex flex-col items-center justify-center gap-8 flex-1 lg:items-start">
-        <span class="text-display-small text-white text-center lg:text-start">معاملات اختیار معامله</span>
-        <p class="text-body-large text-white text-center leading-8 lg:text-start">
+      <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
+        <span class="text-center text-display-small text-white lg:text-start">معاملات اختیار معامله</span>
+        <p class="text-center text-body-large leading-8 text-white lg:text-start">
           NeoTrader امکانات موردنیاز معاملات اختیار معامله را از بررسی قراردادها و تحلیل شرایط بازار تا ساخت
           استراتژی‌های معاملاتی در اختیار معامله‌گران قرار می‌دهد.
         </p>
@@ -159,7 +159,7 @@ const faqs = [
 
     <!-- Content Section -->
 
-    <section class="flex flex-col p-4 max-w-200 mx-auto gap-6">
+    <section class="mx-auto flex max-w-200 flex-col gap-6 p-4">
       <BreadCrumb items={breadCrumbItems} />
       <div>
         <h2 class="text-heading-medium leading-10">معاملات اختیار معامله چیست؟</h2>
@@ -176,16 +176,18 @@ const faqs = [
         </p>
       </div>
 
-      <Image src={SectionBanner1Img} alt="" class="w-full h-auto" loading="lazy" />
+      <Image src={SectionBanner1Img} alt="" class="h-auto w-full" loading="lazy" />
 
       <!-- Features Section -->
       <section class="features mb-5">
-        <h2 class="text-heading-medium pb-5 leading-10">ویژگی‌های اصلی</h2>
-        <div class="mx-auto flex max-w-7xl flex-col gap-2">
+        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های اصلی</h2>
+        <div class="max-w-7xl mx-auto flex flex-col gap-2">
           <div class="flex flex-col gap-3">
-            {features.map((feature) => (
-              <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
-            ))}
+            {
+              features.map((feature) => (
+                <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
+              ))
+            }
           </div>
         </div>
       </section>
@@ -194,53 +196,53 @@ const faqs = [
 
       <article class="flex flex-col gap-3">
         <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           در معاملات اختیار معامله، تنها مشاهده قیمت قرارداد برای تصمیم‌گیری کافی نیست و عوامل مختلفی مانند زمان
           باقی‌مانده تا سررسید، نوسان ضمنی و پارامترهای تحلیلی اهمیت دارند.
         </p>
-        <p class="text-body-medium text-secondary leading-8">
+        <p class="text-body-medium leading-8 text-secondary">
           NeoTrader با ارائه اطلاعات کامل قراردادها، ابزارهای تحلیل اختیار و امکانات ساخت استراتژی، به معامله‌گران کمک
           می‌کند فرصت‌های معاملاتی را بهتر بررسی کنند و تصمیم‌های خود را بر اساس داده‌های بیشتری انجام دهند.
         </p>
-        <p class="text-body-medium text-secondary leading-8">
+        <p class="text-body-medium leading-8 text-secondary">
           سادگی استفاده از زنجیره قرارداد، دسترسی سریع به اطلاعات تحلیلی و فرآیندهای ساده‌تر برای مدیریت قراردادها،
           تجربه معامله اختیار معامله را برای کاربران حرفه‌ای بهبود می‌دهد.
         </p>
       </article>
 
       <Banner>
-        <h6 class="text-title-large text-center text-blue-800 leading-relaxed">
+        <h6 class="text-center text-title-large leading-relaxed text-blue-800">
           همه ابزارهای مورد نیاز معامله گران اختیار، در یک محیط واحد
         </h6>
       </Banner>
 
       <article class="flex flex-col">
         <h2 class="text-heading-medium leading-10">نحوه استفاده و کاربرد</h2>
-        <p class="text-body-medium text-secondary leading-7">
+        <p class="text-body-medium leading-7 text-secondary">
           معامله‌گران اختیار معامله می‌توانند قراردادهای مختلف را در زنجیره قرارداد بررسی کنند، شرایط آن‌ها را با
           استفاده از اطلاعات تحلیلی موجود مقایسه کنند و متناسب با دیدگاه معاملاتی خود، قرارداد یا استراتژی موردنظر را
           انتخاب کنند.
         </p>
-        <p class="text-body-medium text-secondary leading-8">
+        <p class="text-body-medium leading-8 text-secondary">
           برای معامله‌گران حرفه‌ای، امکان بررسی هم‌زمان چند پارامتر مانند قیمت قرارداد، سررسید، IV، یونانی‌ها و موقعیت
           باز، دید کامل‌تری نسبت به شرایط بازار اختیار ایجاد می‌کند.
         </p>
-        <p class="text-body-medium text-secondary leading-8">
+        <p class="text-body-medium leading-8 text-secondary">
           همچنین امکان بررسی موقعیت‌های معاملاتی موجود، محاسبه معیارهای کلیدی و مدیریت بهتر قراردادهای اختیار فراهم شده
           است.
         </p>
       </article>
 
-      <Image src={SectionBanner2Img} alt="" class="w-full h-auto" loading="lazy" />
+      <Image src={SectionBanner2Img} alt="" class="h-auto w-full" loading="lazy" />
 
       <Faq faqs={faqs} />
 
       <!-- Footer CTA -->
       <div
-        class="flex flex-col p-6 lg:h-72 justify-start bg-fg-primary rounded-xl gap-8 bg-cover bg-center bg-(image:--bg-mobile) lg:bg-(image:--bg-desktop)"
+        class="flex flex-col justify-start gap-8 rounded-xl bg-fg-primary bg-(image:--bg-mobile) bg-cover bg-center p-6 lg:h-72 lg:bg-(image:--bg-desktop)"
         style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
       >
-        <div class="text-white flex flex-col gap-2">
+        <div class="flex flex-col gap-2 text-white">
           <h1 class="text-heading-medium leading-10">معاملات اختیار معامله را حرفه‌ای‌تر تجربه کنید</h1>
           <p class="text-body-large leading-8">
             قراردادها را بررسی کنید، استراتژی‌های معاملاتی خود را بسازید و با ابزارهای تحلیلی حرفه‌ای تصمیم‌های دقیق‌تری
@@ -249,7 +251,7 @@ const faqs = [
         </div>
         <a
           href={siteUrl("/brokerage/neo-trader")}
-          class="neo-button neo-button-fill-primary neo-button-large min-w-25 w-40"
+          class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25"
         >
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />
