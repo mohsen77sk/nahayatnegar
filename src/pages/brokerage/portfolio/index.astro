@@ -10,6 +10,7 @@ import TimeLine from "@components/time-line.astro";
 import Faq from "@components/faq.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
+import BannerCard from "@components/bannerCard.astro";
 
 // Icons
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
@@ -26,8 +27,8 @@ import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/portfol
 import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/portfolio-hero-mob.png";
 import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Mockups/laptop.png";
 import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Mockups/imac.png";
-import Section3BannerImg from "@assets/images/Brokerage/1-Neo Trader/Portfolio/banner.png";
-import Section3BannerImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/banner-mob.png";
+import SectionBanner3Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/banner.png";
+import SectionBanner3ImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/banner-mob.png";
 
 const breadCrumbItems = [
   {
@@ -185,10 +186,7 @@ const faqs = [
       <Faq faqs={faqs} />
 
       <!-- Footer CTA -->
-      <div
-        class="flex h-72 flex-col justify-between gap-8 rounded-xl bg-fg-primary bg-(image:--bg-mobile) bg-cover bg-center p-6 lg:bg-(image:--bg-desktop)"
-        style={`--bg-mobile: url('${Section3BannerImgMob.src}'); --bg-desktop: url('${Section3BannerImg.src}');`}
-      >
+      <BannerCard desktopImage={SectionBanner3Img} mobileImage={SectionBanner3ImgMob}>
         <div class="flex flex-col gap-2 text-white lg:w-94">
           <h1 class="text-heading-medium leading-10">عملکرد سرمایه‌گذاری خود را بهتر بشناسید</h1>
           <p class="text-body-large leading-8">
@@ -202,7 +200,7 @@ const faqs = [
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />
         </a>
-      </div>
+      </BannerCard>
     </section>
   </main>
 </Layout>
