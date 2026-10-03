@@ -22,7 +22,7 @@ import Clock from "@assets/icons/iconsax/outline/clock.svg";
 import ChartSuccess from "@assets/icons/iconsax/outline/chart-success.svg";
 import Grid from "@assets/icons/iconsax/outline/grid-8.svg";
 import Cloud from "@assets/icons/iconsax/outline/cloud-plus.svg";
-import Search from "@assets/icons/iconsax/outline/search-normal.svg";
+import Search from "@assets/icons/iconsax/outline/search-normal-1.svg";
 import Computing from "@assets/icons/iconsax/outline/computing.svg";
 import Eye from "@assets/icons/iconsax/outline/eye.svg";
 
@@ -194,11 +194,13 @@ const faqs = [
             dir="ltr"
             class="flex flex-col gap-2 lg:grid lg:grid-cols-[1fr_0.45fr_1.1fr] lg:grid-rows-[auto_auto_auto_auto]"
           >
-            {features.map((feature) => (
-              <div class={`flex w-full ${feature.gridClass}`} dir="rtl">
-                <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
-              </div>
-            ))}
+            {
+              features.map((feature) => (
+                <div class={`flex w-full ${feature.gridClass}`} dir="rtl">
+                  <FeatureCard title={feature.title} description={feature.description} icon={feature.icon} />
+                </div>
+              ))
+            }
           </div>
         </div>
       </section>
