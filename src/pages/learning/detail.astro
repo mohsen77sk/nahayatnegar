@@ -1,0 +1,184 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  fetchAllArticles,
+  fetchPostById,
+  calculateReadingTime,
+  formatPersianDate,
+  resolveImageUrl,
+  type ArticleApiDTO,
+} from "./article.service";
+
+// Icons
+import Book from "@assets/icons/iconsax/outline/book.svg";
+import Calendar from "@assets/icons/iconsax/outline/calendar.svg";
+import Medal from "@assets/icons/iconsax/outline/medal.svg";
+import BreadCrumb from "@components/bread-crumb.astro";
+
+export async function getStaticPaths() {
+  const posts = await fetchAllArticles();
+
+  return Promise.all(
+    posts.map(async (post) => {
+      const fullPost = await fetchPostById(post.id);
+      return {
+        params: { slug: post.slug || post.id },
+        props: { article: fullPost },
+      };
+    }),
+  );
+}
+
+interface Props {
+  article: ArticleApiDTO;
+}
+const { article } = Astro.props;
+
+interface TocItem {
+  id: string;
+  text: string;
+  isSub: boolean;
+}
+
+const tocItems: TocItem[] = [];
+let processedContent = article.content || "";
+
+const headingRegex = /<(h[23])([^>]*)>(.*?)<\/\1>/gi;
+let headingCounter = 1;
+
+processedContent = processedContent.replace(headingRegex, (match, tag, attrs, innerText) => {
+  const cleanText = innerText.replace(/<[^>]*>/g, "").trim();
+  const idMatch = attrs.match(/id=["']([^"']+)["']/i);
+  const id = idMatch ? idMatch[1] : `topic-${headingCounter++}`;
+  tocItems.push({
+    id,
+    text: cleanText,
+    isSub: tag.toLowerCase() === "h3",
+  });
+
+  if (!idMatch) {
+    return `<${tag}${attrs} id="${id}">${innerText}</${tag}>`;
+  }
+  return match;
+});
+const bannerSrc = resolveImageUrl(article.imageUrl);
+const readingTime = calculateReadingTime(article.content);
+const publishDate = article.publishDate || formatPersianDate(article.publishedAt || article.createdAt);
+
+const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning" }, { label: article.title }];
+---
+
+<Layout title={article.title}>
+  <div class="h-21 lg:h-25 w-full bg-[#131C3C]"></div>
+  <main class="flex flex-col min-h-screen gap-6 lg:w-280 m-auto">
+    <BreadCrumb items={breadCrumbItems} />
+    {/* 1. Article Header */}
+    <header class="text-start py-4">
+      <h1 class="text-heading-large font-bold tracking-tight leading-12">{article.title}</h1>
+    </header>
+
+    {/* 2. Top Hero Banner */}
+    <div class="relative w-full roverflow-hidden shadow-md">
+      <img src={bannerSrc} alt={article.title} class="w-full h-full object-cover" loading="eager" />
+    </div>
+
+    {/* 4. Two-Column Layout: Sidebar TOC + Main Content */}
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-2">
+      {/* Left Article Body */}
+      <div class="lg:col-span-9 order-1 space-y-8 text-slate-700 leading-relaxed text-sm sm:text-base">
+        {/* 3. Metadata Header Bar */}
+        <div class="bg-brand/16 border border-sky-100 rounded-lg px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm text-sky-800">
+          <div class="flex items-center gap-2">
+            <Medal class="w-5 text-brand" />
+            <span>
+              سطح: <span class="font-bold">{article.level}</span>
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <Book class="w-5 text-brand" />
+            <span>
+              زمان مطالعه: <span class="font-bold">{readingTime}</span>
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <Calendar class="w-5 text-brand" />
+            <span>
+              زمان انتشار: <span class="font-bold">{article.publishDate}</span>
+            </span>
+          </div>
+        </div>
+
+        <article
+          id="article-content"
+          class="lg:col-span-8 p-6 prose prose-slate max-w-none"
+          set:html={processedContent}
+        />
+      </div>
+
+      {/* Right Sticky Sidebar (Table of Contents) */}
+      {tocItems.length > 0 && (
+        <aside class="hidden lg:flex flex-col w-full lg:col-span-3 lg:sticky lg:top-24 self-start order-1">
+          <nav class="flex flex-col gap-3 shadow-sm text-xs sm:text-sm" aria-label="فهرست مطالب">
+            <div class="flex justify-center items-center rounded-lg p-3 bg-neutral-300">
+              <h2 class="font-bold">فهرست مطالب</h2>
+            </div>
+
+            <div class="flex flex-col space-y-2.5 text-secondary" id="toc-list">
+              {tocItems.map((item) => (
+                <div class="flex flex-col space-y-1 text-sm border-r border-slate-200"> {item.text}</div>
+              ))}
+            </div>
+          </nav>
+        </aside>
+      )}
+    </div>
+  </main>
+</Layout>
+<script>
+  function initDynamicTOC() {
+    const article = document.getElementById("article-content");
+    const tocContainer = document.getElementById("dynamic-toc");
+    const headings = article?.querySelectorAll<HTMLHeadingElement>("h2");
+    if (headings?.length === 0) return;
+    if (tocContainer) tocContainer.innerHTML = "";
+
+    headings?.forEach((heading, index) => {
+      if (!heading.id) {
+        heading.id = `heading-${index}`;
+      }
+
+      heading.classList.add("scroll-mt-10");
+
+      const link = document.createElement("a");
+      link.href = `#${heading.id}`;
+      link.textContent = heading.innerText.trim();
+      link.className = `toc-item block py-2 pr-3 pl-2 -mr-[1px] border-r-2 border-transparent transition-all duration-200 leading-snug rounded-l`;
+
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        heading.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.pushState(null, "", `#${heading.id}`);
+
+        document.querySelectorAll(".toc-item").forEach((el) => {
+          el.classList.remove("border-r-brand", "font-semibold");
+          el.classList.add("border-transparent");
+        });
+        link.classList.remove("border-transparent", "text-slate-600");
+        link.classList.add("border-brand", "font-semibold");
+      });
+
+      tocContainer?.appendChild(link);
+    });
+
+    const firstLink = tocContainer?.querySelector(".toc-item");
+    if (firstLink) {
+      firstLink.classList.remove("border-transparent");
+      firstLink.classList.add("border-r-brand", "font-semibold");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", initDynamicTOC);
+  document.addEventListener("astro:page-load", initDynamicTOC);
+</script>
