@@ -19,6 +19,24 @@ import { Image } from "astro:assets";
 
 import { URLS } from "../../scripts/constants";
 
+const currentPath = Astro.url.pathname;
+const normalizePath = (path) => path.replace(/\/$/, "") || "/";
+
+const isLinkActive = (link) => {
+  if (!link) return false;
+
+  const normalizedCurrent = normalizePath(currentPath);
+  const normalizedLink = normalizePath(siteUrl(link));
+
+  return normalizedCurrent === normalizedLink || normalizedCurrent.startsWith(normalizedLink + "/");
+};
+
+const isMenuActive = (menu) => {
+  if (menu.link && isLinkActive(menu.link)) return true;
+  if (menu.subMenus && menu.subMenus.some((sub) => isLinkActive(sub.link))) return true;
+  return false;
+};
+
 const menus = [
   {
     title: "کارگزاری",
@@ -68,7 +86,7 @@ const menus = [
   {
     title: "نئوتریدر",
     width: "260px",
-    link: "/brokerage/neo-trader",
+    link: URLS.neoTraderAppAddress,
   },
 ];
 
@@ -133,7 +151,12 @@ const mobileMenu = [
             const isExternal = menu.link && (/^https?:\/\//i.test(menu.link) || menu.link.startsWith("//"));
             return (
               <div class="group relative">
-                <div class="menu-trigger text-base flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-2 text-white transition-all duration-300 hover:bg-[#1C2754]">
+                <div
+                  class:list={[
+                    "menu-trigger text-base flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-2 text-white transition-all duration-300 hover:bg-[#1C2754]",
+                    isMenuActive(menu) ? "bg-[#1C2754]" : "",
+                  ]}
+                >
                   <a
                     href={siteUrl(menu.link)}
                     target={isExternal ? "_blank" : undefined}
@@ -161,7 +184,10 @@ const mobileMenu = [
                             href={siteUrl(sub.link)}
                             target={isExternal ? "_blank" : undefined}
                             rel={isExternal ? "noopener noreferrer" : undefined}
-                            class="flex min-h-12 min-w-0 items-center gap-3 rounded-lg px-4 py-3 text-body-small leading-5.25 transition-colors duration-150 hover:bg-hover-primary focus-visible:outline-none"
+                            class:list={[
+                              "flex min-h-12 min-w-0 items-center gap-3 rounded-lg px-4 py-3 text-body-small leading-5.25 transition-colors duration-150 hover:bg-hover-primary focus-visible:outline-none",
+                              isLinkActive(sub.link) ? "bg-hover-primary" : "",
+                            ]}
                           >
                             {Icon && <Icon class="shrink-0 text-brand" />}
                             <span class="text-title-medium">{sub.title}</span>
@@ -259,7 +285,13 @@ const mobileMenu = [
           const Icon = menu.icon;
           return (
             <li class="before:hidden">
-              <a class="flex items-center gap-3 rounded-xl px-5 py-3 transition-colors" href={siteUrl(menu.link)}>
+              <a
+                href={siteUrl(menu.link)}
+                class:list={[
+                  "flex items-center gap-3 rounded-xl px-5 py-3 transition-colors",
+                  isLinkActive(menu.link) ? "bg-[#1C2754] text-white" : "",
+                ]}
+              >
                 {Icon && <Icon class="shrink-0 text-brand" />}
                 <span class="text-title-medium">{menu.title}</span>
               </a>
