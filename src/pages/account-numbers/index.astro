@@ -238,9 +238,11 @@ const accountGroups = [
                       <div class="flex items-center gap-2">
                         <span class="font-medium">{accountNumber}</span>
                         <button
-                          class="neo-button neo-icon-button neo-button-neutral neo-button-small"
+                          class="neo-button neo-icon-button neo-button-neutral neo-button-small copy-tooltip"
                           type="button"
                           data-copy-value={accountNumber}
+                          data-default-tooltip="کپی شماره حساب"
+                          data-tooltip="کپی شماره حساب"
                           aria-label={`کپی شماره حساب ${bankName}`}
                         >
                           <span class="copy-icon">
@@ -257,9 +259,11 @@ const accountGroups = [
                       <div class="flex items-center gap-2">
                         <span class="font-medium">{iban}</span>
                         <button
-                          class="neo-button neo-icon-button neo-button-neutral neo-button-small"
+                          class="neo-button neo-icon-button neo-button-neutral neo-button-small copy-tooltip"
                           type="button"
                           data-copy-value={iban}
+                          data-default-tooltip="کپی شماره شبا"
+                          data-tooltip="کپی شماره شبا"
                           aria-label={`کپی شماره شبا ${bankName}`}
                         >
                           <span class="copy-icon">
@@ -282,6 +286,41 @@ const accountGroups = [
     </section>
   </main>
 </Layout>
+
+<style>
+  .copy-tooltip {
+    position: relative;
+  }
+
+  .copy-tooltip::after {
+    position: absolute;
+    z-index: 10;
+    bottom: calc(100% + 0.5rem);
+    left: 50%;
+    padding: 8px;
+    border-radius: 4px;
+    background: #262b3e;
+    color: #ffffff;
+    content: attr(data-tooltip);
+    font-size: 12px;
+    line-height: 130%;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%);
+    transition:
+      opacity 150ms ease,
+      visibility 150ms ease;
+  }
+
+  .copy-tooltip:hover::after,
+  .copy-tooltip:focus-visible::after,
+  .copy-tooltip[data-tooltip-visible]::after {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>
 
 <script>
   const searchInput = document.querySelector<HTMLInputElement>("[data-account-search]");
@@ -331,6 +370,8 @@ const accountGroups = [
 
         button.querySelector(".copy-icon")?.classList.add("hidden");
         button.querySelector(".check-icon")?.classList.remove("hidden");
+        button.dataset.tooltip = "کپی شد";
+        button.dataset.tooltipVisible = "";
         button.setAttribute("aria-label", "کپی شد");
 
         if (resetTimer) {
@@ -340,7 +381,9 @@ const accountGroups = [
         resetTimer = setTimeout(() => {
           button.querySelector(".copy-icon")?.classList.remove("hidden");
           button.querySelector(".check-icon")?.classList.add("hidden");
-          button.setAttribute("aria-label", "کپی");
+          button.dataset.tooltip = button.dataset.defaultTooltip;
+          delete button.dataset.tooltipVisible;
+          button.setAttribute("aria-label", button.dataset.defaultTooltip ?? "کپی");
         }, 1000);
       }
     });

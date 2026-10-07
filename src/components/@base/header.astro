@@ -1,6 +1,5 @@
 ---
 import Logo from "@assets/icons/logo-header.svg";
-import LogoNoText from "@assets/icons/logo-no-text.svg";
 import MobileMenu from "@assets/icons/iconsax/outline/hamburger-menu.svg";
 import Close from "@assets/icons/iconsax/outline/close-x.svg";
 import DownArrow from "@assets/icons/iconsax/outline/arrow-down-2.svg";
@@ -140,8 +139,7 @@ const mobileMenu = [
     <div class="flex w-full items-center justify-between gap-2">
       <!-- Logo -->
       <a href={siteUrl("/")}>
-        <LogoNoText class="m-icon-nav hidden h-8 w-auto text-brand" />
-        <Logo class="d-icon-nav block h-8 w-auto text-white" />
+        <Logo class="icon-nav h-8 w-auto text-white" />
       </a>
 
       <!-- Desktop Menu -->
@@ -340,8 +338,8 @@ const mobileMenu = [
 
 <script is:inline>
   const headerInner = document.getElementById("header-inner");
-  const dIcon = document.querySelector(".d-icon-nav");
-  const mIcon = document.querySelector(".m-icon-nav");
+  const hIcon = document.querySelector(".icon-nav");
+  const hIconLogo = hIcon.querySelectorAll(".logo");
 
   // منوی موبایل
   const drawer = document.getElementById("mobile-drawer");
@@ -377,16 +375,15 @@ const mobileMenu = [
   function resetHeaderStyles() {
     headerInner.classList.remove("bg-[#102550]/75", "shadow-lg", "lg:py-2", "lg:px-4", "lg:w-md");
     headerInner.classList.add("lg:py-4", "lg:px-6", "w-full");
-    mIcon.classList.add("hidden");
-    dIcon.classList.remove("hidden");
+    hIcon.classList.remove("!text-brand");
+    hIconLogo.forEach((path) => path.classList.remove("hidden"));
   }
 
   function applyScrolledStyles() {
     headerInner.classList.remove("lg:py-4", "px-6");
     headerInner.classList.add("lg:px-4", "bg-[#102550]/75", "backdrop-blur-md", "lg:w-md", "shadow-xl");
-
-    mIcon.classList.remove("hidden");
-    dIcon.classList.add("hidden");
+    hIcon.classList.add("!text-brand");
+    hIconLogo.forEach((path) => path.classList.add("hidden"));
   }
 
   const handleScroll = () => {
@@ -398,4 +395,5 @@ const mobileMenu = [
   };
 
   window.addEventListener("scroll", handleScroll);
+  handleScroll();
 </script>
