@@ -5,7 +5,9 @@ import Footer from "@components/@base/footer.astro";
 import ConsultationModal from "@components/consultation-modal.astro";
 import { siteUrl } from "@utils/url";
 
-const { title } = Astro.props;
+const { title, description = "گروه مالی نهایت‌نگر؛ ارائه‌دهنده خدمات کارگزاری، مدیریت دارایی و آموزش بازار سرمایه." } =
+  Astro.props;
+const pageTitle = `${title} | نهایت‌نگر`;
 ---
 
 <!doctype html>
@@ -14,13 +16,19 @@ const { title } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content" />
 
-    <title>{title}</title>
-    <base href="/" />
+    <title>{pageTitle}</title>
+    <base href={siteUrl("/")} />
 
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content={description} />
+    <meta name="author" content="گروه مالی نهایت‌نگر" />
     <meta name="generator" content={Astro.generator} />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href={siteUrl("/favicon.svg")} />

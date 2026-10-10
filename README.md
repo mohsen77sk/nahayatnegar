@@ -1,46 +1,41 @@
-# Astro Starter Kit: Basics
+# Nahayatnegar Financial Group Website
+
+The Persian-language website for Nahayatnegar Financial Group is built with Astro and Tailwind CSS and published as a static site.
+
+## Requirements
+
+- Node.js `22.12.0` or later
+- npm
+
+## Getting Started
 
 ```sh
-npm create astro@latest -- --template basics
+npm ci
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The Astro development server runs at `http://localhost:4321` by default.
 
-## 🚀 Project Structure
+## Commands
 
-Inside of your Astro project, you'll see the following folders and files:
+| Command                | Description                                                   |
+| ---------------------- | ------------------------------------------------------------- |
+| `npm run dev`          | Start the development server                                  |
+| `npm run build`        | Build the static site into `dist/`                            |
+| `npm run preview`      | Preview the built site locally                                |
+| `npm run format`       | Format Astro, CSS, JavaScript, and TypeScript files in `src/` |
+| `npm run format:check` | Check formatting of source files                              |
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## Project Structure
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- `src/pages/` — Site pages and routes
+- `src/components/` — Reusable components
+- `src/layouts/` — Page layouts
+- `src/assets/` — Images and other assets processed at build time
+- `public/` — Files copied to the output without processing
 
-## 🧞 Commands
+## Deployment
 
-All commands are run from the root of the project, from a terminal:
+The GitHub Actions workflow in `.github/workflows/astro.yml` runs on pushes to the `master` branch. It installs dependencies with `npm ci`, builds the site, and publishes the contents of `dist/` to the `production` branch.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+To build the site under a different base path, set `PUBLIC_BASE_URL`. The default value is `/`.
