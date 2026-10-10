@@ -39,7 +39,9 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
     <SectionLayer1 desktopImage={BrokerageBg} mobileImage={BrokerageBgMob}>
       <!-- right -->
       <div class="order-2 flex flex-1 items-center lg:order-1" slot="right">
-        <Image src={BrokerageObj} alt="نهایت‌نگر" class="h-auto w-full" loading="lazy" />
+        <div class="brokerage-float w-full">
+          <Image src={BrokerageObj} alt="نهایت‌نگر" class="h-auto w-full" loading="lazy" />
+        </div>
       </div>
 
       <!-- left -->
@@ -49,27 +51,27 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
             <LineGradient />
             <div class="flex flex-col items-center gap-2 lg:items-start">
               <h1 class="text-center text-display-small">یک کارگزاری تمام بازار سرمایه</h1>
-              <div class="flex flex-row-reverse items-center gap-2">
+              <div class="flex flex-row-reverse items-center gap-2 text-body-medium text-secondary">
                 <span
-                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-body-medium whitespace-nowrap text-secondary"
+                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 whitespace-nowrap"
                 >
                   انرژی
                 </span>
 
                 <span
-                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3.5 py-1 text-body-medium whitespace-nowrap text-secondary"
+                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3.5 py-1 whitespace-nowrap"
                 >
                   کالا
                 </span>
 
                 <span
-                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-body-medium whitespace-nowrap text-secondary"
+                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 whitespace-nowrap"
                 >
                   فرابورس
                 </span>
 
                 <span
-                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-body-medium whitespace-nowrap text-secondary"
+                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 whitespace-nowrap"
                 >
                   بورس اوراق بهادار
                 </span>
@@ -179,3 +181,25 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
     </SectionLayer1>
   </main>
 </Layout>
+
+<style>
+  .brokerage-float {
+    animation: brokerage-float 3.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes brokerage-float {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(-12px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brokerage-float {
+      animation: none;
+    }
+  }
+</style>
