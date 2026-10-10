@@ -5,6 +5,7 @@ import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import Section1Img from "@assets/images/Nahayatnegar/Account Numbers/account-numbers-hero.png";
 import Section1ImgMob from "@assets/images/Nahayatnegar/Account Numbers/account-numbers-hero-mob.png";
 import IconSearch from "@assets/icons/iconsax/outline/search-normal-1.svg";
+import IconClose from "@assets/icons/iconsax/outline/close-circle.svg";
 import IconCopy from "@assets/icons/iconsax/outline/copy.svg";
 import IconCheck from "@assets/icons/iconsax/outline/tick-circle.svg";
 
@@ -195,14 +196,22 @@ const accountGroups = [
           <div class="relative flex w-full lg:w-80">
             <input
               class="flex-1 pl-10"
-              type="search"
+              type="text"
               name="search"
               placeholder="جستجوی نام بانک، شماره حساب و ..."
               aria-label="جستجوی نام بانک، شماره حساب و ..."
               aria-controls="account-list"
               data-account-search
             />
-            <IconSearch class="absolute top-2.5 left-3 h-4 w-4" />
+            <IconSearch class="absolute top-2.5 left-3 h-4 w-4" data-account-search-icon />
+            <button
+              class="absolute top-2.5 left-3 hidden cursor-pointer"
+              type="button"
+              aria-label="پاک کردن جستجو"
+              data-account-search-clear
+            >
+              <IconClose class="h-4 w-4" />
+            </button>
           </div>
         </div>
 
@@ -324,12 +333,20 @@ const accountGroups = [
 
 <script>
   const searchInput = document.querySelector<HTMLInputElement>("[data-account-search]");
+  const searchIcon = document.querySelector<SVGElement>("[data-account-search-icon]");
+  const clearSearchButton = document.querySelector<HTMLButtonElement>("[data-account-search-clear]");
   const accountCards = document.querySelectorAll<HTMLElement>("[data-account-card]");
   const accountTabs = document.querySelectorAll<HTMLButtonElement>("[data-account-tab]");
   const noResults = document.querySelector<HTMLElement>("[data-no-results]");
   let activeCategory = "securities";
 
   const normalize = (value: string) => value.trim().toLocaleLowerCase().replace(/ي/g, "ی").replace(/ك/g, "ک");
+
+  const updateSearchControls = () => {
+    const hasSearchTerm = Boolean(searchInput?.value);
+    searchIcon?.classList.toggle("hidden", hasSearchTerm);
+    clearSearchButton?.classList.toggle("hidden", !hasSearchTerm);
+  };
 
   const updateAccountList = () => {
     const searchTerm = normalize(searchInput?.value ?? "");
@@ -356,7 +373,16 @@ const accountGroups = [
   });
 
   searchInput?.addEventListener("input", () => {
+    updateSearchControls();
     updateAccountList();
+  });
+
+  clearSearchButton?.addEventListener("click", () => {
+    if (searchInput) {
+      searchInput.value = "";
+      searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+      searchInput.focus();
+    }
   });
 
   document.querySelectorAll<HTMLButtonElement>("[data-copy-value]").forEach((button) => {

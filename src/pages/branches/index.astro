@@ -5,6 +5,7 @@ import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import Section1Img from "@assets/images/Nahayatnegar/Branches/branches-hero.png";
 import Section1ImgMob from "@assets/images/Nahayatnegar/Branches/branches-hero-mob.png";
 import IconSearch from "@assets/icons/iconsax/outline/search-normal-1.svg";
+import IconClose from "@assets/icons/iconsax/outline/close-circle.svg";
 
 const branches = [
   {
@@ -322,14 +323,22 @@ const accountGroups = [
           <div class="relative flex w-full lg:w-80">
             <input
               class="flex-1 pl-10"
-              type="search"
+              type="text"
               name="search"
               placeholder="جستجوی شهر، نشانی و ..."
               aria-label="جستجوی شهر، نشانی و ..."
               aria-controls="branch-list"
               data-branch-search
             />
-            <IconSearch class="absolute top-2.5 left-3 h-4 w-4" />
+            <IconSearch class="absolute top-2.5 left-3 h-4 w-4" data-branch-search-icon />
+            <button
+              class="absolute top-2.5 left-3 hidden cursor-pointer"
+              type="button"
+              aria-label="پاک کردن جستجو"
+              data-branch-search-clear
+            >
+              <IconClose class="h-4 w-4" />
+            </button>
           </div>
         </div>
 
@@ -383,6 +392,8 @@ const accountGroups = [
 
 <script>
   const searchInput = document.querySelector<HTMLInputElement>("[data-branch-search]");
+  const searchIcon = document.querySelector<SVGElement>("[data-branch-search-icon]");
+  const clearSearchButton = document.querySelector<HTMLButtonElement>("[data-branch-search-clear]");
   const branchTabs = document.querySelectorAll<HTMLButtonElement>("[data-branch-tab]");
   const branchGroups = document.querySelectorAll<HTMLElement>("[data-branch-category]");
   const cityGroups = document.querySelectorAll<HTMLElement>("[data-branch-city]");
@@ -390,6 +401,12 @@ const accountGroups = [
   let activeCategory = "branches";
 
   const normalize = (value: string) => value.trim().toLocaleLowerCase().replace(/ي/g, "ی").replace(/ك/g, "ک");
+
+  const updateSearchControls = () => {
+    const hasSearchTerm = Boolean(searchInput?.value);
+    searchIcon?.classList.toggle("hidden", hasSearchTerm);
+    clearSearchButton?.classList.toggle("hidden", !hasSearchTerm);
+  };
 
   const updateBranchList = () => {
     const query = normalize(searchInput?.value ?? "");
@@ -427,5 +444,16 @@ const accountGroups = [
     });
   });
 
-  searchInput?.addEventListener("input", updateBranchList);
+  searchInput?.addEventListener("input", () => {
+    updateSearchControls();
+    updateBranchList();
+  });
+
+  clearSearchButton?.addEventListener("click", () => {
+    if (searchInput) {
+      searchInput.value = "";
+      searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+      searchInput.focus();
+    }
+  });
 </script>
