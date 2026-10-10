@@ -5,7 +5,7 @@ import { siteUrl } from "@utils/url";
 
 // Layout & Custom Components
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
-import BreadCrumb from "@components/bread-crumb.astro";
+import PageContent from "@components/PageContent.astro";
 import Banner from "@components/banner.astro";
 import Faq from "@components/faq.astro";
 import FeatureCard from "@components/FeatureCard.astro";
@@ -163,8 +163,7 @@ const faqs = [
 
     <!-- Content Section -->
 
-    <section class="mx-auto flex max-w-200 flex-col gap-6 p-4">
-      <BreadCrumb items={breadCrumbItems} />
+    <PageContent items={breadCrumbItems} classes="mx-auto flex max-w-200 flex-col gap-6 p-4">
       <div>
         <h2 class="text-heading-medium leading-10">معاملات اختیار معامله چیست؟</h2>
 
@@ -258,6 +257,6 @@ const faqs = [
           <ArrowLeft aria-hidden="true" />
         </a>
       </BannerCard>
-    </section>
+    </PageContent>
   </main>
 </Layout>

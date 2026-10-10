@@ -6,7 +6,7 @@ import { URLS } from "../../../scripts/constants";
 
 // Components
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
-import BreadCrumb from "@components/bread-crumb.astro";
+import PageContent from "@components/PageContent.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import Banner from "@components/banner.astro";
 import BannerCard from "@components/bannerCard.astro";
@@ -148,8 +148,7 @@ const timeline = {
 
     <!-- Content Section -->
 
-    <section class="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
-      <BreadCrumb items={BreadCrumbItem} />
+    <PageContent items={BreadCrumbItem} classes="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
       <div>
         <h2 class="text-heading-medium leading-10">اعتبار معاملاتی نهایت‌نگر</h2>
         <div class="text-body-medium leading-7 text-secondary">اعتباری که با معاملات خودتان ساخته می‌شود.</div>
@@ -219,6 +218,6 @@ const timeline = {
           <ArrowLeft aria-hidden="true" />
         </button>
       </BannerCard>
-    </section>
+    </PageContent>
   </main>
 </Layout>

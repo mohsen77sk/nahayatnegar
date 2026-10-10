@@ -29,7 +29,7 @@ import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/M
 import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/Mockups/imac.png";
 import SectionBanner3Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/Banner.png";
 import SectionBanner3ImgMob from "@assets/images/Brokerage/1-Neo Trader/Watchlist/Banner-mob.png";
-import BreadCrumb from "@components/bread-crumb.astro";
+import PageContent from "@components/PageContent.astro";
 
 const breadCrumbItems = [
   {
@@ -158,8 +158,7 @@ const faqs = [
 
     <!-- Content Section -->
 
-    <section class="mx-auto flex max-w-200 flex-col gap-6 p-4">
-      <BreadCrumb items={breadCrumbItems} />
+    <PageContent items={breadCrumbItems} classes="mx-auto flex max-w-200 flex-col gap-6 p-4">
       <div>
         <h2 class="text-heading-medium leading-10">دیده‌بان بازار چیست؟</h2>
 
@@ -237,6 +236,6 @@ const faqs = [
           <ArrowLeft aria-hidden="true" />
         </a>
       </BannerCard>
-    </section>
+    </PageContent>
   </main>
 </Layout>

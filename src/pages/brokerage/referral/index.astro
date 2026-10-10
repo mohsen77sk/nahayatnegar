@@ -7,7 +7,7 @@ import Layout from "@layouts/Layout.astro";
 
 // Components
 import Banner from "@components/banner.astro";
-import BreadCrumb from "@components/bread-crumb.astro";
+import PageContent from "@components/PageContent.astro";
 import BannerCard from "@components/bannerCard.astro";
 import Faq from "@components/faq.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
@@ -129,8 +129,7 @@ const faqs = [
 
     <!-- Content Section -->
 
-    <section class="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
-      <BreadCrumb items={BreadCrumbItem} />
+    <PageContent items={BreadCrumbItem} classes="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
       <div>
         <h2 class="text-heading-medium leading-10">طرح معرفی مشتری چیست؟</h2>
         <div class="text-body-medium leading-7 text-secondary">پاداش برای هر معرفی موفق</div>
@@ -193,6 +192,6 @@ const faqs = [
           <ArrowLeft aria-hidden="true" />
         </button>
       </BannerCard>
-    </section>
+    </PageContent>
   </main>
 </Layout>

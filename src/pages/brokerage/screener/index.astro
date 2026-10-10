@@ -9,7 +9,7 @@ import Banner from "@components/banner.astro";
 import TimeLine from "@components/time-line.astro";
 import Faq from "@components/faq.astro";
 import BannerCard from "@components/bannerCard.astro";
-import BreadCrumb from "@components/bread-crumb.astro";
+import PageContent from "@components/PageContent.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 
 // Icons
@@ -123,8 +123,7 @@ const faqs = [
 
     <!-- Content Section -->
 
-    <section class="mx-auto flex max-w-200 flex-col gap-6 p-4">
-      <BreadCrumb items={breadCrumbItems} />
+    <PageContent items={breadCrumbItems} classes="mx-auto flex max-w-200 flex-col gap-6 p-4">
       <div>
         <h2 class="text-heading-medium leading-10">اسکرینر بازار چیست؟</h2>
 
@@ -197,6 +196,6 @@ const faqs = [
           <ArrowLeft aria-hidden="true" />
         </a>
       </BannerCard>
-    </section>
+    </PageContent>
   </main>
 </Layout>
