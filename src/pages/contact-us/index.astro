@@ -1,4 +1,5 @@
 ---
+import "leaflet/dist/leaflet.css";
 import { siteUrl } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
@@ -90,7 +91,42 @@ import IconSMS from "@assets/icons/iconsax/bulk/sms.svg";
     </section>
 
     <section class="flex bg-white px-4 py-8 lg:py-16">
-      <div class="relative mx-auto h-80 w-full max-w-lg rounded-3xl border bg-secondary"></div>
+      <div
+        id="contact-map"
+        class="relative mx-auto h-80 w-full max-w-lg overflow-hidden rounded-3xl border bg-secondary"
+        role="region"
+        aria-label="نقشه دفتر مرکزی نهایت‌نگر"
+      >
+      </div>
     </section>
   </main>
 </Layout>
+
+<script>
+  import * as L from "leaflet";
+
+  const contactMap = document.querySelector<HTMLElement>("#contact-map");
+
+  if (contactMap) {
+    const officeLocation: L.LatLngExpression = [35.7550337, 51.3960059];
+    const map = L.map(contactMap).setView(officeLocation, 16);
+    const officeIcon = L.icon({
+      iconUrl: "/assets/images/nn-location-marker.svg",
+      iconRetinaUrl: "/assets/images/nn-location-marker.svg",
+      shadowUrl: "/assets/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19,
+    }).addTo(map);
+
+    L.marker(officeLocation, { icon: officeIcon })
+      .addTo(map)
+      .bindPopup("دفتر مرکزی نهایت‌نگر<br />تهران، خیابان ملاصدرا، شیخ‌بهایی جنوبی، پلاک ۳۱");
+  }
+</script>
