@@ -16,13 +16,13 @@ import Medal from "@assets/icons/iconsax/outline/medal.svg";
 import BreadCrumb from "@components/bread-crumb.astro";
 
 export async function getStaticPaths() {
-  const posts = await fetchAllArticles();
+  const posts = (await fetchAllArticles()).filter((post) => post.published && post.id);
 
   return Promise.all(
     posts.map(async (post) => {
       const fullPost = await fetchPostById(post.id);
       return {
-        params: { slug: post.slug || post.id },
+        params: { slug: post.id },
         props: { article: fullPost },
       };
     }),
@@ -32,7 +32,12 @@ export async function getStaticPaths() {
 interface Props {
   article: ArticleApiDTO;
 }
+const id = Astro.params.slug;
 const { article } = Astro.props;
+
+if (!id || id !== article.id) {
+  throw new Error(`Article route "${id ?? ""}" does not match its generated article.`);
+}
 
 interface TocItem {
   id: string;
@@ -61,8 +66,8 @@ processedContent = processedContent.replace(headingRegex, (match, tag, attrs, in
   }
   return match;
 });
-const bannerSrc = resolveImageUrl(article.imageUrl);
-const readingTime = calculateReadingTime(article.content);
+const bannerSrc = resolveImageUrl(article?.imageUrl);
+const readingTime = calculateReadingTime(article?.content);
 const publishDate = article.publishDate || formatPersianDate(article.publishedAt || article.createdAt);
 
 const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning" }, { label: article.title }];
@@ -105,7 +110,7 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
           <div class="flex items-center gap-2">
             <Calendar class="w-5 text-brand" />
             <span>
-              زمان انتشار: <span class="font-bold">{article.publishDate}</span>
+              زمان انتشار: <span class="font-bold">{publishDate}</span>
             </span>
           </div>
         </div>

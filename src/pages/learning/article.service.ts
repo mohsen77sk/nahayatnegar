@@ -1,3 +1,5 @@
+import { MOCK_ARTICLES_LIST } from "./data/mockArticle";
+
 export interface ImageObject {
   url?: string;
   alt?: string;
@@ -6,7 +8,7 @@ export interface ImageObject {
 
 export interface ArticleApiDTO {
   id: string;
-  slug: string;
+  slug?: string;
   title: string;
   content: string;
   description?: Record<string, any> | string;
@@ -19,14 +21,20 @@ export interface ArticleApiDTO {
   readingTime?: string;
   publishDate?: string;
 }
-const API_BASE_URL: string = import.meta.env.PUBLIC_API_URL?.replace(/\/$/, "") || "/";
+const API_BASE_URL: string | undefined = import.meta.env.PUBLIC_API_URL?.replace(/\/$/, "");
 
 function getApiUrl(endpoint: string): string {
   const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
-  return `${API_BASE_URL}${cleanEndpoint}`;
+  return `${API_BASE_URL || ""}${cleanEndpoint}`;
 }
 
 export async function fetchPostById(id: string): Promise<ArticleApiDTO> {
+  if (!API_BASE_URL) {
+    const article = MOCK_ARTICLES_LIST.find((p) => p.id === id);
+    if (!article) throw new Error(`Article not found: ${id}`);
+    return article;
+  }
+
   const response = await fetch(getApiUrl(`/panel/posts/${id}`));
 
   if (!response.ok) {
@@ -37,8 +45,11 @@ export async function fetchPostById(id: string): Promise<ArticleApiDTO> {
   return result?.data || result;
 }
 
-// دریافت لیست کامل مقالات برای SSG
 export async function fetchAllArticles(): Promise<ArticleApiDTO[]> {
+  if (!API_BASE_URL) {
+    return MOCK_ARTICLES_LIST;
+  }
+
   const response = await fetch(getApiUrl("/panel/posts"));
 
   if (!response.ok) {
