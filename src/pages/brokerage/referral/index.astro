@@ -2,27 +2,16 @@
 // Framework Imports
 import { Image } from "astro:assets";
 
-// Layouts
 import Layout from "@layouts/Layout.astro";
 
-// Components
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import Banner from "@components/banner.astro";
-import PageContent from "@components/PageContent.astro";
 import BannerCard from "@components/bannerCard.astro";
 import Faq from "@components/faq.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
-import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import PageContent from "@components/PageContent.astro";
 import TimeLine from "@components/time-line.astro";
 
-// Assets - Images
-import Section1Img from "@assets/images/Brokerage/8-Referral/referral-hero.png";
-import Section1ImgMob from "@assets/images/Brokerage/8-Referral/referral-hero-mob.png";
-import Section2Img from "@assets/images/Brokerage/8-Referral/web-1.png";
-import Section3Img from "@assets/images/Brokerage/8-Referral/web-2.png";
-import SectionBanner2Img from "@assets/images/Brokerage/8-Referral/Banner.png";
-import SectionBanner2ImgMob from "@assets/images/Brokerage/8-Referral/Banner-mob.png";
-
-//  Assets - Icons
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 import CloudPlus from "@assets/icons/iconsax/outline/cloud-plus.svg";
 import Coin from "@assets/icons/iconsax/outline/coin.svg";
@@ -31,10 +20,16 @@ import DocumentText from "@assets/icons/iconsax/outline/document-text.svg";
 import Link from "@assets/icons/iconsax/outline/link.svg";
 import TwoUser from "@assets/icons/iconsax/outline/profile-2user.svg";
 import UserAdd from "@assets/icons/iconsax/outline/user-add.svg";
+import SectionBanner2ImgMob from "@assets/images/Brokerage/8-Referral/Banner-mob.png";
+import SectionBanner2Img from "@assets/images/Brokerage/8-Referral/Banner.png";
+import Section1ImgMob from "@assets/images/Brokerage/8-Referral/referral-hero-mob.png";
+import Section1Img from "@assets/images/Brokerage/8-Referral/referral-hero.png";
+import Section2Img from "@assets/images/Brokerage/8-Referral/web-1.png";
+import Section3Img from "@assets/images/Brokerage/8-Referral/web-2.png";
 
-//  Utils & Constants
-import URLS from "../../../scripts/constants";
 import { siteUrl } from "@utils/url";
+
+import URLS from "../../../scripts/constants";
 
 const BreadCrumbItem = [
   {

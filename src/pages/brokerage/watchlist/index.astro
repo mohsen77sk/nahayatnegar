@@ -1,35 +1,33 @@
 ---
-import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { siteUrl } from "@utils/url";
 
-// Layout & Custom Components
+import Layout from "@layouts/Layout.astro";
+
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import Banner from "@components/banner.astro";
-import TimeLine from "@components/time-line.astro";
+import BannerCard from "@components/bannerCard.astro";
 import Faq from "@components/faq.astro";
 import FeatureCard from "@components/FeatureCard.astro";
-import BannerCard from "@components/bannerCard.astro";
+import PageContent from "@components/PageContent.astro";
+import TimeLine from "@components/time-line.astro";
 
-// Icons
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
-import Link from "@assets/icons/iconsax/outline/link.svg";
-import LampCharge from "@assets/icons/iconsax/outline/lamp-charge.svg";
-import RulerPen from "@assets/icons/iconsax/outline/ruler-pen.svg";
-import SecurityTime from "@assets/icons/iconsax/outline/security-time.svg";
-import Layer from "@assets/icons/iconsax/outline/layer.svg";
-import Search from "@assets/icons/iconsax/outline/search-normal-1.svg";
 import Computing from "@assets/icons/iconsax/outline/computing.svg";
 import Eye from "@assets/icons/iconsax/outline/eye.svg";
-
-// Images
-import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/watchlist-hero.png";
-import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Watchlist/watchlist-hero-mob.png";
-import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/Mockups/laptop.png";
-import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/Mockups/imac.png";
-import SectionBanner3Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/Banner.png";
+import LampCharge from "@assets/icons/iconsax/outline/lamp-charge.svg";
+import Layer from "@assets/icons/iconsax/outline/layer.svg";
+import Link from "@assets/icons/iconsax/outline/link.svg";
+import RulerPen from "@assets/icons/iconsax/outline/ruler-pen.svg";
+import Search from "@assets/icons/iconsax/outline/search-normal-1.svg";
+import SecurityTime from "@assets/icons/iconsax/outline/security-time.svg";
 import SectionBanner3ImgMob from "@assets/images/Brokerage/1-Neo Trader/Watchlist/Banner-mob.png";
-import PageContent from "@components/PageContent.astro";
+import SectionBanner3Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/Banner.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/Mockups/imac.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/Mockups/laptop.png";
+import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Watchlist/watchlist-hero-mob.png";
+import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/watchlist-hero.png";
+
+import { siteUrl } from "@utils/url";
 
 const breadCrumbItems = [
   {

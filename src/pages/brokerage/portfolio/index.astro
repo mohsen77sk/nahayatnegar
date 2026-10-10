@@ -1,34 +1,32 @@
 ---
-import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { siteUrl } from "@utils/url";
 
-// Layout & Custom Components
+import Layout from "@layouts/Layout.astro";
+
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import Banner from "@components/banner.astro";
-import TimeLine from "@components/time-line.astro";
-import Faq from "@components/faq.astro";
-import PageContent from "@components/PageContent.astro";
-import FeaturesGrid from "@components/FeaturesGrid.astro";
 import BannerCard from "@components/bannerCard.astro";
+import Faq from "@components/faq.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import PageContent from "@components/PageContent.astro";
+import TimeLine from "@components/time-line.astro";
 
-// Icons
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
-import Graph from "@assets/icons/menu/graph.svg";
 import Diagram from "@assets/icons/iconsax/outline/diagram.svg";
-import MoneyTime from "@assets/icons/iconsax/outline/money-time.svg";
 import DocumentDownload from "@assets/icons/iconsax/outline/document-download.svg";
-import SearchStatus from "@assets/icons/iconsax/outline/search-status.svg";
-import Search from "@assets/icons/iconsax/outline/search-normal-1.svg";
 import Eye from "@assets/icons/iconsax/outline/eye.svg";
-
-// Images
-import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/portfolio-hero.png";
-import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/portfolio-hero-mob.png";
-import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Mockups/laptop.png";
-import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Mockups/imac.png";
-import SectionBanner3Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/banner.png";
+import MoneyTime from "@assets/icons/iconsax/outline/money-time.svg";
+import Search from "@assets/icons/iconsax/outline/search-normal-1.svg";
+import SearchStatus from "@assets/icons/iconsax/outline/search-status.svg";
+import Graph from "@assets/icons/menu/graph.svg";
 import SectionBanner3ImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/banner-mob.png";
+import SectionBanner3Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/banner.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Mockups/imac.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/Mockups/laptop.png";
+import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/portfolio-hero-mob.png";
+import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/portfolio-hero.png";
+
+import { siteUrl } from "@utils/url";
 
 const breadCrumbItems = [
   {

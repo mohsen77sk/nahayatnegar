@@ -1,29 +1,32 @@
 ---
-import { siteUrl } from "@utils/url";
 import { Image } from "astro:assets";
-import Layout from "@layouts/Layout.astro";
-import BannerCard from "@components/bannerCard.astro";
-import PageContent from "@components/PageContent.astro";
-import FeaturesGrid from "@components/FeaturesGrid.astro";
-import SectionLayer2 from "@components/@layout/section-layer-2.astro";
-import TimeLine from "@components/time-line.astro";
-import Faq from "@components/faq.astro";
 
-import Section1Img from "@assets/images/Asset Management/4-Asil/asil-hero.png";
+import Layout from "@layouts/Layout.astro";
+
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import BannerCard from "@components/bannerCard.astro";
+import Faq from "@components/faq.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import PageContent from "@components/PageContent.astro";
+import TimeLine from "@components/time-line.astro";
+
+import ArchiveIcon from "@assets/icons/iconsax/outline/archive.svg";
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import ArrowUpIcon from "@assets/icons/iconsax/outline/arrow-up.svg";
+import ChartIcon from "@assets/icons/iconsax/outline/chart-2.svg";
+import DocumentIcon from "@assets/icons/iconsax/outline/document-text-1.svg";
+import GraphIcon from "@assets/icons/iconsax/outline/graph.svg";
+import LinkIcon from "@assets/icons/iconsax/outline/link.svg";
+import SearchIcon from "@assets/icons/iconsax/outline/search-normal-1.svg";
+import WalletIcon from "@assets/icons/iconsax/outline/wallet-add.svg";
 import Section1ImgMob from "@assets/images/Asset Management/4-Asil/asil-hero-mob.png";
+import Section1Img from "@assets/images/Asset Management/4-Asil/asil-hero.png";
 import SectionBanner1Img from "@assets/images/Asset Management/4-Asil/asil-pic1.png";
 import SectionBanner2Img from "@assets/images/Asset Management/4-Asil/asil-pic2.png";
-import SectionBanner3Img from "@assets/images/Asset Management/4-Asil/Banner.png";
 import SectionBanner3ImgMob from "@assets/images/Asset Management/4-Asil/Banner-mob.png";
-import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
-import ChartIcon from "@assets/icons/iconsax/outline/chart-2.svg";
-import GraphIcon from "@assets/icons/iconsax/outline/graph.svg";
-import WalletIcon from "@assets/icons/iconsax/outline/wallet-add.svg";
-import ArrowUpIcon from "@assets/icons/iconsax/outline/arrow-up.svg";
-import DocumentIcon from "@assets/icons/iconsax/outline/document-text-1.svg";
-import LinkIcon from "@assets/icons/iconsax/outline/link.svg";
-import ArchiveIcon from "@assets/icons/iconsax/outline/archive.svg";
-import SearchIcon from "@assets/icons/iconsax/outline/search-normal-1.svg";
+import SectionBanner3Img from "@assets/images/Asset Management/4-Asil/Banner.png";
+
+import { siteUrl } from "@utils/url";
 
 const BreadCrumbItem = [
   {

@@ -1,34 +1,34 @@
 ---
-import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { siteUrl } from "@utils/url";
-import { URLS } from "../../../scripts/constants";
 
-// Components
+import Layout from "@layouts/Layout.astro";
+
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
-import PageContent from "@components/PageContent.astro";
-import FeaturesGrid from "@components/FeaturesGrid.astro";
 import Banner from "@components/banner.astro";
 import BannerCard from "@components/bannerCard.astro";
 import Faq from "@components/faq.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import PageContent from "@components/PageContent.astro";
 import TimeLine from "@components/time-line.astro";
 
-// Icons & Assets
-import Section1Img from "@assets/images/Brokerage/3-Credit/credit-hero.png";
-import Section1ImgMob from "@assets/images/Brokerage/3-Credit/credit-hero-mob.png";
-import SectionBanner1Img from "@assets/images/Brokerage/3-Credit/Mockups/web.png";
-import SectionBanner1ImgMob from "@assets/images/Brokerage/3-Credit/Mockups/mob.png";
-import SectionBanner2Img from "@assets/images/Brokerage/3-Credit/credit-banner.png";
-import SectionBanner2ImgMob from "@assets/images/Brokerage/3-Credit/credit-banner-mob.png";
-
-import Candle from "@assets/icons/iconsax/outline/candle.svg";
-import Flash from "@assets/icons/iconsax/outline/flash.svg";
-import Chart from "@assets/icons/iconsax/outline/chart-2.svg";
-import Tick from "@assets/icons/iconsax/outline/tick-square.svg";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import Candle from "@assets/icons/iconsax/outline/candle.svg";
+import Chart from "@assets/icons/iconsax/outline/chart-2.svg";
+import Flash from "@assets/icons/iconsax/outline/flash.svg";
 import RefreshSquare from "@assets/icons/iconsax/outline/refresh-square.svg";
-import WalletAdd from "@assets/icons/iconsax/outline/wallet-add.svg";
 import TickCircle from "@assets/icons/iconsax/outline/tick-circle.svg";
+import Tick from "@assets/icons/iconsax/outline/tick-square.svg";
+import WalletAdd from "@assets/icons/iconsax/outline/wallet-add.svg";
+import SectionBanner2ImgMob from "@assets/images/Brokerage/3-Credit/credit-banner-mob.png";
+import SectionBanner2Img from "@assets/images/Brokerage/3-Credit/credit-banner.png";
+import Section1ImgMob from "@assets/images/Brokerage/3-Credit/credit-hero-mob.png";
+import Section1Img from "@assets/images/Brokerage/3-Credit/credit-hero.png";
+import SectionBanner1ImgMob from "@assets/images/Brokerage/3-Credit/Mockups/mob.png";
+import SectionBanner1Img from "@assets/images/Brokerage/3-Credit/Mockups/web.png";
+
+import { siteUrl } from "@utils/url";
+
+import { URLS } from "../../../scripts/constants";
 
 const BreadCrumbItem = [
   {

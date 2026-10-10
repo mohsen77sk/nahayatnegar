@@ -1,42 +1,38 @@
 ---
-import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
-import BreadCrumb from "@components/bread-crumb.astro";
-import LineGradient from "@components/line-gradient.astro";
-import Banner from "@components/banner.astro";
-import FeaturesGrid from "@components/FeaturesGrid.astro";
+
+import Layout from "@layouts/Layout.astro";
 
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+import Banner from "@components/banner.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import LineGradient from "@components/line-gradient.astro";
+
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
-
-import HeroBg from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero.png";
-import HeroBgMobile from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero-mob.png";
-
-import WatchlistBg from "@assets/images/Brokerage/1-Neo Trader/watchlist-section.png";
-import WatchlistBgMobile from "@assets/images/Brokerage/1-Neo Trader/watchlist-section-mob.png";
-
-import TechnicalBg from "@assets/images/Brokerage/1-Neo Trader/technical-section.png";
-import TechnicalBgMobile from "@assets/images/Brokerage/1-Neo Trader/technical-section-mob.png";
-
-import OptionBg from "@assets/images/Brokerage/1-Neo Trader/option-section.png";
-import OptionBgMobile from "@assets/images/Brokerage/1-Neo Trader/option-section-mob.png";
-
-import ScreenerBg from "@assets/images/Brokerage/1-Neo Trader/screener-section.png";
-import ScreenerBgMobile from "@assets/images/Brokerage/1-Neo Trader/screener-section-mob.png";
-
+import Brush from "@assets/icons/iconsax/outline/brush-2.svg";
+import Global from "@assets/icons/iconsax/outline/global.svg";
+import Profile2User from "@assets/icons/iconsax/outline/profile-2user.svg";
+import ProfileTick from "@assets/icons/iconsax/outline/profile-tick.svg";
+import TickCircl from "@assets/icons/iconsax/outline/tick-circle.svg";
+import Clock from "@assets/icons/iconsax/outline/wrist-clock.svg";
 import MarketMapBg from "@assets/images/Brokerage/1-Neo Trader/heatmap-bg.png";
 import MarketMapObj from "@assets/images/Brokerage/1-Neo Trader/heatmap-object.png";
-
+import HeroBgMobile from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero-mob.png";
+import HeroBg from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero.png";
+import OptionBgMobile from "@assets/images/Brokerage/1-Neo Trader/option-section-mob.png";
+import OptionBg from "@assets/images/Brokerage/1-Neo Trader/option-section.png";
 import PortfolioObj from "@assets/images/Brokerage/1-Neo Trader/portfolio-management-object.png";
+import ScreenerBgMobile from "@assets/images/Brokerage/1-Neo Trader/screener-section-mob.png";
+import ScreenerBg from "@assets/images/Brokerage/1-Neo Trader/screener-section.png";
 import SymbolInfoObj from "@assets/images/Brokerage/1-Neo Trader/Symbol-info--object.png";
+import TechnicalBgMobile from "@assets/images/Brokerage/1-Neo Trader/technical-section-mob.png";
+import TechnicalBg from "@assets/images/Brokerage/1-Neo Trader/technical-section.png";
+import WatchlistBgMobile from "@assets/images/Brokerage/1-Neo Trader/watchlist-section-mob.png";
+import WatchlistBg from "@assets/images/Brokerage/1-Neo Trader/watchlist-section.png";
 
-import Global from "@assets/icons/iconsax/outline/global.svg";
-import Clock from "@assets/icons/iconsax/outline/wrist-clock.svg";
-import TickCircl from "@assets/icons/iconsax/outline/tick-circle.svg";
-import ProfileTick from "@assets/icons/iconsax/outline/profile-tick.svg";
-import Brush from "@assets/icons/iconsax/outline/brush-2.svg";
-import Profile2User from "@assets/icons/iconsax/outline/profile-2user.svg";
 import { siteUrl } from "@utils/url";
+
 import URLS from "../../../scripts/constants";
 
 const BreadCrumbItem = [

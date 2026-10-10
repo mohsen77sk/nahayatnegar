@@ -1,34 +1,37 @@
 ---
-import { siteUrl } from "@utils/url";
 import { Image } from "astro:assets";
-import Layout from "@layouts/Layout.astro";
-import BannerCard from "@components/bannerCard.astro";
-import PageContent from "@components/PageContent.astro";
-import FeaturesGrid from "@components/FeaturesGrid.astro";
-import SectionLayer2 from "@components/@layout/section-layer-2.astro";
-import TimeLine from "@components/time-line.astro";
-import Faq from "@components/faq.astro";
 
-import Section1Img from "@assets/images/Asset Management/5-Portfolio Management/PM-hero.png";
-import Section1ImgMob from "@assets/images/Asset Management/5-Portfolio Management/PM-hero-mob.png";
+import Layout from "@layouts/Layout.astro";
+
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import BannerCard from "@components/bannerCard.astro";
+import Faq from "@components/faq.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import PageContent from "@components/PageContent.astro";
+import TimeLine from "@components/time-line.astro";
+
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import BagIcon from "@assets/icons/iconsax/outline/bag.svg";
+import ChartIcon from "@assets/icons/iconsax/outline/chart.svg";
+import DocumentIcon from "@assets/icons/iconsax/outline/document-text-1.svg";
+import EyeIcon from "@assets/icons/iconsax/outline/eye.svg";
+import GraphIcon from "@assets/icons/iconsax/outline/graph.svg";
+import MessageEditIcon from "@assets/icons/iconsax/outline/message-edit.svg";
+import NoteIcon from "@assets/icons/iconsax/outline/note.svg";
+import UserTagIcon from "@assets/icons/iconsax/outline/user-tag.svg";
+import Warning2 from "@assets/icons/iconsax/outline/warning-2.svg";
+import SectionBanner3ImgMob from "@assets/images/Asset Management/5-Portfolio Management/Banner-mob.png";
+import SectionBanner3Img from "@assets/images/Asset Management/5-Portfolio Management/Banner.png";
 import Section2ImgSub1 from "@assets/images/Asset Management/5-Portfolio Management/image1.png";
 import Section2ImgSub2 from "@assets/images/Asset Management/5-Portfolio Management/image2.png";
 import Section2ImgSub3 from "@assets/images/Asset Management/5-Portfolio Management/image3.png";
 import Section2ImgSub4 from "@assets/images/Asset Management/5-Portfolio Management/image4.png";
+import Section1ImgMob from "@assets/images/Asset Management/5-Portfolio Management/PM-hero-mob.png";
+import Section1Img from "@assets/images/Asset Management/5-Portfolio Management/PM-hero.png";
 import SectionBanner1Img from "@assets/images/Asset Management/5-Portfolio Management/pm-pic1.png";
 import SectionBanner2Img from "@assets/images/Asset Management/5-Portfolio Management/pm-pic2.png";
-import SectionBanner3Img from "@assets/images/Asset Management/5-Portfolio Management/Banner.png";
-import SectionBanner3ImgMob from "@assets/images/Asset Management/5-Portfolio Management/Banner-mob.png";
-import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
-import Warning2 from "@assets/icons/iconsax/outline/warning-2.svg";
-import GraphIcon from "@assets/icons/iconsax/outline/graph.svg";
-import BagIcon from "@assets/icons/iconsax/outline/bag.svg";
-import EyeIcon from "@assets/icons/iconsax/outline/eye.svg";
-import ChartIcon from "@assets/icons/iconsax/outline/chart.svg";
-import DocumentIcon from "@assets/icons/iconsax/outline/document-text-1.svg";
-import UserTagIcon from "@assets/icons/iconsax/outline/user-tag.svg";
-import MessageEditIcon from "@assets/icons/iconsax/outline/message-edit.svg";
-import NoteIcon from "@assets/icons/iconsax/outline/note.svg";
+
+import { siteUrl } from "@utils/url";
 
 const BreadCrumbItem = [
   {

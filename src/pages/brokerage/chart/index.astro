@@ -1,38 +1,35 @@
 ---
+import { Image } from "astro:assets";
+
 import Layout from "@layouts/Layout.astro";
 
-import { Image } from "astro:assets";
-import { siteUrl } from "@utils/url";
-
-// Layout & Custom Components
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
-import PageContent from "@components/PageContent.astro";
 import Banner from "@components/banner.astro";
-import TimeLine from "@components/time-line.astro";
+import BannerCard from "@components/bannerCard.astro";
 import Faq from "@components/faq.astro";
 import FeatureCard from "@components/FeatureCard.astro";
-import BannerCard from "@components/bannerCard.astro";
+import PageContent from "@components/PageContent.astro";
+import TimeLine from "@components/time-line.astro";
 
-// Icons
+import Activity from "@assets/icons/iconsax/outline/activity.svg";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 import Bezier from "@assets/icons/iconsax/outline/bezier.svg";
-import Activity from "@assets/icons/iconsax/outline/activity.svg";
-import FavoriteChart from "@assets/icons/iconsax/outline/favorite-chart.svg";
-import Clock from "@assets/icons/iconsax/outline/clock.svg";
 import ChartSuccess from "@assets/icons/iconsax/outline/chart-success.svg";
-import Grid from "@assets/icons/iconsax/outline/grid-8.svg";
+import Clock from "@assets/icons/iconsax/outline/clock.svg";
 import Cloud from "@assets/icons/iconsax/outline/cloud-plus.svg";
-import Search from "@assets/icons/iconsax/outline/search-normal-1.svg";
 import Computing from "@assets/icons/iconsax/outline/computing.svg";
 import Eye from "@assets/icons/iconsax/outline/eye.svg";
-
-// Images
-import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero.png";
-import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero-mob.png";
-import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/laptop.png";
-import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/imac.png";
-import SectionBanner3Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner.png";
+import FavoriteChart from "@assets/icons/iconsax/outline/favorite-chart.svg";
+import Grid from "@assets/icons/iconsax/outline/grid-8.svg";
+import Search from "@assets/icons/iconsax/outline/search-normal-1.svg";
 import SectionBanner3ImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner-mob.png";
+import SectionBanner3Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Banner.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/imac.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Technical/Mockups/laptop.png";
+import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero-mob.png";
+import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero.png";
+
+import { siteUrl } from "@utils/url";
 
 const breadCrumbItems = [
   {
