@@ -39,6 +39,16 @@ import Profile2User from "@assets/icons/iconsax/outline/profile-2user.svg";
 import { siteUrl } from "@utils/url";
 import URLS from "../../../scripts/constants";
 
+const BreadCrumbItem = [
+  {
+    label: "کارگزاری",
+    href: "/brokerage",
+  },
+  {
+    label: "نئوتریدر",
+  },
+];
+
 const features = [
   {
     title: "همه ابزارهای مورد نیاز، در یک سامانه",
@@ -111,17 +121,7 @@ const features = [
     </SectionLayer1>
 
     <section class="mx-auto w-full max-w-lg px-3">
-      <BreadCrumb
-        items={[
-          {
-            label: "کارگزاری",
-            href: "/brokerage",
-          },
-          {
-            label: "نئوتریدر",
-          },
-        ]}
-      />
+      <BreadCrumb items={BreadCrumbItem} />
 
       <div class="mb-10">
         <div class="my-9 flex flex-col-reverse items-center gap-6 lg:flex-row">
@@ -278,8 +278,8 @@ const features = [
 
     <!-- begin::Instrument Info -->
     <SectionLayer1 classes="bg-white">
-      <div class="order-2 flex flex-1 items-center" slot="left">
-        <Image src={SymbolInfoObj} alt="اطلاعات نماد" class="h-auto w-full" loading="lazy" />
+      <div class="order-2 flex flex-1 items-center justify-center" slot="left">
+        <Image src={SymbolInfoObj} alt="اطلاعات نماد" class="h-auto max-h-100 w-auto" loading="lazy" />
       </div>
 
       <div class="order-1 flex flex-1 items-center" slot="right">
@@ -315,42 +315,6 @@ const features = [
     </SectionLayer1>
     <!-- end::Instrument Info -->
 
-    <!-- begin::PortfolioManagment -->
-    <SectionLayer1 classes="bg-white">
-      <div class="order-2 flex flex-1 items-center" slot="left">
-        <Image src={PortfolioObj} alt="مدیریت پورتفوی" class="h-auto w-full" loading="lazy" />
-      </div>
-
-      <div class="order-1 flex flex-1 items-center" slot="right">
-        <div class="flex flex-1 flex-col gap-6">
-          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
-            <LineGradient />
-            <div class="flex flex-col items-center gap-2 lg:items-start">
-              <h1 class="text-center text-display-small text-primary lg:text-right">مدیریت پرتفوی</h1>
-              <h6 class="text-body-medium text-neutral-800">بدانید سرمایه‌گذاری شما امروز چه وضعیتی دارد</h6>
-            </div>
-          </div>
-
-          <div class="flex flex-col items-center gap-4 lg:items-start lg:pr-6">
-            <div>
-              <p class="text-center text-body-large leading-[210%] text-primary lg:text-justify">
-                مدیریت پرتفوی تنها نمایش دارایی‌ها نیست؛ بلکه ابزاری برای ارزیابی عملکرد سرمایه‌گذاری است.
-                <br />
-                در این بخش می‌توانید ارزش روز دارایی‌ها، سود و زیان، عملکرد سرمایه‌گذاری در بازه‌های زمانی مختلف و اطلاعات
-                مرتبط با مجامع را مشاهده کنید و تصویر دقیق‌تری از وضعیت سرمایه خود داشته باشید.
-              </p>
-            </div>
-
-            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/brokerage/portfolio")}>
-              مشاهده جزئیات
-              <ArrowLeft aria-hidden="true" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </SectionLayer1>
-    <!-- end::PortfolioManagment -->
-
     <!-- begin::Screener -->
     <SectionLayer1 desktopImage={ScreenerBg} mobileImage={ScreenerBgMobile}>
       <div class="order-1 flex flex-0 items-center lg:order-2 lg:flex-1" slot="left">
@@ -384,6 +348,42 @@ const features = [
       <div class="flex flex-0 items-center lg:flex-1" slot="right"></div>
     </SectionLayer1>
     <!-- end::Screener -->
+
+    <!-- begin::PortfolioManagment -->
+    <SectionLayer1 classes="bg-white">
+      <div class="order-2 flex flex-1 items-center justify-center" slot="left">
+        <Image src={PortfolioObj} alt="مدیریت پورتفوی" class="h-auto max-h-125 w-auto" loading="lazy" />
+      </div>
+
+      <div class="order-1 flex flex-1 items-center" slot="right">
+        <div class="flex flex-1 flex-col gap-6">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
+            <LineGradient />
+            <div class="flex flex-col items-center gap-2 lg:items-start">
+              <h1 class="text-center text-display-small text-primary lg:text-right">مدیریت پرتفوی</h1>
+              <h6 class="text-body-medium text-neutral-800">بدانید سرمایه‌گذاری شما امروز چه وضعیتی دارد</h6>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center gap-4 lg:items-start lg:pr-6">
+            <div>
+              <p class="text-center text-body-large leading-[210%] text-primary lg:text-justify">
+                مدیریت پرتفوی تنها نمایش دارایی‌ها نیست؛ بلکه ابزاری برای ارزیابی عملکرد سرمایه‌گذاری است.
+                <br />
+                در این بخش می‌توانید ارزش روز دارایی‌ها، سود و زیان، عملکرد سرمایه‌گذاری در بازه‌های زمانی مختلف و اطلاعات
+                مرتبط با مجامع را مشاهده کنید و تصویر دقیق‌تری از وضعیت سرمایه خود داشته باشید.
+              </p>
+            </div>
+
+            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/brokerage/portfolio")}>
+              مشاهده جزئیات
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionLayer1>
+    <!-- end::PortfolioManagment -->
 
     <!-- begin::MarketMap -->
     <SectionLayer1 desktopImage={MarketMapBg} mobileImage={MarketMapBg}>
