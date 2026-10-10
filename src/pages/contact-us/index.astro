@@ -99,6 +99,8 @@ import { siteUrl } from "@utils/url";
         class="relative mx-auto h-80 w-full max-w-lg overflow-hidden rounded-3xl border bg-secondary"
         role="region"
         aria-label="نقشه دفتر مرکزی نهایت‌نگر"
+        data-marker-icon-url={siteUrl("/assets/images/nn-location-marker.svg")}
+        data-marker-shadow-url={siteUrl("/assets/images/marker-shadow.png")}
       >
       </div>
     </section>
@@ -113,10 +115,17 @@ import { siteUrl } from "@utils/url";
   if (contactMap) {
     const officeLocation: L.LatLngExpression = [35.7550337, 51.3960059];
     const map = L.map(contactMap).setView(officeLocation, 16);
+    const markerIconUrl = contactMap.dataset.markerIconUrl;
+    const markerShadowUrl = contactMap.dataset.markerShadowUrl;
+
+    if (!markerIconUrl || !markerShadowUrl) {
+      throw new Error("Map marker asset URLs are missing.");
+    }
+
     const officeIcon = L.icon({
-      iconUrl: "/assets/images/nn-location-marker.svg",
-      iconRetinaUrl: "/assets/images/nn-location-marker.svg",
-      shadowUrl: "/assets/images/marker-shadow.png",
+      iconUrl: markerIconUrl,
+      iconRetinaUrl: markerIconUrl,
+      shadowUrl: markerShadowUrl,
       iconSize: [25, 41],
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
