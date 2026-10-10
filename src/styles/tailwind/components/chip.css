@@ -1,0 +1,5 @@
+@layer components {
+  .neo-chip {
+    @apply flex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium;
+  }
+}

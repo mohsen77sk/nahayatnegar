@@ -199,6 +199,7 @@
 @import "./tailwind/components/button.css";
 @import "./tailwind/components/card.css";
 @import "./tailwind/components/input.css";
+@import "./tailwind/components/chip.css";
 @import "./tailwind/components/page.css";
 @import "./tailwind/components/tabs.css";
 
