@@ -8,13 +8,13 @@ interface BreadcrumbItem {
 
 interface Props {
   items: BreadcrumbItem[];
-  classes: string;
+  withBottomSpacing?: boolean;
 }
 
-const { items, classes } = Astro.props;
+const { items, withBottomSpacing = false } = Astro.props;
 ---
 
-<section class={classes}>
+<section class:list={["neo-page-content", { "neo-page-content-spaced": withBottomSpacing }]}>
   <BreadCrumb items={items} />
   <slot />
 </section>
