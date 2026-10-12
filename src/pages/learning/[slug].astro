@@ -48,7 +48,7 @@ interface TocItem {
 const tocItems: TocItem[] = [];
 let processedContent = article.content || "";
 
-const headingRegex = /<(h[23])([^>]*)>(.*?)<\/\1>/gi;
+const headingRegex = /<(h[2])([^>]*)>(.*?)<\/\1>/gi;
 let headingCounter = 1;
 
 processedContent = processedContent.replace(headingRegex, (match, tag, attrs, innerText) => {
@@ -74,25 +74,27 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
 ---
 
 <Layout title={article.title}>
-  <div class="h-21 lg:h-25 w-full bg-[#131C3C]"></div>
-  <main class="flex flex-col min-h-screen gap-6 lg:w-280 m-auto">
+  <div class="h-21 w-full bg-[#131C3C] lg:h-25"></div>
+  <main class="m-auto flex min-h-screen flex-col gap-6 lg:w-280">
     <BreadCrumb items={breadCrumbItems} />
     {/* 1. Article Header */}
-    <header class="text-start py-4">
-      <h1 class="text-heading-large font-bold tracking-tight leading-12">{article.title}</h1>
+    <header class="py-4 text-start">
+      <h1 class="text-heading-large leading-12 font-bold tracking-tight">{article.title}</h1>
     </header>
 
     {/* 2. Top Hero Banner */}
-    <div class="relative w-full roverflow-hidden shadow-md">
-      <img src={bannerSrc} alt={article.title} class="w-full h-full object-cover" loading="eager" />
+    <div class="roverflow-hidden shadow-md relative w-full">
+      <img src={bannerSrc} alt={article.title} class="h-full w-full object-cover" loading="eager" />
     </div>
 
     {/* 4. Two-Column Layout: Sidebar TOC + Main Content */}
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-2">
+    <div class="grid grid-cols-1 items-start gap-8 pt-2 lg:grid-cols-12">
       {/* Left Article Body */}
-      <div class="lg:col-span-9 order-1 space-y-8 text-slate-700 leading-relaxed text-sm sm:text-base">
+      <div class="text-slate-700 text-base order-1 space-y-8 leading-relaxed lg:col-span-9">
         {/* 3. Metadata Header Bar */}
-        <div class="bg-brand/16 border border-sky-100 rounded-lg px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm text-sky-800">
+        <div
+          class="border-sky-100 text-xs text-sky-800 flex flex-wrap items-center justify-between gap-3 rounded-lg border bg-brand/16 px-4 py-3"
+        >
           <div class="flex items-center gap-2">
             <Medal class="w-5 text-brand" />
             <span>
@@ -117,71 +119,79 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
 
         <article
           id="article-content"
-          class="lg:col-span-8 p-6 prose prose-slate max-w-none"
+          class="prose prose-slate max-w-none p-6 leading-8 lg:col-span-8 [&_a]:text-brand [&_a]:no-underline [&_h2]:scroll-mt-10 [&_h2]:text-heading-small [&_h2]:leading-9 [&_h2]:font-bold"
           set:html={processedContent}
         />
       </div>
 
       {/* Right Sticky Sidebar (Table of Contents) */}
-      {tocItems.length > 0 && (
-        <aside class="hidden lg:flex flex-col w-full lg:col-span-3 lg:sticky lg:top-24 self-start order-1">
-          <nav class="flex flex-col gap-3 shadow-sm text-xs sm:text-sm" aria-label="فهرست مطالب">
-            <div class="flex justify-center items-center rounded-lg p-3 bg-neutral-300">
-              <h2 class="font-bold">فهرست مطالب</h2>
-            </div>
 
-            <div class="flex flex-col space-y-2.5 text-secondary" id="toc-list">
-              {tocItems.map((item) => (
-                <div class="flex flex-col space-y-1 text-sm border-r border-slate-200"> {item.text}</div>
-              ))}
-            </div>
-          </nav>
-        </aside>
-      )}
+      {
+        tocItems.length > 0 && (
+          <aside class="order-1 hidden w-full flex-col self-start lg:sticky lg:top-24 lg:col-span-3 lg:flex">
+            <nav class="shadow-sm text-xs flex flex-col gap-3" aria-label="فهرست مطالب">
+              <div class="flex items-center justify-center rounded-lg bg-neutral-300 p-3">
+                <h2 class="font-bold">فهرست مطالب</h2>
+              </div>
+
+              <div class="flex flex-col space-y-2.5 text-secondary" id="toc-list">
+                {tocItems.map((item, index) => (
+                  <div class="flex flex-col space-y-1">
+                    <a
+                      id="dynamic-toc"
+                      href={`#${item.id}`}
+                      class:list={[
+                        "toc-item block border-r-2 leading-snug transition-all duration-200",
+                        index === 0 ? "border-r-brand font-semibold" : "border-transparent text-secondary",
+                      ]}
+                      class="toc-item block border-r-2 border-transparent p-2 leading-snug transition-all duration-200"
+                    >
+                      {item.text}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </nav>
+          </aside>
+        )
+      }
     </div>
   </main>
 </Layout>
 <script>
   function initDynamicTOC() {
     const article = document.getElementById("article-content");
-    const tocContainer = document.getElementById("dynamic-toc");
+    const tocLinks = document.querySelectorAll(".toc-item");
+
     const headings = article?.querySelectorAll<HTMLHeadingElement>("h2");
     if (headings?.length === 0) return;
-    if (tocContainer) tocContainer.innerHTML = "";
 
     headings?.forEach((heading, index) => {
       if (!heading.id) {
-        heading.id = `heading-${index}`;
+        heading.id = `topic-${index}`;
       }
+    });
 
-      heading.classList.add("scroll-mt-10");
-
-      const link = document.createElement("a");
-      link.href = `#${heading.id}`;
-      link.textContent = heading.innerText.trim();
-      link.className = `toc-item block py-2 pr-3 pl-2 -mr-[1px] border-r-2 border-transparent transition-all duration-200 leading-snug rounded-l`;
-
+    tocLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
-        heading.scrollIntoView({ behavior: "smooth", block: "start" });
-        history.pushState(null, "", `#${heading.id}`);
+        const targetId = link.getAttribute("href")?.substring(1);
+        const targetHeading = document.getElementById(targetId || "");
 
-        document.querySelectorAll(".toc-item").forEach((el) => {
+        if (targetHeading) {
+          targetHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.pushState(null, "", `#${targetId}`);
+        }
+
+        // استایل اکتیو کردن
+        tocLinks.forEach((el) => {
           el.classList.remove("border-r-brand", "font-semibold");
           el.classList.add("border-transparent");
         });
-        link.classList.remove("border-transparent", "text-slate-600");
-        link.classList.add("border-brand", "font-semibold");
+        link.classList.remove("border-transparent");
+        link.classList.add("border-r-brand", "font-semibold");
       });
-
-      tocContainer?.appendChild(link);
     });
-
-    const firstLink = tocContainer?.querySelector(".toc-item");
-    if (firstLink) {
-      firstLink.classList.remove("border-transparent");
-      firstLink.classList.add("border-r-brand", "font-semibold");
-    }
   }
 
   document.addEventListener("DOMContentLoaded", initDynamicTOC);
