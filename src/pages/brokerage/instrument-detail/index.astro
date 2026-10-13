@@ -5,27 +5,21 @@ import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
 import { Image } from "astro:assets";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
-import Banner from "@components/banner.astro";
-import TimeLine from "@components/time-line.astro";
 import BannerCard from "@components/bannerCard.astro";
 import Faq from "@components/faq.astro";
 
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
-import Section1Img from "@assets/images/Brokerage/4-Nahaban/nahaban-hero.png";
-import Section1ImgMob from "@assets/images/Brokerage/4-Nahaban/nahaban-hero-mob.png";
+import Section1Img from "@assets/images/Brokerage/instrument-detail/instrument-hero.png";
+import Section1ImgMob from "@assets/images/Brokerage/instrument-detail/instrument-hero-mob.png";
 import MockupImageMob from "@assets/images/Brokerage/4-Nahaban/Mockups/mob.png";
 import MockupImageWeb from "@assets/images/Brokerage/4-Nahaban/Mockups/web.png";
-import BannerWeb from "@assets/images/Brokerage/4-Nahaban/Banner.png";
-import BannerMob from "@assets/images/Brokerage/4-Nahaban/Banner-mob.png";
+import BannerWeb from "@assets/images/Brokerage/instrument-detail/banner.png";
+import BannerMob from "@assets/images/Brokerage/instrument-detail/banner-mob.png";
 
-import Clock from "@assets/icons/iconsax/outline/clock.svg";
-import Candle from "@assets/icons/iconsax/outline/candle.svg";
-import DiscountCircle from "@assets/icons/iconsax/outline/discount-circle.svg";
-import Wallet3 from "@assets/icons/iconsax/outline/wallet-3.svg";
-import Verify from "@assets/icons/iconsax/outline/verify.svg";
-import TickCircl from "@assets/icons/iconsax/outline/tick-circle.svg";
-import Timer from "@assets/icons/iconsax/outline/timer.svg";
-import Moneys from "@assets/icons/iconsax/outline/moneys.svg";
+import Link from "@assets/icons/iconsax/outline/link.svg";
+import HomeTrendUp from "@assets/icons/iconsax/outline/home-trend-up.svg";
+import User from "@assets/icons/iconsax/outline/user.svg";
+import Activity from "@assets/icons/iconsax/outline/activity.svg";
 
 const BreadCrumbItem = [
   {
@@ -33,74 +27,73 @@ const BreadCrumbItem = [
     href: "/brokerage",
   },
   {
-    label: "نهابان",
+    label: "نئوتریدر",
+    href: "/brokerage/neo-trader",
+  },
+  {
+    label: "اطلاعات نماد",
   },
 ];
 
 const features = [
   {
-    title: "سرمایه همیشه آماده معامله",
-    description: "وجوه در حساب معاملاتی می‌ماند و هر لحظه برای معامله یا برداشت در دسترس است.",
-    icon: Candle,
+    title: "اطلاعات قیمت",
+    description: `وضعیت قیمت را لحظه‌ای دنبال کنید<br/>
+اطلاعات مربوط به قیمت نماد و تغییرات آن را مشاهده کنید و وضعیت جاری معاملات را زیر نظر داشته باشید.`,
+    icon: HomeTrendUp,
   },
   {
-    title: "سود از همان روز نخست",
-    description: "سود به‌صورت روزانه محاسبه و در حساب اختصاصی شما ثبت می‌شود.",
-    icon: Clock,
+    title: "اطلاعات حقیقی و حقوقی",
+    description: `اطلاعات معاملات حقیقی و حقوقی نماد را مشاهده کنید و میزان مشارکت هر گروه را در معاملات بررسی کنید.<br/>
+همچنین اطلاعات سرانه خرید حقیقی و حقوقی و تغییر مالکیت از حقیقی به حقوقی و بالعکس در اختیار شما قرار دارد.`,
+    icon: User,
   },
   {
-    title: "انتقال خودکار سود هنگام استفاده",
-    description: "با برداشت وجه یا خرید اوراق، سود متناظر به حساب معاملاتی شما منتقل می‌شود.",
-    icon: DiscountCircle,
+    title: "اطلاعات کامل نماد",
+    description: `مشخصات نماد را یکجا ببینید<br/>
+اطلاعاتی مانند بازه مجاز قیمت، بیشترین و کمترین قیمت، حجم مبنا و سایر مشخصات نماد در دسترس شما قرار دارد.`,
+    icon: Activity,
   },
   {
-    title: "سود روزشمار برای موجودی نقد",
-    description: "موجودی نقد حساب معاملاتی شما تا زمان استفاده، مشمول سود روزشمار است.",
-    icon: Wallet3,
-  },
-  {
-    title: "سود روزشمار برای وجه تضمین اختیار",
-    description: "بازده مؤثر سرمایه‌گذاری شما در معاملات اختیار حفظ می‌شود.",
-    icon: Verify,
+    title: "دسترسی به اطلاعات و منابع مرتبط",
+    description: `اطلاعات تکمیلی را سریع‌تر پیدا کنید<br/>
+لینک‌های مرتبط با نماد، از جمله دسترسی به اطلاعات منتشرشده در TSE و کدال، در اختیار شما قرار دارد تا در صورت نیاز بتوانید اطلاعات تکمیلی نماد را بررسی کنید.`,
+    icon: Link,
   },
 ];
 
-const timeline = {
-  title: "نهابان در سه گام",
-  steps: [
-    {
-      title: "ورود وجوه به طرح نهابان",
-      description:
-        "درصورت ماندن وجوه نزد کارگزاری، موجودی نقد حساب یا وجه تضمین معاملات اختیار شما وارد طرح نهابان می‌شود.",
-      icon: TickCircl,
-    },
-    {
-      title: "محاسبه و ثبت سود روزشمار",
-      description: "سامانه نهابان، سود روزشمار را روزانه محاسبه و در حساب اختصاصی شما ثبت می‌کند.",
-      icon: Timer,
-    },
-    {
-      title: "انتقال سود به هنگام استفاده از وجوه",
-      description: "با برداشت وجه یا خرید اوراق بهادار، سود روزشمار متناظر به حساب معاملاتی شما منتقل می‌شود.",
-      icon: Moneys,
-    },
-  ],
-};
-
 const faqs = [
   {
-    title: "آیا سود هر روز پرداخت می‌شود؟",
-    description:
-      "خیر. سود به‌صورت روزانه محاسبه و در حساب نهابان نگهداری می‌شود و هنگام خروج تمام یا بخشی از وجوه از طرح، سود متناظر آن به حساب معاملاتی شما منتقل می‌شود.",
+    title: "بازه مجاز قیمت چیست؟",
+    description:"بازه مجاز، محدوده قیمتی است که سفارش‌های خرید و فروش یک نماد در طول جلسه معاملاتی می‌توانند در آن ثبت شوند. این محدوده بر اساس مقررات بازار تعیین می‌شود و در صفحه اطلاعات نماد قابل مشاهده است."
   },
   {
-    title: "آیا سود نهابان قابل برداشت است؟",
-    description: "بله. با خروج تمام یا بخشی از وجوه از طرح، سود روزشمار متناظر نیز به حساب معاملاتی شما منتقل می‌شود.",
+    title: "حجم مبنا چیست؟",
+    description:"حجم مبنا یکی از اطلاعات معاملاتی نماد است که در محاسبه تغییر قیمت پایانی نقش دارد. مقدار حجم مبنا برای هر نماد در اطلاعات آن نمایش داده می‌شود."
   },
   {
-    title: "آیا در مدت استفاده از نهابان، سرمایه من برای معامله در دسترس است؟",
-    description:
-      "بله. وجوه شما در حساب معاملاتی باقی می‌ماند و هر زمان که بخواهید می‌توانید از آن برای انجام معاملات یا برداشت وجه استفاده کنید.",
+    title: "سرانه خرید حقیقی و حقوقی چیست؟",
+    description:"سرانه خرید حقیقی، میانگین ارزش خرید انجام‌شده توسط هر خریدار حقیقی است. بررسی سرانه خرید حقیقی و حقوقی می‌تواند دید بهتری نسبت به اندازه معاملات انجام‌شده توسط این دو گروه ارائه دهد."
+  },
+  {
+    title: "تغییر مالکیت حقیقی و حقوقی یعنی چه؟",
+    description:"تغییر مالکیت حقیقی و حقوقی نشان می‌دهد در جریان معاملات، چه مقداری از سهام از سرمایه‌گذاران حقوقی به حقیقی منتقل شده است. این اطلاعات می‌تواند برای بررسی رفتار معاملاتی حقیقی‌ها و حقوقی‌ها مورد استفاده قرار گیرد."
+  },
+  {
+    title: "اطلاعیه‌های مربوط به یک نماد را از کجا ببینم؟",
+    description:"اطلاعیه‌های رسمی شرکت‌ها در سامانه کدال منتشر می‌شوند. از بخش اطلاعات نماد در NeoTrader می‌توانید به لینک مرتبط با کدال دسترسی داشته باشید و اطلاعیه‌های شرکت را در منبع اصلی آن‌ها مشاهده کنید."
+  },
+  {
+    title: "پیام ناظر با اطلاعیه کدال چه تفاوتی دارد؟",
+    description:"پیام ناظر، اطلاع‌رسانی مربوط به وضعیت معاملات و تصمیمات ناظر بازار درباره نماد است؛ در حالی که اطلاعیه‌های کدال معمولاً شامل اطلاعات رسمی منتشرشده توسط شرکت‌ها و ناشران است."
+  },
+  {
+    title: "قیمت پایانی با آخرین قیمت معامله چه تفاوتی دارد؟",
+    description:"آخرین قیمت معامله، قیمت آخرین معامله انجام‌شده در نماد است، در حالی که قیمت پایانی بر اساس معاملات انجام‌شده و حجم مبنای نماد، در طول جلسه معاملاتی محاسبه می‌شود."
+  },
+  {
+    title: "عمق بازار چه اطلاعاتی را نشان می‌دهد؟",
+    description:"عمق بازار، وضعیت سفارش‌های خرید و فروش در سطوح مختلف قیمت را نشان می‌دهد و تصویر دقیق‌تری از عرضه و تقاضای موجود در نماد ارائه می‌کند."
   },
 ];
 ---
@@ -109,23 +102,16 @@ const faqs = [
   <main>
     <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
       <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
-        <h1 class="text-display-small text-white">نهابان ؛ فراتر از یک بانک</h1>
+        <h1 class="text-display-small text-white">اطلاعات نماد</h1>
         <p class="text-center text-body-large leading-8 text-white lg:text-start">
-          با نهابان ، سرمایه شما تا رسیدن فرصت بعدی خرید، بیکار نمی‌ماند و می‌تواند برایتان بازده روزشمار ایجاد کند.
+          اطلاعات قیمت، عمق بازار، رفتار خریداران و فروشندگان، معاملات حقیقی و حقوقی و سایر اطلاعات مهم نماد را برای
+          بررسی دقیق‌تر بازار مشاهده کنید.
         </p>
         <div class="flex flex-col gap-4 lg:flex-row">
           <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
-            افتتاح حساب
+            ورود به سامانه
             <ArrowLeft aria-hidden="true" />
           </a>
-          <button
-            class="neo-button neo-button-outline-primary neo-button-large"
-            type="button"
-            data-consultation-modal-trigger
-          >
-            درخواست مشاوره
-            <ArrowLeft aria-hidden="true" />
-          </button>
         </div>
       </div>
     </SectionLayer2>
@@ -134,64 +120,55 @@ const faqs = [
       <BreadCrumb items={BreadCrumbItem} />
 
       <div>
-        <h2 class="text-heading-medium leading-10">نهابان</h2>
-        <div class="text-body-medium leading-7 text-secondary">
-          سود روزشمار برای موجودی نقد و وجه تضمین معاملات اختیار
-        </div>
+        <h2 class="text-heading-medium leading-10">اطلاعات نماد چیست؟</h2>
       </div>
 
       <p class="text-body-large leading-8">
-        نهابان سرویسی است که روی موجودی نقد حساب معاملاتی و همچنین وجه تضمین معاملات اختیار، سود روزشمار محاسبه و پرداخت
-        می‌کند. سود محاسبه‌شده به‌صورت روزانه در حساب اختصاصی نهابان شما ثبت و تجمیع می‌شود و هر زمان تمام یا بخشی از
-        موجودی خود را از طرح خارج کنید، سود متناظر آن نیز به حساب معاملاتی شما منتقل می شود .
+        پیش از انجام معامله، بررسی قیمت و وضعیت عرضه و تقاضا تنها بخشی از اطلاعات موردنیاز برای شناخت یک نماد است. بخش
+        اطلاعات نماد در NeoTrader مجموعه‌ای از داده‌های معاملاتی و اطلاعات مرتبط با نماد را در اختیار شما قرار می‌دهد؛
+        از وضعیت لحظه‌ای قیمت و عمق بازار گرفته تا اطلاعات حقیقی و حقوقی، پیام‌های ناظر و اطلاعات معاملاتی نماد. به این
+        ترتیب می‌توانید وضعیت یک نماد را از جنبه‌های مختلف بررسی کنید و با اطلاعات کامل‌تری تصمیم بگیرید.
       </p>
 
       <Image src={MockupImageMob} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
 
       <div class="features mb-5">
-        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های متمایز نهابان</h2>
-        <FeaturesGrid features={features} rowPattern={[2, 3]} />
+        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های اصلی</h2>
+        <FeaturesGrid features={features} rowPattern={[2, 2]} />
       </div>
 
-      <h2 class="text-heading-medium leading-10">نهابان چگونه کار می‌کند؟</h2>
+      <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
 
-      <p class="text-body-large leading-8">
-        اگر در حساب معاملاتی خود موجودی نقد داشته باشید یا برای معاملات اختیار، وجه تضمین نزد کارگزاری نگهداری کنید،
-        نهابان مطابق شرایط طرح، سود روزشمار این مبالغ را به‌صورت روزانه محاسبه و در حساب اختصاصی نهابان شما ثبت می‌کند.<br
-        />
-        این سود تا زمانی که وجوه در طرح باقی بمانند، به‌صورت روزانه افزایش می‌یابد. هر زمان که تمام یا بخشی از این وجوه را
-        برای خرید اوراق بهادار مصرف کنید یا از حساب معاملاتی خود برداشت نمایید، سود روزشمار محاسبه‌شده متناظر با مبلغ خارج‌شده
-        نیز به حساب معاملاتی شما منتقل می‌شود.
-      </p>
-
-      <Banner>
-        <h6 class="text-right text-title-large leading-relaxed text-blue-800 lg:text-center">
-          حتی زمانی که معامله‌ای انجام نمی‌دهید، سرمایه شما می‌تواند برایتان بازده ایجاد کند.
-        </h6>
-      </Banner>
-
-      <TimeLine title={timeline.title} steps={timeline.steps} />
+      <div>
+        <h4 class="text-heading-medium leading-10">اطلاعات به‌روز، تصمیم‌گیری سریع‌تر</h4>
+        <p class="text-body-large leading-8">
+          در بازار سرمایه، ارزش اطلاعات به زمان دریافت آن وابسته است. تغییر قیمت، وضعیت عرضه و تقاضا و اطلاعات معاملاتی
+          یک نماد می‌تواند در طول روز تغییر کند و تصمیم‌گیری بر اساس داده‌های قدیمی، تصویر دقیقی از شرایط فعلی بازار
+          ارائه نمی‌دهد. در NeoTrader، اطلاعات نماد به‌صورت به‌روز در اختیار شما قرار می‌گیرد تا هنگام بررسی یک سهم،
+          آخرین وضعیت بازار را مشاهده کنید و سریع‌تر شرایط نماد را ارزیابی کنید. این به‌روزرسانی سریع، به‌خصوص هنگام
+          تغییرات لحظه‌ای بازار، کمک می‌کند اطلاعات مورد استفاده برای تصمیم‌گیری تا حد امکان با وضعیت جاری معاملات
+          هماهنگ باشد.
+        </p>
+      </div>
 
       <Image src={MockupImageWeb} alt="" class="h-auto w-full" loading="lazy" />
 
       <Faq faqs={faqs} />
 
-      <BannerCard desktopImage={BannerWeb} mobileImage={BannerMob} classes={"lg:h-72"}>
-        <div class="flex max-w-94 flex-col gap-4 text-white lg:w-1/2">
-          <h1 class="text-heading-medium leading-10">طرح نهابان</h1>
+      <BannerCard desktopImage={BannerWeb} mobileImage={BannerMob}>
+        <div class="flex flex-col gap-2 text-white lg:w-94">
+          <h1 class="text-heading-medium leading-10">قبل از معامله، اطلاعات نماد را بررسی کنید</h1>
           <p class="text-body-meduim leading-8 text-neutral-500">
-            سرمایه خود را در نهابان قرار دهید تا موجودی نقد حساب و وجه تضمین معاملات اختیار شما، مشمول سود روزشمار شوند
-            و تا زمان رسیدن فرصت بعدی بازار، برایتان بازده ایجاد کنند.
+            قیمت، عمق بازار، رفتار حقیقی و حقوقی و اطلاعات معاملاتی نماد را بررسی کنید و با دید کامل‌تری تصمیم بگیرید.
           </p>
         </div>
-        <button
-          type="button"
-          class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40"
-          data-consultation-modal-trigger
+        <a
+          href={siteUrl("/brokerage/neo-trader")}
+          class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25"
         >
-          درخواست مشاوره
+          ورود به سامانه
           <ArrowLeft aria-hidden="true" />
-        </button>
+        </a>
       </BannerCard>
     </section>
   </main>
