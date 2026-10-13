@@ -1,0 +1,200 @@
+---
+import { Image } from "astro:assets";
+
+import Layout from "@layouts/Layout.astro";
+
+import SectionLayer2 from "@components/@layout/section-layer-2.astro";
+import Banner from "@components/banner.astro";
+import BannerCard from "@components/bannerCard.astro";
+import Faq from "@components/faq.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import PageContent from "@components/PageContent.astro";
+import TimeLine from "@components/time-line.astro";
+
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import DocumentFilter from "@assets/icons/iconsax/outline/document-filter.svg";
+import Frame from "@assets/icons/iconsax/outline/chart-1.svg";
+import ThreeSquare from "@assets/icons/iconsax/outline/3square.svg";
+import FlashCircle from "@assets/icons/iconsax/outline/flash-circle.svg";
+import Search from "@assets/icons/iconsax/outline/search-normal-1.svg";
+import Grid from "@assets/icons/iconsax/outline/grid-7.svg";
+import Chart from "@assets/icons/iconsax/outline/chart-2.svg";
+import SectionBanner3ImgMob from "@assets/images/Brokerage/1-Neo Trader/Market Map/banner-mob.png";
+import SectionBanner3Img from "@assets/images/Brokerage/1-Neo Trader/Market Map/banner.png";
+import SectionBanner2Img from "@assets/images/Brokerage/1-Neo Trader/Market Map/Mockups/imac.png";
+import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Market Map/Mockups/laptop.png";
+import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Market Map/market-map-hero-mob.png";
+import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Market Map/market-map-hero.png";
+
+import { siteUrl } from "@utils/url";
+
+const breadCrumbItems = [
+  {
+    label: "کارگزاری",
+    href: "/brokerage",
+  },
+  { label: "نئوتریدر", href: "/brokerage/neo-trader" },
+  { label: "نقشه بازار" },
+];
+
+const features = [
+  {
+    title: "بازارهای مختلف در یک نمای تصویری",
+    description:
+      "وضعیت بورس، فرابورس، بازار پایه فرابورس، صندوق‌های سرمایه‌گذاری و اختیار معامله را در قالب نقشه بازار مشاهده کنید و متناسب با بازار موردنظر خود، اطلاعات را بررسی کنید.",
+    icon: DocumentFilter,
+  },
+  {
+    title: "نمایش بازار بر اساس معیارهای مختلف",
+    description:
+      "نقشه بازار را با معیارهایی مانند ارزش معاملات، حجم معاملات، عرضه و تقاضا و رفتار حقیقی و حقوقی بررسی کنید تا هر بار از زاویه‌ای متفاوت به وضعیت بازار نگاه کنید.",
+    icon: Frame,
+  },
+  {
+    title: "بررسی هم‌زمان تعداد زیادی نماد",
+    description:
+      "به‌جای مرور یک فهرست طولانی، وضعیت تعداد زیادی از نمادها را به‌صورت هم‌زمان ببینید و برای بررسی دقیق‌تر، روی گزینه‌های مورد توجه خود تمرکز کنید.",
+    icon: ThreeSquare,
+  },
+  {
+    title: "تشخیص سریع نقاط مهم بازار",
+    description:
+      "نمای تصویری نقشه کمک می‌کند نمادها و بخش‌هایی که در یک معیار خاص وضعیت متفاوتی دارند، سریع‌تر در میان سایر نمادها دیده شوند.",
+    icon: FlashCircle,
+  },
+];
+
+const timeline = {
+  title: "کاربرد نقشه بازار",
+  steps: [
+    {
+      title: "اول تصویر کلی، بعد بررسی جزئیات",
+      description:
+        "قبل از اینکه سراغ نمادهای خاص بروید، با مشاهده نقشه بازار یک نمای کلی از شرایط معاملات داشته باشید. این کار کمک می‌کند نقاط قابل توجه بازار را سریع‌تر پیدا کنید.",
+      icon: Search,
+    },
+    {
+      title: "جریان معاملات را از چند زاویه بررسی کنید",
+      description:
+        "ممکن است یک بار بخواهید بدانید بیشترین ارزش معاملات در کدام نمادها شکل گرفته و بار دیگر رفتار عرضه و تقاضا یا معاملات حقیقی و حقوقی برایتان مهم باشد. تغییر معیار نمایش، امکان بررسی بازار از زوایای مختلف را فراهم می‌کند.",
+      icon: Grid,
+    },
+    {
+      title: "بازارها را جداگانه بررسی کنید",
+      description:
+        "شرایط بازار سهام با صندوق‌های سرمایه‌گذاری یا اختیار معامله یکسان نیست. با انتخاب بازار موردنظر، نقشه را متناسب با همان بخش از بازار مشاهده کنید.",
+      icon: Chart,
+    },
+  ],
+};
+
+const faqs = [
+  {
+    title: "آیا ارزش معاملات بالا به معنی مناسب بودن یک نماد برای خرید است؟",
+    description:
+      "خیر. ارزش معاملات بالا صرفاً نشان‌دهنده میزان فعالیت معاملاتی در یک نماد است و به‌تنهایی نمی‌تواند مبنای تصمیم خرید یا فروش باشد. برای بررسی یک نماد باید عوامل و اطلاعات دیگری نیز در نظر گرفته شود.",
+  },
+  {
+    title: "آیا می‌توانم از نقشه بازار برای پیدا کردن نمادهای پرمعامله استفاده کنم؟",
+    description:
+      "بله. با استفاده از معیار حجم یا ارزش معاملات می‌توانید نمادهایی را که فعالیت معاملاتی بیشتری دارند سریع‌تر شناسایی و سپس بررسی دقیق‌تری روی آن‌ها انجام دهید.",
+  },
+  {
+    title: "آیا نقشه بازار جایگزین تحلیل نماد است؟",
+    description:
+      "خیر. نقشه بازار بیشتر برای ایجاد یک دید سریع و کلی و پیدا کردن نقاط قابل توجه بازار کاربرد دارد. پس از شناسایی یک نماد، می‌توانید برای بررسی دقیق‌تر از اطلاعات نماد، نمودار و سایر ابزارهای تحلیلی استفاده کنید.",
+  },
+];
+---
+
+<Layout title="نقشه بازار">
+  <main>
+    <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
+      <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
+        <span class="text-center text-display-small text-white lg:text-start">نقشه بازار </span>
+        <p class="text-center text-body-large leading-8 text-white lg:text-start">
+          وضعیت بازار را به‌صورت تصویری دنبال کنید، بین بازارهای مختلف جابه‌جا شوید و بر اساس معیارهایی مانند ارزش و حجم
+          معاملات، عرضه و تقاضا و رفتار حقیقی و حقوقی، جریان معاملات را سریع‌تر بررسی کنید.
+        </p>
+        <p class="text-center text-body-large leading-8 text-white lg:text-start">
+          <div class="flex gap-4">
+            <a href={siteUrl("/brokerage/neo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
+              ورود به سامانه <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </p>
+      </div>
+    </SectionLayer2>
+    <!-- Content Section -->
+
+    <PageContent items={breadCrumbItems}>
+      <div>
+        <h2 class="text-heading-medium leading-10">نقشه بازار چیست؟</h2>
+
+        <p class="text-body-large leading-8">
+          وقتی تعداد زیادی نماد به‌صورت هم‌زمان در حال معامله هستند، بررسی وضعیت تک‌تک آن‌ها تصویر روشنی از شرایط کلی
+          بازار به شما نمی‌دهد.
+        </p>
+        <p class="text-body-large leading-8">
+          نقشه بازار، اطلاعات بازار را به شکلی بصری نمایش می‌دهد تا تغییرات و تفاوت عملکرد نمادها را سریع‌تر ببینید. در
+          NeoTrader می‌توانید بازار موردنظر خود را انتخاب کرده و نحوه نمایش اطلاعات را بر اساس معیارهای مختلف تغییر
+          دهید.
+        </p>
+        <p class="text-body-large leading-8">
+          به این ترتیب، به‌جای اینکه برای پیدا کردن نقاط قابل توجه بازار، اطلاعات نمادها را یکی‌یکی بررسی کنید，
+          می‌توانید ابتدا یک نمای کلی از بازار داشته باشید و سپس روی بخش‌ها و نمادهای موردنظر تمرکز کنید.
+        </p>
+      </div>
+
+      <Image src={SectionBanner1Img} alt="" class="h-auto w-full" loading="lazy" />
+
+      <!-- Features Section -->
+      <div class="features mb-5">
+        <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های اصلی</h2>
+        <FeaturesGrid features={features} rowPattern={[2, 2]} />
+      </div>
+      <!-- Benefits Section -->
+
+      <article class="flex flex-col gap-3">
+        <h2 class="text-heading-medium leading-10">مزیت برای معامله‌گر</h2>
+        <p class="text-body-medium leading-7 text-secondary">وضعیت بازار در یک نگاه</p>
+
+        <p class="text-body-medium leading-7 text-secondary">
+          در جریان معاملات، حجم زیادی از اطلاعات به‌صورت هم‌زمان تغییر می‌کند. دنبال کردن همه این تغییرات در قالب جدول
+          یا فهرست، زمان‌بر است و تشخیص نقاط مهم بازار را دشوار می‌کند.
+        </p>
+        <p class="text-body-medium leading-7 text-secondary">
+          نقشه بازار این اطلاعات را به یک نمای بصری و قابل درک تبدیل می‌کند؛ به‌گونه‌ای که تفاوت میان بخش‌های مختلف
+          بازار و نمادهای قابل توجه، سریع‌تر دیده می‌شود.
+        </p>
+        <p class="text-body-medium leading-7 text-secondary">
+          این نگاه تصویری به معامله‌گر کمک می‌کند ابتدا وضعیت کلی بازار را درک کند، سپس توجه خود را روی بخش‌هایی بگذارد
+          که ارزش بررسی بیشتری دارند.
+        </p>
+      </article>
+
+      <TimeLine steps={timeline.steps} title={timeline.title} />
+      <Image src={SectionBanner2Img} alt="" class="h-auto w-full" loading="lazy" />
+
+      <Faq faqs={faqs} />
+
+      <!-- Footer CTA -->
+      <BannerCard desktopImage={SectionBanner3Img} mobileImage={SectionBanner3ImgMob}>
+        <div class="flex flex-col gap-2 text-white lg:w-94">
+          <h1 class="text-heading-medium leading-10">بازار را در یک نگاه ببینید</h1>
+          <p class="text-body-large leading-8">
+            از نمای کلی بازار شروع کنید، نقاط قابل توجه را پیدا کنید و سپس بررسی دقیق‌تر نمادهای موردنظر خود را انجام
+            دهید.
+          </p>
+        </div>
+        <a
+          href={siteUrl("/brokerage/neo-trader")}
+          class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25"
+        >
+          ورود به سامانه
+          <ArrowLeft aria-hidden="true" />
+        </a>
+      </BannerCard>
+    </PageContent>
+  </main>
+</Layout>
