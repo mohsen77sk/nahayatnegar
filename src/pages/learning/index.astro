@@ -1,7 +1,83 @@
 ---
+import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import Layout from "@layouts/Layout.astro";
+
+import IconSearch from "@assets/icons/iconsax/outline/search-normal-1.svg";
+import ArrowDown from "@assets/icons/iconsax/outline/arrow-down-2.svg";
+import IconClose from "@assets/icons/iconsax/outline/close-circle.svg";
+
+import Section1Img from "@assets/images/Learning/learning-hero.png";
+import Section1ImgMob from "@assets/images/Learning/learning-hero-mob.png";
 ---
 
 <Layout title="Learning">
-  <main></main>
+  <main>
+    <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
+      <!-- right -->
+      <div class="flex flex-1 items-center self-center" slot="right">
+        <div class="flex flex-col items-center gap-8 lg:items-start">
+          <span class="text-display-small text-white">آموزش</span>
+          <h1 class="text-center text-body-large text-white">منابع آموزشی حرفه‌ای برای سرمایه‌گذاران آینده‌نگر</h1>
+          <div class="flex flex-wrap items-center justify-center gap-2 text-body-large text-white">
+            <div class="neo-chip">آموزش مقدماتی بورس</div>
+            <div class="neo-chip">روانشناسی بازار</div>
+            <div class="neo-chip">تحلیل بنیادی</div>
+          </div>
+        </div>
+      </div>
+      <!-- left -->
+      <div class="flex-1" slot="left"></div>
+    </SectionLayer1>
+
+    <section class="flex bg-fg-primary px-4 py-8 lg:py-2">
+      <div class="relative mx-auto flex w-full max-w-lg flex-col gap-6">
+        <h4 class="text-heading-medium">مقالات آموزشی</h4>
+
+        <div class="flex w-full flex-1 flex-col items-center justify-between gap-4 lg:w-auto lg:flex-row">
+          <div class="neo-tabs w-full lg:w-auto">
+            <button class="neo-tab-label active w-full lg:w-auto" type="button" data-account-tab="securities">
+              مقدماتی
+            </button>
+            <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="commodity"> متوسط </button>
+            <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="brokerage"> پیشرفته </button>
+          </div>
+
+          <div class="flex gap-2">
+            <div class="relative flex w-full lg:w-30">
+              <select
+                class="text-2xl h-8.75 w-full text-secondary appearance-none rounded-lg border-2 pr-2 pl-2 text-right outline-none"
+              >
+                <option selected>جدیدترین</option>
+                <option>قدیمی‌ترین</option>
+              </select>
+
+              <ArrowDown class="absolute top-2.5 left-3 h-4 w-4" data-account-search-icon />
+            </div>
+
+            <div class="relative flex w-full lg:w-55">
+              <input
+                class="flex-1 pl-10"
+                type="text"
+                name="search"
+                placeholder="جستجو"
+                aria-label="جستجو"
+                autocomplete="off"
+                aria-controls="account-list"
+                data-account-search
+              />
+              <IconSearch class="absolute top-2.5 left-3 h-4 w-4" data-account-search-icon />
+              <button
+                class="absolute top-2.5 left-3 hidden cursor-pointer"
+                type="button"
+                aria-label="پاک کردن جستجو"
+                data-account-search-clear
+              >
+                <IconClose class="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
