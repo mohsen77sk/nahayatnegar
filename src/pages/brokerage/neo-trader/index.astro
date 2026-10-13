@@ -1,43 +1,49 @@
 ---
-import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
-import BreadCrumb from "@components/bread-crumb.astro";
-import LineGradient from "@components/line-gradient.astro";
-import Banner from "@components/banner.astro";
-import FeaturesGrid from "@components/FeaturesGrid.astro";
+
+import Layout from "@layouts/Layout.astro";
 
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+import Banner from "@components/banner.astro";
+import BreadCrumb from "@components/bread-crumb.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import LineGradient from "@components/line-gradient.astro";
+
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
-
-import HeroBg from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero.png";
-import HeroBgMobile from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero-mob.png";
-
-import WatchlistBg from "@assets/images/Brokerage/1-Neo Trader/watchlist-section.png";
-import WatchlistBgMobile from "@assets/images/Brokerage/1-Neo Trader/watchlist-section-mob.png";
-
-import TechnicalBg from "@assets/images/Brokerage/1-Neo Trader/technical-section.png";
-import TechnicalBgMobile from "@assets/images/Brokerage/1-Neo Trader/technical-section-mob.png";
-
-import OptionBg from "@assets/images/Brokerage/1-Neo Trader/option-section.png";
-import OptionBgMobile from "@assets/images/Brokerage/1-Neo Trader/option-section-mob.png";
-
-import ScreenerBg from "@assets/images/Brokerage/1-Neo Trader/screener-section.png";
-import ScreenerBgMobile from "@assets/images/Brokerage/1-Neo Trader/screener-section-mob.png";
-
+import Brush from "@assets/icons/iconsax/outline/brush-2.svg";
+import Global from "@assets/icons/iconsax/outline/global.svg";
+import Profile2User from "@assets/icons/iconsax/outline/profile-2user.svg";
+import ProfileTick from "@assets/icons/iconsax/outline/profile-tick.svg";
+import TickCircl from "@assets/icons/iconsax/outline/tick-circle.svg";
+import Clock from "@assets/icons/iconsax/outline/wrist-clock.svg";
 import MarketMapBg from "@assets/images/Brokerage/1-Neo Trader/heatmap-bg.png";
 import MarketMapObj from "@assets/images/Brokerage/1-Neo Trader/heatmap-object.png";
-
+import HeroBgMobile from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero-mob.png";
+import HeroBg from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero.png";
+import OptionBgMobile from "@assets/images/Brokerage/1-Neo Trader/option-section-mob.png";
+import OptionBg from "@assets/images/Brokerage/1-Neo Trader/option-section.png";
 import PortfolioObj from "@assets/images/Brokerage/1-Neo Trader/portfolio-management-object.png";
+import ScreenerBgMobile from "@assets/images/Brokerage/1-Neo Trader/screener-section-mob.png";
+import ScreenerBg from "@assets/images/Brokerage/1-Neo Trader/screener-section.png";
 import SymbolInfoObj from "@assets/images/Brokerage/1-Neo Trader/Symbol-info--object.png";
+import TechnicalBgMobile from "@assets/images/Brokerage/1-Neo Trader/technical-section-mob.png";
+import TechnicalBg from "@assets/images/Brokerage/1-Neo Trader/technical-section.png";
+import WatchlistBgMobile from "@assets/images/Brokerage/1-Neo Trader/watchlist-section-mob.png";
+import WatchlistBg from "@assets/images/Brokerage/1-Neo Trader/watchlist-section.png";
 
-import Global from "@assets/icons/iconsax/outline/global.svg";
-import Clock from "@assets/icons/iconsax/outline/wrist-clock.svg";
-import TickCircl from "@assets/icons/iconsax/outline/tick-circle.svg";
-import ProfileTick from "@assets/icons/iconsax/outline/profile-tick.svg";
-import Brush from "@assets/icons/iconsax/outline/brush-2.svg";
-import Profile2User from "@assets/icons/iconsax/outline/profile-2user.svg";
 import { siteUrl } from "@utils/url";
+
 import URLS from "../../../scripts/constants";
+
+const BreadCrumbItem = [
+  {
+    label: "کارگزاری",
+    href: "/brokerage",
+  },
+  {
+    label: "نئوتریدر",
+  },
+];
 
 const features = [
   {
@@ -73,12 +79,11 @@ const features = [
       <!-- right -->
       <div class="flex flex-1 items-center self-center pt-6 lg:pt-0" slot="right">
         <div class="flex flex-col items-center gap-8 lg:items-start">
-          <h1 class="text-display-small text-center text-white lg:text-right">
+          <h1 class="text-center text-display-small text-white lg:text-right">
             <span class="block">نئوتریدر؛</span>
             سامانه معاملات آنلاین کارگزاری نهایت‌نگر
           </h1>
 
-              
           <div class="flex flex-col items-center gap-8 lg:items-start">
             <p class="text-center text-body-large text-body-large--font-weight leading-8 text-white lg:text-justify">
               نسل جدید معاملات آنلاین در بازار سرمایه
@@ -112,17 +117,7 @@ const features = [
     </SectionLayer1>
 
     <section class="mx-auto w-full max-w-lg px-3">
-      <BreadCrumb
-        items={[
-          {
-            label: "کارگزاری",
-            href: "/brokerage",
-          },
-          {
-            label: "نئوتریدر",
-          },
-        ]}
-      />
+      <BreadCrumb items={BreadCrumbItem} />
 
       <div class="mb-10">
         <div class="my-9 flex flex-col-reverse items-center gap-6 lg:flex-row">
@@ -190,10 +185,7 @@ const features = [
               </p>
             </div>
 
-            <a
-              class="neo-button neo-button-fill-primary neo-button-meduim"
-              href={siteUrl("/brokerage/watchlist")}
-            >
+            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/brokerage/watchlist")}>
               مشاهده جزئیات
               <ArrowLeft aria-hidden="true" />
             </a>
@@ -234,10 +226,7 @@ const features = [
               </p>
             </div>
 
-            <a
-              class="neo-button neo-button-fill-primary neo-button-meduim"
-              href={siteUrl("/brokerage/chart")}
-            >
+            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/brokerage/chart")}>
               مشاهده جزئیات
               <ArrowLeft aria-hidden="true" />
             </a>
@@ -271,10 +260,7 @@ const features = [
               کامل‌تری اتخاذ کنید.
             </p>
 
-            <a
-              class="neo-button neo-button-fill-primary neo-button-meduim"
-              href={siteUrl("/brokerage/option")}
-            >
+            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/brokerage/option")}>
               مشاهده جزئیات
               <ArrowLeft aria-hidden="true" />
             </a>
@@ -288,8 +274,8 @@ const features = [
 
     <!-- begin::Instrument Info -->
     <SectionLayer1 classes="bg-white">
-      <div class="order-2 flex flex-1 items-center" slot="left">
-        <Image src={SymbolInfoObj} alt="اطلاعات نماد" class="h-auto w-full" loading="lazy" />
+      <div class="order-2 flex flex-1 items-center justify-center" slot="left">
+        <Image src={SymbolInfoObj} alt="اطلاعات نماد" class="h-auto max-h-100 w-auto" loading="lazy" />
       </div>
 
       <div class="order-1 flex flex-1 items-center" slot="right">
@@ -325,45 +311,6 @@ const features = [
     </SectionLayer1>
     <!-- end::Instrument Info -->
 
-    <!-- begin::PortfolioManagment -->
-    <SectionLayer1 classes="bg-white">
-      <div class="order-2 flex flex-1 items-center" slot="left">
-        <Image src={PortfolioObj} alt="مدیریت پورتفوی" class="h-auto w-full" loading="lazy" />
-      </div>
-
-      <div class="order-1 flex flex-1 items-center" slot="right">
-        <div class="flex flex-1 flex-col gap-6">
-          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
-            <LineGradient />
-            <div class="flex flex-col items-center gap-2 lg:items-start">
-              <h1 class="text-center text-display-small text-primary lg:text-right">مدیریت پرتفوی</h1>
-              <h6 class="text-body-medium text-neutral-800">بدانید سرمایه‌گذاری شما امروز چه وضعیتی دارد</h6>
-            </div>
-          </div>
-
-          <div class="flex flex-col items-center gap-4 lg:items-start lg:pr-6">
-            <div>
-              <p class="text-center text-body-large leading-[210%] text-primary lg:text-justify">
-                مدیریت پرتفوی تنها نمایش دارایی‌ها نیست؛ بلکه ابزاری برای ارزیابی عملکرد سرمایه‌گذاری است.
-                <br />
-                در این بخش می‌توانید ارزش روز دارایی‌ها، سود و زیان، عملکرد سرمایه‌گذاری در بازه‌های زمانی مختلف و اطلاعات
-                مرتبط با مجامع را مشاهده کنید و تصویر دقیق‌تری از وضعیت سرمایه خود داشته باشید.
-              </p>
-            </div>
-
-            <a
-              class="neo-button neo-button-fill-primary neo-button-meduim"
-              href={siteUrl("/brokerage/portfolio")}
-            >
-              مشاهده جزئیات
-              <ArrowLeft aria-hidden="true" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </SectionLayer1>
-    <!-- end::PortfolioManagment -->
-
     <!-- begin::Screener -->
     <SectionLayer1 desktopImage={ScreenerBg} mobileImage={ScreenerBgMobile}>
       <div class="order-1 flex flex-0 items-center lg:order-2 lg:flex-1" slot="left">
@@ -386,10 +333,7 @@ const features = [
               را مشاهده کنید که با استراتژی معاملاتی شما همخوانی دارند.
             </p>
 
-            <a
-              class="neo-button neo-button-fill-primary neo-button-meduim"
-              href={siteUrl("/brokerage/screener")}
-            >
+            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/brokerage/screener")}>
               مشاهده جزئیات
               <ArrowLeft aria-hidden="true" />
             </a>
@@ -400,6 +344,42 @@ const features = [
       <div class="flex flex-0 items-center lg:flex-1" slot="right"></div>
     </SectionLayer1>
     <!-- end::Screener -->
+
+    <!-- begin::PortfolioManagment -->
+    <SectionLayer1 classes="bg-white">
+      <div class="order-2 flex flex-1 items-center justify-center" slot="left">
+        <Image src={PortfolioObj} alt="مدیریت پورتفوی" class="h-auto max-h-125 w-auto" loading="lazy" />
+      </div>
+
+      <div class="order-1 flex flex-1 items-center" slot="right">
+        <div class="flex flex-1 flex-col gap-6">
+          <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
+            <LineGradient />
+            <div class="flex flex-col items-center gap-2 lg:items-start">
+              <h1 class="text-center text-display-small text-primary lg:text-right">مدیریت پرتفوی</h1>
+              <h6 class="text-body-medium text-neutral-800">بدانید سرمایه‌گذاری شما امروز چه وضعیتی دارد</h6>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center gap-4 lg:items-start lg:pr-6">
+            <div>
+              <p class="text-center text-body-large leading-[210%] text-primary lg:text-justify">
+                مدیریت پرتفوی تنها نمایش دارایی‌ها نیست؛ بلکه ابزاری برای ارزیابی عملکرد سرمایه‌گذاری است.
+                <br />
+                در این بخش می‌توانید ارزش روز دارایی‌ها، سود و زیان، عملکرد سرمایه‌گذاری در بازه‌های زمانی مختلف و اطلاعات
+                مرتبط با مجامع را مشاهده کنید و تصویر دقیق‌تری از وضعیت سرمایه خود داشته باشید.
+              </p>
+            </div>
+
+            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/brokerage/portfolio")}>
+              مشاهده جزئیات
+              <ArrowLeft aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </SectionLayer1>
+    <!-- end::PortfolioManagment -->
 
     <!-- begin::MarketMap -->
     <SectionLayer1 desktopImage={MarketMapBg} mobileImage={MarketMapBg}>
@@ -427,10 +407,7 @@ const features = [
               </p>
             </div>
 
-            <a
-              class="neo-button neo-button-fill-primary neo-button-meduim"
-              href={siteUrl("/brokerage/market-map")}
-            >
+            <a class="neo-button neo-button-fill-primary neo-button-meduim" href={siteUrl("/brokerage/market-map")}>
               مشاهده جزئیات
               <ArrowLeft aria-hidden="true" />
             </a>

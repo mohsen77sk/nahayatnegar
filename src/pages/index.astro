@@ -1,22 +1,25 @@
 ---
-import { siteUrl } from "@utils/url";
 import { Image } from "astro:assets";
+
 import Layout from "@layouts/Layout.astro";
 
-import SectionVideoHero from "@components/@layout/section-video-hero.astro";
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+import SectionVideoHero from "@components/@layout/section-video-hero.astro";
 import LineGradient from "@components/line-gradient.astro";
-import HeroVideo from "@assets/images/Home/Sunrise over Earth.mp4";
-import BrokerageBg from "@assets/images/Home/brokerage-bg.png";
+
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 import BrokerageBgMob from "@assets/images/Home/brokerage-bg-mob.png";
+import BrokerageBg from "@assets/images/Home/brokerage-bg.png";
 import BrokerageObj from "@assets/images/Home/brokerage-object.png";
-import Section3Bg from "@assets/images/Home/chatGPT_image.png";
 import Section3Obj from "@assets/images/Home/chatGPT_image-object.png";
-import SectionLearningBg from "@assets/images/Home/learning-bg.png";
-import SectionLearningBgMob from "@assets/images/Home/learning-bg-mob.png";
+import Section3Bg from "@assets/images/Home/chatGPT_image.png";
 import FinancingBg from "@assets/images/Home/financing-bg.png";
 import FinancingObj from "@assets/images/Home/financing-obj.png";
-import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import SectionLearningBgMob from "@assets/images/Home/learning-bg-mob.png";
+import SectionLearningBg from "@assets/images/Home/learning-bg.png";
+import HeroVideo from "@assets/images/Home/Sunrise over Earth.mp4";
+
+import { siteUrl } from "@utils/url";
 ---
 
 <Layout title="خانه">
@@ -39,7 +42,9 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
     <SectionLayer1 desktopImage={BrokerageBg} mobileImage={BrokerageBgMob}>
       <!-- right -->
       <div class="order-2 flex flex-1 items-center lg:order-1" slot="right">
-        <Image src={BrokerageObj} alt="نهایت‌نگر" class="h-auto w-full" loading="lazy" />
+        <div class="brokerage-float w-full">
+          <Image src={BrokerageObj} alt="نهایت‌نگر" class="h-auto w-full" loading="lazy" />
+        </div>
       </div>
 
       <!-- left -->
@@ -49,27 +54,27 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
             <LineGradient />
             <div class="flex flex-col items-center gap-2 lg:items-start">
               <h1 class="text-center text-display-small">یک کارگزاری تمام بازار سرمایه</h1>
-              <div class="flex flex-row-reverse items-center gap-2">
+              <div class="flex flex-row-reverse items-center gap-2 text-body-medium text-secondary">
                 <span
-                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-body-medium whitespace-nowrap text-secondary"
+                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 whitespace-nowrap"
                 >
                   انرژی
                 </span>
 
                 <span
-                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3.5 py-1 text-body-medium whitespace-nowrap text-secondary"
+                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3.5 py-1 whitespace-nowrap"
                 >
                   کالا
                 </span>
 
                 <span
-                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-body-medium whitespace-nowrap text-secondary"
+                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 whitespace-nowrap"
                 >
                   فرابورس
                 </span>
 
                 <span
-                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-body-medium whitespace-nowrap text-secondary"
+                  class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 whitespace-nowrap"
                 >
                   بورس اوراق بهادار
                 </span>
@@ -179,3 +184,25 @@ import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
     </SectionLayer1>
   </main>
 </Layout>
+
+<style>
+  .brokerage-float {
+    animation: brokerage-float 3.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes brokerage-float {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(-12px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brokerage-float {
+      animation: none;
+    }
+  }
+</style>

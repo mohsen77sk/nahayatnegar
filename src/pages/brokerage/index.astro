@@ -1,35 +1,35 @@
 ---
-import { siteUrl } from "@utils/url";
 import { Image } from "astro:assets";
-import { URLS } from "../../scripts/constants";
 
 import Layout from "@layouts/Layout.astro";
+
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import LineGradient from "@components/line-gradient.astro";
 
+import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
 import Section1ImgMob from "@assets/images/Brokerage/brokerage-hero-mob.png";
 import Section1Img from "@assets/images/Brokerage/brokerage-hero.png";
-import Section2Img from "@assets/images/Brokerage/credit-section.png";
-import Section2ImgMob from "@assets/images/Brokerage/credit-section-mob.png";
-import Section3Img from "@assets/images/Brokerage/nahaban-section.png";
-import Section3ImgMob from "@assets/images/Brokerage/nahaban-section-mob.png";
-import Section4Img from "@assets/images/Brokerage/instant-withdraw-section.png";
-import Section4ImgMob from "@assets/images/Brokerage/instant-withdraw-section-mob.png";
-import Section5Img from "@assets/images/Brokerage/discount-commition-bg.png";
-import Section5ImgMob from "@assets/images/Brokerage/discount-commition-bg-mob.png";
-import Section5ImgObj from "@assets/images/Brokerage/discount-commition-object.png";
-import Section6Img from "@assets/images/Brokerage/card-bg.png";
 import Section6ImgMob from "@assets/images/Brokerage/card-bg-mob.png";
+import Section6Img from "@assets/images/Brokerage/card-bg.png";
 import Section6ImgObj from "@assets/images/Brokerage/card-object.png";
+import Section2ImgMob from "@assets/images/Brokerage/credit-section-mob.png";
+import Section2Img from "@assets/images/Brokerage/credit-section.png";
+import Section5ImgMob from "@assets/images/Brokerage/discount-commition-bg-mob.png";
+import Section5Img from "@assets/images/Brokerage/discount-commition-bg.png";
+import Section5ImgObj from "@assets/images/Brokerage/discount-commition-object.png";
+import Section4ImgMob from "@assets/images/Brokerage/instant-withdraw-section-mob.png";
+import Section4Img from "@assets/images/Brokerage/instant-withdraw-section.png";
+import Section3ImgMob from "@assets/images/Brokerage/nahaban-section-mob.png";
+import Section3Img from "@assets/images/Brokerage/nahaban-section.png";
 import Section7ImgObj from "@assets/images/Brokerage/refferal-object.png";
 
-import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
+import { siteUrl } from "@utils/url";
 
 import MoboObjectMob from "../../assets/images/Brokerage/introduce-mobo-mob.png";
 import MoboObjectImg from "../../assets/images/Brokerage/introduce-mobo.png";
-
 import NeoObjectMob from "../../assets/images/Brokerage/introduce-neo-mob.png";
 import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
+import { URLS } from "../../scripts/constants";
 ---
 
 <!-- Hero  -->
@@ -41,9 +41,9 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
           <div class="text-display-small text-white">خدمات کارگزاری</div>
           <h1 class="text-center text-body-large text-white">تمام آنچه برای یک سرمایه‌گذاری حرفه‌ای نیاز دارید</h1>
           <div class="flex flex-wrap items-center justify-center gap-2 text-body-large text-white">
-            <div class="lex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">سرویس‌های مالی</div>
-            <div class="lex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">پلتفرم‌های معاملاتی</div>
-            <div class="lex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">خدمات ویژه برای مشتریان</div>
+            <div class="neo-chip">سرویس‌های مالی</div>
+            <div class="neo-chip">پلتفرم‌های معاملاتی</div>
+            <div class="neo-chip">خدمات ویژه برای مشتریان</div>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                   پنل معاملاتی پیشرفته نهایت‌نگر که با ارائه امکانات حرفه‌ای و رابط کاربری روان، تجربه‌ای سریع، دقیق و
                   مطمئن را برای انجام معاملات در بازار سرمایه فراهم می‌کند.
                 </h3>
-                <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl('/brokerage/neo-trader')}>
+                <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/brokerage/neo-trader")}>
                   ورود به نئوتریدر
                   <ArrowLeft aria-hidden="true" />
                 </a>
@@ -98,10 +98,7 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                   سامانه معاملاتی اختصاصی تلفن همراه نهایت‌نگر که به شما امکان می‌دهد در هر زمان و هر مکان، با رابط
                   کاربری ساده و کاربرپسند، معاملات آنلاین خود را با سرعت و دقت بالا انجام دهید.
                 </h3>
-                <a
-                  href={siteUrl('/brokerage/mobo-trader')}
-                  class="neo-button neo-button-fill-primary neo-button-large"
-                >
+                <a href={siteUrl("/brokerage/mobo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
                   ورود به موبوتریدر
                   <ArrowLeft aria-hidden="true" />
                 </a>
@@ -195,7 +192,10 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
               با سرویس پرداخت آنی کارگزاری نهایت نگر ؛ در هر ساعت از شبانه روز به وجوه خود نزد کارگزار ی دسترسی داشته
               باشید .
             </p>
-            <a href={siteUrl("/brokerage/instant-withdraw")} class="neo-button neo-button-fill-primary neo-button-large">
+            <a
+              href={siteUrl("/brokerage/instant-withdraw")}
+              class="neo-button neo-button-fill-primary neo-button-large"
+            >
               بیشتر
               <ArrowLeft aria-hidden="true" />
             </a>
@@ -220,10 +220,10 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
               با طرح های تخفیف کارمزد نهایت نگر ، هزینه معاملات خود را کاهش دهید و بازده بیشتری از سرمایه گذاری تان بدست
               آورید
             </p>
-            <button class="neo-button neo-button-fill-primary neo-button-large">
+            <a href={siteUrl("/brokerage/nahabarg")} class="neo-button neo-button-fill-primary neo-button-large">
               بیشتر
               <ArrowLeft aria-hidden="true" />
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -247,9 +247,9 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
           <p class="text-center text-body-large leading-8 font-medium text-secondary lg:text-center">
             با کارت بانکی متصل به حساب نهایت‌نگر ، دسترسی سریع و آسان به سرمایه خود را تجربه کنید.
           </p>
-          <button class="neo-button neo-button-fill-primary neo-button-large mx-auto">
-            بیشتر
-            <ArrowLeft aria-hidden="true" />
+          <button class="neo-button neo-button-fill-primary neo-button-large mx-auto w-37 cursor-auto">
+            به زودی
+            <!-- <ArrowLeft aria-hidden="true" /> -->
           </button>
         </div>
 
@@ -273,10 +273,10 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
             <p class="text-center text-body-large leading-8 text-secondary lg:text-justify">
               دوستان خود را به نهایت‌نگر دعوت کنید و از مزایای معرفی ، تخفیف‌های اختصاصی و خدمات ویژه بهره‌مند شوید .
             </p>
-            <button class="neo-button neo-button-fill-primary neo-button-large">
+            <a href={siteUrl("/brokerage/referral")} class="neo-button neo-button-fill-primary neo-button-large">
               بیشتر
               <ArrowLeft aria-hidden="true" />
-            </button>
+            </a>
           </div>
         </div>
       </div>

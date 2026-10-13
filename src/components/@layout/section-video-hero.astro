@@ -4,12 +4,15 @@ interface Props {
   mobileVideo: any;
   poster?: any;
   hasGap?: boolean;
+  classes?: string;
 }
 
-const { desktopVideo, mobileVideo, poster, hasGap } = Astro.props;
+const { desktopVideo, mobileVideo, poster, hasGap, classes } = Astro.props;
 ---
 
-<section class="relative flex min-h-225 overflow-hidden bg-cover bg-center bg-no-repeat px-4 py-8 lg:py-16">
+<section
+  class={`relative flex min-h-225 overflow-hidden bg-cover bg-center bg-no-repeat px-4 py-8 lg:py-16 ${classes || ""}`}
+>
   <!-- Background video -->
   <video
     class="absolute inset-0 z-0 h-full w-full object-cover"

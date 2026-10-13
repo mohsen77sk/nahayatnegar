@@ -1,0 +1,20 @@
+---
+import BreadCrumb from "@components/bread-crumb.astro";
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  withBottomSpacing?: boolean;
+}
+
+const { items, withBottomSpacing = false } = Astro.props;
+---
+
+<section class:list={["neo-page-content", { "neo-page-content-spaced": withBottomSpacing }]}>
+  <BreadCrumb items={items} />
+  <slot />
+</section>

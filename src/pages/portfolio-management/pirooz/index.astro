@@ -1,31 +1,33 @@
 ---
-import { siteUrl } from "@utils/url";
 import { Image } from "astro:assets";
+
 import Layout from "@layouts/Layout.astro";
-import BannerCard from "@components/bannerCard.astro";
-import BreadCrumb from "@components/bread-crumb.astro";
-import FeaturesGrid from "@components/FeaturesGrid.astro";
+
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
-import TimeLine from "@components/time-line.astro";
+import BannerCard from "@components/bannerCard.astro";
 import Faq from "@components/faq.astro";
+import FeaturesGrid from "@components/FeaturesGrid.astro";
+import PageContent from "@components/PageContent.astro";
+import TimeLine from "@components/time-line.astro";
 
-import SectionBanner1Img from "@assets/images/Asset Management/2-Pirooz/pirooz-pic1.png";
-import SectionBanner2Img from "@assets/images/Asset Management/2-Pirooz/pirooz-pic2.png";
-import SectionBanner3Img from "@assets/images/Asset Management/2-Pirooz/Banner.png";
-import SectionBanner3ImgMob from "@assets/images/Asset Management/2-Pirooz/Banner-mob.png";
-
-import Section1Img from "@assets/images/Asset Management/2-Pirooz/pirooz-hero.png";
-import Section1ImgMob from "@assets/images/Asset Management/2-Pirooz/pirooz-hero-mob.png";
+import ArchiveIcon from "@assets/icons/iconsax/outline/archive.svg";
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
-import ShoppingCartIcon from "@assets/icons/iconsax/outline/shopping-cart.svg";
-import ProfileIcon from "@assets/icons/iconsax/outline/profile-2user.svg";
-import ClockIcon from "@assets/icons/iconsax/outline/clock.svg";
 import ChartIcon from "@assets/icons/iconsax/outline/chart-2.svg";
-import WalletIcon from "@assets/icons/iconsax/outline/wallet-add.svg";
+import ClockIcon from "@assets/icons/iconsax/outline/clock.svg";
 import DocumentIcon from "@assets/icons/iconsax/outline/document-text-1.svg";
 import LinkIcon from "@assets/icons/iconsax/outline/link.svg";
-import ArchiveIcon from "@assets/icons/iconsax/outline/archive.svg";
-import SearchIcon from "@assets/icons/iconsax/outline/search-normal.svg";
+import ProfileIcon from "@assets/icons/iconsax/outline/profile-2user.svg";
+import SearchIcon from "@assets/icons/iconsax/outline/search-normal-1.svg";
+import ShoppingCartIcon from "@assets/icons/iconsax/outline/shopping-cart.svg";
+import WalletIcon from "@assets/icons/iconsax/outline/wallet-add.svg";
+import SectionBanner3ImgMob from "@assets/images/Asset Management/2-Pirooz/Banner-mob.png";
+import SectionBanner3Img from "@assets/images/Asset Management/2-Pirooz/Banner.png";
+import Section1ImgMob from "@assets/images/Asset Management/2-Pirooz/pirooz-hero-mob.png";
+import Section1Img from "@assets/images/Asset Management/2-Pirooz/pirooz-hero.png";
+import SectionBanner1Img from "@assets/images/Asset Management/2-Pirooz/pirooz-pic1.png";
+import SectionBanner2Img from "@assets/images/Asset Management/2-Pirooz/pirooz-pic2.png";
+
+import { siteUrl } from "@utils/url";
 
 const BreadCrumbItem = [
   {
@@ -172,8 +174,7 @@ const faqs = [
       </div>
     </SectionLayer2>
 
-    <section class="mx-auto mb-15 flex max-w-200 flex-col gap-6 p-4">
-      <BreadCrumb items={BreadCrumbItem} />
+    <PageContent items={BreadCrumbItem} withBottomSpacing>
 
       <div>
         <h2 class="text-heading-medium leading-10">چرا صندوق پیروز؟</h2>
@@ -210,9 +211,9 @@ const faqs = [
           </colgroup>
           <thead class="bg-blue-900 text-white">
             <tr>
-              <th scope="col" class="h-11 rounded-r-lg px-4 py-2 text-start">صندوق ناب</th>
+              <th scope="col" class="h-11 rounded-r-lg px-4 py-2 text-start">صندوق سرمایه‌گذاری</th>
               <th scope="col" class="h-11 px-4 py-2">مقایسه</th>
-              <th scope="col" class="h-11 rounded-l-lg px-4 py-2 text-end">خرید طلای فیزیکی</th>
+              <th scope="col" class="h-11 rounded-l-lg px-4 py-2 text-end">خرید مستقیم سهام</th>
             </tr>
           </thead>
           <tbody>
@@ -284,6 +285,6 @@ const faqs = [
           <ArrowLeft aria-hidden="true" />
         </a>
       </BannerCard>
-    </section>
+    </PageContent>
   </main>
 </Layout>

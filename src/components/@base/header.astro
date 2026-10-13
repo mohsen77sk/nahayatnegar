@@ -1,6 +1,5 @@
 ---
 import Logo from "@assets/icons/logo-header.svg";
-import LogoNoText from "@assets/icons/logo-no-text.svg";
 import MobileMenu from "@assets/icons/iconsax/outline/hamburger-menu.svg";
 import Close from "@assets/icons/iconsax/outline/close-x.svg";
 import DownArrow from "@assets/icons/iconsax/outline/arrow-down-2.svg";
@@ -18,6 +17,24 @@ import { siteUrl } from "@utils/url";
 import { Image } from "astro:assets";
 
 import { URLS } from "../../scripts/constants";
+
+const currentPath = Astro.url.pathname;
+const normalizePath = (path) => path.replace(/\/$/, "") || "/";
+
+const isLinkActive = (link) => {
+  if (!link) return false;
+
+  const normalizedCurrent = normalizePath(currentPath);
+  const normalizedLink = normalizePath(siteUrl(link));
+
+  return normalizedCurrent === normalizedLink || normalizedCurrent.startsWith(normalizedLink + "/");
+};
+
+const isMenuActive = (menu) => {
+  if (menu.link && isLinkActive(menu.link)) return true;
+  if (menu.subMenus && menu.subMenus.some((sub) => isLinkActive(sub.link))) return true;
+  return false;
+};
 
 const menus = [
   {
@@ -122,8 +139,7 @@ const mobileMenu = [
     <div class="flex w-full items-center justify-between gap-2">
       <!-- Logo -->
       <a href={siteUrl("/")}>
-        <LogoNoText class="m-icon-nav hidden h-8 w-auto text-brand" />
-        <Logo class="d-icon-nav block h-8 w-auto text-white" />
+        <Logo class="icon-nav h-8 w-auto text-white" />
       </a>
 
       <!-- Desktop Menu -->
@@ -133,7 +149,12 @@ const mobileMenu = [
             const isExternal = menu.link && (/^https?:\/\//i.test(menu.link) || menu.link.startsWith("//"));
             return (
               <div class="group relative">
-                <div class="menu-trigger text-base flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-2 text-white transition-all duration-300 hover:bg-[#1C2754]">
+                <div
+                  class:list={[
+                    "menu-trigger text-base flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-2 text-white transition-all duration-300 hover:bg-[#1C2754]",
+                    isMenuActive(menu) ? "bg-[#1C2754]" : "",
+                  ]}
+                >
                   <a
                     href={siteUrl(menu.link)}
                     target={isExternal ? "_blank" : undefined}
@@ -161,7 +182,10 @@ const mobileMenu = [
                             href={siteUrl(sub.link)}
                             target={isExternal ? "_blank" : undefined}
                             rel={isExternal ? "noopener noreferrer" : undefined}
-                            class="flex min-h-12 min-w-0 items-center gap-3 rounded-lg px-4 py-3 text-body-small leading-5.25 transition-colors duration-150 hover:bg-hover-primary focus-visible:outline-none"
+                            class:list={[
+                              "flex min-h-12 min-w-0 items-center gap-3 rounded-lg px-4 py-3 text-body-small leading-5.25 transition-colors duration-150 hover:bg-hover-primary focus-visible:outline-none",
+                              isLinkActive(sub.link) ? "bg-hover-primary" : "",
+                            ]}
                           >
                             {Icon && <Icon class="shrink-0 text-brand" />}
                             <span class="text-title-medium">{sub.title}</span>
@@ -220,7 +244,10 @@ const mobileMenu = [
 
       <!-- Mobile Menu Button -->
       <div class="flex items-stretch gap-2 lg:hidden">
-        <a href={URLS.registerAddress} class="neo-button neo-button-fill-primary"> افتتاح حساب </a>
+        <a href={URLS.registerAddress} class="neo-button neo-button-fill-primary">
+          {" "}
+          افتتاح حساب{" "}
+        </a>
 
         <button id="mobile-menu-btn" class="neo-button neo-icon-button items-center bg-[#1C2754] p-1 text-white">
           <MobileMenu class="main-kabab-icon shrink-0" />
@@ -256,7 +283,13 @@ const mobileMenu = [
           const Icon = menu.icon;
           return (
             <li class="before:hidden">
-              <a class="flex items-center gap-3 rounded-xl px-5 py-3 transition-colors" href={siteUrl(menu.link)}>
+              <a
+                href={siteUrl(menu.link)}
+                class:list={[
+                  "flex items-center gap-3 rounded-xl px-5 py-3 transition-colors",
+                  isLinkActive(menu.link) ? "bg-[#1C2754] text-white" : "",
+                ]}
+              >
                 {Icon && <Icon class="shrink-0 text-brand" />}
                 <span class="text-title-medium">{menu.title}</span>
               </a>
@@ -283,12 +316,18 @@ const mobileMenu = [
 
       <div class="flex items-center gap-2.5">
         <Phone class="h-4 w-4 shrink-0 text-brand" />
-        <a href="tel:02184450" class="ltr text-body-small"> ۰۲۱ ۸۴۴۵۰ </a>
+        <a href="tel:02184450" class="ltr text-body-small">
+          {" "}
+          ۰۲۱ ۸۴۴۵۰{" "}
+        </a>
       </div>
 
       <div class="flex items-center gap-2.5">
         <Sms class="h-4 w-4 shrink-0 text-brand" />
-        <a href="mailto:info@nahayatnegar.com" class="text-body-small"> Info@nahayatnegar.com </a>
+        <a href="mailto:info@nahayatnegar.com" class="text-body-small">
+          {" "}
+          Info@nahayatnegar.com{" "}
+        </a>
       </div>
     </div>
     <a href={siteUrl(URLS.moboTraderAppAddress)} class="neo-button neo-button-large neo-button-fill-primary">
@@ -299,20 +338,8 @@ const mobileMenu = [
 
 <script is:inline>
   const headerInner = document.getElementById("header-inner");
-  const dIcon = document.querySelector(".d-icon-nav");
-  const mIcon = document.querySelector(".m-icon-nav");
-
-  function toggleMenu(button) {
-    const content = button.nextElementSibling;
-    const li = button.closest("li");
-    li.classList.toggle("expanded");
-
-    content.classList.toggle("max-h-0");
-    content.classList.toggle("max-h-[1000px]");
-
-    const svg = button.querySelector("svg");
-    svg.classList.toggle("rotate-270");
-  }
+  const hIcon = document.querySelector(".icon-nav");
+  const hIconLogo = hIcon.querySelectorAll(".logo");
 
   // منوی موبایل
   const drawer = document.getElementById("mobile-drawer");
@@ -348,16 +375,15 @@ const mobileMenu = [
   function resetHeaderStyles() {
     headerInner.classList.remove("bg-[#102550]/75", "shadow-lg", "lg:py-2", "lg:px-4", "lg:w-md");
     headerInner.classList.add("lg:py-4", "lg:px-6", "w-full");
-    mIcon.classList.add("hidden");
-    dIcon.classList.remove("hidden");
+    hIcon.classList.remove("!text-brand");
+    hIconLogo.forEach((path) => path.classList.remove("hidden"));
   }
 
   function applyScrolledStyles() {
     headerInner.classList.remove("lg:py-4", "px-6");
     headerInner.classList.add("lg:px-4", "bg-[#102550]/75", "backdrop-blur-md", "lg:w-md", "shadow-xl");
-
-    mIcon.classList.remove("hidden");
-    dIcon.classList.add("hidden");
+    hIcon.classList.add("!text-brand");
+    hIconLogo.forEach((path) => path.classList.add("hidden"));
   }
 
   const handleScroll = () => {
@@ -369,4 +395,5 @@ const mobileMenu = [
   };
 
   window.addEventListener("scroll", handleScroll);
+  handleScroll();
 </script>

@@ -1,16 +1,20 @@
 ---
-import { siteUrl } from "@utils/url";
+import "leaflet/dist/leaflet.css";
+
 import Layout from "@layouts/Layout.astro";
+
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import LineGradient from "@components/line-gradient.astro";
 
-import Section1Img from "@assets/images/Nahayatnegar/Contact Us/contact-us-hero.png";
-import Section1ImgMob from "@assets/images/Nahayatnegar/Contact Us/contact-us-hero-mob.png";
+import IconCall from "@assets/icons/iconsax/bulk/call.svg";
+import IconLocation from "@assets/icons/iconsax/bulk/location.svg";
+import IconSMS from "@assets/icons/iconsax/bulk/sms.svg";
 import IconInstagram from "@assets/icons/iconsax/outline/instagram.svg";
 import IconWhatsapp from "@assets/icons/iconsax/outline/whatsapp.svg";
-import IconLocation from "@assets/icons/iconsax/bulk/location.svg";
-import IconCall from "@assets/icons/iconsax/bulk/call.svg";
-import IconSMS from "@assets/icons/iconsax/bulk/sms.svg";
+import Section1ImgMob from "@assets/images/Nahayatnegar/Contact Us/contact-us-hero-mob.png";
+import Section1Img from "@assets/images/Nahayatnegar/Contact Us/contact-us-hero.png";
+
+import { siteUrl } from "@utils/url";
 ---
 
 <Layout title="تماس با ما">
@@ -55,16 +59,16 @@ import IconSMS from "@assets/icons/iconsax/bulk/sms.svg";
           </div>
 
           <div class="flex justify-center gap-2 lg:justify-start">
-            <a class="neo-button neo-icon-button neo-button-primary" href="/" aria-label="واتساپ">
+            <a class="neo-button neo-icon-button neo-button-neutral" href="/" aria-label="واتساپ">
               <IconWhatsapp aria-hidden="true" />
             </a>
-            <a class="neo-button neo-icon-button neo-button-primary" href="/" aria-label="اینستاگرام">
+            <a class="neo-button neo-icon-button neo-button-neutral" href="/" aria-label="اینستاگرام">
               <IconInstagram aria-hidden="true" />
             </a>
           </div>
 
-          <div class="flex">
-            <a class="neo-button neo-button-primary" href={siteUrl("/branches")}> آدرس و تلفن شعب </a>
+          <div class="flex justify-center gap-2 lg:justify-start">
+            <a class="neo-button neo-button-light-primary" href={siteUrl("/branches")}> آدرس و تلفن شعب </a>
           </div>
         </div>
 
@@ -90,7 +94,51 @@ import IconSMS from "@assets/icons/iconsax/bulk/sms.svg";
     </section>
 
     <section class="flex bg-white px-4 py-8 lg:py-16">
-      <div class="relative mx-auto h-80 w-full max-w-lg rounded-3xl border bg-secondary"></div>
+      <div
+        id="contact-map"
+        class="relative mx-auto h-80 w-full max-w-lg overflow-hidden rounded-3xl border bg-secondary"
+        role="region"
+        aria-label="نقشه دفتر مرکزی نهایت‌نگر"
+        data-marker-icon-url={siteUrl("/assets/images/nn-location-marker.svg")}
+        data-marker-shadow-url={siteUrl("/assets/images/marker-shadow.png")}
+      >
+      </div>
     </section>
   </main>
 </Layout>
+
+<script>
+  import * as L from "leaflet";
+
+  const contactMap = document.querySelector<HTMLElement>("#contact-map");
+
+  if (contactMap) {
+    const officeLocation: L.LatLngExpression = [35.7550337, 51.3960059];
+    const map = L.map(contactMap).setView(officeLocation, 16);
+    const markerIconUrl = contactMap.dataset.markerIconUrl;
+    const markerShadowUrl = contactMap.dataset.markerShadowUrl;
+
+    if (!markerIconUrl || !markerShadowUrl) {
+      throw new Error("Map marker asset URLs are missing.");
+    }
+
+    const officeIcon = L.icon({
+      iconUrl: markerIconUrl,
+      iconRetinaUrl: markerIconUrl,
+      shadowUrl: markerShadowUrl,
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19,
+    }).addTo(map);
+
+    L.marker(officeLocation, { icon: officeIcon })
+      .addTo(map)
+      .bindPopup("دفتر مرکزی نهایت‌نگر<br />تهران، خیابان ملاصدرا، شیخ‌بهایی جنوبی، پلاک ۳۱");
+  }
+</script>

@@ -1,23 +1,26 @@
 ---
 import { Image } from "astro:assets";
-import Layout from "@layouts/Layout.astro";
-import SectionLayer1 from "@components/@layout/section-layer-1.astro";
-import Section1Img from "@assets/images/Nahayatnegar/Account Numbers/account-numbers-hero.png";
-import Section1ImgMob from "@assets/images/Nahayatnegar/Account Numbers/account-numbers-hero-mob.png";
-import IconSearch from "@assets/icons/iconsax/outline/search-normal-1.svg";
-import IconCopy from "@assets/icons/iconsax/outline/copy.svg";
-import IconCheck from "@assets/icons/iconsax/outline/tick-circle.svg";
 
-import BankSaman from "@assets/icons/banks/saman.svg";
-import BankMeli from "@assets/icons/banks/meli.svg";
-import BankMelat from "@assets/icons/banks/melat.svg";
-import BankShar from "@assets/icons/banks/shahr.svg";
-import BankPasargad from "@assets/icons/banks/pasargad.svg";
-import BankKhavarmiane from "@assets/icons/banks/khavarmiane.svg";
-import BankTejarat from "@assets/icons/banks/tejarat.svg";
-import BankParsian from "@assets/icons/banks/parsian.svg";
+import Layout from "@layouts/Layout.astro";
+
+import SectionLayer1 from "@components/@layout/section-layer-1.astro";
+
 import BankGardeshgari from "@assets/icons/banks/gardeshgari.svg";
+import BankKhavarmiane from "@assets/icons/banks/khavarmiane.svg";
+import BankMelat from "@assets/icons/banks/melat.svg";
+import BankMeli from "@assets/icons/banks/meli.svg";
+import BankParsian from "@assets/icons/banks/parsian.svg";
+import BankPasargad from "@assets/icons/banks/pasargad.svg";
 import BankSaderat from "@assets/icons/banks/saderat.svg";
+import BankSaman from "@assets/icons/banks/saman.svg";
+import BankShar from "@assets/icons/banks/shahr.svg";
+import BankTejarat from "@assets/icons/banks/tejarat.svg";
+import IconClose from "@assets/icons/iconsax/outline/close-circle.svg";
+import IconCopy from "@assets/icons/iconsax/outline/copy.svg";
+import IconSearch from "@assets/icons/iconsax/outline/search-normal-1.svg";
+import IconCheck from "@assets/icons/iconsax/outline/tick-circle.svg";
+import Section1ImgMob from "@assets/images/Nahayatnegar/Account Numbers/account-numbers-hero-mob.png";
+import Section1Img from "@assets/images/Nahayatnegar/Account Numbers/account-numbers-hero.png";
 
 const securitiesAccount = [
   {
@@ -166,10 +169,10 @@ const accountGroups = [
         <div class="flex flex-col items-center gap-8 lg:items-start">
           <h1 class="text-center text-display-small text-white">شماره حساب‌های نهایت‌نگر</h1>
           <div class="flex flex-wrap items-center justify-center gap-2 text-body-large text-white">
-            <div class="flex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">بورس اوراق بهادار</div>
-            <div class="flex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">بورس کالا</div>
-            <div class="flex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">بورس انرژی</div>
-            <div class="flex justify-start rounded-full bg-[#353C57] px-4 py-1 font-medium">اختیار معامله</div>
+            <div class="neo-chip">بورس اوراق بهادار</div>
+            <div class="neo-chip">بورس کالا</div>
+            <div class="neo-chip">بورس انرژی</div>
+            <div class="neo-chip">اختیار معامله</div>
           </div>
         </div>
       </div>
@@ -195,14 +198,22 @@ const accountGroups = [
           <div class="relative flex w-full lg:w-80">
             <input
               class="flex-1 pl-10"
-              type="search"
+              type="text"
               name="search"
               placeholder="جستجوی نام بانک، شماره حساب و ..."
               aria-label="جستجوی نام بانک، شماره حساب و ..."
               aria-controls="account-list"
               data-account-search
             />
-            <IconSearch class="absolute top-2.5 left-3 h-4 w-4" />
+            <IconSearch class="absolute top-2.5 left-3 h-4 w-4" data-account-search-icon />
+            <button
+              class="absolute top-2.5 left-3 hidden cursor-pointer"
+              type="button"
+              aria-label="پاک کردن جستجو"
+              data-account-search-clear
+            >
+              <IconClose class="h-4 w-4" />
+            </button>
           </div>
         </div>
 
@@ -238,9 +249,11 @@ const accountGroups = [
                       <div class="flex items-center gap-2">
                         <span class="font-medium">{accountNumber}</span>
                         <button
-                          class="neo-button neo-icon-button neo-button-neutral neo-button-small"
+                          class="neo-button neo-icon-button neo-button-neutral neo-button-small copy-tooltip"
                           type="button"
                           data-copy-value={accountNumber}
+                          data-default-tooltip="کپی شماره حساب"
+                          data-tooltip="کپی شماره حساب"
                           aria-label={`کپی شماره حساب ${bankName}`}
                         >
                           <span class="copy-icon">
@@ -257,9 +270,11 @@ const accountGroups = [
                       <div class="flex items-center gap-2">
                         <span class="font-medium">{iban}</span>
                         <button
-                          class="neo-button neo-icon-button neo-button-neutral neo-button-small"
+                          class="neo-button neo-icon-button neo-button-neutral neo-button-small copy-tooltip"
                           type="button"
                           data-copy-value={iban}
+                          data-default-tooltip="کپی شماره شبا"
+                          data-tooltip="کپی شماره شبا"
                           aria-label={`کپی شماره شبا ${bankName}`}
                         >
                           <span class="copy-icon">
@@ -283,14 +298,57 @@ const accountGroups = [
   </main>
 </Layout>
 
+<style>
+  .copy-tooltip {
+    position: relative;
+  }
+
+  .copy-tooltip::after {
+    position: absolute;
+    z-index: 10;
+    bottom: calc(100% + 0.5rem);
+    left: 50%;
+    padding: 8px;
+    border-radius: 4px;
+    background: #262b3e;
+    color: #ffffff;
+    content: attr(data-tooltip);
+    font-size: 12px;
+    line-height: 130%;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%);
+    transition:
+      opacity 150ms ease,
+      visibility 150ms ease;
+  }
+
+  .copy-tooltip:hover::after,
+  .copy-tooltip:focus-visible::after,
+  .copy-tooltip[data-tooltip-visible]::after {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>
+
 <script>
   const searchInput = document.querySelector<HTMLInputElement>("[data-account-search]");
+  const searchIcon = document.querySelector<SVGElement>("[data-account-search-icon]");
+  const clearSearchButton = document.querySelector<HTMLButtonElement>("[data-account-search-clear]");
   const accountCards = document.querySelectorAll<HTMLElement>("[data-account-card]");
   const accountTabs = document.querySelectorAll<HTMLButtonElement>("[data-account-tab]");
   const noResults = document.querySelector<HTMLElement>("[data-no-results]");
   let activeCategory = "securities";
 
   const normalize = (value: string) => value.trim().toLocaleLowerCase().replace(/ي/g, "ی").replace(/ك/g, "ک");
+
+  const updateSearchControls = () => {
+    const hasSearchTerm = Boolean(searchInput?.value);
+    searchIcon?.classList.toggle("hidden", hasSearchTerm);
+    clearSearchButton?.classList.toggle("hidden", !hasSearchTerm);
+  };
 
   const updateAccountList = () => {
     const searchTerm = normalize(searchInput?.value ?? "");
@@ -317,7 +375,16 @@ const accountGroups = [
   });
 
   searchInput?.addEventListener("input", () => {
+    updateSearchControls();
     updateAccountList();
+  });
+
+  clearSearchButton?.addEventListener("click", () => {
+    if (searchInput) {
+      searchInput.value = "";
+      searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+      searchInput.focus();
+    }
   });
 
   document.querySelectorAll<HTMLButtonElement>("[data-copy-value]").forEach((button) => {
@@ -331,6 +398,8 @@ const accountGroups = [
 
         button.querySelector(".copy-icon")?.classList.add("hidden");
         button.querySelector(".check-icon")?.classList.remove("hidden");
+        button.dataset.tooltip = "کپی شد";
+        button.dataset.tooltipVisible = "";
         button.setAttribute("aria-label", "کپی شد");
 
         if (resetTimer) {
@@ -340,7 +409,9 @@ const accountGroups = [
         resetTimer = setTimeout(() => {
           button.querySelector(".copy-icon")?.classList.remove("hidden");
           button.querySelector(".check-icon")?.classList.add("hidden");
-          button.setAttribute("aria-label", "کپی");
+          button.dataset.tooltip = button.dataset.defaultTooltip;
+          delete button.dataset.tooltipVisible;
+          button.setAttribute("aria-label", button.dataset.defaultTooltip ?? "کپی");
         }, 1000);
       }
     });

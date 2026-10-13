@@ -7,14 +7,16 @@ export interface StepItem {
 
 export interface Props {
   title: string;
+  description?: string;
   steps: StepItem[];
 }
 
-const { title, steps } = Astro.props;
+const { title, description, steps } = Astro.props;
 ---
 
 <div class="flex flex-col gap-6 rounded-xl bg-fg-primary p-6">
   <h2 class="text-heading-medium leading-10">{title}</h2>
+  {description && <p class="text-body-medium text-secondary">{description}</p>}
   <div class="flex flex-col">
     {
       steps.map((step) => {

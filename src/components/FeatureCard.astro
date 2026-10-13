@@ -19,5 +19,5 @@ const { title, description, icon: Icon } = Astro.props;
 
   <h3 class="text-title-medium">{title}</h3>
 
-  {description && <div class="text-body-medium text-secondary prose-sm max-w-none" set:html={description} />}
+  {description && <div class="prose-sm max-w-none text-body-medium text-secondary" set:html={description} />}
 </div>

@@ -1,0 +1,9 @@
+@layer components {
+  .neo-page-content {
+    @apply mx-auto flex max-w-200 flex-col gap-6 p-4;
+  }
+
+  .neo-page-content-spaced {
+    @apply mb-15;
+  }
+}
