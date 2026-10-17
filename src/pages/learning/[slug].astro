@@ -7,7 +7,7 @@ import {
   formatPersianDate,
   resolveImageUrl,
   type ArticleApiDTO,
-} from "./article.service";
+} from "../../services/learning/article.service";
 
 // Icons
 import Book from "@assets/icons/iconsax/outline/book.svg";
@@ -73,7 +73,12 @@ const publishDate = article.publishDate || formatPersianDate(article.publishedAt
 const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning" }, { label: article.title }];
 ---
 
-<Layout title={article.title}>
+<Layout
+  title={article.title}
+  description={(typeof article.description === "string" ? article.description : article.description?.text) ||
+    `${article.title}؛ راهنمایی آموزشی از گروه مالی نهایت‌نگر درباره بازار سرمایه و سرمایه‌گذاری.`}
+  image={bannerSrc}
+>
   <div class="h-21 w-full bg-[#131C3C] lg:h-25"></div>
   <main class="m-auto flex min-h-screen flex-col gap-6 lg:w-280">
     <BreadCrumb items={breadCrumbItems} />
