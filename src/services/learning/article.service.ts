@@ -1,4 +1,4 @@
-import { MOCK_ARTICLES_LIST } from "./data/mockArticle";
+import { MOCK_ARTICLES_LIST } from "./mockArticle";
 
 export interface ImageObject {
   url?: string;
