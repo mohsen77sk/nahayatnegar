@@ -1,0 +1,206 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  fetchAllArticles,
+  fetchPostById,
+  calculateReadingTime,
+  formatPersianDate,
+  resolveImageUrl,
+  type ArticleApiDTO,
+} from "../../services/learning/article.service";
+
+// Icons
+import Book from "@assets/icons/iconsax/outline/book.svg";
+import Calendar from "@assets/icons/iconsax/outline/calendar.svg";
+import Medal from "@assets/icons/iconsax/outline/medal.svg";
+import BreadCrumb from "@components/bread-crumb.astro";
+
+export async function getStaticPaths() {
+  const posts = (await fetchAllArticles()).filter((post) => post.published && post.id);
+
+  return Promise.all(
+    posts.map(async (post) => {
+      const fullPost = await fetchPostById(post.id);
+      return {
+        params: { slug: post.id },
+        props: { article: fullPost },
+      };
+    }),
+  );
+}
+
+interface Props {
+  article: ArticleApiDTO;
+}
+const id = Astro.params.slug;
+const { article } = Astro.props;
+
+if (!id || id !== article.id) {
+  throw new Error(`Article route "${id ?? ""}" does not match its generated article.`);
+}
+
+interface TocItem {
+  id: string;
+  text: string;
+  isSub: boolean;
+}
+
+const tocItems: TocItem[] = [];
+let processedContent = article.content || "";
+
+const headingRegex = /<(h[2])([^>]*)>(.*?)<\/\1>/gi;
+let headingCounter = 1;
+
+processedContent = processedContent.replace(headingRegex, (match, tag, attrs, innerText) => {
+  const cleanText = innerText.replace(/<[^>]*>/g, "").trim();
+  const idMatch = attrs.match(/id=["']([^"']+)["']/i);
+  const id = idMatch ? idMatch[1] : `topic-${headingCounter++}`;
+  tocItems.push({
+    id,
+    text: cleanText,
+    isSub: tag.toLowerCase() === "h3",
+  });
+
+  if (!idMatch) {
+    return `<${tag}${attrs} id="${id}">${innerText}</${tag}>`;
+  }
+  return match;
+});
+const bannerSrc = resolveImageUrl(article?.imageUrl);
+const readingTime = calculateReadingTime(article?.content);
+const publishDate = article.publishDate || formatPersianDate(article.publishedAt || article.createdAt);
+
+const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning" }, { label: article.title }];
+---
+
+<Layout
+  title={article.title}
+  description={
+    (typeof article.description === "string" ? article.description : article.description?.text) ||
+    `${article.title}؛ راهنمایی آموزشی از گروه مالی نهایت‌نگر درباره بازار سرمایه و سرمایه‌گذاری.`
+  }
+  image={bannerSrc}
+>
+  <div class="h-21 w-full bg-[#131C3C] lg:h-25"></div>
+  <main class="m-auto flex min-h-screen flex-col gap-6 lg:w-280">
+    <BreadCrumb items={breadCrumbItems} />
+    {/* 1. Article Header */}
+    <header class="py-4 text-start">
+      <h1 class="text-heading-large leading-12 font-bold tracking-tight">{article.title}</h1>
+    </header>
+
+    {/* 2. Top Hero Banner */}
+    <div class="roverflow-hidden shadow-md relative w-full">
+      <img src={bannerSrc} alt={article.title} class="h-full w-full object-cover" loading="eager" />
+    </div>
+
+    {/* 4. Two-Column Layout: Sidebar TOC + Main Content */}
+    <div class="grid grid-cols-1 items-start gap-8 pt-2 lg:grid-cols-12">
+      {/* Left Article Body */}
+      <div class="text-slate-700 text-base order-1 space-y-8 leading-relaxed lg:col-span-9">
+        {/* 3. Metadata Header Bar */}
+        <div
+          class="border-sky-100 text-xs text-sky-800 flex flex-wrap items-center justify-between gap-3 rounded-lg border bg-brand/16 px-4 py-3"
+        >
+          <div class="flex items-center gap-2">
+            <Medal class="w-5 text-brand" />
+            <span>
+              سطح: <span class="font-bold">{article.level}</span>
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <Book class="w-5 text-brand" />
+            <span>
+              زمان مطالعه: <span class="font-bold">{readingTime}</span>
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <Calendar class="w-5 text-brand" />
+            <span>
+              زمان انتشار: <span class="font-bold">{publishDate}</span>
+            </span>
+          </div>
+        </div>
+
+        <article
+          id="article-content"
+          class="prose prose-slate max-w-none p-6 leading-8 lg:col-span-8 [&_a]:text-brand [&_a]:no-underline [&_h2]:scroll-mt-10 [&_h2]:text-heading-small [&_h2]:leading-9 [&_h2]:font-bold"
+          set:html={processedContent}
+        />
+      </div>
+
+      {/* Right Sticky Sidebar (Table of Contents) */}
+
+      {
+        tocItems.length > 0 && (
+          <aside class="order-1 hidden w-full flex-col self-start lg:sticky lg:top-24 lg:col-span-3 lg:flex">
+            <nav class="shadow-sm text-xs flex flex-col gap-3" aria-label="فهرست مطالب">
+              <div class="flex items-center justify-center rounded-lg bg-neutral-300 p-3">
+                <h2 class="font-bold">فهرست مطالب</h2>
+              </div>
+
+              <div class="flex flex-col space-y-2.5 text-secondary" id="toc-list">
+                {tocItems.map((item, index) => (
+                  <div class="flex flex-col space-y-1">
+                    <a
+                      id="dynamic-toc"
+                      href={`#${item.id}`}
+                      class:list={[
+                        "toc-item block border-r-2 leading-snug transition-all duration-200",
+                        index === 0 ? "border-r-brand font-semibold" : "border-transparent text-secondary",
+                      ]}
+                      class="toc-item block border-r-2 border-transparent p-2 leading-snug transition-all duration-200"
+                    >
+                      {item.text}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </nav>
+          </aside>
+        )
+      }
+    </div>
+  </main>
+</Layout>
+<script>
+  function initDynamicTOC() {
+    const article = document.getElementById("article-content");
+    const tocLinks = document.querySelectorAll(".toc-item");
+
+    const headings = article?.querySelectorAll<HTMLHeadingElement>("h2");
+    if (headings?.length === 0) return;
+
+    headings?.forEach((heading, index) => {
+      if (!heading.id) {
+        heading.id = `topic-${index}`;
+      }
+    });
+
+    tocLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href")?.substring(1);
+        const targetHeading = document.getElementById(targetId || "");
+
+        if (targetHeading) {
+          targetHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.pushState(null, "", `#${targetId}`);
+        }
+
+        // استایل اکتیو کردن
+        tocLinks.forEach((el) => {
+          el.classList.remove("border-r-brand", "font-semibold");
+          el.classList.add("border-transparent");
+        });
+        link.classList.remove("border-transparent");
+        link.classList.add("border-r-brand", "font-semibold");
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initDynamicTOC);
+  document.addEventListener("astro:page-load", initDynamicTOC);
+</script>
