@@ -10,7 +10,7 @@ const {
   description = "گروه مالی نهایت‌نگر؛ خدمات کارگزاری، مدیریت دارایی و آموزش بازار سرمایه در ایران.",
   image,
 } = Astro.props;
-const pageTitle = `${title} | نهایت‌نگر`;
+const pageTitle = title.includes("نهایت‌نگر") ? title : `${title} | نهایت‌نگر`;
 const pageDescription = (typeof description === "string" ? description : "")
   .replace(/<[^>]*>/g, " ")
   .replace(/\s+/g, " ")
