@@ -1,5 +1,4 @@
-// src/services/mockArticle.ts
-import type { ArticleApiDTO } from "../article.service";
+import type { ArticleApiDTO } from "./article.service";
 
 export const MOCK_ARTICLE: ArticleApiDTO = {
   id: "post-101",
@@ -58,7 +57,6 @@ export const MOCK_ARTICLE: ArticleApiDTO = {
   `,
 };
 
-// لیست ماک برای SSG
 export const MOCK_ARTICLES_LIST: ArticleApiDTO[] = [
   MOCK_ARTICLE,
   {
