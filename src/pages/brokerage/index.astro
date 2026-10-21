@@ -49,55 +49,7 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
           </div>
         </div>
       </div>
-      <div class="flex flex-1 items-center justify-center" slot="left">
-        <!-- <div class="sketchfab-embed-wrapper"> -->
-        <iframe
-          id="diamond-viewer"
-          class="mb-30 h-full w-full lg:mb-0 lg:ml-12.5 lg:h-1/2"
-          title="Diamond"
-          frameborder="0"
-          allowfullscreen
-          allow="autoplay; fullscreen; xr-spatial-tracking"
-          xr-spatial-tracking
-          execution-while-out-of-viewport
-          execution-while-not-rendered
-        >
-        </iframe>
-        <script is:inline src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
-        <script is:inline>
-          const viewerFrame = document.getElementById("diamond-viewer");
-          const viewerClient = new Sketchfab("1.12.1", viewerFrame);
-
-          viewerClient.init("1ab1e8de5a604b4081c15326eaa5682b", {
-            autostart: 1,
-            autospin: 1,
-            preload: 1,
-            transparent: 1,
-            dnt: 1,
-            ui_hint: 0,
-            ui_controls: 0,
-            ui_infos: 0,
-            ui_start: 0,
-            ui_general_controls: 0,
-            ui_settings: 0,
-            ui_inspector: 0,
-            ui_ar: 0,
-            ui_vr: 0,
-            ui_fullscreen: 0,
-            ui_help: 0,
-            ui_stop: 0,
-            ui_animations: 0,
-            ui_annotations: 0,
-            success: function (api) {
-              api.addEventListener("viewerready", function () {
-                api.setPostProcessing({ enable: false });
-              });
-              api.start();
-            },
-          });
-        </script>
-        <!-- </div> -->
-      </div>
+      <div class="flex flex-1 items-center justify-center" slot="left"></div>
     </SectionLayer1>
 
     <!-- introduce -->
