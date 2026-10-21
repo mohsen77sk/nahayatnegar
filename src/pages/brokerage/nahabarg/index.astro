@@ -24,7 +24,7 @@ import MockupImageWeb from "@assets/images/Brokerage/6-Nahabarg/Mockups/web.png"
 import Section1ImgMob from "@assets/images/Brokerage/6-Nahabarg/nahabarg-hero-mob.png";
 import Section1Img from "@assets/images/Brokerage/6-Nahabarg/nahabarg-hero.png";
 
-import { siteUrl } from "@utils/url";
+import { URLS } from "@utils/url";
 
 const BreadCrumbItem = [
   {
@@ -123,7 +123,7 @@ const faqs = [
           کنید.
         </p>
         <div class="flex flex-col gap-4 lg:flex-row">
-          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={URLS.registerAddress}>
             افتتاح حساب
             <ArrowLeft aria-hidden="true" />
           </a>
@@ -140,7 +140,6 @@ const faqs = [
     </SectionLayer2>
 
     <PageContent items={BreadCrumbItem} withBottomSpacing>
-
       <div>
         <h2 class="text-heading-medium leading-10">نهابرگ چیست؟</h2>
         <div class="text-body-medium leading-7 text-secondary">تخفیف کارمزد معاملات؛ نهابرگ</div>

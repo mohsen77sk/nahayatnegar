@@ -26,7 +26,7 @@ import Section1Img from "@assets/images/Brokerage/5-Instant Withdraw/instant-wit
 import MockupImageMob from "@assets/images/Brokerage/5-Instant Withdraw/Mockups/mob.png";
 import MockupImage from "@assets/images/Brokerage/5-Instant Withdraw/Mockups/web.png";
 
-import { siteUrl } from "@utils/url";
+import { URLS } from "@utils/url";
 
 const BreadCrumbItem = [
   {
@@ -112,7 +112,7 @@ const faqs = [
           کوتاه‌ترین زمان ممکن وجه خود را دریافت نمایید.
         </p>
         <div class="flex flex-col gap-4 lg:flex-row">
-          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={URLS.registerAddress}>
             افتتاح حساب
             <ArrowLeft aria-hidden="true" />
           </a>
@@ -129,7 +129,6 @@ const faqs = [
     </SectionLayer2>
 
     <PageContent items={BreadCrumbItem} withBottomSpacing>
-
       <div>
         <h2 class="text-heading-medium leading-10">برداشت آنی چیست؟</h2>
         <div class="text-body-medium leading-7 text-secondary">دسترسی سریع به وجه، بدون انتظار</div>
