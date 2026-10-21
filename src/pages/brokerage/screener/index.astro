@@ -24,7 +24,7 @@ import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Screener/Mo
 import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Screener/screener-hero-mob.png";
 import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Screener/screener-hero.png";
 
-import { siteUrl } from "@utils/url";
+import { URLS } from "@utils/url";
 
 const breadCrumbItems = [
   {
@@ -115,7 +115,7 @@ const faqs = [
           پیدا کنید که با معیارهای موردنظر شما مطابقت دارند؛ با فیلترهای آماده یا ترکیبی که خودتان می‌سازید.
         </p>
         <div class="flex gap-4">
-          <a href={siteUrl("/brokerage/neo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
+          <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large">
             ورود به نئوتریدر <ArrowLeft aria-hidden="true" />
           </a>
         </div>
@@ -189,10 +189,7 @@ const faqs = [
             خود را سریع‌تر پیدا کنید.
           </p>
         </div>
-        <a
-          href={siteUrl("/brokerage/neo-trader")}
-          class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25"
-        >
+        <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25">
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />
         </a>

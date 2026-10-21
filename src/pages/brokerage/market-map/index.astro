@@ -26,7 +26,7 @@ import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Market Map/
 import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Market Map/market-map-hero-mob.png";
 import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Market Map/market-map-hero.png";
 
-import { siteUrl } from "@utils/url";
+import { URLS } from "@utils/url";
 
 const breadCrumbItems = [
   {
@@ -118,7 +118,7 @@ const faqs = [
         </p>
         <p class="text-center text-body-large leading-8 text-white lg:text-start">
           <div class="flex gap-4">
-            <a href={siteUrl("/brokerage/neo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
+            <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large">
               ورود به سامانه <ArrowLeft aria-hidden="true" />
             </a>
           </div>
@@ -187,10 +187,7 @@ const faqs = [
             دهید.
           </p>
         </div>
-        <a
-          href={siteUrl("/brokerage/neo-trader")}
-          class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25"
-        >
+        <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25">
           ورود به سامانه
           <ArrowLeft aria-hidden="true" />
         </a>
