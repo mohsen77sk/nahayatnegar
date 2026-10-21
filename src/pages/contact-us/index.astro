@@ -9,12 +9,13 @@ import LineGradient from "@components/line-gradient.astro";
 import IconCall from "@assets/icons/iconsax/bulk/call.svg";
 import IconLocation from "@assets/icons/iconsax/bulk/location.svg";
 import IconSMS from "@assets/icons/iconsax/bulk/sms.svg";
-import IconInstagram from "@assets/icons/iconsax/outline/instagram.svg";
-import IconWhatsapp from "@assets/icons/iconsax/outline/whatsapp.svg";
+import IconInstagram from "@assets/icons/social/instagram.svg";
+import IconLinkedin from "@assets/icons/social/linkedin.svg";
+import IconTelegram from "@assets/icons/social/telegram.svg";
 import Section1ImgMob from "@assets/images/Nahayatnegar/Contact Us/contact-us-hero-mob.png";
 import Section1Img from "@assets/images/Nahayatnegar/Contact Us/contact-us-hero.png";
 
-import { siteUrl } from "@utils/url";
+import { siteUrl, CommunicationURLS } from "@utils/url";
 ---
 
 <Layout
@@ -62,11 +63,26 @@ import { siteUrl } from "@utils/url";
           </div>
 
           <div class="flex justify-center gap-2 lg:justify-start">
-            <a class="neo-button neo-icon-button neo-button-neutral" href="/" aria-label="واتساپ">
-              <IconWhatsapp aria-hidden="true" />
-            </a>
-            <a class="neo-button neo-icon-button neo-button-neutral" href="/" aria-label="اینستاگرام">
+            <a
+              class="neo-button neo-icon-button neo-button-neutral"
+              href={CommunicationURLS.instagram}
+              aria-label="اینستاگرام"
+            >
               <IconInstagram aria-hidden="true" />
+            </a>
+            <a
+              class="neo-button neo-icon-button neo-button-neutral"
+              href={CommunicationURLS.linkedin}
+              aria-label="لینکدین"
+            >
+              <IconLinkedin aria-hidden="true" />
+            </a>
+            <a
+              class="neo-button neo-icon-button neo-button-neutral"
+              href={CommunicationURLS.telegram}
+              aria-label="تلگرام"
+            >
+              <IconTelegram aria-hidden="true" />
             </a>
           </div>
 
