@@ -26,9 +26,7 @@ import Section1Img from "@assets/images/Brokerage/3-Credit/credit-hero.png";
 import SectionBanner1ImgMob from "@assets/images/Brokerage/3-Credit/Mockups/mob.png";
 import SectionBanner1Img from "@assets/images/Brokerage/3-Credit/Mockups/web.png";
 
-import { siteUrl } from "@utils/url";
-
-import { URLS } from "../../../scripts/constants";
+import { siteUrl, URLS } from "@utils/url";
 
 const BreadCrumbItem = [
   {
@@ -119,7 +117,10 @@ const timeline = {
 };
 ---
 
-<Layout title="اعتبار معاملاتی">
+<Layout
+  title="اعتبار معاملاتی کارگزاری"
+  description="شرایط و مراحل دریافت اعتبار معاملاتی از کارگزاری نهایت‌نگر را بشناسید و با اعتبار، قدرت خرید خود را مدیریت کنید."
+>
   <main>
     <!-- Hero Section -->
 
@@ -130,7 +131,7 @@ const timeline = {
           قدرت خرید خود را افزایش دهید و فرصت‌های بازار را از دست ندهید.
         </p>
         <div class="flex gap-4">
-          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl(URLS.registerAddress)}>
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={URLS.registerAddress}>
             افتتاح حساب
             <ArrowLeft aria-hidden="true" />
           </a>

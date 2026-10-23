@@ -27,7 +27,7 @@ import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/M
 import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Watchlist/watchlist-hero-mob.png";
 import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Watchlist/watchlist-hero.png";
 
-import { siteUrl } from "@utils/url";
+import { URLS } from "@utils/url";
 
 const breadCrumbItems = [
   {
@@ -137,7 +137,10 @@ const faqs = [
 ];
 ---
 
-<Layout title="دیده‌بان">
+<Layout
+  title="دیده‌بان بازار بورس"
+  description="دیده‌بان بازار نهایت‌نگر برای دنبال‌کردن نمادها، مشاهده تغییرات بازار و دسترسی سریع به اطلاعات معاملاتی کاربرد دارد."
+>
   <main>
     <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
       <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
@@ -147,7 +150,7 @@ const faqs = [
           اطلاعات آن‌ها را به‌صورت لحظه‌ای دنبال کنید.
         </p>
         <div class="flex gap-4">
-          <a href={siteUrl("/brokerage/neo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
+          <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large">
             ورود به نئوتریدر <ArrowLeft aria-hidden="true" />
           </a>
         </div>
@@ -226,10 +229,7 @@ const faqs = [
             نمادهای موردنظر خود را در دیده‌بان قرار دهید و اطلاعات بازار را در یک محیط یکپارچه و لحظه‌ای دنبال کنید.
           </p>
         </div>
-        <a
-          href={siteUrl("/brokerage/neo-trader")}
-          class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25"
-        >
+        <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25">
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />
         </a>

@@ -24,12 +24,10 @@ import SectionBanner2ImgMob from "@assets/images/Brokerage/8-Referral/Banner-mob
 import SectionBanner2Img from "@assets/images/Brokerage/8-Referral/Banner.png";
 import Section1ImgMob from "@assets/images/Brokerage/8-Referral/referral-hero-mob.png";
 import Section1Img from "@assets/images/Brokerage/8-Referral/referral-hero.png";
-import Section2Img from "@assets/images/Brokerage/8-Referral/web-1.png";
-import Section3Img from "@assets/images/Brokerage/8-Referral/web-2.png";
+import Section2Img from "@assets/images/Brokerage/8-Referral/Mockups/laptop1.png";
+import Section3Img from "@assets/images/Brokerage/8-Referral/Mockups/laptop2.png";
 
-import { siteUrl } from "@utils/url";
-
-import URLS from "../../../scripts/constants";
+import { URLS } from "@utils/url";
 
 const BreadCrumbItem = [
   {
@@ -97,7 +95,10 @@ const faqs = [
 ];
 ---
 
-<Layout title="مشتری">
+<Layout
+  title="طرح معرفی مشتریان"
+  description="با طرح معرفی مشتریان کارگزاری نهایت‌نگر، شرایط دعوت از دوستان و جزئیات بهره‌مندی از این برنامه را بخوانید."
+>
   <main>
     <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
       <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
@@ -106,7 +107,7 @@ const faqs = [
           با معرفی دوستان و آشنایان به کارگزاری نهایت‌نگر، می‌توانید به ازای هر معرفی موفق، پاداش دریافت کنید.
         </p>
         <div class="flex gap-4">
-          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl(URLS.registerAddress)}>
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={URLS.registerAddress}>
             افتتاح حساب
             <ArrowLeft aria-hidden="true" />
           </a>

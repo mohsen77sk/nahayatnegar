@@ -29,7 +29,7 @@ import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Technical/M
 import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero-mob.png";
 import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Technical/technical-hero.png";
 
-import { siteUrl } from "@utils/url";
+import { URLS } from "@utils/url";
 
 const breadCrumbItems = [
   {
@@ -146,7 +146,10 @@ const faqs = [
 ];
 ---
 
-<Layout title="تحلیل تکنیکال و نمودارهای پیشرفته">
+<Layout
+  title="تحلیل تکنیکال و نمودار بازار"
+  description="با ابزار تحلیل تکنیکال و نمودارهای پیشرفته، روند قیمت و اطلاعات نمادهای بازار سرمایه را در سامانه نهایت‌نگر بررسی کنید."
+>
   <main>
     <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
       <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
@@ -156,7 +159,7 @@ const faqs = [
           خود را روی نمودار ثبت و ذخیره کنید؛ همه در محیطی یکپارچه با سامانه معاملات.
         </p>
         <div class="flex gap-4">
-          <a href={siteUrl("/brokerage/neo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
+          <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large">
             ورود به نئوتریدر <ArrowLeft aria-hidden="true" />
           </a>
         </div>
@@ -237,10 +240,7 @@ const faqs = [
             ابزارهای تحلیل تکنیکال، نمودارهای لحظه‌ای و تحلیل‌های خود را در کنار سامانه معاملات در اختیار داشته باشید.
           </p>
         </div>
-        <a
-          href={siteUrl("/brokerage/neo-trader")}
-          class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25"
-        >
+        <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25">
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />
         </a>

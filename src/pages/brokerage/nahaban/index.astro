@@ -27,7 +27,7 @@ import MockupImageWeb from "@assets/images/Brokerage/4-Nahaban/Mockups/web.png";
 import Section1ImgMob from "@assets/images/Brokerage/4-Nahaban/nahaban-hero-mob.png";
 import Section1Img from "@assets/images/Brokerage/4-Nahaban/nahaban-hero.png";
 
-import { siteUrl } from "@utils/url";
+import { URLS } from "@utils/url";
 
 const BreadCrumbItem = [
   {
@@ -107,7 +107,10 @@ const faqs = [
 ];
 ---
 
-<Layout title="نهابان">
+<Layout
+  title="نهابان؛ خدمات مالی و بانکی"
+  description="نهابان نهایت‌نگر راهکاری برای دسترسی به خدمات مالی و مدیریت بهتر وجه است؛ با امکانات و شرایط استفاده آشنا شوید."
+>
   <main>
     <SectionLayer2 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
       <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
@@ -116,7 +119,7 @@ const faqs = [
           با نهابان ، سرمایه شما تا رسیدن فرصت بعدی خرید، بیکار نمی‌ماند و می‌تواند برایتان بازده روزشمار ایجاد کند.
         </p>
         <div class="flex flex-col gap-4 lg:flex-row">
-          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={URLS.registerAddress}>
             افتتاح حساب
             <ArrowLeft aria-hidden="true" />
           </a>
@@ -133,7 +136,6 @@ const faqs = [
     </SectionLayer2>
 
     <PageContent items={BreadCrumbItem} withBottomSpacing>
-
       <div>
         <h2 class="text-heading-medium leading-10">نهابان</h2>
         <div class="text-body-medium leading-7 text-secondary">
@@ -179,7 +181,7 @@ const faqs = [
 
       <BannerCard desktopImage={BannerWeb} mobileImage={BannerMob} classes={"lg:h-72"}>
         <div class="flex max-w-94 flex-col gap-4 text-white lg:w-1/2">
-          <h1 class="text-heading-medium leading-10">طرح نهابان</h1>
+          <h2 class="text-heading-medium leading-10">طرح نهابان</h2>
           <p class="text-body-meduim leading-8 text-neutral-500">
             سرمایه خود را در نهابان قرار دهید تا موجودی نقد حساب و وجه تضمین معاملات اختیار شما، مشمول سود روزشمار شوند
             و تا زمان رسیدن فرصت بعدی بازار، برایتان بازده ایجاد کنند.

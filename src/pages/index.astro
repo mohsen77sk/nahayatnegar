@@ -22,7 +22,10 @@ import HeroVideo from "@assets/images/Home/Sunrise over Earth.mp4";
 import { siteUrl } from "@utils/url";
 ---
 
-<Layout title="خانه">
+<Layout
+  title="گروه مالی نهایت‌نگر"
+  description="خدمات کارگزاری، معاملات آنلاین، مدیریت دارایی و آموزش سرمایه‌گذاری در بازار سرمایه ایران؛ همراه با گروه مالی نهایت‌نگر."
+>
   <main>
     <SectionVideoHero desktopVideo={HeroVideo} mobileVideo={HeroVideo}>
       <div slot="right" class="flex h-150 w-full flex-col items-center justify-center text-center">
@@ -53,7 +56,7 @@ import { siteUrl } from "@utils/url";
           <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
             <div class="flex flex-col items-center gap-2 lg:items-start">
-              <h1 class="text-center text-display-small">یک کارگزاری تمام بازار سرمایه</h1>
+              <h2 class="text-center text-display-small">یک کارگزاری تمام بازار سرمایه</h2>
               <div class="flex flex-row-reverse items-center gap-2 text-body-medium text-secondary">
                 <span
                   class="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 whitespace-nowrap"
@@ -106,7 +109,7 @@ import { siteUrl } from "@utils/url";
           <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
             <div class="flex flex-col items-center lg:items-start">
-              <h1 class="text-display-small text-white">مدیریت دارایی حرفه‌ای</h1>
+              <h2 class="text-display-small text-white">مدیریت دارایی حرفه‌ای</h2>
               <span class="text-body-medium text-neutral-900">
                 امنیت، سود پایدار و سرمایه‌گذاری هوشمند در بازار سرمایه
               </span>
@@ -132,7 +135,7 @@ import { siteUrl } from "@utils/url";
         <div class="flex flex-col gap-6">
           <div class="flex flex-col-reverse items-center text-center">
             <div class="flex flex-col items-center">
-              <h1 class="text-display-small">تامین مالی</h1>
+              <h2 class="text-display-small">تامین مالی</h2>
               <h6 class="text-secondary">راهکارهای نوین تأمین مالی برای توسعه کسب‌وکارها</h6>
               <div class="mt-6 h-1 w-16 rounded-round bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
             </div>
@@ -162,7 +165,7 @@ import { siteUrl } from "@utils/url";
           <div class="flex flex-col-reverse items-center gap-6 lg:flex-row">
             <LineGradient />
             <div class="flex flex-col items-center lg:items-start">
-              <h1 class="text-display-small text-white">آموزش</h1>
+              <h2 class="text-display-small text-white">آموزش</h2>
               <span class="text-body-medium text-white">
                 از علم به ثروت؛ دانش مالی، کلید رشد پایدار در بازار سرمایه
               </span>
@@ -187,7 +190,7 @@ import { siteUrl } from "@utils/url";
 
 <style>
   .brokerage-float {
-    animation: brokerage-float 3.5s ease-in-out infinite alternate;
+    animation: brokerage-float 2s ease-in-out infinite alternate;
   }
 
   @keyframes brokerage-float {

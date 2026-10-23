@@ -13,15 +13,13 @@ import Location from "@assets/icons/menu/location.svg";
 import Sms from "@assets/icons/menu/sms.svg";
 import AboutUsMenuImg from "@assets/images/Nahayatnegar/About Us/about-us-menu.png";
 
-import { siteUrl } from "@utils/url";
+import { siteUrl, URLS } from "@utils/url";
 import { Image } from "astro:assets";
 
-import { URLS } from "../../scripts/constants";
-
 const currentPath = Astro.url.pathname;
-const normalizePath = (path) => path.replace(/\/$/, "") || "/";
+const normalizePath = (path: string) => path.replace(/\/$/, "") || "/";
 
-const isLinkActive = (link) => {
+const isLinkActive = (link: string) => {
   if (!link) return false;
 
   const normalizedCurrent = normalizePath(currentPath);
@@ -30,9 +28,9 @@ const isLinkActive = (link) => {
   return normalizedCurrent === normalizedLink || normalizedCurrent.startsWith(normalizedLink + "/");
 };
 
-const isMenuActive = (menu) => {
+const isMenuActive = (menu: any) => {
   if (menu.link && isLinkActive(menu.link)) return true;
-  if (menu.subMenus && menu.subMenus.some((sub) => isLinkActive(sub.link))) return true;
+  if (menu.subMenus && menu.subMenus.some((sub: any) => isLinkActive(sub.link))) return true;
   return false;
 };
 

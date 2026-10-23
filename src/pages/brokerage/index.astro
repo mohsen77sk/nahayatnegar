@@ -29,11 +29,13 @@ import MoboObjectMob from "../../assets/images/Brokerage/introduce-mobo-mob.png"
 import MoboObjectImg from "../../assets/images/Brokerage/introduce-mobo.png";
 import NeoObjectMob from "../../assets/images/Brokerage/introduce-neo-mob.png";
 import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
-import { URLS } from "../../scripts/constants";
 ---
 
 <!-- Hero  -->
-<Layout title="کارگزاری">
+<Layout
+  title="خدمات کارگزاری نهایت‌نگر"
+  description="خدمات کارگزاری نهایت‌نگر شامل سامانه‌های معاملاتی، اعتبار معاملاتی، برداشت آنی و ابزارهای سرمایه‌گذاری بازارهای مالی است."
+>
   <main>
     <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
       <div class="flex flex-1 items-center gap-8 self-center" slot="right">
@@ -47,7 +49,7 @@ import { URLS } from "../../scripts/constants";
           </div>
         </div>
       </div>
-      <div class="flex-1" slot="left"></div>
+      <div class="flex flex-1 items-center justify-center" slot="left"></div>
     </SectionLayer1>
 
     <!-- introduce -->
@@ -55,7 +57,7 @@ import { URLS } from "../../scripts/constants";
       <div class="relative mx-auto flex w-full max-w-lg flex-col gap-4 lg:flex-row">
         <div class="flex flex-col gap-15">
           <div class="flex flex-col items-center gap-2 text-center">
-            <h1 class="text-display-small">سامانه‌های معاملاتی نهایت‌نگر</h1>
+            <h2 class="text-display-small">سامانه‌های معاملاتی نهایت‌نگر</h2>
             <p class="text-body-large text-secondary">
               با پنل‌های نئوتریدر و موبوتریدر، تجربه‌ای سریع و حرفه‌ای از معاملات بازار سرمایه داشته باشید.
             </p>
@@ -67,7 +69,7 @@ import { URLS } from "../../scripts/constants";
               class="sticky top-24 flex origin-top translate-y-0 scale-[0.94] flex-col items-center justify-center gap-8 rounded-3xl bg-[linear-gradient(90deg,#00BFA5_0%,#004EA2_40%,#0A1628_100%)] p-6 text-center transition-transform duration-700 lg:flex-row-reverse lg:gap-4"
             >
               <div class="self-سفشقف flex flex-1 flex-col gap-8 px-16 py-8 text-white lg:px-8 lg:py-0">
-                <h1 class="text-heading-medium">سامانه‌ معاملاتی نئوتریدر</h1>
+                <h2 class="text-heading-medium">سامانه‌ معاملاتی نئوتریدر</h2>
                 <h3 class="leading-8 font-normal">
                   پنل معاملاتی پیشرفته نهایت‌نگر که با ارائه امکانات حرفه‌ای و رابط کاربری روان، تجربه‌ای سریع، دقیق و
                   مطمئن را برای انجام معاملات در بازار سرمایه فراهم می‌کند.
@@ -93,7 +95,7 @@ import { URLS } from "../../scripts/constants";
               class="sticky z-1 -mt-12 flex origin-top scale-[0.96] flex-col items-center justify-center gap-8 rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)] p-6 text-center transition-transform duration-700 lg:top-48 lg:-mt-35 lg:translate-y-18 lg:flex-row-reverse lg:gap-4"
             >
               <div class="flex flex-1 flex-col gap-8 self-center px-16 py-8 text-white lg:px-8 lg:py-0">
-                <h1 class="text-heading-medium">سامانه‌ معاملاتی موبوتریدر</h1>
+                <h2 class="text-heading-medium">سامانه‌ معاملاتی موبوتریدر</h2>
                 <h3 class="leading-8 font-normal">
                   سامانه معاملاتی اختصاصی تلفن همراه نهایت‌نگر که به شما امکان می‌دهد در هر زمان و هر مکان، با رابط
                   کاربری ساده و کاربرپسند، معاملات آنلاین خود را با سرعت و دقت بالا انجام دهید.
@@ -130,7 +132,7 @@ import { URLS } from "../../scripts/constants";
             <LineGradient />
             <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary">اعتبار هوشمند</span>
-              <h1 class="text-display-small text-white">اعتبار معاملاتی خودکار</h1>
+              <h2 class="text-display-small text-white">اعتبار معاملاتی خودکار</h2>
             </div>
           </div>
           <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
@@ -155,7 +157,7 @@ import { URLS } from "../../scripts/constants";
             <LineGradient />
             <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary">سرمایه شما همیشه سود می سازد</span>
-              <h1 class="text-display-small">نهابان مثل یک بانک</h1>
+              <h2 class="text-display-small">نهابان مثل یک بانک</h2>
             </div>
           </div>
           <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
@@ -184,7 +186,7 @@ import { URLS } from "../../scripts/constants";
             <LineGradient />
             <div class="flex flex-col items-center gap-2 text-center lg:items-start lg:text-start">
               <span class="text-neutral-800">پرداخت آنی</span>
-              <h1 class="text-display-small text-white">دسترسی فوری به سرمایه در هر ساعت از شبانه روز</h1>
+              <h2 class="text-display-small text-white">دسترسی فوری به سرمایه در هر ساعت از شبانه روز</h2>
             </div>
           </div>
           <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
@@ -212,7 +214,7 @@ import { URLS } from "../../scripts/constants";
             <LineGradient />
             <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary">طرح های تخفیف کارمزد</span>
-              <h1 class="text-display-small">تخفیف کارمزد ، هزینه کمتر و بازده بیشتر</h1>
+              <h2 class="text-display-small">تخفیف کارمزد ، هزینه کمتر و بازده بیشتر</h2>
             </div>
           </div>
           <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">
@@ -240,7 +242,7 @@ import { URLS } from "../../scripts/constants";
           <div class="flex flex-col-reverse items-center text-center">
             <div class="flex flex-col items-center">
               <span class="text-secondary">کارت بانکی نهایت‌نگر</span>
-              <h1 class="text-display-small">سرمایه‌تان ، همیشه همراه شما</h1>
+              <h2 class="text-display-small">سرمایه‌تان ، همیشه همراه شما</h2>
               <div class="mt-6 h-1 w-16 rounded-round bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
             </div>
           </div>
@@ -266,7 +268,7 @@ import { URLS } from "../../scripts/constants";
             <LineGradient />
             <div class="flex flex-col items-center gap-2 text-center lg:items-start">
               <span class="text-secondary">باهم رشد کنیم</span>
-              <h1 class="text-display-small">سود مشارکت ، فراتر از سرمایه‌گذاری</h1>
+              <h2 class="text-display-small">سود مشارکت ، فراتر از سرمایه‌گذاری</h2>
             </div>
           </div>
           <div class="flex flex-col items-center gap-4 pt-3 pr-6 pb-3 lg:items-start">

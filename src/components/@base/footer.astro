@@ -1,11 +1,11 @@
 ---
-import { siteUrl } from "@utils/url";
-import Instagram from "@assets/icons/iconsax/outline/instagram.svg";
-import Whatsapp from "@assets/icons/iconsax/outline/whatsapp.svg";
+import { siteUrl, URLS, CommunicationURLS } from "@utils/url";
+import IconInstagram from "@assets/icons/social/instagram.svg";
+import IconLinkedin from "@assets/icons/social/linkedin.svg";
+import IconTelegram from "@assets/icons/social/telegram.svg";
 import Call from "@assets/icons/iconsax/outline/call.svg";
 import Map from "@assets/icons/iconsax/outline/map.svg";
 import Logo from "@assets/icons/logo-footer.svg";
-import { URLS } from "../../scripts/constants";
 
 const phone = "02184450";
 const columns = [
@@ -36,7 +36,7 @@ const columns = [
 ];
 ---
 
-<footer class="flex w-full justify-center bg-fg-secondary px-4">
+<footer class="flex w-full justify-center border-t bg-fg-secondary px-4">
   <div class="flex w-full max-w-lg flex-col items-center gap-8">
     <!-- Support -->
     <div
@@ -97,11 +97,26 @@ const columns = [
               <span class="ltr">مسیریابی رو نقشه</span>
             </a>
             <div class="flex gap-2">
-              <a class="neo-button neo-icon-button neo-button-neutral" href="/" aria-label="واتساپ">
-                <Whatsapp aria-hidden="true" />
+              <a
+                class="neo-button neo-icon-button neo-button-neutral"
+                href={CommunicationURLS.instagram}
+                aria-label="اینستاگرام"
+              >
+                <IconInstagram aria-hidden="true" />
               </a>
-              <a class="neo-button neo-icon-button neo-button-neutral" href="/" aria-label="اینستاگرام">
-                <Instagram aria-hidden="true" />
+              <a
+                class="neo-button neo-icon-button neo-button-neutral"
+                href={CommunicationURLS.linkedin}
+                aria-label="لینکدین"
+              >
+                <IconLinkedin aria-hidden="true" />
+              </a>
+              <a
+                class="neo-button neo-icon-button neo-button-neutral"
+                href={CommunicationURLS.telegram}
+                aria-label="تلگرام"
+              >
+                <IconTelegram aria-hidden="true" />
               </a>
             </div>
           </div>

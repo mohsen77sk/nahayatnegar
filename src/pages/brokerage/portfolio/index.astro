@@ -26,7 +26,7 @@ import SectionBanner1Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/M
 import Section2ImgMob from "@assets/images/Brokerage/1-Neo Trader/Portfolio/portfolio-hero-mob.png";
 import Section2Img from "@assets/images/Brokerage/1-Neo Trader/Portfolio/portfolio-hero.png";
 
-import { siteUrl } from "@utils/url";
+import { URLS } from "@utils/url";
 
 const breadCrumbItems = [
   {
@@ -116,7 +116,10 @@ const faqs = [
 ];
 ---
 
-<Layout title="مدیریت پرتفوی">
+<Layout
+  title="مدیریت پرتفوی سرمایه‌گذاری"
+  description="ابزار مدیریت پرتفوی نهایت‌نگر به شما کمک می‌کند دارایی‌ها و عملکرد سرمایه‌گذاری خود را یکپارچه بررسی کنید."
+>
   <main>
     <SectionLayer2 desktopImage={Section2Img} mobileImage={Section2ImgMob}>
       <div class="flex flex-1 flex-col items-center justify-center gap-8 lg:items-start">
@@ -126,7 +129,7 @@ const faqs = [
           بررسی کنید و اثر مجامع را نیز در محاسبات سود و زیان در نظر بگیرید.
         </p>
         <div class="flex gap-4">
-          <a href={siteUrl("/brokerage/neo-trader")} class="neo-button neo-button-fill-primary neo-button-large">
+          <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large">
             ورود به نئوتریدر <ArrowLeft aria-hidden="true" />
           </a>
         </div>
@@ -190,10 +193,7 @@ const faqs = [
             ارزش پرتفوی و عملکرد سرمایه‌گذاری‌های خود را بررسی کنید و ببینید سرمایه شما در طول زمان چگونه عمل کرده است.
           </p>
         </div>
-        <a
-          href={siteUrl("/brokerage/neo-trader")}
-          class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25"
-        >
+        <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large w-40 min-w-25">
           ورود به نئوتریدر
           <ArrowLeft aria-hidden="true" />
         </a>

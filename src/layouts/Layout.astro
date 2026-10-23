@@ -5,9 +5,21 @@ import Footer from "@components/@base/footer.astro";
 import ConsultationModal from "@components/consultation-modal.astro";
 import { siteUrl } from "@utils/url";
 
-const { title, description = "گروه مالی نهایت‌نگر؛ ارائه‌دهنده خدمات کارگزاری، مدیریت دارایی و آموزش بازار سرمایه." } =
-  Astro.props;
-const pageTitle = `${title} | نهایت‌نگر`;
+const {
+  title,
+  description = "گروه مالی نهایت‌نگر؛ خدمات کارگزاری، مدیریت دارایی و آموزش بازار سرمایه در ایران.",
+  image,
+} = Astro.props;
+const pageTitle = title.includes("نهایت‌نگر") ? title : `${title} | نهایت‌نگر`;
+const pageDescription = (typeof description === "string" ? description : "")
+  .replace(/<[^>]*>/g, " ")
+  .replace(/\s+/g, " ")
+  .trim()
+  .slice(0, 160);
+const canonicalUrl = import.meta.env.PUBLIC_SITE_URL
+  ? new URL(siteUrl(Astro.url.pathname), import.meta.env.PUBLIC_SITE_URL).toString()
+  : undefined;
+const socialImageUrl = image && canonicalUrl ? new URL(siteUrl(image), canonicalUrl).toString() : undefined;
 ---
 
 <!doctype html>
@@ -19,16 +31,22 @@ const pageTitle = `${title} | نهایت‌نگر`;
     <title>{pageTitle}</title>
     <base href={siteUrl("/")} />
 
-    <meta name="description" content={description} />
+    <meta name="description" content={pageDescription} />
     <meta name="author" content="گروه مالی نهایت‌نگر" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <meta property="og:locale" content="fa_IR" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="گروه مالی نهایت‌نگر" />
     <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:description" content={pageDescription} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
+    <meta name="twitter:card" content={socialImageUrl ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={pageDescription} />
+    {socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href={siteUrl("/favicon.svg")} />
