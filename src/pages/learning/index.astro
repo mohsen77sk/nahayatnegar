@@ -1,6 +1,7 @@
 ---
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
 
 import IconSearch from "@assets/icons/iconsax/outline/search-normal-1.svg";
 import ArrowDown from "@assets/icons/iconsax/outline/arrow-down-2.svg";
@@ -8,10 +9,13 @@ import IconClose from "@assets/icons/iconsax/outline/close-circle.svg";
 
 import Section1Img from "@assets/images/Learning/learning-hero.png";
 import Section1ImgMob from "@assets/images/Learning/learning-hero-mob.png";
+import Sample1 from "@assets/images/Learning/samples/sample1.jpg";
+import Sample2 from "@assets/images/Learning/samples/sample2.jpg";
+import Sample3 from "@assets/images/Learning/samples/sample3.jpg";
 ---
 
 <Layout title="Learning">
-  <main>
+  <main class="bg-white">
     <SectionLayer1 desktopImage={Section1Img} mobileImage={Section1ImgMob}>
       <!-- right -->
       <div class="flex flex-1 items-center self-center" slot="right">
@@ -29,12 +33,13 @@ import Section1ImgMob from "@assets/images/Learning/learning-hero-mob.png";
       <div class="flex-1" slot="left"></div>
     </SectionLayer1>
 
-    <section class="flex bg-fg-primary px-4 py-8 lg:py-2">
+    <!-- Tabs and Search -->
+    <section class="neo-page-content flex bg-fg-primary px-0 py-8 lg:py-2" aria-label="Post filters">
       <div class="relative mx-auto flex w-full max-w-lg flex-col gap-6">
         <h4 class="text-heading-medium">مقالات آموزشی</h4>
 
         <div class="flex w-full flex-1 flex-col items-center justify-between gap-4 lg:w-auto lg:flex-row">
-          <div class="neo-tabs w-full lg:w-auto">
+          <div class="neo-tabs w-full lg:w-auto" aria-label="Post categories">
             <button class="neo-tab-label active w-full lg:w-auto" type="button" data-account-tab="securities">
               مقدماتی
             </button>
@@ -45,7 +50,7 @@ import Section1ImgMob from "@assets/images/Learning/learning-hero-mob.png";
           <div class="flex w-full justify-end gap-2">
             <div class="relative flex w-full lg:w-30">
               <select
-                class="text-2xl h-8.75 w-full appearance-none rounded-lg border-2 pr-2 pl-2 text-right text-secondary outline-none"
+                class="text-2xl h-8.75 w-full appearance-none rounded-lg border pr-2 pl-2 text-right text-secondary outline-none focus:border-brand"
               >
                 <option selected>جدیدترین</option>
                 <option>قدیمی‌ترین</option>
@@ -77,6 +82,36 @@ import Section1ImgMob from "@assets/images/Learning/learning-hero-mob.png";
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Posts List -->
+    <section class="neo-page-content px-0" aria-label="Posts">
+      <div class="flex flex-wrap gap-4">
+        {
+          [0, 1, 2, 3, 4, 5, 6].map(() => {
+            return (
+              <article class="h-66 w-64 gap-2 rounded-lg bg-secondary px-2 pt-2 pb-4">
+                <header>
+                  <Image
+                    src={Sample1}
+                    alt="دفتر مرکزی نهایت‌نگر"
+                    class="h-full w-full rounded-xl object-cover"
+                    loading="lazy"
+                  />
+                </header>
+                
+                <footer class="pt-2 px-2 gap-2">
+                  <div class="flex items-center gap-2">
+                    <span>
+                      6 دقیقه
+                    </span>
+                  </div>
+                </footer>
+              </article>
+            );
+          })
+        }
       </div>
     </section>
   </main>
