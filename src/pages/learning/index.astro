@@ -6,12 +6,96 @@ import { Image } from "astro:assets";
 import IconSearch from "@assets/icons/iconsax/outline/search-normal-1.svg";
 import ArrowDown from "@assets/icons/iconsax/outline/arrow-down-2.svg";
 import IconClose from "@assets/icons/iconsax/outline/close-circle.svg";
+import Timer from "@assets/icons/iconsax/bulk/Timer1.svg";
+import Medal from "@assets/icons/iconsax/bulk/Medal.svg";
 
 import Section1Img from "@assets/images/Learning/learning-hero.png";
 import Section1ImgMob from "@assets/images/Learning/learning-hero-mob.png";
 import Sample1 from "@assets/images/Learning/samples/sample1.jpg";
 import Sample2 from "@assets/images/Learning/samples/sample2.jpg";
 import Sample3 from "@assets/images/Learning/samples/sample3.jpg";
+
+type ArticleLevel = "beginner" | "intermediate" | "advanced";
+
+type Article = {
+  id: number;
+  title: string;
+  description: string;
+  level: ArticleLevel;
+  readingTime: number;
+  publishedAt: string;
+  views: number;
+  image: typeof Sample1;
+};
+
+const articles: Article[] = [
+  {
+    id: 1,
+    title: "آشنایی با بورس",
+    description: "مفاهیم اولیه بازار سرمایه و نحوه شروع سرمایه‌گذاری",
+    level: "beginner",
+    readingTime: 6,
+    publishedAt: "2026-10-20",
+    views: 1200,
+    image: Sample1,
+  },
+  {
+    id: 13,
+    title: "مقاله",
+    description: "مفاهیم اولیه بازار سرمایه و نحوه شروع سرمایه‌گذاری",
+    level: "beginner",
+    readingTime: 6,
+    publishedAt: "2026-10-20",
+    views: 1200,
+    image: Sample1,
+  },
+  {
+    id: 16,
+    title: "آشنایی با بورس",
+    description: "مفاهیم اولیه بازار سرمایه و نحوه شروع سرمایه‌گذاری",
+    level: "beginner",
+    readingTime: 6,
+    publishedAt: "2026-10-20",
+    views: 1200,
+    image: Sample1,
+  },
+  {
+    id: 2,
+    title: "روانشناسی بازار سرمایه",
+    description: "بررسی رفتار سرمایه‌گذاران و مدیریت احساسات",
+    level: "intermediate",
+    readingTime: 8,
+    publishedAt: "2026-10-22",
+    views: 2500,
+    image: Sample2,
+  },
+  {
+    id: 3,
+    title: "تحلیل بنیادی پیشرفته",
+    description: "ارزیابی ارزش ذاتی شرکت‌ها و تحلیل صورت‌های مالی",
+    level: "advanced",
+    readingTime: 12,
+    publishedAt: "2026-10-18",
+    views: 4200,
+    image: Sample3,
+  },
+  {
+    id: 4,
+    title: "تحلیل بنیادی پیشرفته",
+    description: "ارزیابی ارزش ذاتی شرکت‌ها و تحلیل صورت‌های مالی",
+    level: "advanced",
+    readingTime: 12,
+    publishedAt: "2026-10-20",
+    views: 4200,
+    image: Sample2,
+  },
+];
+
+const levels = [
+  { label: "مقدماتی", value: "beginner" },
+  { label: "متوسط", value: "intermediate" },
+  { label: "پیشرفته", value: "advanced" },
+];
 ---
 
 <Layout title="Learning">
@@ -39,21 +123,24 @@ import Sample3 from "@assets/images/Learning/samples/sample3.jpg";
         <h4 class="text-heading-medium">مقالات آموزشی</h4>
 
         <div class="flex w-full flex-1 flex-col items-center justify-between gap-4 lg:w-auto lg:flex-row">
-          <div class="neo-tabs w-full lg:w-auto" aria-label="Post categories">
-            <button class="neo-tab-label active w-full lg:w-auto" type="button" data-account-tab="securities">
-              مقدماتی
-            </button>
-            <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="commodity"> متوسط </button>
-            <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab="brokerage"> پیشرفته </button>
+          <div id="article-level" class="neo-tabs w-full lg:w-auto" aria-label="Post categories">
+            {
+              levels.map((level) => (
+                <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab={level.value}>
+                  {level.label}
+                </button>
+              ))
+            }
           </div>
 
           <div class="flex w-full justify-end gap-2">
             <div class="relative flex w-full lg:w-30">
               <select
+                id="article-sort"
                 class="text-2xl h-8.75 w-full appearance-none rounded-lg border pr-2 pl-2 text-right text-secondary outline-none focus:border-brand"
               >
-                <option selected>جدیدترین</option>
-                <option>قدیمی‌ترین</option>
+                <option value="newest" selected>جدیدترین</option>
+                <option value="oldest">قدیمی‌ترین</option>
               </select>
 
               <ArrowDown class="absolute top-2.5 left-3 h-4 w-4" data-account-search-icon />
@@ -61,6 +148,7 @@ import Sample3 from "@assets/images/Learning/samples/sample3.jpg";
 
             <div class="relative flex w-full lg:w-55">
               <input
+                id="article-search"
                 class="flex-1 pl-10"
                 type="text"
                 name="search"
@@ -87,25 +175,44 @@ import Sample3 from "@assets/images/Learning/samples/sample3.jpg";
 
     <!-- Posts List -->
     <section class="neo-page-content px-0" aria-label="Posts">
-      <div class="flex flex-wrap gap-4">
+      <div class="flex flex-wrap gap-4" id="article-list">
         {
-          [0, 1, 2, 3, 4, 5, 6].map(() => {
+          articles.map((article) => {
             return (
-              <article class="h-66 w-64 gap-2 rounded-lg bg-secondary px-2 pt-2 pb-4">
+              <article
+                data-article
+                data-level={article.level}
+                data-date={article.publishedAt}
+                data-title={article.title}
+                data-description={article.description}
+                class="h-66 w-64 cursor-pointer gap-2 rounded-lg bg-secondary px-2 pt-2 pb-4"
+              >
                 <header>
                   <Image
-                    src={Sample1}
-                    alt="دفتر مرکزی نهایت‌نگر"
-                    class="h-full w-full rounded-xl object-cover"
+                    src={article.image}
+                    alt={article.title}
+                    class="h-full max-h-[141px] w-full rounded-xl object-cover"
                     loading="lazy"
                   />
                 </header>
-                
-                <footer class="pt-2 px-2 gap-2">
-                  <div class="flex items-center gap-2">
-                    <span>
-                      6 دقیقه
-                    </span>
+
+                <footer class="flex flex-col gap-3 px-2 pt-2">
+                  <div class="flex gap-2">
+                    <div class="flex items-center gap-1">
+                      <Timer class="h-4 w-4 text-[#767D98]" />
+                      <span class="text-caption-medium text-[#767D98]">{article.readingTime}</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                      <Medal class="h-4 w-4 text-[#767D98]" />
+                      <span class="text-caption-medium text-[#767D98]">
+                        {levels.find((i) => i.value === article.level)?.label}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col gap-1">
+                    <h6 class="text-title-medium">{article.title}</h6>
+                    <p class="text-body-small">{article.description}</p>
                   </div>
                 </footer>
               </article>
@@ -116,3 +223,71 @@ import Sample3 from "@assets/images/Learning/samples/sample3.jpg";
     </section>
   </main>
 </Layout>
+
+<script>
+  const defaultLevel = "beginner";
+
+  const levelTabs = document.querySelectorAll<HTMLButtonElement>("#article-level [data-account-tab]");
+  const articles = document.querySelectorAll<HTMLElement>("[data-article]");
+
+  const searchInput = document.querySelector<HTMLInputElement>("#article-search");
+  const sortSelect = document.querySelector<HTMLSelectElement>("#article-sort");
+  const articleList = document.querySelector<HTMLElement>("#article-list");
+
+  const normalize = (value: string) => value.toLocaleLowerCase("fa").replace(/ي/g, "ی").replace(/ك/g, "ک").trim();
+
+  const filterArticles = (selectedLevel: string) => {
+    levelTabs.forEach((tab) => {
+      tab.classList.toggle("active", tab.dataset.accountTab === selectedLevel);
+    });
+
+    const query = normalize(searchInput?.value ?? "");
+    const sortBy = sortSelect?.value ?? "newest";
+
+    const sortedArticles = [...articles].sort((a, b) => {
+      const dateA = new Date(a.dataset.date ?? "").getTime();
+      const dateB = new Date(b.dataset.date ?? "").getTime();
+
+      return sortBy === "oldest" ? dateA - dateB : dateB - dateA;
+    });
+
+    sortedArticles.forEach((article) => {
+      const title = normalize(article.dataset.title ?? "");
+      const description = normalize(article.dataset.description ?? "");
+
+      const matchesLevel = selectedLevel === "all" || article.dataset.level === selectedLevel;
+
+      const matchesSearch = title.includes(query) || description.includes(query);
+
+      article.hidden = !(matchesLevel && matchesSearch);
+
+      articleList?.appendChild(article);
+    });
+  };
+
+  levelTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const level = tab.dataset.accountTab;
+
+      if (level) filterArticles(level);
+    });
+  });
+
+  sortSelect?.addEventListener("change", () => {
+    const activeLevel =
+      document.querySelector<HTMLButtonElement>("#article-level [data-account-tab].active")?.dataset.accountTab ??
+      defaultLevel;
+
+    filterArticles(activeLevel);
+  });
+
+  searchInput?.addEventListener("input", () => {
+    const activeLevel =
+      document.querySelector<HTMLButtonElement>("#article-level [data-account-tab].active")?.dataset.accountTab ??
+      defaultLevel;
+
+    filterArticles(activeLevel);
+  });
+
+  filterArticles(defaultLevel);
+</script>
