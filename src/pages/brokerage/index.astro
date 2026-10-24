@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 
 import Layout from "@layouts/Layout.astro";
 
+import Diamond from "@components/diamond.astro";
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import LineGradient from "@components/line-gradient.astro";
 
@@ -49,7 +50,11 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
           </div>
         </div>
       </div>
-      <div class="flex flex-1 items-center justify-center" slot="left"></div>
+      <div class="flex flex-1 items-center justify-center" slot="left">
+        <div class="lg:mt-25 lg:ml-12.5">
+          <Diamond src="assets/models/diamond.glb" speed="40deg" size="350px" tilt="90deg" />
+        </div>
+      </div>
     </SectionLayer1>
 
     <!-- introduce -->

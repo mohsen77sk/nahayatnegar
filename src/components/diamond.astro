@@ -1,0 +1,92 @@
+---
+interface Props {
+  src?: string;
+  hdrSrc?: string;
+  speed?: string;
+  size?: string;
+  tilt?: string;
+}
+
+const {
+  src = "/assets/models/diamond.glb",
+  hdrSrc = "neutral",
+  speed = "35deg",
+  size = "320px",
+  tilt = "90deg",
+} = Astro.props;
+---
+
+<div class="diamond-wrapper" style={`width: ${size}; height: ${size};`}>
+  <model-viewer
+    class="diamond-model"
+    src={src}
+    alt="3D Diamond"
+    auto-rotate
+    rotation-per-second={speed}
+    auto-rotate-delay="0"
+    camera-orbit={`0deg ${tilt} 105%`}
+    interaction-prompt="none"
+    disable-zoom
+    disable-pan
+    environment-image={hdrSrc}
+    tone-mapping="commerce"
+    exposure="1.4"
+    shadow-intensity="0.4"
+    shadow-softness="1"
+    loading="eager"
+  >
+  </model-viewer>
+</div>
+
+<script>
+  import "@google/model-viewer";
+
+  function setupDiamonds() {
+    const viewers = document.querySelectorAll(".diamond-model");
+    viewers.forEach((viewer) => {
+      if ((viewer as any).loaded) {
+        viewer.classList.add("is-loaded");
+      } else {
+        viewer.addEventListener(
+          "load",
+          () => {
+            viewer.classList.add("is-loaded");
+          },
+          { once: true },
+        );
+      }
+    });
+  }
+
+  // اجرا در لود اولیه و پشتیبانی از View Transitions در Astro
+  setupDiamonds();
+  document.addEventListener("astro:page-load", setupDiamonds);
+</script>
+
+<style>
+  .diamond-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .diamond-model {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    --poster-color: transparent;
+    outline: none;
+    pointer-events: none; /* جلوگیری از گیر کردن اسکرول صفحه روی موبایل */
+    opacity: 0;
+    transform: scale(0.92);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .diamond-model.is-loaded {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
