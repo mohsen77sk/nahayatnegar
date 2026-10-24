@@ -58,9 +58,11 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
     </SectionLayer1>
 
     <!-- introduce -->
-    <section class="flex min-h-225 bg-cover bg-center bg-no-repeat px-4 py-8 lg:py-50">
-      <div class="relative mx-auto flex w-full max-w-lg flex-col gap-4 lg:flex-row">
-        <div class="flex flex-col gap-15">
+    <section
+      class="brokerage-intro-section relative h-[250vh] bg-cover bg-center bg-no-repeat px-4 py-8 [view-timeline-name:--section-timeline]"
+    >
+      <div class="brokerage-intro-sticky sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+        <div class="brokerage-intro-cards relative mx-auto flex w-full max-w-lg flex-col items-center gap-8">
           <div class="flex flex-col items-center gap-2 text-center">
             <h2 class="text-display-small">سامانه‌های معاملاتی نهایت‌نگر</h2>
             <p class="text-body-large text-secondary">
@@ -69,16 +71,17 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
             <div class="mt-6 h-1 w-16 rounded-round bg-linear-to-r from-[#0170F3] via-[#7766E2] to-[#E64086]"></div>
           </div>
 
-          <div class="relative">
+          <div class="max-w-4xl relative h-128 w-full">
             <div
-              class="sticky top-24 flex origin-top translate-y-0 scale-[0.94] flex-col items-center justify-center gap-8 rounded-3xl bg-[linear-gradient(90deg,#00BFA5_0%,#004EA2_40%,#0A1628_100%)] p-6 text-center transition-transform duration-700 lg:flex-row-reverse lg:gap-4"
+              class="brokerage-intro-card absolute inset-0 flex flex-col items-center justify-center gap-8 rounded-3xl bg-[linear-gradient(90deg,#00BFA5_0%,#004EA2_40%,#0A1628_100%)] p-8 text-center transition-transform duration-700 lg:flex-row-reverse lg:gap-4"
             >
-              <div class="self-سفشقف flex flex-1 flex-col gap-8 px-16 py-8 text-white lg:px-8 lg:py-0">
+              <div class="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-white lg:px-8 lg:py-0">
                 <h2 class="text-heading-medium">سامانه‌ معاملاتی نئوتریدر</h2>
                 <h3 class="leading-8 font-normal">
                   پنل معاملاتی پیشرفته نهایت‌نگر که با ارائه امکانات حرفه‌ای و رابط کاربری روان، تجربه‌ای سریع، دقیق و
                   مطمئن را برای انجام معاملات در بازار سرمایه فراهم می‌کند.
                 </h3>
+<<<<<<< Updated upstream
                 <div class="flex justify-center">
                   <a
                     class="neo-button neo-button-fill-primary neo-button-large"
@@ -88,8 +91,17 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                     <ArrowLeft aria-hidden="true" />
                   </a>
                 </div>
+=======
+                <a
+                  class="neo-button neo-button-fill-primary neo-button-large w-40"
+                  href={siteUrl("/brokerage/neo-trader")}
+                >
+                  ورود به نئوتریدر
+                  <ArrowLeft aria-hidden="true" />
+                </a>
+>>>>>>> Stashed changes
               </div>
-              <div class="flex w-full flex-1 items-center justify-center self-stretch pt-6 lg:hidden lg:pt-0">
+              <div class="flex w-full flex-1 items-center justify-center self-stretch lg:hidden lg:pt-0">
                 <Image src={NeoObjectMob} alt="" class="h-auto max-w-68.75 object-contain" loading="lazy" />
               </div>
               <div class="hidden w-full flex-1 items-center justify-center p-6 lg:flex">
@@ -101,15 +113,19 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                 />
               </div>
             </div>
+
             <div
-              class="sticky z-1 -mt-12 flex origin-top scale-[0.96] flex-col items-center justify-center gap-8 rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)] p-6 text-center transition-transform duration-700 lg:top-48 lg:-mt-35 lg:translate-y-18 lg:flex-row-reverse lg:gap-4"
+              class="brokerage-intro-card brokerage-intro-card--animated py-t-6text-center absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)] transition-transform duration-700 lg:flex-row-reverse lg:gap-4"
             >
-              <div class="flex flex-1 flex-col gap-8 self-center px-16 py-8 text-white lg:px-8 lg:py-0">
+              <div
+                class="flex flex-1 flex-col items-center justify-center gap-3 self-center px-6 text-white lg:px-8 lg:py-0"
+              >
                 <h2 class="text-heading-medium">سامانه‌ معاملاتی موبوتریدر</h2>
                 <h3 class="leading-8 font-normal">
                   سامانه معاملاتی اختصاصی تلفن همراه نهایت‌نگر که به شما امکان می‌دهد در هر زمان و هر مکان، با رابط
                   کاربری ساده و کاربرپسند، معاملات آنلاین خود را با سرعت و دقت بالا انجام دهید.
                 </h3>
+<<<<<<< Updated upstream
                 <div class="flex justify-center">
                   <a
                     href={siteUrl("/brokerage/mobo-trader")}
@@ -119,8 +135,17 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
                     <ArrowLeft aria-hidden="true" />
                   </a>
                 </div>
+=======
+                <a
+                  href={siteUrl("/brokerage/mobo-trader")}
+                  class="neo-button neo-button-fill-primary neo-button-large w-40"
+                >
+                  ورود به موبوتریدر
+                  <ArrowLeft aria-hidden="true" />
+                </a>
+>>>>>>> Stashed changes
               </div>
-              <div class="flex w-full flex-1 items-center justify-center self-stretch pt-6 lg:hidden lg:pt-0">
+              <div class="flex w-full items-center justify-center self-stretch pt-6 lg:hidden lg:pt-0">
                 <Image src={MoboObjectMob} alt="" class="max-h-87.5 w-auto object-contain" loading="lazy" />
               </div>
               <div class="hidden w-full flex-1 items-center justify-center p-6 lg:flex">
@@ -304,3 +329,57 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
     </SectionLayer1>
   </main>
 </Layout>
+<style>
+  @keyframes cardSlideUp {
+    from {
+      transform: translateY(115%);
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
+
+  .brokerage-intro-card--animated {
+    animation-name: cardSlideUp;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --section-timeline;
+    animation-range: entry 20% exit 45%;
+  }
+
+  @supports not (animation-timeline: view()) {
+    .brokerage-intro-card--animated {
+      animation: none;
+      transform: none;
+    }
+  }
+
+  /* Show both cards in normal document flow for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .brokerage-intro-section {
+      height: auto;
+    }
+
+    .brokerage-intro-sticky {
+      position: static;
+      height: auto;
+      overflow: visible;
+    }
+
+    .brokerage-intro-cards {
+      display: flex;
+      height: auto;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .brokerage-intro-card,
+    .brokerage-intro-card--animated {
+      position: relative;
+      inset: auto;
+      transform: none;
+      animation: none;
+    }
+  }
+</style>
