@@ -52,7 +52,7 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
       </div>
       <div class="flex flex-1 items-center justify-center" slot="left">
         <div class="lg:mt-25 lg:ml-12.5">
-          <Diamond src="assets/models/diamond.glb" speed="40deg" size="350px" tilt="90deg" />
+          <Diamond src={siteUrl("assets/models/diamond.glb")} speed="40deg" size="350px" tilt="90deg" />
         </div>
       </div>
     </SectionLayer1>
@@ -313,7 +313,7 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
 <style>
   @keyframes cardSlideUp {
     from {
-      transform: translateY(115%);
+      transform: translateY(calc(120% + 24px));
     }
     to {
       transform: translateY(0%);
