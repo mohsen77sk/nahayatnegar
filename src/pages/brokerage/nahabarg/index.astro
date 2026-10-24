@@ -1,11 +1,10 @@
 ---
-import { Image } from "astro:assets";
-
 import Layout from "@layouts/Layout.astro";
 
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import Banner from "@components/banner.astro";
 import BannerCard from "@components/bannerCard.astro";
+import ImageCard from "@components/imageCard.astro";
 import Faq from "@components/faq.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import PageContent from "@components/PageContent.astro";
@@ -151,7 +150,7 @@ const faqs = [
         استفاده کنید.
       </p>
 
-      <Image src={MockupImageMob} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
+      <ImageCard image={MockupImageMob} alt="" />
 
       <div class="features mb-5">
         <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های متمایز نهابرگ</h2>
@@ -182,7 +181,7 @@ const faqs = [
         موجودی نهابرگ به‌صورت مستمر به‌روزرسانی می‌شود و همواره نشان‌دهنده مجموع تخفیف‌های کارمزدی قابل استفاده شماست.
       </p>
 
-      <Image src={MockupImageWeb} alt="" class="h-auto w-full" loading="lazy" />
+      <ImageCard image={MockupImageWeb} alt="" />
 
       <Faq faqs={faqs} />
 

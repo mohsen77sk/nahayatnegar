@@ -1,0 +1,85 @@
+---
+import { Image } from "astro:assets";
+
+import MaximizeIcon from "@assets/icons/iconsax/outline/maximize-3.svg";
+
+interface Props {
+  image: ImageMetadata;
+  alt?: string;
+}
+
+const { image, alt } = Astro.props;
+---
+
+<div class="relative rounded-xl bg-fg-primary p-2 shadow-primary" data-image-card>
+  <Image src={image} alt={alt ?? ""} class="h-auto w-full rounded-xl" loading="lazy" />
+  <button
+    class="neo-button neo-icon-button neo-button-large neo-button-light-neutral absolute right-4 bottom-4"
+    type="button"
+    aria-label="نمایش تصویر بزرگ"
+    data-image-preview-trigger
+  >
+    <MaximizeIcon />
+  </button>
+
+  <dialog class="image-preview" aria-label={alt ? `پیش‌نمایش ${alt}` : "پیش‌نمایش تصویر"} data-image-preview>
+    <button
+      class="neo-button neo-icon-button neo-button-light-neutral image-preview__close"
+      type="button"
+      aria-label="بستن پیش‌نمایش"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor">
+        <path d="m6 6 12 12M18 6 6 18"></path>
+      </svg>
+    </button>
+    <Image src={image} alt={alt ?? ""} class="image-preview__image" />
+  </dialog>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-image-card]").forEach((card) => {
+    const trigger = card.querySelector<HTMLButtonElement>("[data-image-preview-trigger]");
+    const dialog = card.querySelector<HTMLDialogElement>("[data-image-preview]");
+
+    if (!trigger || !dialog) return;
+
+    trigger.addEventListener("click", () => dialog.showModal());
+    dialog.querySelector(".image-preview__close")?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  });
+</script>
+
+<style>
+  .image-preview {
+    width: fit-content;
+    max-width: calc(100% - 32px);
+    max-height: calc(100% - 32px);
+    margin: auto;
+    overflow: visible;
+    border: 0;
+    background: transparent;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-tertiary);
+  }
+
+  .image-preview::backdrop {
+    background: rgb(0 0 0 / 75%);
+    backdrop-filter: blur(2px);
+  }
+
+  .image-preview__image {
+    display: block;
+    width: auto;
+    max-width: calc(100vw - 64px);
+    max-height: calc(100dvh - 64px);
+    object-fit: contain;
+  }
+
+  .image-preview__close {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+  }
+</style>

@@ -1,12 +1,11 @@
 ---
 // Framework Imports
-import { Image } from "astro:assets";
-
 import Layout from "@layouts/Layout.astro";
 
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import Banner from "@components/banner.astro";
 import BannerCard from "@components/bannerCard.astro";
+import ImageCard from "@components/imageCard.astro";
 import Faq from "@components/faq.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import PageContent from "@components/PageContent.astro";
@@ -135,13 +134,7 @@ const faqs = [
         پس از آغاز کار مشتری معرفی شده ، پاداش براساس فعالیت وی به شما تعلق می‌گیرد.
       </p>
 
-      <div class="h-100 w-full rounded-xl bg-white p-2 shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
-        <div
-          class="h-full rounded-xl bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${Section2Img.src})` }}
-        >
-        </div>
-      </div>
+      <ImageCard image={Section2Img} alt="" />
 
       <div class="features mb-5">
         <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های متمایز اعتبار نهایت‌نگر</h2>
@@ -159,13 +152,8 @@ const faqs = [
         <h6 class="text-center text-title-large leading-relaxed text-blue-800">یک معرفی ساده، یک پاداش ارزشمند.</h6>
       </Banner>
 
-      <div class="h-100 w-full rounded-xl bg-white p-2 shadow-[0_10px_20px_0_rgba(0,0,0,0.15)]">
-        <div
-          class="h-full rounded-xl bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${Section3Img.src})` }}
-        >
-        </div>
-      </div>
+      <ImageCard image={Section3Img} alt="" />
+
       <TimeLine steps={timeline.steps} title={timeline.title} />
 
       <Faq faqs={faqs} />

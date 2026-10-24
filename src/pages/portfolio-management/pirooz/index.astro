@@ -1,10 +1,9 @@
 ---
-import { Image } from "astro:assets";
-
 import Layout from "@layouts/Layout.astro";
 
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import BannerCard from "@components/bannerCard.astro";
+import ImageCard from "@components/imageCard.astro";
 import Faq from "@components/faq.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import PageContent from "@components/PageContent.astro";
@@ -178,7 +177,6 @@ const faqs = [
     </SectionLayer2>
 
     <PageContent items={BreadCrumbItem} withBottomSpacing>
-
       <div>
         <h2 class="text-heading-medium leading-10">چرا صندوق پیروز؟</h2>
         <div class="text-body-medium leading-7 text-secondary">سادگی معامله، قدرت یک صندوق</div>
@@ -191,9 +189,7 @@ const faqs = [
 
       <FeaturesGrid features={features} rowPattern={[3, 3]} />
 
-      <div class="rounded-xl bg-fg-primary p-2 shadow-primary">
-        <Image src={SectionBanner1Img} alt="صندوق پیروز" class="h-auto w-full rounded-xl" loading="lazy" />
-      </div>
+      <ImageCard image={SectionBanner1Img} alt="صندوق پیروز" />
 
       <h2 class="text-heading-medium leading-10">صندوق پیروز چگونه سرمایه‌گذاری می‌کند؟</h2>
 
@@ -259,9 +255,7 @@ const faqs = [
         <li>کسانی که می‌خواهند از مدیریت حرفه‌ای صندوق نیز بهره‌مند شوند.</li>
       </ul>
 
-      <div class="rounded-xl bg-fg-primary p-2 shadow-primary">
-        <Image src={SectionBanner2Img} alt="صندوق پیروز" class="h-auto w-full rounded-xl" loading="lazy" />
-      </div>
+      <ImageCard image={SectionBanner2Img} alt="صندوق پیروز" />
 
       <TimeLine steps={timeline.steps} title={timeline.title} />
 

@@ -5,6 +5,7 @@ import Layout from "@layouts/Layout.astro";
 
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import BannerCard from "@components/bannerCard.astro";
+import ImageCard from "@components/imageCard.astro";
 import Faq from "@components/faq.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import PageContent from "@components/PageContent.astro";
@@ -172,7 +173,6 @@ const faqs = [
     </SectionLayer2>
 
     <PageContent items={BreadCrumbItem} withBottomSpacing>
-
       <div>
         <h2 class="text-heading-medium leading-10">چرا سبدگردانی اختصاصی؟</h2>
         <div class="text-body-medium leading-7 text-secondary">
@@ -451,9 +451,7 @@ const faqs = [
         </div>
       </div>
 
-      <div class="rounded-xl bg-fg-primary p-2 shadow-primary">
-        <Image src={SectionBanner1Img} alt="صندوق ناب" class="h-auto w-full rounded-xl" loading="lazy" />
-      </div>
+      <ImageCard image={SectionBanner1Img} alt="صندوق ناب" />
 
       <h2 class="text-heading-medium leading-10">مزایای سبدگردانی اختصاصی نهایت‌نگر</h2>
 
@@ -493,9 +491,7 @@ const faqs = [
         </table>
       </div>
 
-      <div class="rounded-xl bg-fg-primary p-2 shadow-primary">
-        <Image src={SectionBanner2Img} alt="نهایت‌نگر" class="h-auto w-full rounded-xl" loading="lazy" />
-      </div>
+      <ImageCard image={SectionBanner2Img} alt="نهایت‌نگر" />
 
       <TimeLine steps={timeline.steps} title={timeline.title} />
 

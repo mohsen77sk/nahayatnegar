@@ -1,11 +1,10 @@
 ---
-import { Image } from "astro:assets";
-
 import Layout from "@layouts/Layout.astro";
 
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import Banner from "@components/banner.astro";
 import BannerCard from "@components/bannerCard.astro";
+import ImageCard from "@components/imageCard.astro";
 import Faq from "@components/faq.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import PageContent from "@components/PageContent.astro";
@@ -162,7 +161,7 @@ const timeline = {
         شما با معاملات خودتان ساخته می‌شود.
       </p>
 
-      <Image src={SectionBanner1ImgMob} alt="" class="h-auto w-full" loading="lazy" />
+      <ImageCard image={SectionBanner1ImgMob} alt="" />
 
       <div class="features mb-5">
         <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های متمایز اعتبار نهایت‌نگر</h2>
@@ -184,7 +183,8 @@ const timeline = {
         <h6 class="text-center text-title-large leading-relaxed text-blue-800">گردش معاملات شما، اعتبار شماست.</h6>
       </Banner>
 
-      <Image src={SectionBanner1Img} alt="" class="h-auto w-full" loading="lazy" />
+      <ImageCard image={SectionBanner1Img} alt="" />
+
       <p class="text-body-large leading-8">
         اعتبار تخصیص‌یافته برای یک دوره یک‌ماهه در اختیار شما قرار می‌گیرد. در پایان سررسید، س امانه به‌صورت خودکار
         شرایط اعتباری شما را مجدداً ارزیابی می‌کند و در صورت تحقق گردش مورد انتظار و حفظ شرایط لازم، اعتبار شما برای

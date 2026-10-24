@@ -1,11 +1,10 @@
 ---
-import { Image } from "astro:assets";
-
 import Layout from "@layouts/Layout.astro";
 
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import Banner from "@components/banner.astro";
 import BannerCard from "@components/bannerCard.astro";
+import ImageCard from "@components/imageCard.astro";
 import Faq from "@components/faq.astro";
 import FeatureCard from "@components/FeatureCard.astro";
 import PageContent from "@components/PageContent.astro";
@@ -173,7 +172,7 @@ const faqs = [
         </p>
       </div>
 
-      <Image src={SectionBanner1Img} alt="" class="h-auto w-full" loading="lazy" />
+      <ImageCard image={SectionBanner1Img} alt="" />
 
       <!-- Features Section -->
       <section class="features mb-5">
@@ -217,7 +216,8 @@ const faqs = [
       </Banner>
 
       <TimeLine steps={timeline.steps} description={timeline.description} title={timeline.title} />
-      <Image src={SectionBanner2Img} alt="" class="h-auto w-full" loading="lazy" />
+
+      <ImageCard image={SectionBanner2Img} alt="" />
 
       <Faq faqs={faqs} />
 

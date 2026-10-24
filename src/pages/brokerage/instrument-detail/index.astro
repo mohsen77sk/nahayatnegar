@@ -3,9 +3,9 @@ import { URLS } from "@utils/url";
 import Layout from "@layouts/Layout.astro";
 import SectionLayer2 from "@components/@layout/section-layer-2.astro";
 import BreadCrumb from "@components/bread-crumb.astro";
-import { Image } from "astro:assets";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import BannerCard from "@components/bannerCard.astro";
+import ImageCard from "@components/imageCard.astro";
 import Faq from "@components/faq.astro";
 
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
@@ -138,7 +138,7 @@ const faqs = [
         ترتیب می‌توانید وضعیت یک نماد را از جنبه‌های مختلف بررسی کنید و با اطلاعات کامل‌تری تصمیم بگیرید.
       </p>
 
-      <Image src={MockupImageMob} alt="صندوق ناب" class="h-auto w-full" loading="lazy" />
+      <ImageCard image={MockupImageMob} alt="" />
 
       <div class="features mb-5">
         <h2 class="pb-5 text-heading-medium leading-10">ویژگی‌های اصلی</h2>
@@ -159,7 +159,7 @@ const faqs = [
         </p>
       </div>
 
-      <Image src={MockupImageWeb} alt="" class="h-auto w-full" loading="lazy" />
+      <ImageCard image={MockupImageWeb} alt="" />
 
       <Faq faqs={faqs} />
 
