@@ -344,19 +344,29 @@ const mobileMenu = [
   const backdrop = document.getElementById("mobile-drawer-backdrop");
   const menuBtn = document.getElementById("mobile-menu-btn");
   const closeBtn = document.getElementById("drawer-close");
+  let wasHtmlScrollLocked = false;
+  let wasBodyScrollLocked = false;
 
   function openDrawer() {
+    if (!drawer.classList.contains("translate-x-full")) return;
+
+    wasHtmlScrollLocked = document.documentElement.classList.contains("overflow-hidden");
+    wasBodyScrollLocked = document.body.classList.contains("overflow-hidden");
     drawer.classList.remove("translate-x-full");
-    backdrop.classList.remove("opacity-0", "pointer-events-none");
-    backdrop.classList.add("opacity-100");
+    backdrop?.classList.remove("opacity-0", "pointer-events-none");
+    backdrop?.classList.add("opacity-100");
+    document.documentElement.classList.add("overflow-hidden");
     document.body.classList.add("overflow-hidden");
   }
 
   function closeDrawer() {
+    if (drawer.classList.contains("translate-x-full")) return;
+
     drawer.classList.add("translate-x-full");
-    backdrop.classList.add("opacity-0", "pointer-events-none");
-    backdrop.classList.remove("opacity-100");
-    document.body.classList.remove("overflow-hidden");
+    backdrop?.classList.add("opacity-0", "pointer-events-none");
+    backdrop?.classList.remove("opacity-100");
+    if (!wasHtmlScrollLocked) document.documentElement.classList.remove("overflow-hidden");
+    if (!wasBodyScrollLocked) document.body.classList.remove("overflow-hidden");
   }
 
   menuBtn?.addEventListener("click", openDrawer);

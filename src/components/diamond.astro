@@ -25,6 +25,7 @@ const {
     rotation-per-second={speed}
     auto-rotate-delay="0"
     camera-orbit={`0deg ${tilt} 105%`}
+    camera-controls
     interaction-prompt="none"
     disable-zoom
     disable-pan
@@ -40,20 +41,30 @@ const {
 
 <script>
   import "@google/model-viewer";
+  import type { ModelViewerElement } from "@google/model-viewer";
+
+  function tintDiamondBlue(viewer: ModelViewerElement) {
+    const material = viewer.model?.materials[0];
+    if (!material || viewer.dataset.blueTinted === "true") return;
+
+    const [red, green, blue, alpha] = material.pbrMetallicRoughness.baseColorFactor;
+    material.pbrMetallicRoughness.setBaseColorFactor([red * 0.3, green * 0.4, Math.min(blue * 1.8, 1), alpha]);
+    material.setEmissiveFactor([0.1, 0.2, 1]);
+    viewer.dataset.blueTinted = "true";
+  }
 
   function setupDiamonds() {
-    const viewers = document.querySelectorAll(".diamond-model");
+    const viewers = document.querySelectorAll<ModelViewerElement>(".diamond-model");
     viewers.forEach((viewer) => {
-      if ((viewer as any).loaded) {
+      const markLoaded = () => {
+        tintDiamondBlue(viewer);
         viewer.classList.add("is-loaded");
+      };
+
+      if (viewer.loaded) {
+        markLoaded();
       } else {
-        viewer.addEventListener(
-          "load",
-          () => {
-            viewer.classList.add("is-loaded");
-          },
-          { once: true },
-        );
+        viewer.addEventListener("load", markLoaded, { once: true });
       }
     });
   }
@@ -77,7 +88,7 @@ const {
     background-color: transparent;
     --poster-color: transparent;
     outline: none;
-    pointer-events: none; /* جلوگیری از گیر کردن اسکرول صفحه روی موبایل */
+    cursor: grab;
     opacity: 0;
     transform: scale(0.92);
     transition:
@@ -88,5 +99,9 @@ const {
   .diamond-model.is-loaded {
     opacity: 1;
     transform: scale(1);
+  }
+
+  .diamond-model:active {
+    cursor: grabbing;
   }
 </style>
