@@ -22,7 +22,8 @@ import HeroBgMobile from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero-
 import HeroBg from "@assets/images/Brokerage/1-Neo Trader/neo-trader-hero.png";
 import OptionBgMobile from "@assets/images/Brokerage/1-Neo Trader/option-section-mob.png";
 import OptionBg from "@assets/images/Brokerage/1-Neo Trader/option-section.png";
-import PortfolioObj from "@assets/images/Brokerage/1-Neo Trader/portfolio-management-object.png";
+import PortfolioBgMobile from "@assets/images/Brokerage/1-Neo Trader/portfolio-management-mob.png";
+import PortfolioBg from "@assets/images/Brokerage/1-Neo Trader/portfolio-management.png";
 import ScreenerBgMobile from "@assets/images/Brokerage/1-Neo Trader/screener-section-mob.png";
 import ScreenerBg from "@assets/images/Brokerage/1-Neo Trader/screener-section.png";
 import SymbolInfoObj from "@assets/images/Brokerage/1-Neo Trader/Symbol-info-object.png";
@@ -347,9 +348,9 @@ const features = [
     <!-- end::Screener -->
 
     <!-- begin::PortfolioManagment -->
-    <SectionLayer1 classes="bg-white">
+    <SectionLayer1 desktopImage={PortfolioBg} mobileImage={PortfolioBgMobile}>
       <div class="order-2 flex flex-1 items-center justify-center" slot="left">
-        <Image src={PortfolioObj} alt="مدیریت پورتفوی" class="h-auto max-h-125 w-auto" loading="lazy" />
+        <!-- <Image src={PortfolioObj} alt="مدیریت پورتفوی" class="h-auto max-h-125 w-auto" loading="lazy" /> -->
       </div>
 
       <div class="order-1 flex flex-1 items-center" slot="right">
