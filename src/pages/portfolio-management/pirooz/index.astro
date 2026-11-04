@@ -7,6 +7,7 @@ import ImageCard from "@components/imageCard.astro";
 import Faq from "@components/faq.astro";
 import FeaturesGrid from "@components/FeaturesGrid.astro";
 import PageContent from "@components/PageContent.astro";
+import FundChart from "@components/FundChart.astro";
 import TimeLine from "@components/time-line.astro";
 
 import ArchiveIcon from "@assets/icons/iconsax/outline/archive.svg";
@@ -243,7 +244,7 @@ const faqs = [
 
       <h2 class="text-heading-medium leading-10">نمودار بازدهی صندوق پیروز</h2>
 
-      <div class="rounded-xl bg-fg-primary p-2"></div>
+      <FundChart apiUrl="https://landing-api.nahayatnegar.com/assetDailyInfo" fund="piroz" />
 
       <h2 class="text-heading-medium leading-10">صندوق پیروز مناسب چه کسانی است؟</h2>
 

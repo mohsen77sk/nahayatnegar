@@ -3,15 +3,22 @@
 
 export interface Props {
   apiUrl: string; // آدرس پایه API (مثلا: /api/fund-data)
+  fund?: string;
   defaultTimeframe?: string;
 }
 
-const { apiUrl, defaultTimeframe = "YEARLY" } = Astro.props;
+const { apiUrl, fund, defaultTimeframe = "YEARLY" } = Astro.props;
 
 const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
 ---
 
-<dynamic-fund-chart class="fund-card" data-chart-id={chartId} data-api-url={apiUrl}>
+<dynamic-fund-chart
+  class="fund-card"
+  data-chart-id={chartId}
+  data-api-url={apiUrl}
+  data-fund={fund}
+  data-default-timeframe={defaultTimeframe}
+>
   <!-- API filter -->
   <div class="flex">
     <div class="neo-tabs w-full rounded-full border bg-fg-primary px-4 lg:w-auto">
@@ -47,19 +54,25 @@ const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
   const chartColors: Record<string, string> = {
     naab: "#3B82F6",
     dollar: "#10B981",
-    seke: "#EF4444",
+    seke: "#795548",
     shemsh: "#8b5cf6",
     gold: "#F59E0B",
+    asil: "#10B981",
+    piroz: "#3B82F6",
+    pouya: "#10B981",
+    index: "#EF4444",
   };
 
   class DynamicFundChart extends HTMLElement {
     private chartInstance: Chart | null = null;
     private chartId: string;
     private apiUrl: string;
+    private fund: string;
 
     connectedCallback() {
       this.chartId = this.dataset.chartId!;
       this.apiUrl = this.dataset.apiUrl!;
+      this.fund = this.dataset.fund!;
 
       const buttons = this.querySelectorAll<HTMLButtonElement>(".neo-tab-label");
 
@@ -85,8 +98,15 @@ const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
       loading.style.display = "flex";
 
       try {
-        const response = await fetch(`${this.apiUrl}?timeFrame=${timeframe}`);
-        const apiData = await response.json();
+        const [fundResponse, indexResponse] = await Promise.all([
+          fetch(`${this.apiUrl}?timeFrame=${timeframe}&fund=${this.fund}`),
+          fetch(`${this.apiUrl}?timeFrame=${timeframe}&fund=index`),
+        ]);
+        const [fundData, indexData] = await Promise.all([fundResponse.json(), indexResponse.json()]);
+        const apiData = {
+          items: { ...fundData.items, ...indexData.items },
+          data: { ...fundData.data, ...indexData.data },
+        };
 
         // ۱. ساخت محور زمانی مرجع (استخراج تمام تاریخ‌های یکتا)
         const allTimestamps = new Set<number>();
