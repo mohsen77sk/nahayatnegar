@@ -1,7 +1,6 @@
 ---
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
 import Layout from "@layouts/Layout.astro";
-import { Image } from "astro:assets";
 
 import IconSearch from "@assets/icons/iconsax/outline/search-normal-1.svg";
 import ArrowDown from "@assets/icons/iconsax/outline/arrow-down-2.svg";
@@ -11,91 +10,54 @@ import Medal from "@assets/icons/iconsax/bulk/Medal.svg";
 
 import Section1Img from "@assets/images/Learning/learning-hero.png";
 import Section1ImgMob from "@assets/images/Learning/learning-hero-mob.png";
-import Sample1 from "@assets/images/Learning/samples/sample1.jpg";
-import Sample2 from "@assets/images/Learning/samples/sample2.jpg";
-import Sample3 from "@assets/images/Learning/samples/sample3.jpg";
+
+import { MOCK_ARTICLES } from "./data/mockArticles";
 
 type ArticleLevel = "beginner" | "intermediate" | "advanced";
 
 type Article = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   level: ArticleLevel;
   readingTime: number;
   publishedAt: string;
-  views: number;
-  image: typeof Sample1;
+  image: { url: string; alt: string };
 };
 
-const articles: Article[] = [
-  {
-    id: 1,
-    title: "آشنایی با بورس",
-    description: "مفاهیم اولیه بازار سرمایه و نحوه شروع سرمایه‌گذاری",
-    level: "beginner",
-    readingTime: 6,
-    publishedAt: "2026-10-20",
-    views: 1200,
-    image: Sample1,
-  },
-  {
-    id: 13,
-    title: "مقاله",
-    description: "مفاهیم اولیه بازار سرمایه و نحوه شروع سرمایه‌گذاری",
-    level: "beginner",
-    readingTime: 6,
-    publishedAt: "2026-10-20",
-    views: 1200,
-    image: Sample1,
-  },
-  {
-    id: 16,
-    title: "آشنایی با بورس",
-    description: "مفاهیم اولیه بازار سرمایه و نحوه شروع سرمایه‌گذاری",
-    level: "beginner",
-    readingTime: 6,
-    publishedAt: "2026-10-20",
-    views: 1200,
-    image: Sample1,
-  },
-  {
-    id: 2,
-    title: "روانشناسی بازار سرمایه",
-    description: "بررسی رفتار سرمایه‌گذاران و مدیریت احساسات",
-    level: "intermediate",
-    readingTime: 8,
-    publishedAt: "2026-10-22",
-    views: 2500,
-    image: Sample2,
-  },
-  {
-    id: 3,
-    title: "تحلیل بنیادی پیشرفته",
-    description: "ارزیابی ارزش ذاتی شرکت‌ها و تحلیل صورت‌های مالی",
-    level: "advanced",
-    readingTime: 12,
-    publishedAt: "2026-10-18",
-    views: 4200,
-    image: Sample3,
-  },
-  {
-    id: 4,
-    title: "تحلیل بنیادی پیشرفته",
-    description: "ارزیابی ارزش ذاتی شرکت‌ها و تحلیل صورت‌های مالی",
-    level: "advanced",
-    readingTime: 12,
-    publishedAt: "2026-10-20",
-    views: 4200,
-    image: Sample2,
-  },
-];
-
-const levels = [
+const levels: { label: string; value: ArticleLevel }[] = [
   { label: "مقدماتی", value: "beginner" },
   { label: "متوسط", value: "intermediate" },
   { label: "پیشرفته", value: "advanced" },
 ];
+
+const WORDS_PER_MINUTE = 120;
+
+const getReadingTime = (html: string) => {
+  const words = html
+    .replace(/<[^>]*>/g, " ")
+    .split(/\s+/)
+    .filter(Boolean).length;
+
+  return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
+};
+
+const articles: Article[] = MOCK_ARTICLES.map((article) => ({
+  id: article.id,
+  title: article.title,
+  description: article.description?.text ?? "",
+  level: levels.find((item) => item.label === article.level)?.value ?? "beginner",
+  readingTime: getReadingTime(article.content),
+  publishedAt: article.publishedAt,
+  image: article.imageUrl,
+}));
+
+const articlesJson = JSON.stringify(
+  articles.map((article) => ({
+    ...article,
+    levelLabel: levels.find((item) => item.value === article.level)?.label ?? "",
+  })),
+).replace(/</g, "\\u003c");
 ---
 
 <Layout title="Learning">
@@ -137,7 +99,7 @@ const levels = [
             <div class="relative flex w-full lg:w-30">
               <select
                 id="article-sort"
-                class="text-2xl h-8.75 w-full appearance-none rounded-lg border pr-2 pl-2 text-right text-secondary outline-none focus:border-brand"
+                class="text-2xl h-8.75 w-full appearance-none rounded-lg border border-(--border-color-secondary) pr-2 pl-2 text-right text-secondary outline-none focus:border-brand"
               >
                 <option value="newest" selected>جدیدترین</option>
                 <option value="oldest">قدیمی‌ترین</option>
@@ -155,7 +117,7 @@ const levels = [
                 placeholder="جستجو"
                 aria-label="جستجو"
                 autocomplete="off"
-                aria-controls="account-list"
+                aria-controls="article-list"
                 data-account-search
               />
               <IconSearch class="absolute top-2.5 left-3 h-4 w-4" data-account-search-icon />
@@ -176,65 +138,144 @@ const levels = [
     <!-- Posts List -->
     <section class="neo-page-content px-0" aria-label="Posts">
       <div class="flex flex-wrap gap-4" id="article-list">
-        {
-          articles.map((article) => {
-            return (
-              <article
-                data-article
-                data-level={article.level}
-                data-date={article.publishedAt}
-                data-title={article.title}
-                data-description={article.description}
-                class="h-66 w-64 cursor-pointer gap-2 rounded-lg bg-secondary px-2 pt-2 pb-4"
-              >
-                <header>
-                  <Image
-                    src={article.image}
-                    alt={article.title}
-                    class="h-full max-h-[141px] w-full rounded-xl object-cover"
-                    loading="lazy"
-                  />
-                </header>
-
-                <footer class="flex flex-col gap-3 px-2 pt-2">
-                  <div class="flex gap-2">
-                    <div class="flex items-center gap-1">
-                      <Timer class="h-4 w-4 text-[#767D98]" />
-                      <span class="text-caption-medium text-[#767D98]">{article.readingTime}</span>
-                    </div>
-                    <div class="flex items-center gap-1">
-                      <Medal class="h-4 w-4 text-[#767D98]" />
-                      <span class="text-caption-medium text-[#767D98]">
-                        {levels.find((i) => i.value === article.level)?.label}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-col gap-1">
-                    <h6 class="text-title-medium">{article.title}</h6>
-                    <p class="text-body-small">{article.description}</p>
-                  </div>
-                </footer>
-              </article>
-            );
-          })
-        }
+        <div
+          id="article-loader"
+          class="hidden w-full basis-full items-center justify-center py-6"
+          role="status"
+          aria-live="polite"
+        >
+          <span class="h-8 w-8 animate-spin rounded-full border-4 border-[#E9EBF2] border-t-brand"></span>
+          <span class="sr-only">در حال بارگذاری</span>
+        </div>
+        <div id="article-sentinel" class="h-px w-full basis-full" aria-hidden="true"></div>
       </div>
     </section>
+
+    <script is:inline id="articles-data" type="application/json" set:html={articlesJson} />
+
+    <!-- Card template: cloned by the script, 25 at a time -->
+    <template id="article-card-template">
+      <article class="h-66 w-64 overflow-hidden rounded-lg bg-secondary">
+        <a data-field="link" href="#" class="block h-full cursor-pointer px-2 pt-2 pb-4">
+          <header class="overflow-hidden rounded-xl bg-[#E9EBF2]">
+            <img
+              data-field="image"
+              src=""
+              alt=""
+              width="256"
+              height="141"
+              class="h-[141px] w-full rounded-xl object-cover opacity-0 transition-opacity duration-500"
+              loading="lazy"
+              decoding="async"
+            />
+            <div data-field="placeholder" class="h-[141px] w-full rounded-xl bg-[#E9EBF2]"></div>
+          </header>
+
+          <footer class="flex flex-col gap-3 px-2 pt-2">
+            <div class="flex gap-2">
+              <div class="flex items-center gap-1">
+                <Timer class="h-4 w-4 text-[#767D98]" />
+                <span data-field="readingTime" class="text-caption-medium text-[#767D98]"></span>
+              </div>
+              <div class="flex items-center gap-1">
+                <Medal class="h-4 w-4 text-[#767D98]" />
+                <span data-field="level" class="text-caption-medium text-[#767D98]"></span>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <h6 data-field="title" class="text-title-medium"></h6>
+              <p data-field="description" class="text-body-small"></p>
+            </div>
+          </footer>
+        </a>
+      </article>
+    </template>
   </main>
 </Layout>
 
 <script>
+  type ArticleCard = {
+    id: string;
+    title: string;
+    description: string;
+    level: string;
+    levelLabel: string;
+    readingTime: number;
+    publishedAt: string;
+    image: { url: string; alt: string } | string | null;
+  };
+
+  const PAGE_SIZE = 6;
+  const LOAD_DELAY = 600;
   const defaultLevel = "beginner";
 
   const levelTabs = document.querySelectorAll<HTMLButtonElement>("#article-level [data-account-tab]");
-  const articles = document.querySelectorAll<HTMLElement>("[data-article]");
-
   const searchInput = document.querySelector<HTMLInputElement>("#article-search");
   const sortSelect = document.querySelector<HTMLSelectElement>("#article-sort");
   const articleList = document.querySelector<HTMLElement>("#article-list");
+  const sentinel = document.querySelector<HTMLElement>("#article-sentinel");
+  const loader = document.querySelector<HTMLElement>("#article-loader");
+  const template = document.querySelector<HTMLTemplateElement>("#article-card-template");
+  const dataElement = document.querySelector<HTMLScriptElement>("#articles-data");
+
+  const allArticles: ArticleCard[] = JSON.parse(dataElement?.textContent ?? "[]");
+
+  let matched: ArticleCard[] = [];
+  let renderedCount = 0;
+  let isLoading = false;
+  let loadTimer: number | undefined;
 
   const normalize = (value: string) => value.toLocaleLowerCase("fa").replace(/ي/g, "ی").replace(/ك/g, "ک").trim();
+
+  const getActiveLevel = () =>
+    document.querySelector<HTMLButtonElement>("#article-level [data-account-tab].active")?.dataset.accountTab ??
+    defaultLevel;
+
+  const setText = (root: ParentNode, field: string, value: string) => {
+    const element = root.querySelector<HTMLElement>(`[data-field="${field}"]`);
+    if (element) element.textContent = value;
+  };
+
+  const createCard = (article: ArticleCard) => {
+    const fragment = template!.content.cloneNode(true) as DocumentFragment;
+
+    const link = fragment.querySelector<HTMLAnchorElement>('[data-field="link"]');
+    if (link) link.href = `/learning/${encodeURIComponent(article.id)}`;
+
+    const image = fragment.querySelector<HTMLImageElement>('[data-field="image"]');
+    const placeholder = fragment.querySelector<HTMLElement>('[data-field="placeholder"]');
+    const imageUrl = typeof article.image === "string" ? article.image : article.image?.url;
+    const imageAlt = typeof article.image === "string" ? article.title : (article.image?.alt ?? article.title);
+
+    if (imageUrl && image) {
+      image.addEventListener("load", () => image.classList.remove("opacity-0"), { once: true });
+      image.src = imageUrl;
+      image.alt = imageAlt;
+      placeholder?.remove();
+    } else {
+      image?.remove();
+    }
+
+    setText(fragment, "readingTime", String(article.readingTime));
+    setText(fragment, "level", article.levelLabel);
+    setText(fragment, "title", article.title);
+    setText(fragment, "description", article.description);
+
+    return fragment;
+  };
+
+  const renderNext = () => {
+    if (!template || !articleList) return;
+
+    const next = matched.slice(renderedCount, renderedCount + PAGE_SIZE);
+    const fragment = document.createDocumentFragment();
+
+    next.forEach((article) => fragment.appendChild(createCard(article)));
+    articleList.insertBefore(fragment, loader ?? sentinel);
+
+    renderedCount += next.length;
+  };
 
   const filterArticles = (selectedLevel: string) => {
     levelTabs.forEach((tab) => {
@@ -244,50 +285,77 @@ const levels = [
     const query = normalize(searchInput?.value ?? "");
     const sortBy = sortSelect?.value ?? "newest";
 
-    const sortedArticles = [...articles].sort((a, b) => {
-      const dateA = new Date(a.dataset.date ?? "").getTime();
-      const dateB = new Date(b.dataset.date ?? "").getTime();
+    matched = allArticles
+      .filter((article) => {
+        const matchesLevel = selectedLevel === "all" || article.level === selectedLevel;
+        const matchesSearch =
+          normalize(article.title).includes(query) || normalize(article.description).includes(query);
 
-      return sortBy === "oldest" ? dateA - dateB : dateB - dateA;
-    });
+        return matchesLevel && matchesSearch;
+      })
+      .sort((a, b) => {
+        const dateA = new Date(a.publishedAt).getTime();
+        const dateB = new Date(b.publishedAt).getTime();
 
-    sortedArticles.forEach((article) => {
-      const title = normalize(article.dataset.title ?? "");
-      const description = normalize(article.dataset.description ?? "");
+        return sortBy === "oldest" ? dateA - dateB : dateB - dateA;
+      });
 
-      const matchesLevel = selectedLevel === "all" || article.dataset.level === selectedLevel;
+    window.clearTimeout(loadTimer);
+    isLoading = false;
+    setLoader(false);
 
-      const matchesSearch = title.includes(query) || description.includes(query);
-
-      article.hidden = !(matchesLevel && matchesSearch);
-
-      articleList?.appendChild(article);
-    });
+    articleList?.querySelectorAll("article").forEach((element) => element.remove());
+    renderedCount = 0;
+    renderNext();
+    recheckSentinel();
   };
+
+  const setLoader = (visible: boolean) => {
+    loader?.classList.toggle("hidden", !visible);
+    loader?.classList.toggle("flex", visible);
+  };
+
+  const loadMore = () => {
+    isLoading = true;
+    setLoader(true);
+
+    loadTimer = window.setTimeout(() => {
+      renderNext();
+      setLoader(false);
+      isLoading = false;
+      recheckSentinel();
+    }, LOAD_DELAY);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (!entries[0].isIntersecting) return;
+      if (isLoading || renderedCount >= matched.length) return;
+
+      loadMore();
+    },
+    { rootMargin: "0px 0px 300px 0px" },
+  );
+
+  function recheckSentinel() {
+    if (!sentinel) return;
+    requestAnimationFrame(() => {
+      observer.unobserve(sentinel);
+      observer.observe(sentinel);
+    });
+  }
+
+  if (sentinel) observer.observe(sentinel);
 
   levelTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const level = tab.dataset.accountTab;
-
       if (level) filterArticles(level);
     });
   });
 
-  sortSelect?.addEventListener("change", () => {
-    const activeLevel =
-      document.querySelector<HTMLButtonElement>("#article-level [data-account-tab].active")?.dataset.accountTab ??
-      defaultLevel;
-
-    filterArticles(activeLevel);
-  });
-
-  searchInput?.addEventListener("input", () => {
-    const activeLevel =
-      document.querySelector<HTMLButtonElement>("#article-level [data-account-tab].active")?.dataset.accountTab ??
-      defaultLevel;
-
-    filterArticles(activeLevel);
-  });
+  sortSelect?.addEventListener("change", () => filterArticles(getActiveLevel()));
+  searchInput?.addEventListener("input", () => filterArticles(getActiveLevel()));
 
   filterArticles(defaultLevel);
 </script>
