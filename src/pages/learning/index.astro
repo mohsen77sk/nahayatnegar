@@ -105,7 +105,7 @@ const articlesJson = JSON.stringify(
                 <option value="oldest">قدیمی‌ترین</option>
               </select>
 
-              <ArrowDown class="absolute top-2.5 left-3 h-4 w-4" data-account-search-icon />
+              <ArrowDown class="pointer-events-none absolute top-2.5 left-3 h-4 w-4" />
             </div>
 
             <div class="relative flex w-full lg:w-55">
@@ -118,14 +118,14 @@ const articlesJson = JSON.stringify(
                 aria-label="جستجو"
                 autocomplete="off"
                 aria-controls="article-list"
-                data-account-search
+                data-article-search
               />
-              <IconSearch class="absolute top-2.5 left-3 h-4 w-4" data-account-search-icon />
+              <IconSearch class="absolute top-2.5 left-3 h-4 w-4" data-article-search-icon />
               <button
                 class="absolute top-2.5 left-3 hidden cursor-pointer"
                 type="button"
                 aria-label="پاک کردن جستجو"
-                data-account-search-clear
+                data-article-search-clear
               >
                 <IconClose class="h-4 w-4" />
               </button>
@@ -138,12 +138,7 @@ const articlesJson = JSON.stringify(
     <!-- Posts List -->
     <section class="neo-page-content px-0" aria-label="Posts">
       <div class="flex flex-wrap gap-4" id="article-list">
-        <div
-          id="article-loader"
-          class="hidden w-full basis-full items-center justify-center py-6"
-          role="status"
-          aria-live="polite"
-        >
+        <div id="article-loader" class="hidden w-full basis-full items-center justify-center py-6" role="status" aria-live="polite">
           <span class="h-8 w-8 animate-spin rounded-full border-4 border-[#E9EBF2] border-t-brand"></span>
           <span class="sr-only">در حال بارگذاری</span>
         </div>
@@ -151,7 +146,7 @@ const articlesJson = JSON.stringify(
       </div>
     </section>
 
-    <script is:inline id="articles-data" type="application/json" set:html={articlesJson} />
+    <script is:inline id="articles-data" type="application/json" set:html={articlesJson}></script>
 
     <!-- Card template: cloned by the script, 25 at a time -->
     <template id="article-card-template">
@@ -216,6 +211,8 @@ const articlesJson = JSON.stringify(
   const articleList = document.querySelector<HTMLElement>("#article-list");
   const sentinel = document.querySelector<HTMLElement>("#article-sentinel");
   const loader = document.querySelector<HTMLElement>("#article-loader");
+  const searchIcon = document.querySelector<SVGElement>("[data-article-search-icon]");
+  const clearSearchButton = document.querySelector<HTMLButtonElement>("[data-article-search-clear]");
   const template = document.querySelector<HTMLTemplateElement>("#article-card-template");
   const dataElement = document.querySelector<HTMLScriptElement>("#articles-data");
 
@@ -355,7 +352,24 @@ const articlesJson = JSON.stringify(
   });
 
   sortSelect?.addEventListener("change", () => filterArticles(getActiveLevel()));
-  searchInput?.addEventListener("input", () => filterArticles(getActiveLevel()));
+  const updateSearchControls = () => {
+    const hasSearchTerm = Boolean(searchInput?.value);
+    searchIcon?.classList.toggle("hidden", hasSearchTerm);
+    clearSearchButton?.classList.toggle("hidden", !hasSearchTerm);
+  };
+
+  searchInput?.addEventListener("input", () => {
+    updateSearchControls();
+    filterArticles(getActiveLevel());
+  });
+
+  clearSearchButton?.addEventListener("click", () => {
+    if (!searchInput) return;
+
+    searchInput.value = "";
+    searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+    searchInput.focus();
+  });
 
   filterArticles(defaultLevel);
 </script>
