@@ -1,0 +1,115 @@
+<app-toast dir="rtl" aria-label="اعلان‌ها">
+  <div data-toast-list></div>
+  <template>
+    <div class="toast" data-toast>
+      <p data-toast-message aria-atomic="true"></p>
+      <button type="button" data-toast-close aria-label="بستن اعلان">×</button>
+    </div>
+  </template>
+</app-toast>
+
+<script>
+  import type { ToastOptions } from "@utils/toast";
+
+  class AppToast extends HTMLElement {
+    private timers = new Set<ReturnType<typeof setTimeout>>();
+
+    connectedCallback() {
+      document.addEventListener("app:toast", this.show);
+    }
+
+    disconnectedCallback() {
+      document.removeEventListener("app:toast", this.show);
+      this.timers.forEach(clearTimeout);
+      this.timers.clear();
+    }
+
+    private show = (event: Event) => {
+      // Dialogs render above the page: use their toast host while they are open.
+      const activeDialog = document.querySelector("dialog[open]");
+      if (activeDialog ? !activeDialog.contains(this) : this.closest("dialog")) return;
+
+      const { message, type = "success", duration = 6000 } = (event as CustomEvent<ToastOptions>).detail;
+      const template = this.querySelector("template");
+      const list = this.querySelector("[data-toast-list]");
+      if (!template || !list) return;
+
+      const fragment = template.content.cloneNode(true) as DocumentFragment;
+      const toast = fragment.querySelector<HTMLElement>("[data-toast]")!;
+      const text = toast.querySelector<HTMLElement>("[data-toast-message]")!;
+      toast.dataset.type = type;
+      text.setAttribute("role", type === "error" ? "alert" : "status");
+
+      const dismiss = () => {
+        clearTimeout(timer);
+        this.timers.delete(timer);
+        toast.remove();
+      };
+      const timer = setTimeout(dismiss, duration);
+      this.timers.add(timer);
+      toast.querySelector("[data-toast-close]")?.addEventListener("click", dismiss);
+      list.append(fragment);
+      // Populate the live region after it is mounted so assistive tools announce it.
+      requestAnimationFrame(() => {
+        text.textContent = message;
+      });
+    };
+  }
+
+  if (!customElements.get("app-toast")) customElements.define("app-toast", AppToast);
+</script>
+
+<style>
+  app-toast {
+    position: fixed;
+    inset-block-end: max(24px, env(safe-area-inset-bottom));
+    inset-inline-end: 16px;
+    z-index: 2000;
+    width: min(400px, calc(100% - 32px));
+    pointer-events: none;
+  }
+
+  [data-toast-list] {
+    display: grid;
+    gap: 12px;
+  }
+
+  .toast {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid var(--border-color-secondary);
+    border-inline-start: 4px solid var(--color-green-700);
+    border-radius: var(--radius-xl);
+    background: var(--background-color-fg-primary);
+    color: var(--text-color-primary);
+    box-shadow: var(--shadow-primary);
+    pointer-events: auto;
+  }
+
+  .toast[data-type="error"] {
+    border-inline-start-color: var(--color-error);
+  }
+
+  [data-toast-message] {
+    flex: 1;
+    overflow-wrap: anywhere;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  [data-toast-close] {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-md);
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  [data-toast-close]:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+</style>

@@ -1,231 +1,240 @@
 ---
-// src/components/DynamicFundChart.astro
+import { FUND_TIMEFRAMES, isFundTimeframe, type FundTimeframe } from "@utils/fund-chart";
 
 export interface Props {
-  fund?: string;
-  defaultTimeframe?: string;
+  fund: string;
+  defaultTimeframe?: FundTimeframe;
 }
 
 const { fund, defaultTimeframe = "YEARLY" } = Astro.props;
-
-const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
+const timeframe = isFundTimeframe(defaultTimeframe) ? defaultTimeframe : "YEARLY";
 ---
 
-<dynamic-fund-chart
-  class="fund-card"
-  data-chart-id={chartId}
-  data-fund={fund}
-  data-default-timeframe={defaultTimeframe}
->
-  <!-- API filter -->
+<dynamic-fund-chart class="fund-card" data-fund={fund} data-default-timeframe={timeframe}>
   <div class="flex">
-    <div class="neo-tabs w-full rounded-full border bg-fg-primary px-4 lg:w-auto">
-      <button class="neo-tab-label" type="button" data-value="MONTHLY3">۳ ماهه</button>
-      <button class="neo-tab-label" type="button" data-value="MONTHLY6">۶ ماهه</button>
-      <button class="neo-tab-label active" type="button" data-value="YEARLY">یکساله</button>
+    <div
+      class="neo-tabs w-full rounded-full border bg-fg-primary px-4 lg:w-auto"
+      role="group"
+      aria-label="بازه زمانی نمودار"
+    >
+      {
+        FUND_TIMEFRAMES.map(({ value, label }) => (
+          <button
+            class:list={["neo-tab-label", { active: value === timeframe }]}
+            type="button"
+            data-timeframe={value}
+            aria-pressed={value === timeframe}
+          >
+            {label}
+          </button>
+        ))
+      }
     </div>
   </div>
 
-  <div class="flex items-center justify-between gap-4">
-    <!-- legend -->
-    <div class="flex items-center gap-4" id={`legend-${chartId}`}></div>
-    <!-- badge -->
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <div class="flex flex-wrap items-center gap-4" data-legends aria-label="راهنمای نمودار"></div>
     <div class="flex items-center gap-1 text-body-small">
-      <span class="">بازدهی صندوق</span>
-      <span class="flex rounded-lg bg-green-100 px-2 py-1 text-green-500" id={`return-rate-${chartId}`}>--٪</span>
+      <span>بازدهی صندوق</span>
+      <!-- A separate return-rate field has not been specified by the API. -->
+      <span class="flex rounded-lg bg-green-100 px-2 py-1 text-green-500">--٪</span>
     </div>
   </div>
 
-  <div class="chart-wrapper">
-    <!-- یک لودینگ ساده در حین دریافت دیتا -->
-    <div id={`loading-${chartId}`} class="loading-overlay">در حال دریافت اطلاعات...</div>
-    <canvas id={chartId}></canvas>
+  <div class="chart-wrapper" data-state="loading" aria-busy="true">
+    <div class="chart-status" data-status>
+      <p role="status" aria-live="polite" data-status-message>در حال دریافت اطلاعات...</p>
+      <button class="neo-button neo-button-light-primary" type="button" data-retry hidden>تلاش دوباره</button>
+    </div>
+    <canvas role="img" aria-label="نمودار مقایسه بازدهی صندوق و شاخص بازار"></canvas>
+    <div class="chart-tooltip" data-tooltip dir="rtl" aria-hidden="true" hidden>
+      <div class="mb-1 text-center text-body-small text-secondary" data-tooltip-title></div>
+      <div class="flex flex-col gap-2" data-tooltip-rows></div>
+    </div>
   </div>
+
+  <template data-legend-template>
+    <button class="legend-item flex items-center gap-1 text-body-small" type="button" aria-pressed="true">
+      <span class="h-2 w-2 rounded-full" data-dot aria-hidden="true"></span>
+      <span data-label></span>
+    </button>
+  </template>
+  <template data-tooltip-template>
+    <div class="flex items-center justify-between gap-4 text-body-small">
+      <div class="flex items-center gap-1.5">
+        <span class="h-2 w-2 rounded-full" data-dot></span>
+        <span data-label></span>
+      </div>
+      <span data-value dir="ltr"></span>
+    </div>
+  </template>
 </dynamic-fund-chart>
 
 <script>
-  import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip } from "chart.js";
+  import {
+    Chart,
+    LineController,
+    LineElement,
+    PointElement,
+    LinearScale,
+    CategoryScale,
+    Tooltip,
+    type TooltipModel,
+  } from "chart.js";
+  import { fetchFundChart } from "../services/fund-chart.service";
+  import { getApiErrorMessage } from "@utils/api-error";
+  import {
+    isFundTimeframe,
+    prepareFundChartData,
+    toFarsiDigits,
+    type FundChartData,
+    type FundTimeframe,
+  } from "@utils/fund-chart";
+
   Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
 
-  const toFarsiDigits = (num: number | string) => num.toString().replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[+d]);
-
-  const chartColors: Record<string, string> = {
-    naab: "#3B82F6",
-    dollar: "#10B981",
-    seke: "#795548",
-    shemsh: "#8b5cf6",
-    gold: "#F59E0B",
-    asil: "#10B981",
-    piroz: "#3B82F6",
-    pouya: "#10B981",
-    index: "#EF4444",
-  };
-
   class DynamicFundChart extends HTMLElement {
-    private chartInstance: Chart | null = null;
-    private chartId: string;
-    private apiUrl: string;
-    private fund: string;
+    private chart: Chart<"line", (number | null)[], string> | null = null;
+    private request: AbortController | null = null;
+    private events: AbortController | null = null;
+    private timeframe: FundTimeframe = "YEARLY";
+    private axisLabels: string[] = [];
+    private tooltipKey = "";
+    private cache = new Map<FundTimeframe, FundChartData>();
+    private hiddenSeries = new Set<string>();
 
     connectedCallback() {
-      this.chartId = this.dataset.chartId!;
-      this.apiUrl = import.meta.env.PUBLIC_API_URL + "/assetDailyInfo";
-      this.fund = this.dataset.fund!;
-
-      const buttons = this.querySelectorAll<HTMLButtonElement>(".neo-tab-label");
-
-      // بایند کردن ایونت کلیک برای دکمه‌های بازه زمانی
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          buttons.forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-
-          const timeframe = btn.dataset.value!;
-          this.fetchAndRenderData(timeframe);
-        });
-      });
-
-      // لود اولیه (مثلاً حالت یکساله پیش‌فرض)
-      const defaultActive = this.querySelector<HTMLButtonElement>(".neo-tab-label.active");
-      const defaultTf = defaultActive ? defaultActive.dataset.value : "YEARLY";
-      this.fetchAndRenderData(defaultTf!);
+      this.events?.abort();
+      this.events = new AbortController();
+      this.addEventListener("click", this.handleClick, { signal: this.events.signal });
+      this.timeframe = isFundTimeframe(this.dataset.defaultTimeframe) ? this.dataset.defaultTimeframe : "YEARLY";
+      void this.load(this.timeframe);
     }
 
-    async fetchAndRenderData(timeframe: string) {
-      const loading = this.querySelector(`#loading-${this.chartId}`) as HTMLElement;
-      loading.style.display = "flex";
+    disconnectedCallback() {
+      this.request?.abort();
+      this.request = null;
+      this.events?.abort();
+      this.chart?.destroy();
+      this.chart = null;
+      this.cache.clear();
+    }
+
+    private handleClick = (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) return;
+      const button = event.target.closest<HTMLButtonElement>("button");
+      if (!button || button.closest("dynamic-fund-chart") !== this) return;
+
+      const timeframe = button.dataset.timeframe;
+      if (isFundTimeframe(timeframe)) {
+        if (timeframe !== this.timeframe) void this.load(timeframe);
+      } else if (button.hasAttribute("data-retry")) {
+        void this.load(this.timeframe);
+      } else if (button.dataset.series && this.chart) {
+        const index = Number(button.dataset.index);
+        const visible = !this.chart.isDatasetVisible(index);
+        this.chart.setDatasetVisibility(index, visible);
+        this.chart.update();
+        button.setAttribute("aria-pressed", String(visible));
+        if (visible) this.hiddenSeries.delete(button.dataset.series);
+        else this.hiddenSeries.add(button.dataset.series);
+      }
+    };
+
+    private setState(state: "loading" | "ready" | "empty" | "error", message = "") {
+      const wrapper = this.querySelector<HTMLElement>(".chart-wrapper")!;
+      wrapper.dataset.state = state;
+      wrapper.setAttribute("aria-busy", String(state === "loading"));
+      this.querySelector<HTMLElement>("[data-status]")!.hidden = state === "ready";
+      this.querySelector<HTMLElement>("[data-status-message]")!.textContent = message;
+      this.querySelector<HTMLButtonElement>("[data-retry]")!.hidden = state !== "error";
+      this.querySelector<HTMLElement>("[data-legends]")!.hidden = state !== "ready";
+      this.querySelector<HTMLElement>("[data-tooltip]")!.hidden = true;
+      this.tooltipKey = "";
+    }
+
+    private async load(timeframe: FundTimeframe) {
+      this.request?.abort();
+      const request = new AbortController();
+      this.request = request;
+      this.timeframe = timeframe;
+      this.querySelectorAll<HTMLButtonElement>("[data-timeframe]").forEach((button) => {
+        const active = button.dataset.timeframe === timeframe;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+      this.setState("loading", "در حال دریافت اطلاعات...");
 
       try {
-        const [fundResponse, indexResponse] = await Promise.all([
-          fetch(`${this.apiUrl}?timeFrame=${timeframe}&fund=${this.fund}`),
-          fetch(`${this.apiUrl}?timeFrame=${timeframe}&fund=index`),
-        ]);
-        const [fundData, indexData] = await Promise.all([fundResponse.json(), indexResponse.json()]);
-        const apiData = {
-          items: { ...fundData.items, ...indexData.items },
-          data: { ...fundData.data, ...indexData.data },
-        };
+        let data = this.cache.get(timeframe);
+        if (!data) {
+          const response = await fetchFundChart(this.dataset.fund ?? "", timeframe, request.signal);
+          if (this.request !== request || !this.isConnected) return;
+          data = prepareFundChartData(response);
+          this.cache.set(timeframe, data);
+        }
 
-        // ۱. ساخت محور زمانی مرجع (استخراج تمام تاریخ‌های یکتا)
-        const allTimestamps = new Set<number>();
-        Object.values(apiData.items).forEach((dataset: any) => {
-          dataset.forEach((item: any) => allTimestamps.add(item.event_date));
-        });
+        if (!data.series.some((series) => series.values.some((value) => value !== null))) {
+          this.setState("empty", "اطلاعاتی برای این بازه زمانی موجود نیست.");
+          return;
+        }
 
-        // ۲. مرتب‌سازی تاریخ‌ها از قدیم به جدید
-        const sortedTimestamps = Array.from(allTimestamps).sort((a, b) => a - b);
-
-        // ۳. تبدیل تاریخ‌های مرجع به لیبل‌های شمسی برای محور X و تولتیپ
-        const exactDateLabels = sortedTimestamps.map((ts) =>
-          new Intl.DateTimeFormat("fa-IR", { year: "numeric", month: "2-digit", day: "2-digit" }).format(
-            new Date(ts * 1000),
-          ),
-        );
-
-        // ۴. همگام‌سازی دیتای هر نماد با محور زمانی مرجع
-        const chartDatasets = Object.entries(apiData.items).map(([key, dataArray]: [string, any]) => {
-          const color = chartColors[key] || "#9ca3af";
-
-          // ساخت یک Map برای جستجوی سریع دیتای این نماد
-          const dataMap = new Map();
-          dataArray.forEach((item: any) => dataMap.set(item.event_date, item.turnover));
-
-          // اگر برای تاریخ مرجع دیتایی داشتیم آن را می‌گذاریم، در غیر این صورت null
-          const alignedData = sortedTimestamps.map((ts) => {
-            return dataMap.has(ts) ? dataMap.get(ts) : null;
-          });
-
-          return {
-            label: apiData.data[key] || key,
-            color: color,
-            data: alignedData, // دیتای همگام‌سازی شده با مقادیر null
-            spanGaps: true, // متصل کردن خطوط در صورت وجود دیتای null (بسیار مهم)
-            borderColor: color,
-            borderWidth: 2,
-            tension: 0.35,
-            pointRadius: 0,
-            pointHoverRadius: 6,
-            pointHoverBackgroundColor: color,
-            pointHoverBorderColor: "#ffffff",
-            pointHoverBorderWidth: 2,
-          };
-        });
-
-        // ادامه عملیات رندر (بدون تغییر)
-        this.renderLegends(chartDatasets);
-
-        const returnRateEl = this.querySelector(`#return-rate-${this.chartId}`);
-        if (returnRateEl) returnRateEl.textContent = toFarsiDigits("0") + "٪";
-
-        this.updateChart(exactDateLabels, sortedTimestamps, chartDatasets);
+        this.axisLabels = data.axisLabels;
+        this.updateChart(data);
+        this.renderLegends(data);
+        this.setState("ready");
       } catch (error) {
-        console.error("خطا در دریافت اطلاعات چارت", error);
+        if (this.request !== request || !this.isConnected) return;
+        this.setState("error", getApiErrorMessage(error, "دریافت اطلاعات نمودار انجام نشد. لطفاً دوباره تلاش کنید."));
       } finally {
-        loading.style.display = "none";
+        if (this.request === request) this.request = null;
       }
     }
 
-    renderLegends(datasets: any[]) {
-      const legendContainer = this.querySelector(`#legend-${this.chartId}`);
-      if (!legendContainer) return;
-
-      // ۱. ساخت HTML راهنما به همراه data-index برای تشخیص اینکه کدام خط کلیک شده است
-      legendContainer.innerHTML = datasets
-        .map(
-          (ds, index) => `
-        <div class="legend-item flex items-center gap-1 cursor-pointer transition-opacity duration-200" data-index="${index}">
-          <span class="w-2 h-2 rounded-full" style="background-color:${ds.color};"></span>
-          <span class="text-body-small" style="color:${ds.color};">${ds.label}</span>
-        </div>
-      `,
-        )
-        .join("");
-
-      // ۲. اضافه کردن رویداد کلیک برای خاموش/روشن کردن خطوط نمودار
-      const legendElements = legendContainer.querySelectorAll(".legend-item");
-
-      legendElements.forEach((el) => {
-        el.addEventListener("click", () => {
-          if (!this.chartInstance) return;
-          const datasetIndex = parseInt(el.getAttribute("data-index")!);
-          const isVisible = this.chartInstance.isDatasetVisible(datasetIndex);
-
-          this.chartInstance.setDatasetVisibility(datasetIndex, !isVisible);
-          this.chartInstance.update();
-
-          if (isVisible) {
-            el.style.opacity = "0.4";
-            el.style.filter = "grayscale(100%)";
-          } else {
-            el.style.opacity = "1";
-            el.style.filter = "none";
-          }
-        });
+    private renderLegends(data: FundChartData) {
+      const template = this.querySelector<HTMLTemplateElement>("[data-legend-template]")!;
+      const items = data.series.map((series, index) => {
+        const fragment = template.content.cloneNode(true) as DocumentFragment;
+        const button = fragment.querySelector("button")!;
+        button.dataset.series = series.key;
+        button.dataset.index = String(index);
+        button.style.color = series.color;
+        button.setAttribute("aria-pressed", String(!this.hiddenSeries.has(series.key)));
+        fragment.querySelector<HTMLElement>("[data-dot]")!.style.backgroundColor = series.color;
+        fragment.querySelector("[data-label]")!.textContent = series.label;
+        return fragment;
       });
+      this.querySelector("[data-legends]")!.replaceChildren(...items);
     }
 
-    updateChart(labels: string[], timestamps: number[], datasets: any[]) {
-      const canvas = this.querySelector<HTMLCanvasElement>(`#${this.chartId}`);
-      if (!canvas) return;
+    private updateChart(data: FundChartData) {
+      const datasets = data.series.map((series) => ({
+        label: series.label,
+        data: [...series.values],
+        hidden: this.hiddenSeries.has(series.key),
+        spanGaps: true,
+        borderColor: series.color,
+        borderWidth: 2,
+        tension: 0.35,
+        pointRadius: 0,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: series.color,
+        pointHoverBorderColor: "#ffffff",
+        pointHoverBorderWidth: 2,
+      }));
 
-      // اگر چارت از قبل ساخته شده، فقط دیتای آن را آپدیت می‌کنیم (برای انیمیشن نرم و پرفورمنس)
-      if (this.chartInstance) {
-        this.chartInstance.data.labels = labels;
-        this.chartInstance.data.datasets = datasets;
-
-        this.chartInstance.options.scales!.x!.ticks!.callback = function (value, index) {
-          const ts = timestamps[index];
-          return new Intl.DateTimeFormat("fa-IR", { month: "long", year: "2-digit" }).format(new Date(ts * 1000));
-        };
-
-        this.chartInstance.update();
+      if (this.chart) {
+        this.chart.data = { labels: [...data.labels], datasets };
+        data.series.forEach((series, index) =>
+          this.chart!.setDatasetVisibility(index, !this.hiddenSeries.has(series.key)),
+        );
+        this.chart.update();
         return;
       }
 
-      // اگر چارت وجود نداشت (لود اولیه)، آن را می‌سازیم
-      this.chartInstance = new Chart(canvas, {
+      this.chart = new Chart(this.querySelector("canvas")!, {
         type: "line",
-        data: { labels, datasets },
+        data: { labels: [...data.labels], datasets },
         options: {
           responsive: true,
           maintainAspectRatio: false,
@@ -234,65 +243,8 @@ const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
             legend: { display: false },
             tooltip: {
               enabled: false,
-              itemSort: (a, b) => b.parsed.y - a.parsed.y,
-              external: function (context) {
-                const { chart, tooltip } = context;
-                let tooltipEl = document.getElementById("custom-chart-tooltip");
-
-                if (!tooltipEl) {
-                  tooltipEl = document.createElement("div");
-                  tooltipEl.id = "custom-chart-tooltip";
-                  tooltipEl.style.position = "absolute";
-                  tooltipEl.style.pointerEvents = "none";
-                  tooltipEl.style.transition = "all 0.15s ease";
-                  tooltipEl.style.zIndex = "999";
-                  document.body.appendChild(tooltipEl);
-                }
-
-                if (tooltip.opacity === 0) {
-                  tooltipEl.style.opacity = "0";
-                  return;
-                }
-
-                if (tooltip.body) {
-                  const titleLines = tooltip.title || [];
-                  const dataPoints = tooltip.dataPoints;
-
-                  let innerHtml = `
-                    <div class="bg-fg-primary rounded-xl shadow-primary py-2 px-4 flex flex-col gap-2 min-w-[140px]" dir="rtl">
-                  `;
-
-                  titleLines.forEach((title) => {
-                    innerHtml += `<div class="text-body-small text-secondary text-center mb-1">${title}</div>`;
-                  });
-
-                  dataPoints.forEach((dataPoint) => {
-                    const label = dataPoint.dataset.label || "";
-                    const val = toFarsiDigits(dataPoint.parsed.y);
-                    const color = dataPoint.dataset.borderColor;
-
-                    innerHtml += `
-                      <div class="flex items-center justify-between gap-4 text-body-small">
-                        <div class="flex items-center gap-1.5">
-                          <span class="w-2 h-2 rounded-full" style="background-color: ${color};"></span>
-                          <span>${label}</span>
-                        </div>
-                        <span style="color: ${color};" dir="ltr">${val}٪</span>
-                      </div>
-                    `;
-                  });
-
-                  innerHtml += `</div>`;
-                  tooltipEl.innerHTML = innerHtml;
-                }
-
-                const { left, top } = chart.canvas.getBoundingClientRect();
-
-                tooltipEl.style.opacity = "1";
-                tooltipEl.style.left = left + window.scrollX + tooltip.caretX + "px";
-                tooltipEl.style.top = top + window.scrollY + tooltip.caretY + "px";
-                tooltipEl.style.transform = "translate(-50%, calc(-100% - 12px))";
-              },
+              itemSort: (a, b) => (b.parsed.y ?? 0) - (a.parsed.y ?? 0),
+              external: ({ tooltip }) => this.renderTooltip(tooltip),
             },
           },
           scales: {
@@ -303,13 +255,7 @@ const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
                 color: "#131722",
                 maxTicksLimit: 12,
                 maxRotation: 0,
-                callback: function (value, index) {
-                  const ts = timestamps[index];
-                  if (!ts) return "";
-                  return new Intl.DateTimeFormat("fa-IR", { month: "long", year: "2-digit" }).format(
-                    new Date(ts * 1000),
-                  );
-                },
+                callback: (_value, index) => this.axisLabels[index] ?? "",
               },
             },
             y: {
@@ -326,42 +272,114 @@ const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
         },
       });
     }
+
+    private renderTooltip(tooltip: TooltipModel<"line">) {
+      const element = this.querySelector<HTMLElement>("[data-tooltip]")!;
+      element.hidden = tooltip.opacity === 0 || element.parentElement?.dataset.state !== "ready";
+      if (element.hidden || !this.chart) return;
+
+      const key = JSON.stringify([
+        tooltip.title,
+        tooltip.dataPoints.map((point) => [point.datasetIndex, point.dataIndex, point.parsed.y]),
+      ]);
+      if (key !== this.tooltipKey) {
+        this.tooltipKey = key;
+        element.querySelector("[data-tooltip-title]")!.textContent = tooltip.title.join(" · ");
+        const template = this.querySelector<HTMLTemplateElement>("[data-tooltip-template]")!;
+        const rows = tooltip.dataPoints.map((point) => {
+          const fragment = template.content.cloneNode(true) as DocumentFragment;
+          const color = typeof point.dataset.borderColor === "string" ? point.dataset.borderColor : "#9ca3af";
+          fragment.querySelector<HTMLElement>("[data-dot]")!.style.backgroundColor = color;
+          fragment.querySelector("[data-label]")!.textContent = point.dataset.label ?? "";
+          const value = fragment.querySelector<HTMLElement>("[data-value]")!;
+          value.textContent = point.parsed.y === null ? "—" : `${toFarsiDigits(point.parsed.y)}٪`;
+          value.style.color = color;
+          return fragment;
+        });
+        element.querySelector("[data-tooltip-rows]")!.replaceChildren(...rows);
+      }
+
+      const wrapper = element.parentElement!;
+      const canvas = this.chart.canvas;
+      const x = canvas.offsetLeft + tooltip.caretX;
+      const y = canvas.offsetTop + tooltip.caretY;
+      element.style.left = `${Math.max(8, Math.min(x - element.offsetWidth / 2, wrapper.clientWidth - element.offsetWidth - 8))}px`;
+      const above = y - element.offsetHeight - 12;
+      element.style.top = `${Math.max(8, Math.min(above >= 8 ? above : y + 12, wrapper.clientHeight - element.offsetHeight - 8))}px`;
+    }
   }
 
-  if (!customElements.get("dynamic-fund-chart")) {
-    customElements.define("dynamic-fund-chart", DynamicFundChart);
-  }
+  if (!customElements.get("dynamic-fund-chart")) customElements.define("dynamic-fund-chart", DynamicFundChart);
 </script>
 
 <style>
   .fund-card {
-    direction: rtl;
+    position: relative;
     display: flex;
     flex-direction: column;
-    position: relative;
     gap: 16px;
-  }
-
-  .loading-overlay {
-    inset: 0;
-    position: absolute;
     direction: rtl;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    color: var(--color-brand);
-    z-index: 10;
   }
 
   .chart-wrapper {
     position: relative;
     width: 100%;
     height: 380px;
-    direction: ltr;
     padding: 24px 16px;
     border-radius: 8px;
-    background-color: var(--background-color-fg-primary);
+    background: var(--background-color-fg-primary);
+    direction: ltr;
     font-family: var(--default-font-family);
+  }
+
+  .chart-wrapper:not([data-state="ready"]) canvas {
+    visibility: hidden;
+  }
+
+  .chart-status {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+    color: var(--color-brand);
+    text-align: center;
+    direction: rtl;
+  }
+
+  .chart-tooltip {
+    position: absolute;
+    z-index: 2;
+    width: max-content;
+    min-width: 140px;
+    max-width: calc(100% - 16px);
+    padding: 8px 16px;
+    overflow-wrap: anywhere;
+    border-radius: var(--radius-xl);
+    background: var(--background-color-fg-primary);
+    box-shadow: var(--shadow-primary);
+    pointer-events: none;
+  }
+
+  .legend-item {
+    cursor: pointer;
+  }
+
+  .legend-item[aria-pressed="false"] {
+    opacity: 0.4;
+    filter: grayscale(100%);
+  }
+
+  .legend-item:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 4px;
+  }
+
+  [hidden] {
+    display: none !important;
   }
 </style>
