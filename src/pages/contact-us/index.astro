@@ -91,23 +91,49 @@ import { siteUrl, CommunicationURLS } from "@utils/url";
           </div>
         </div>
 
-        <form class="flex flex-1 flex-col gap-4 rounded-3xl bg-fg-secondary p-8">
+        <form id="contact-form" class="flex flex-1 flex-col gap-4 rounded-3xl bg-fg-secondary p-8">
           <div class="flex flex-col gap-3">
-            <span class="text-title-large">نام و نام‌خانوادگی</span>
-            <input class="neo-input-large" type="text" name="name" placeholder="به فارسی" />
+            <label for="contact-name" class="text-title-large">نام و نام‌خانوادگی</label>
+            <input
+              id="contact-name"
+              class="neo-input-large"
+              type="text"
+              name="name"
+              autocomplete="name"
+              placeholder="به فارسی"
+              required
+            />
           </div>
 
           <div class="flex flex-col gap-3">
-            <span class="text-title-large">ایمیل</span>
-            <input class="neo-input-large" type="text" name="email" placeholder="email@gmail.com" />
+            <label for="contact-email" class="text-title-large">ایمیل</label>
+            <input
+              id="contact-email"
+              class="neo-input-large"
+              type="email"
+              name="email"
+              autocomplete="email"
+              placeholder="email@gmail.com"
+              required
+            />
           </div>
 
           <div class="flex flex-col gap-3">
-            <span class="text-title-large">پیام شما</span>
-            <textarea class="neo-input-large" name="message" placeholder="پیام خود را بنویسید."></textarea>
+            <label for="contact-message" class="text-title-large">پیام شما</label>
+            <textarea
+              id="contact-message"
+              class="neo-input-large"
+              name="message"
+              placeholder="پیام خود را بنویسید."
+              required></textarea>
           </div>
 
-          <button type="submit" class="neo-button neo-button-fill-primary neo-button-large"> ارسال </button>
+          <button
+            type="submit"
+            class="neo-button neo-button-fill-primary neo-button-large disabled:cursor-wait disabled:opacity-60"
+          >
+            ارسال
+          </button>
         </form>
       </div>
     </section>
@@ -128,6 +154,50 @@ import { siteUrl, CommunicationURLS } from "@utils/url";
 
 <script>
   import * as L from "leaflet";
+  import { sendContactMessage } from "../../services/contact.service";
+  import { showToast } from "@utils/toast";
+  import { getApiErrorMessage } from "@utils/api-error";
+
+  const contactForm = document.querySelector<HTMLFormElement>("#contact-form");
+  const submitButton = contactForm?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  if (contactForm && submitButton) {
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (submitButton.disabled || !contactForm.reportValidity()) return;
+
+      const formData = new FormData(contactForm);
+      const message = {
+        name: String(formData.get("name") ?? "").trim(),
+        email: String(formData.get("email") ?? "").trim(),
+        message: String(formData.get("message") ?? "").trim(),
+      };
+
+      if (!message.name || !message.email || !message.message) {
+        showToast({ message: "لطفاً همهٔ فیلدها را تکمیل کنید.", type: "error" });
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "در حال ارسال…";
+      contactForm.setAttribute("aria-busy", "true");
+
+      try {
+        await sendContactMessage(message);
+        contactForm.reset();
+        showToast({ message: "پیام شما با موفقیت ارسال شد." });
+      } catch (error) {
+        showToast({
+          message: getApiErrorMessage(error, "ارسال پیام انجام نشد. لطفاً دوباره تلاش کنید."),
+          type: "error",
+        });
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "ارسال";
+        contactForm.removeAttribute("aria-busy");
+      }
+    });
+  }
 
   const contactMap = document.querySelector<HTMLElement>("#contact-map");
 

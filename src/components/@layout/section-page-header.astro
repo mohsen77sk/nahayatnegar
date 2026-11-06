@@ -1,0 +1,200 @@
+---
+import type { PageHeader } from "../../services/page-header.service";
+import { siteUrl } from "@utils/url";
+
+interface Props {
+  header: PageHeader;
+}
+
+const { header } = Astro.props;
+const ctaClasses = {
+  primary: "neo-button-fill-primary",
+  secondary: "neo-button-outline-primary",
+};
+const ctaHref = (link: string) => {
+  if (/^(https?:\/\/|mailto:|tel:)/i.test(link)) return link;
+  if (link.startsWith("#")) return link;
+  if (link.startsWith("/") && !link.startsWith("//")) return siteUrl(link);
+  return undefined;
+};
+---
+
+{
+  header.isActive && (
+    <page-header-hero data-theme={header.theme} data-layout={header.layout}>
+      <section class="hero relative flex min-h-225 overflow-hidden px-4 py-8 lg:py-16" aria-label={header.text}>
+        <div class="absolute inset-0" aria-hidden="true">
+          {header.slides.map((slide, index) => {
+            const desktop = slide.desktop || slide.mobile!;
+            const mobile = slide.mobile || desktop;
+            return (
+              <div data-slide hidden={index !== 0} class="absolute inset-0">
+                {slide.mediaType === "video" ? (
+                  <video
+                    class="h-full w-full object-cover"
+                    muted
+                    loop
+                    playsinline
+                    preload={index === 0 ? "metadata" : "none"}
+                  >
+                    <source src={desktop.url} media="(min-width: 1200px)" type={desktop.mimetype || undefined} />
+                    <source src={mobile.url} type={mobile.mimetype || undefined} />
+                  </video>
+                ) : (
+                  <picture>
+                    <source media="(min-width: 1200px)" srcset={desktop.url} />
+                    <img
+                      src={mobile.url}
+                      alt=""
+                      class="h-full w-full object-cover"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      fetchpriority={index === 0 ? "high" : "auto"}
+                    />
+                  </picture>
+                )}
+              </div>
+            );
+          })}
+        </div>
+        <div class="hero-overlay pointer-events-none absolute inset-0" />
+        <div class="relative mx-auto flex w-full max-w-lg flex-col lg:flex-row">
+          <div class="flex min-h-150 w-full flex-col items-center justify-center text-center">
+            <h1 class="mb-2 text-display-large whitespace-pre-line">{header.text}</h1>
+            {header.description && <p class="mb-6 text-heading-large whitespace-pre-line">{header.description}</p>}
+            <div class="flex flex-wrap justify-center gap-3">
+              {header.ctas.map((cta) =>
+                cta.label.trim() === "درخواست مشاوره" ? (
+                  <button
+                    type="button"
+                    data-consultation-modal-trigger
+                    class:list={["neo-button neo-button-large", ctaClasses[cta.variant]]}
+                  >
+                    {cta.label}
+                  </button>
+                ) : (
+                  ctaHref(cta.link) && (
+                    <a href={ctaHref(cta.link)} class:list={["neo-button neo-button-large", ctaClasses[cta.variant]]}>
+                      {cta.label}
+                    </a>
+                  )
+                ),
+              )}
+            </div>
+          </div>
+          <div class="h-75 lg:hidden" />
+        </div>
+        <div class="absolute inset-x-4 bottom-8 flex items-center justify-center gap-3">
+          {header.slides.length > 1 && (
+            <div class="flex gap-2" role="group" aria-label="انتخاب اسلاید" data-slide-controls hidden>
+              {header.slides.map((_, index) => (
+                <button
+                  type="button"
+                  data-slide-button
+                  aria-label={`اسلاید ${index + 1}`}
+                  aria-pressed={index === 0 ? "true" : "false"}
+                  class="slide-button h-8 w-8 rounded-full border border-current"
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </page-header-hero>
+  )
+}
+
+<script>
+  class PageHeaderHero extends HTMLElement {
+    private events?: AbortController;
+
+    connectedCallback() {
+      this.events?.abort();
+      this.events = new AbortController();
+      const { signal } = this.events;
+      const slides = Array.from(this.querySelectorAll<HTMLElement>("[data-slide]"));
+      const buttons = Array.from(this.querySelectorAll<HTMLButtonElement>("[data-slide-button]"));
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const desktopViewport = window.matchMedia("(min-width: 1200px)");
+      let active = 0;
+
+      const showSlide = (index: number) => {
+        active = index;
+        slides.forEach((slide, position) => {
+          slide.hidden = position !== index;
+          const video = slide.querySelector("video");
+          if (!video) return;
+          if (position === index && !reducedMotion.matches) {
+            video.muted = true;
+            // Autoplay may be blocked by the browser's playback policy.
+            void video.play().catch(() => {});
+          } else video.pause();
+        });
+        buttons.forEach((button, position) => button.setAttribute("aria-pressed", String(position === index)));
+      };
+
+      this.querySelector<HTMLElement>("[data-slide-controls]")?.removeAttribute("hidden");
+      buttons.forEach((button, index) => button.addEventListener("click", () => showSlide(index), { signal }));
+      desktopViewport.addEventListener(
+        "change",
+        () => {
+          slides.forEach((slide) => {
+            const video = slide.querySelector("video");
+            const sources = video?.querySelectorAll("source");
+            const source = sources?.[desktopViewport.matches ? 0 : 1];
+            if (video && source) {
+              video.src = source.src;
+              video.load();
+            }
+          });
+          showSlide(active);
+        },
+        { signal },
+      );
+      reducedMotion.addEventListener("change", () => showSlide(active), { signal });
+      showSlide(0);
+    }
+
+    disconnectedCallback() {
+      this.events?.abort();
+      this.querySelectorAll("video").forEach((video) => video.pause());
+    }
+  }
+  if (!customElements.get("page-header-hero")) customElements.define("page-header-hero", PageHeaderHero);
+</script>
+
+<style>
+  page-header-hero {
+    display: block;
+  }
+  .hero {
+    background: #101828;
+    color: white;
+  }
+  .hero-overlay {
+    background: rgb(0 0 0 / 25%);
+  }
+  [data-theme="light"] .hero {
+    background: #f9fafb;
+    color: #101828;
+  }
+  [data-theme="light"] .hero-overlay {
+    background: rgb(255 255 255 / 25%);
+  }
+  [hidden] {
+    display: none !important;
+  }
+  .slide-button {
+    cursor: pointer;
+  }
+  .slide-button[aria-pressed="true"] {
+    background: var(--color-brand, #0170f3);
+    color: white;
+  }
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+</style>

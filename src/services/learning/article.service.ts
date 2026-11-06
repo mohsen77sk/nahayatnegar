@@ -21,7 +21,7 @@ export interface ArticleApiDTO {
   readingTime?: string;
   publishDate?: string;
 }
-const API_BASE_URL: string | undefined = import.meta.env.PUBLIC_API_URL?.replace(/\/$/, "");
+const API_BASE_URL: string | undefined = import.meta.env.PUBLIC_ADMIN_API_URL;
 
 function getApiUrl(endpoint: string): string {
   const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;

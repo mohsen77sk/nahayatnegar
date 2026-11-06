@@ -1,3 +1,7 @@
+---
+import Toast from "@components/toast.astro";
+---
+
 <dialog
   id="consultation-modal"
   dir="rtl"
@@ -25,28 +29,58 @@
 
   <form class="grid grid-cols-1 gap-4 pt-3 lg:grid-cols-2">
     <div class="flex flex-col gap-1">
-      <span class="text-body-small text-secondary">نام و نام‌خانوادگی</span>
-      <input class="neo-input-medium" type="text" name="name" placeholder="محل نوشتار" required />
+      <label for="consultation-name" class="text-body-small text-secondary">نام و نام‌خانوادگی</label>
+      <input
+        id="consultation-name"
+        class="neo-input-medium"
+        type="text"
+        name="name"
+        autocomplete="name"
+        placeholder="محل نوشتار"
+        required
+      />
     </div>
 
     <div class="flex flex-col gap-1">
-      <span class="text-body-small text-secondary">شماره تماس</span>
-      <input class="neo-input-medium" type="tel" name="phone" placeholder="۰۹۱********" required />
+      <label for="consultation-phone" class="text-body-small text-secondary">شماره تماس</label>
+      <input
+        id="consultation-phone"
+        class="neo-input-medium"
+        type="tel"
+        name="phoneNumber"
+        autocomplete="tel"
+        placeholder="۰۹۱********"
+        required
+      />
     </div>
 
     <div class="flex flex-col gap-1 lg:col-span-2">
-      <span class="text-body-small text-secondary">موضوع مشاوره (اختیاری)</span>
-      <textarea class="neo-input-medium" name="message" rows="4" placeholder="موضوع مشاوره را بنویسید (اختیاری)"
-      ></textarea>
+      <label for="consultation-subject" class="text-body-small text-secondary">موضوع مشاوره (اختیاری)</label>
+      <textarea
+        id="consultation-subject"
+        class="neo-input-medium"
+        name="subject"
+        rows="4"
+        placeholder="موضوع مشاوره را بنویسید (اختیاری)"></textarea>
     </div>
 
     <div class="flex justify-end lg:col-span-2">
-      <button class="neo-button neo-button-medium neo-button-fill-primary mt-4 min-w-24" type="button"> ارسال </button>
+      <button
+        class="neo-button neo-button-medium neo-button-fill-primary mt-4 min-w-24 disabled:cursor-wait disabled:opacity-60"
+        type="submit"
+      >
+        ارسال
+      </button>
     </div>
   </form>
+  <Toast />
 </dialog>
 
 <script>
+  import { sendInvestmentLead } from "../services/investment-lead.service";
+  import { showToast } from "@utils/toast";
+  import { getApiErrorMessage } from "@utils/api-error";
+
   const modal = document.querySelector<HTMLDialogElement>("#consultation-modal");
 
   if (modal) {
@@ -58,6 +92,51 @@
     modal.addEventListener("click", (event) => {
       if (event.target === modal) modal.close();
     });
+
+    const form = modal.querySelector<HTMLFormElement>("form");
+    const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    if (form && submitButton) {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (submitButton.disabled || !form.reportValidity()) return;
+
+        const formData = new FormData(form);
+        const lead = {
+          name: String(formData.get("name") ?? "").trim(),
+          phoneNumber: String(formData.get("phoneNumber") ?? "")
+            .trim()
+            .replace(/[۰-۹]/g, (digit) => String(digit.charCodeAt(0) - 1776))
+            .replace(/[٠-٩]/g, (digit) => String(digit.charCodeAt(0) - 1632)),
+          subject: String(formData.get("subject") ?? "").trim(),
+        };
+
+        if (!lead.name || !lead.phoneNumber) {
+          showToast({ message: "لطفاً نام و شماره تماس خود را وارد کنید.", type: "error" });
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "در حال ارسال…";
+        form.setAttribute("aria-busy", "true");
+
+        try {
+          await sendInvestmentLead(lead);
+          form.reset();
+          modal.close();
+          showToast({ message: "درخواست مشاوره شما با موفقیت ثبت شد." });
+        } catch (error) {
+          showToast({
+            message: getApiErrorMessage(error, "ثبت درخواست مشاوره انجام نشد. لطفاً دوباره تلاش کنید."),
+            type: "error",
+          });
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "ارسال";
+          form.removeAttribute("aria-busy");
+        }
+      });
+    }
   }
 </script>
 
