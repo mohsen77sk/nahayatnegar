@@ -2,12 +2,11 @@
 // src/components/DynamicFundChart.astro
 
 export interface Props {
-  apiUrl: string; // آدرس پایه API (مثلا: /api/fund-data)
   fund?: string;
   defaultTimeframe?: string;
 }
 
-const { apiUrl, fund, defaultTimeframe = "YEARLY" } = Astro.props;
+const { fund, defaultTimeframe = "YEARLY" } = Astro.props;
 
 const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
 ---
@@ -15,7 +14,6 @@ const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
 <dynamic-fund-chart
   class="fund-card"
   data-chart-id={chartId}
-  data-api-url={apiUrl}
   data-fund={fund}
   data-default-timeframe={defaultTimeframe}
 >
@@ -71,7 +69,7 @@ const chartId = `chart-${Math.random().toString(36).substring(2, 9)}`;
 
     connectedCallback() {
       this.chartId = this.dataset.chartId!;
-      this.apiUrl = this.dataset.apiUrl!;
+      this.apiUrl = import.meta.env.PUBLIC_API_URL + "/assetDailyInfo";
       this.fund = this.dataset.fund!;
 
       const buttons = this.querySelectorAll<HTMLButtonElement>(".neo-tab-label");

@@ -4,7 +4,8 @@ import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
-import SectionVideoHero from "@components/@layout/section-video-hero.astro";
+import SectionPageHeader from "@components/@layout/section-page-header.astro";
+import { fetchPageHeader, type PageHeader } from "../services/page-header.service";
 import LineGradient from "@components/line-gradient.astro";
 
 import ArrowLeft from "@assets/icons/iconsax/outline/arrow-left.svg";
@@ -19,7 +20,23 @@ import SectionLearningBgMob from "@assets/images/Home/learning-bg-mob.png";
 import SectionLearningBg from "@assets/images/Home/learning-bg.png";
 import HeroVideo from "@assets/images/Home/Sunrise over Earth.mp4";
 
-import { siteUrl } from "@utils/url";
+import { siteUrl, URLS } from "@utils/url";
+
+const apiHeader = await fetchPageHeader("home");
+const fallbackHeader: PageHeader = {
+  page: "home",
+  layout: 1,
+  theme: "dark",
+  text: "گروه مالی نهایت‌نگر",
+  description: "ارائه دهنده انواع سرویس‌ها و خدمات معاملاتی بازار سرمایه",
+  ctas: [
+    { label: "ثبت‌نام در بورس", link: URLS.registerAddress, variant: "primary" },
+    { label: "درخواست مشاوره", link: "#consultation-modal", variant: "secondary" },
+  ],
+  slides: [{ mediaType: "video", desktop: { url: HeroVideo, mimetype: "video/mp4" } }],
+  isActive: true,
+};
+const pageHeader = apiHeader ?? fallbackHeader;
 ---
 
 <Layout
@@ -27,20 +44,7 @@ import { siteUrl } from "@utils/url";
   description="خدمات کارگزاری، معاملات آنلاین، مدیریت دارایی و آموزش سرمایه‌گذاری در بازار سرمایه ایران؛ همراه با گروه مالی نهایت‌نگر."
 >
   <main>
-    <SectionVideoHero desktopVideo={HeroVideo} mobileVideo={HeroVideo}>
-      <div slot="right" class="flex h-150 w-full flex-col items-center justify-center text-center">
-        <h1 class="mb-2 text-display-large text-white">گروه مالی نهایت‌نگر</h1>
-        <p class="mb-6 text-heading-large text-white">ارائه دهنده انواع سرویس‌ها و خدمات معاملاتی بازار سرمایه</p>
-        <div class="flex justify-center gap-3">
-          <button class="neo-button neo-button-large neo-button-fill-primary">ثبت‌نام در بورس</button>
-          <button class="neo-button neo-button-large neo-button-outline-primary" data-consultation-modal-trigger>
-            درخواست مشاوره
-          </button>
-        </div>
-      </div>
-
-      <div slot="left" class="h-75 lg:hidden"></div>
-    </SectionVideoHero>
+    <SectionPageHeader header={pageHeader} />
 
     <SectionLayer1 desktopImage={BrokerageBg} mobileImage={BrokerageBgMob}>
       <!-- right -->
