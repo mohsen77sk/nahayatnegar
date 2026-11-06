@@ -36,8 +36,7 @@ const timeframe = isFundTimeframe(defaultTimeframe) ? defaultTimeframe : "YEARLY
     <div class="flex flex-wrap items-center gap-4" data-legends aria-label="راهنمای نمودار"></div>
     <div class="flex items-center gap-1 text-body-small">
       <span>بازدهی صندوق</span>
-      <!-- A separate return-rate field has not been specified by the API. -->
-      <span class="flex rounded-lg bg-green-100 px-2 py-1 text-green-500">--٪</span>
+      <span class="flex rounded-lg bg-green-100 px-2 py-1 text-green-500" data-return-rate dir="ltr">--٪</span>
     </div>
   </div>
 
@@ -164,6 +163,9 @@ const timeframe = isFundTimeframe(defaultTimeframe) ? defaultTimeframe : "YEARLY
         button.setAttribute("aria-pressed", String(active));
       });
       this.setState("loading", "در حال دریافت اطلاعات...");
+      const returnRate = this.querySelector<HTMLElement>("[data-return-rate]")!;
+      returnRate.textContent = "--٪";
+      returnRate.dataset.negative = "false";
 
       try {
         let data = this.cache.get(timeframe);
@@ -173,6 +175,12 @@ const timeframe = isFundTimeframe(defaultTimeframe) ? defaultTimeframe : "YEARLY
           data = prepareFundChartData(response);
           this.cache.set(timeframe, data);
         }
+
+        returnRate.textContent =
+          data.returnRate === null
+            ? "--٪"
+            : `${new Intl.NumberFormat("fa-IR", { maximumFractionDigits: 2 }).format(data.returnRate)}٪`;
+        returnRate.dataset.negative = String(data.returnRate !== null && data.returnRate < 0);
 
         if (!data.series.some((series) => series.values.some((value) => value !== null))) {
           this.setState("empty", "اطلاعاتی برای این بازه زمانی موجود نیست.");
@@ -313,6 +321,11 @@ const timeframe = isFundTimeframe(defaultTimeframe) ? defaultTimeframe : "YEARLY
 </script>
 
 <style>
+  [data-return-rate][data-negative="true"] {
+    background-color: var(--color-red-100);
+    color: var(--color-red-500);
+  }
+
   .fund-card {
     position: relative;
     display: flex;

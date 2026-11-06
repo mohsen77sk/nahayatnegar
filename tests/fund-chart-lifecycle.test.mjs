@@ -91,7 +91,7 @@ function setup() {
 }
 
 function response(value) {
-  return { items: { naab: [{ event_date: 1735689600, turnover: value }] }, data: { naab: "ناب" } };
+  return { items: { naab: [{ event_date: 1735689600, turnover: value }] }, data: { naab: "ناب" }, returnRate: value };
 }
 
 test("uses the configured default timeframe on connection", async () => {
@@ -102,6 +102,7 @@ test("uses the configured default timeframe on connection", async () => {
   await new Promise(setImmediate);
   assert.equal(host.querySelector(".chart-wrapper").dataset.state, "ready");
   assert.equal(charts[0].data.datasets[0].data[0], 6);
+  assert.equal(host.querySelector("[data-return-rate]").textContent, `${toFarsiDigits(6)}٪`);
 });
 
 test("cancels the older request and ignores its late successful response", async () => {
@@ -115,6 +116,7 @@ test("cancels the older request and ignores its late successful response", async
   await oldLoad;
   assert.equal(charts.length, 1);
   assert.equal(charts[0].data.datasets[0].data[0], 3);
+  assert.equal(host.querySelector("[data-return-rate]").textContent, `${toFarsiDigits(3)}٪`);
   assert.equal(host.querySelector(".chart-wrapper").dataset.state, "ready");
 });
 
@@ -141,6 +143,7 @@ test("reuses the chart and cached timeframe data", async () => {
   assert.equal(requests.length, 2);
   assert.equal(charts.length, 1);
   assert.equal(charts[0].data.datasets[0].data[0], 12);
+  assert.equal(host.querySelector("[data-return-rate]").textContent, `${toFarsiDigits(12)}٪`);
 });
 
 test("disconnect cancels work, removes listeners, and destroys the chart", async () => {
@@ -176,4 +179,19 @@ test("shows empty and error states and allows retrying a failed timeframe", asyn
   requests[2].resolve(response(12));
   await retry;
   assert.equal(host.querySelector(".chart-wrapper").dataset.state, "ready");
+});
+
+test("displays negative and unavailable return rates without stale values while loading", async () => {
+  const { host, requests } = setup();
+  const first = host.load("YEARLY");
+  requests[0].resolve(response(-2.5));
+  await first;
+  assert.equal(host.querySelector("[data-return-rate]").textContent, `${new Intl.NumberFormat("fa-IR").format(-2.5)}٪`);
+  assert.equal(host.querySelector("[data-return-rate]").dataset.negative, "true");
+  const next = host.load("MONTHLY3");
+  assert.equal(host.querySelector("[data-return-rate]").textContent, "--٪");
+  requests[1].resolve({ ...response(3), returnRate: null });
+  await next;
+  assert.equal(host.querySelector("[data-return-rate]").textContent, "--٪");
+  assert.equal(host.querySelector("[data-return-rate]").dataset.negative, "false");
 });

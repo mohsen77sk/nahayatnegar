@@ -9,6 +9,7 @@ export type FundTimeframe = (typeof FUND_TIMEFRAMES)[number]["value"];
 export interface FundChartResponse {
   items: Record<string, { event_date: number; turnover: number | null }[]>;
   data: Record<string, string>;
+  returnRate?: number | null;
 }
 
 export interface FundSeries {
@@ -22,6 +23,7 @@ export interface FundChartData {
   labels: string[];
   axisLabels: string[];
   series: FundSeries[];
+  returnRate: number | null;
 }
 
 const colors: Record<string, string> = {
@@ -31,7 +33,7 @@ const colors: Record<string, string> = {
   shemsh: "#8b5cf6",
   gold: "#F59E0B",
   asil: "#10B981",
-  piroz: "#3B82F6",
+  pirooz: "#3B82F6",
   pouya: "#10B981",
   index: "#EF4444",
 };
@@ -54,6 +56,7 @@ export function prepareFundChartData(response: FundChartResponse): FundChartData
   );
 
   return {
+    returnRate: response.returnRate ?? null,
     labels: timestamps.map((timestamp) => dateFormatter.format(timestamp * 1000)),
     axisLabels: timestamps.map((timestamp) => monthFormatter.format(timestamp * 1000)),
     series: entries.map(([key, points]) => {

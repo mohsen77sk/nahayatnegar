@@ -46,7 +46,12 @@ test("deduplicates timestamps, uses the last point, and supports unknown symbols
   assert.deepEqual(result.series[0].values, [2]);
   assert.equal(result.series[0].label, "unknown");
   assert.equal(result.series[0].color, "#9ca3af");
-  assert.deepEqual(prepareFundChartData({ items: {}, data: {} }), { labels: [], axisLabels: [], series: [] });
+  assert.deepEqual(prepareFundChartData({ items: {}, data: {} }), {
+    labels: [],
+    axisLabels: [],
+    series: [],
+    returnRate: null,
+  });
 });
 
 test("fetches fund and index in parallel and encodes query parameters", async (t) => {
@@ -111,7 +116,7 @@ test("preserves API problem details and aborts the companion request on failure"
   assert.equal(siblingSignal.aborted, true);
 });
 
-test("cancels both requests when the component cancels its signal", async (t) => {
+test("cancels chart, index, and summary requests when the component cancels its signal", async (t) => {
   const signals = [];
   const request = t.mock.method(globalThis, "fetch", (_url, { signal }) => {
     signals.push(signal);
@@ -124,13 +129,105 @@ test("cancels both requests when the component cancels its signal", async (t) =>
   const pending = fetchFundChart("naab", "YEARLY", controller.signal, apiBase);
   controller.abort();
   await assert.rejects(pending, { name: "AbortError" });
+  assert.equal(signals.length, 3);
+  assert.ok(signals.every((signal) => signal.aborted));
+});
+
+test("fetches summary alongside chart series and uses the selected timeframe for all supported funds", async (t) => {
+  const calls = [];
+  const releases = [];
+  const request = t.mock.method(globalThis, "fetch", (url, { signal }) => {
+    const parsed = new URL(url);
+    calls.push(parsed);
+    assert.ok(signal instanceof AbortSignal);
+    return new Promise((resolve) =>
+      releases.push(() =>
+        resolve(
+          Response.json(
+            parsed.pathname === "/assetSummary"
+              ? { data: { MONTHLY3: "0", MONTHLY6: "-12.34", YEARLY: "149.74" } }
+              : { items: {}, data: {} },
+          ),
+        ),
+      ),
+    );
+  });
+  t.after(() => request.mock.restore());
+
+  for (const [fund, summaryFund] of [
+    ["naab", "naab"],
+    ["asil", "asil"],
+    ["pouya", "pouya"],
+    ["pirooz", "pirooz"],
+  ]) {
+    for (const [timeframe, expected] of [
+      ["MONTHLY3", 0],
+      ["MONTHLY6", -12.34],
+      ["YEARLY", 149.74],
+    ]) {
+      calls.length = 0;
+      releases.length = 0;
+      const pending = fetchFundChart(fund, timeframe, undefined, apiBase);
+      assert.equal(calls.length, 3, "all three requests start before any finishes");
+      const summary = calls.find((url) => url.pathname === "/assetSummary");
+      assert.equal(summary.searchParams.get("fund"), summaryFund);
+      assert.equal(summary.searchParams.has("timeFrame"), false);
+      releases.forEach((release) => release());
+      const response = await pending;
+      assert.equal(response.returnRate, expected);
+      assert.equal(prepareFundChartData(response).returnRate, expected);
+    }
+  }
+});
+
+test("validates summary data and preserves missing returns as unavailable", async (t) => {
+  let payload;
+  const request = t.mock.method(globalThis, "fetch", async (url) =>
+    Response.json(new URL(url).pathname === "/assetSummary" ? payload : { items: {}, data: {} }),
+  );
+  t.after(() => request.mock.restore());
+  for (const invalid of [
+    null,
+    {},
+    { data: [] },
+    { data: { YEARLY: "" } },
+    { data: { YEARLY: "bad" } },
+    { data: { YEARLY: false } },
+  ]) {
+    payload = invalid;
+    await assert.rejects(fetchFundChart("naab", "YEARLY", undefined, apiBase), /Invalid fund/);
+  }
+  for (const data of [{}, { YEARLY: null }, { YEARLY: 0 }, { YEARLY: -2.5 }]) {
+    payload = { data };
+    const response = await fetchFundChart("naab", "YEARLY", undefined, apiBase);
+    assert.equal(response.returnRate, data.YEARLY ?? null);
+  }
+});
+
+test("summary API errors abort pending chart requests and preserve API error details", async (t) => {
+  const signals = [];
+  const request = t.mock.method(globalThis, "fetch", async (url, { signal }) => {
+    if (new URL(url).pathname === "/assetSummary")
+      return Response.json({ detail: "Summary unavailable" }, { status: 503 });
+    signals.push(signal);
+    return new Promise((_resolve, reject) =>
+      signal.addEventListener("abort", () => reject(signal.reason), { once: true }),
+    );
+  });
+  t.after(() => request.mock.restore());
+  await assert.rejects(fetchFundChart("naab", "YEARLY", undefined, apiBase), (error) => {
+    assert.equal(getApiErrorMessage(error, "fallback"), "Summary unavailable");
+    return true;
+  });
   assert.equal(signals.length, 2);
   assert.ok(signals.every((signal) => signal.aborted));
 });
 
 test("rejects malformed points and responses before rendering", async (t) => {
   let payload;
-  const request = t.mock.method(globalThis, "fetch", async () => Response.json(payload));
+  const request = t.mock.method(globalThis, "fetch", async (url) =>
+    Response.json(new URL(url).pathname === "/assetSummary" ? { data: { YEARLY: "10" } } : payload),
+  );
   t.after(() => request.mock.restore());
   for (const invalid of [
     null,
