@@ -6,11 +6,18 @@ export interface ImageObject {
   [key: string]: any;
 }
 
+export interface Heading {
+  id: string;
+  title: string;
+  order: number;
+}
+
 export interface ArticleApiDTO {
   id: string;
-  slug?: string;
+  slug: string;
   title: string;
   content: string;
+  headings?: Heading[];
   description?: Record<string, any> | string;
   imageUrl?: ImageObject | string;
   published: boolean;
@@ -21,24 +28,25 @@ export interface ArticleApiDTO {
   readingTime?: string;
   publishDate?: string;
 }
-const API_BASE_URL: string | undefined = import.meta.env.PUBLIC_ADMIN_API_URL;
+
+const API_BASE_URL: string | undefined = import.meta.env.PUBLIC_API_URL?.replace(/\/$/, "");
 
 function getApiUrl(endpoint: string): string {
   const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
   return `${API_BASE_URL || ""}${cleanEndpoint}`;
 }
 
-export async function fetchPostById(id: string): Promise<ArticleApiDTO> {
+export async function fetchPostBySlug(slug: string): Promise<ArticleApiDTO> {
   if (!API_BASE_URL) {
-    const article = MOCK_ARTICLES_LIST.find((p) => p.id === id);
-    if (!article) throw new Error(`Article not found: ${id}`);
+    const article = MOCK_ARTICLES_LIST.find((p) => p.slug === slug || p.id === slug);
+    if (!article) throw new Error(`Article not found: ${slug}`);
     return article;
   }
 
-  const response = await fetch(getApiUrl(`/panel/posts/${id}`));
+  const response = await fetch(getApiUrl(`/posts/${slug}`));
 
   if (!response.ok) {
-    throw new Error(`خطا در دریافت پست با شناسه ${id} - وضعیت: ${response.status}`);
+    throw new Error(`خطا در دریافت پست با شناسه ${slug} - وضعیت: ${response.status}`);
   }
 
   const result = await response.json();
@@ -50,7 +58,7 @@ export async function fetchAllArticles(): Promise<ArticleApiDTO[]> {
     return MOCK_ARTICLES_LIST;
   }
 
-  const response = await fetch(getApiUrl("/panel/posts"));
+  const response = await fetch(getApiUrl("/posts"));
 
   if (!response.ok) {
     throw new Error(`خطا در دریافت لیست مقالات: ${response.statusText}`);

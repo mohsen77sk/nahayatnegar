@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import {
   fetchAllArticles,
-  fetchPostById,
+  fetchPostBySlug,
   calculateReadingTime,
   formatPersianDate,
   resolveImageUrl,
@@ -16,13 +16,13 @@ import Medal from "@assets/icons/iconsax/outline/medal.svg";
 import BreadCrumb from "@components/bread-crumb.astro";
 
 export async function getStaticPaths() {
-  const posts = (await fetchAllArticles()).filter((post) => post.published && post.id);
+  const posts = (await fetchAllArticles()).filter((post) => post.published && post.slug);
 
   return Promise.all(
     posts.map(async (post) => {
-      const fullPost = await fetchPostById(post.id);
+      const fullPost = await fetchPostBySlug(post.slug);
       return {
-        params: { slug: post.id },
+        params: { slug: post.slug },
         props: { article: fullPost },
       };
     }),
@@ -32,11 +32,11 @@ export async function getStaticPaths() {
 interface Props {
   article: ArticleApiDTO;
 }
-const id = Astro.params.slug;
+const slug = Astro.params.slug;
 const { article } = Astro.props;
 
-if (!id || id !== article.id) {
-  throw new Error(`Article route "${id ?? ""}" does not match its generated article.`);
+if (!slug || slug !== article.slug) {
+  throw new Error(`Article route "${slug ?? ""}" does not match its generated article.`);
 }
 
 interface TocItem {
@@ -67,10 +67,18 @@ processedContent = processedContent.replace(headingRegex, (match, tag, attrs, in
   return match;
 });
 const bannerSrc = resolveImageUrl(article?.imageUrl);
-const readingTime = calculateReadingTime(article?.content);
+const readingTime = calculateReadingTime(article?.content as string);
 const publishDate = article.publishDate || formatPersianDate(article.publishedAt || article.createdAt);
 
-const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning" }, { label: article.title }];
+const sortedHeadings = [...(article.headings ?? [])].sort((a, b) => a.order - b.order);
+const breadCrumbItems = [
+  { label: "مقالات آموزشی", href: "/learning" },
+  ...sortedHeadings.map((h) => ({
+    label: h.title,
+    href: `/learning/${article.slug ?? ""}#${h.id}`,
+  })),
+  { label: article.title, href: `/learning/${article.slug ?? ""}` },
+];
 ---
 
 <Layout

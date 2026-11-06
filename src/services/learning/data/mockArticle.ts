@@ -1,5 +1,5 @@
 // src/services/mockArticle.ts
-import type { ArticleApiDTO } from "../article.service";
+import type { ArticleApiDTO } from "../../../pages/learning/article.service";
 
 export const MOCK_ARTICLE: ArticleApiDTO = {
   id: "post-101",
