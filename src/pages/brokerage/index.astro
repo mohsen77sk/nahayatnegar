@@ -59,9 +59,9 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
 
     <!-- introduce -->
     <section
-      class="brokerage-intro-section relative h-[250vh] bg-cover bg-center bg-no-repeat px-4 py-8 [view-timeline-name:--section-timeline]"
+      class="brokerage-intro-section relative h-[450vh] bg-cover bg-center bg-no-repeat px-4 py-4 [view-timeline-name:--section-timeline] lg:py-8"
     >
-      <div class="brokerage-intro-sticky sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+      <div class="brokerage-intro-sticky sticky top-0 flex min-h-screen flex-col justify-center lg:overflow-hidden">
         <div class="brokerage-intro-cards relative mx-auto flex w-full max-w-lg flex-col items-center gap-8">
           <div class="flex flex-col items-center gap-2 text-center">
             <h2 class="text-display-small">سامانه‌های معاملاتی نهایت‌نگر</h2>
@@ -105,7 +105,7 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
             </div>
 
             <div
-              class="brokerage-intro-card brokerage-intro-card--animated py-t-6 relative inset-0 z-10 flex h-full flex-col items-center justify-center rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)] text-center transition-transform duration-700 lg:flex-row-reverse lg:gap-4"
+              class="brokerage-intro-card brokerage-intro-card--animated py-t-6 absolute inset-0 z-10 flex h-full flex-col items-center justify-center rounded-3xl bg-[linear-gradient(90deg,#7B61FF_0%,#1C2754_50%,#0D0B1E_100%)] text-center transition-transform duration-700 lg:relative lg:flex-row-reverse lg:gap-4"
             >
               <div
                 class="flex flex-1 flex-col items-center justify-center gap-3 self-center p-6 text-white lg:px-8 lg:py-0"
@@ -311,22 +311,36 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
   </main>
 </Layout>
 <style>
-  @keyframes cardSlideUp {
+  @keyframes cardSlideUpMobile {
     from {
-      transform: translateY(calc(120% + 24px));
+      transform: translateY(calc(100% + 24px));
     }
     to {
-      transform: translateY(0%);
+      transform: translateY(12%);
+    }
+  }
+  @keyframes cardSlideUp {
+    from {
+      transform: translateY(calc(100% + 24px));
+    }
+    to {
+      transform: translateY(15%);
     }
   }
 
   .brokerage-intro-card--animated {
-    animation-name: cardSlideUp;
+    animation-name: cardSlideUpMobile;
     animation-duration: auto;
     animation-timing-function: linear;
     animation-fill-mode: both;
     animation-timeline: --section-timeline;
-    animation-range: entry 70% exit 45%;
+    animation-range: 40% 72%;
+  }
+  @media (min-width: 1200px) {
+    .brokerage-intro-card--animated {
+      animation-name: cardSlideUp;
+      animation-range: contain 0% contain 100%;
+    }
   }
 
   @supports not (animation-timeline: view()) {
@@ -341,7 +355,6 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
     .brokerage-intro-section {
       height: auto;
     }
-
     .brokerage-intro-sticky {
       position: static;
       height: auto;
