@@ -1,36 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import {
-  fetchAllArticles,
-  fetchPostById,
+  fetchLatestArticles,
   calculateReadingTime,
   formatPersianDate,
+  getLevelLabel,
   resolveImageUrl,
-  type ArticleApiDTO,
+  type PostsResponseDto,
 } from "../../services/learning/article.service";
 
-// Icons
 import Book from "@assets/icons/iconsax/outline/book.svg";
 import Calendar from "@assets/icons/iconsax/outline/calendar.svg";
 import Medal from "@assets/icons/iconsax/outline/medal.svg";
 import BreadCrumb from "@components/bread-crumb.astro";
 
 export async function getStaticPaths() {
-  const posts = (await fetchAllArticles()).filter((post) => post.published && post.id);
+  const posts = (await fetchLatestArticles()).filter((post) => post.published && post.id);
 
-  return Promise.all(
-    posts.map(async (post) => {
-      const fullPost = await fetchPostById(post.id);
-      return {
-        params: { slug: post.id },
-        props: { article: fullPost },
-      };
-    }),
-  );
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { article: post },
+  }));
 }
 
 interface Props {
-  article: ArticleApiDTO;
+  article: PostsResponseDto;
 }
 const id = Astro.params.slug;
 const { article } = Astro.props;
@@ -48,34 +42,32 @@ interface TocItem {
 const tocItems: TocItem[] = [];
 let processedContent = article.content || "";
 
-const headingRegex = /<(h[2])([^>]*)>(.*?)<\/\1>/gi;
+const headingRegex = new RegExp("<h2([^>]*)>([\\s\\S]*?)</h2>", "gi");
 let headingCounter = 1;
 
-processedContent = processedContent.replace(headingRegex, (match, tag, attrs, innerText) => {
+processedContent = processedContent.replace(headingRegex, (match, attrs, innerText) => {
   const cleanText = innerText.replace(/<[^>]*>/g, "").trim();
   const idMatch = attrs.match(/id=["']([^"']+)["']/i);
-  const id = idMatch ? idMatch[1] : `topic-${headingCounter++}`;
-  tocItems.push({
-    id,
-    text: cleanText,
-    isSub: tag.toLowerCase() === "h3",
-  });
+  const headingId = idMatch ? idMatch[1] : `topic-${headingCounter++}`;
+  tocItems.push({ id: headingId, text: cleanText, isSub: false });
 
   if (!idMatch) {
-    return `<${tag}${attrs} id="${id}">${innerText}</${tag}>`;
+    return `<h2${attrs} id="${headingId}">${innerText}</h2>`;
   }
   return match;
 });
-const bannerSrc = resolveImageUrl(article?.imageUrl);
-const readingTime = calculateReadingTime(article?.content);
-const publishDate = article.publishDate || formatPersianDate(article.publishedAt || article.createdAt);
+
+const bannerSrc = resolveImageUrl(article.imageUrl);
+const readingTime = calculateReadingTime(article.content);
+const publishDate = formatPersianDate(article.publishedAt || article.createdAt);
+const levelLabel = getLevelLabel(article.level);
 
 const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning" }, { label: article.title }];
 ---
 
 <Layout
   title={article.title}
-  description={(typeof article.description === "string" ? article.description : article.description?.text) ||
+  description={article.description ||
     `${article.title}؛ راهنمایی آموزشی از گروه مالی نهایت‌نگر درباره بازار سرمایه و سرمایه‌گذاری.`}
   image={bannerSrc}
 >
@@ -92,18 +84,18 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
       <img src={bannerSrc} alt={article.title} class="h-full w-full object-cover" loading="eager" />
     </div>
 
-    {/* 4. Two-Column Layout: Sidebar TOC + Main Content */}
+    {/* 3. Two-Column Layout: Sidebar TOC + Main Content */}
     <div class="grid grid-cols-1 items-start gap-8 pt-2 lg:grid-cols-12">
-      {/* Left Article Body */}
+      {/* Article Body */}
       <div class="text-slate-700 text-base order-1 space-y-8 leading-relaxed lg:col-span-9">
-        {/* 3. Metadata Header Bar */}
+        {/* Metadata Header Bar */}
         <div
           class="border-sky-100 text-xs text-sky-800 flex flex-wrap items-center justify-between gap-3 rounded-lg border bg-brand/16 px-4 py-3"
         >
           <div class="flex items-center gap-2">
             <Medal class="w-5 text-brand" />
             <span>
-              سطح: <span class="font-bold">{article.level}</span>
+              سطح: <span class="font-bold">{levelLabel}</span>
             </span>
           </div>
 
@@ -129,8 +121,7 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
         />
       </div>
 
-      {/* Right Sticky Sidebar (Table of Contents) */}
-
+      {/* Sticky Sidebar (Table of Contents) */}
       {
         tocItems.length > 0 && (
           <aside class="order-1 hidden w-full flex-col self-start lg:sticky lg:top-24 lg:col-span-3 lg:flex">
@@ -143,13 +134,11 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
                 {tocItems.map((item, index) => (
                   <div class="flex flex-col space-y-1">
                     <a
-                      id="dynamic-toc"
                       href={`#${item.id}`}
                       class:list={[
-                        "toc-item block border-r-2 leading-snug transition-all duration-200",
+                        "toc-item block border-r-2 p-2 leading-snug transition-all duration-200",
                         index === 0 ? "border-r-brand font-semibold" : "border-transparent text-secondary",
                       ]}
-                      class="toc-item block border-r-2 border-transparent p-2 leading-snug transition-all duration-200"
                     >
                       {item.text}
                     </a>
@@ -188,7 +177,6 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
           history.pushState(null, "", `#${targetId}`);
         }
 
-        // استایل اکتیو کردن
         tocLinks.forEach((el) => {
           el.classList.remove("border-r-brand", "font-semibold");
           el.classList.add("border-transparent");

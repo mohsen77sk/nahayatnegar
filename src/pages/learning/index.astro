@@ -11,9 +11,12 @@ import Medal from "@assets/icons/iconsax/bulk/Medal.svg";
 import Section1Img from "@assets/images/Learning/learning-hero.png";
 import Section1ImgMob from "@assets/images/Learning/learning-hero-mob.png";
 
-import { MOCK_ARTICLES } from "./data/mockArticles";
-
-type ArticleLevel = "beginner" | "intermediate" | "advanced";
+import {
+  ARTICLE_LEVELS,
+  fetchLatestArticles,
+  type ArticleLevel,
+  type PostsResponseDto,
+} from "../../services/learning/article.service";
 
 type Article = {
   id: string;
@@ -25,11 +28,7 @@ type Article = {
   image: { url: string; alt: string };
 };
 
-const levels: { label: string; value: ArticleLevel }[] = [
-  { label: "مقدماتی", value: "beginner" },
-  { label: "متوسط", value: "intermediate" },
-  { label: "پیشرفته", value: "advanced" },
-];
+const levels = ARTICLE_LEVELS;
 
 const WORDS_PER_MINUTE = 120;
 
@@ -42,15 +41,29 @@ const getReadingTime = (html: string) => {
   return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
 };
 
-const articles: Article[] = MOCK_ARTICLES.map((article) => ({
-  id: article.id,
-  title: article.title,
-  description: article.description?.text ?? "",
-  level: levels.find((item) => item.label === article.level)?.value ?? "beginner",
-  readingTime: getReadingTime(article.content),
-  publishedAt: article.publishedAt,
-  image: article.imageUrl,
-}));
+let rawArticles: PostsResponseDto[] = [];
+try {
+  rawArticles = await fetchLatestArticles();
+} catch (error) {
+  console.error("Failed to load articles:", error);
+}
+
+const toLevel = (raw?: string): ArticleLevel => {
+  if (!raw) return "beginner";
+  return levels.find((item) => item.value === raw || raw.includes(item.label))?.value ?? "beginner";
+};
+
+const articles: Article[] = rawArticles
+  .filter((article) => article.published)
+  .map((article) => ({
+    id: article.id,
+    title: article.title,
+    description: article.description ?? "",
+    level: toLevel(article.level),
+    readingTime: getReadingTime(article.content ?? ""),
+    publishedAt: article.publishedAt || article.createdAt,
+    image: { url: article.imageUrl ?? "", alt: article.title },
+  }));
 
 const articlesJson = JSON.stringify(
   articles.map((article) => ({
@@ -138,7 +151,12 @@ const articlesJson = JSON.stringify(
     <!-- Posts List -->
     <section class="neo-page-content px-0" aria-label="Posts">
       <div class="flex flex-wrap gap-4" id="article-list">
-        <div id="article-loader" class="hidden w-full basis-full items-center justify-center py-6" role="status" aria-live="polite">
+        <div
+          id="article-loader"
+          class="hidden w-full basis-full items-center justify-center py-6"
+          role="status"
+          aria-live="polite"
+        >
           <span class="h-8 w-8 animate-spin rounded-full border-4 border-[#E9EBF2] border-t-brand"></span>
           <span class="sr-only">در حال بارگذاری</span>
         </div>
@@ -146,9 +164,9 @@ const articlesJson = JSON.stringify(
       </div>
     </section>
 
-    <script is:inline id="articles-data" type="application/json" set:html={articlesJson}></script>
+    <script is:inline id="articles-data" type="application/json" set:html={articlesJson} />
 
-    <!-- Card template: cloned by the script, 25 at a time -->
+    <!-- Card template: cloned by the script, 6 at a time -->
     <template id="article-card-template">
       <article class="h-66 w-64 overflow-hidden rounded-lg bg-secondary">
         <a data-field="link" href="#" class="block h-full cursor-pointer px-2 pt-2 pb-4">

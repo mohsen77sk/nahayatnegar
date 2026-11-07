@@ -1,34 +1,57 @@
 import { MOCK_ARTICLES_LIST } from "./mockArticle";
 
-export interface ImageObject {
-  url?: string;
-  alt?: string;
-  [key: string]: any;
-}
+export type ArticleLevel = "beginner" | "intermediate" | "advanced";
 
-export interface ArticleApiDTO {
+export const ARTICLE_LEVELS: { label: string; value: ArticleLevel }[] = [
+  { label: "مقدماتی", value: "beginner" },
+  { label: "متوسط", value: "intermediate" },
+  { label: "پیشرفته", value: "advanced" },
+];
+
+export interface PostsResponseDto {
   id: string;
-  slug?: string;
   title: string;
+  slug: string;
   content: string;
-  description?: Record<string, any> | string;
-  imageUrl?: ImageObject | string;
+  description: string;
+  imageUrl: string;
   published: boolean;
-  publishedAt?: Record<string, any> | string | null;
+  publishedAt: string | null;
   createdAt: string;
   updatedAt: string;
-  level?: string;
-  readingTime?: string;
-  publishDate?: string;
+  level: string;
+  headings: any[];
 }
+
+export interface PostsListResponseDto {
+  count: number;
+  page: number;
+  per_page: number;
+  total_page: number;
+  items: PostsResponseDto[];
+}
+
+export type PostsSortOrder = "asc" | "desc";
+
+export interface PostsQueryParams {
+  from?: string;
+  to?: string;
+  search?: string;
+  page?: number;
+  per_page?: number;
+  sort_by?: string;
+  order?: PostsSortOrder;
+}
+
 const API_BASE_URL: string | undefined = import.meta.env.PUBLIC_ADMIN_API_URL;
+const BUILD_POSTS_LIMIT = 100;
 
 function getApiUrl(endpoint: string): string {
   const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
   return `${API_BASE_URL || ""}${cleanEndpoint}`;
 }
 
-export async function fetchPostById(id: string): Promise<ArticleApiDTO> {
+export async function fetchPostById(id: string): Promise<PostsResponseDto> {
   if (!API_BASE_URL) {
     const article = MOCK_ARTICLES_LIST.find((p) => p.id === id);
     if (!article) throw new Error(`Article not found: ${id}`);
@@ -42,22 +65,52 @@ export async function fetchPostById(id: string): Promise<ArticleApiDTO> {
   }
 
   const result = await response.json();
-  return result?.data || result;
+  return result?.data ?? result;
 }
 
-export async function fetchAllArticles(): Promise<ArticleApiDTO[]> {
+export async function fetchAllArticles(params: PostsQueryParams = {}): Promise<PostsListResponseDto> {
   if (!API_BASE_URL) {
-    return MOCK_ARTICLES_LIST;
+    return {
+      count: MOCK_ARTICLES_LIST.length,
+      page: 1,
+      per_page: MOCK_ARTICLES_LIST.length,
+      total_page: 1,
+      items: MOCK_ARTICLES_LIST,
+    };
   }
 
-  const response = await fetch(getApiUrl("/panel/posts"));
+  const query = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined && value !== null && value !== "") {
+      query.set(key, String(value));
+    }
+  }
+  const queryString = query.toString();
+
+  const response = await fetch(getApiUrl(`/panel/posts${queryString ? `?${queryString}` : ""}`));
 
   if (!response.ok) {
     throw new Error(`خطا در دریافت لیست مقالات: ${response.statusText}`);
   }
 
   const result = await response.json();
-  return Array.isArray(result) ? result : result?.data || [];
+  return result?.data ?? result;
+}
+
+export async function fetchLatestArticles(limit: number = BUILD_POSTS_LIMIT): Promise<PostsResponseDto[]> {
+  const result = await fetchAllArticles({
+    page: 1,
+    per_page: limit,
+    sort_by: "createdAt",
+    order: "desc",
+  });
+
+  return result.items ?? [];
+}
+
+export function getLevelLabel(raw?: string): string {
+  if (!raw) return "";
+  return ARTICLE_LEVELS.find((item) => item.value === raw || raw.includes(item.label))?.label ?? raw;
 }
 
 export function calculateReadingTime(htmlContent?: string): string {
@@ -68,12 +121,11 @@ export function calculateReadingTime(htmlContent?: string): string {
   return `${minutes} دقیقه`;
 }
 
-export function formatPersianDate(dateInput: any): string {
+export function formatPersianDate(dateInput?: string | null): string {
   if (!dateInput) return "نامشخص";
   try {
-    const dateStr =
-      typeof dateInput === "string" ? dateInput : dateInput.date || dateInput.value || dateInput.toString();
-    const date = new Date(dateStr);
+    const date = new Date(dateInput);
+    if (Number.isNaN(date.getTime())) return "نامشخص";
     return new Intl.DateTimeFormat("fa-IR", {
       year: "numeric",
       month: "long",
@@ -84,8 +136,6 @@ export function formatPersianDate(dateInput: any): string {
   }
 }
 
-export function resolveImageUrl(image: ImageObject | string | undefined): string {
-  if (!image) return "/placeholder-banner.jpg";
-  if (typeof image === "string") return image;
-  return image.url || image.src || "/placeholder-banner.jpg";
+export function resolveImageUrl(image?: string | null): string {
+  return image || "/placeholder-banner.jpg";
 }
