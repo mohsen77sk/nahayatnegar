@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import {
   fetchAllArticles,
-  fetchPostBySlug,
+  fetchPostById,
   calculateReadingTime,
   formatPersianDate,
   resolveImageUrl,
@@ -16,13 +16,13 @@ import Medal from "@assets/icons/iconsax/outline/medal.svg";
 import BreadCrumb from "@components/bread-crumb.astro";
 
 export async function getStaticPaths() {
-  const posts = (await fetchAllArticles()).filter((post) => post.published && post.slug);
+  const posts = (await fetchAllArticles()).filter((post) => post.published && post.id);
 
   return Promise.all(
     posts.map(async (post) => {
-      const fullPost = await fetchPostBySlug(post.slug);
+      const fullPost = await fetchPostById(post.id);
       return {
-        params: { slug: post.slug },
+        params: { slug: post.id },
         props: { article: fullPost },
       };
     }),
@@ -35,7 +35,7 @@ interface Props {
 const slug = Astro.params.slug;
 const { article } = Astro.props;
 
-if (!slug || slug !== article.slug) {
+if (!slug || slug !== article.id) {
   throw new Error(`Article route "${slug ?? ""}" does not match its generated article.`);
 }
 

@@ -36,17 +36,17 @@ function getApiUrl(endpoint: string): string {
   return `${API_BASE_URL || ""}${cleanEndpoint}`;
 }
 
-export async function fetchPostBySlug(slug: string): Promise<ArticleApiDTO> {
+export async function fetchPostById(id: string): Promise<ArticleApiDTO> {
   if (!API_BASE_URL) {
-    const article = MOCK_ARTICLES_LIST.find((p) => p.slug === slug || p.id === slug);
-    if (!article) throw new Error(`Article not found: ${slug}`);
+    const article = MOCK_ARTICLES_LIST.find((p) => p.id === id);
+    if (!article) throw new Error(`Article not found: ${id}`);
     return article;
   }
 
-  const response = await fetch(getApiUrl(`/posts/${slug}`));
+  const response = await fetch(getApiUrl(`/posts/${id}`));
 
   if (!response.ok) {
-    throw new Error(`خطا در دریافت پست با شناسه ${slug} - وضعیت: ${response.status}`);
+    throw new Error(`خطا در دریافت پست با شناسه ${id} - وضعیت: ${response.status}`);
   }
 
   const result = await response.json();
