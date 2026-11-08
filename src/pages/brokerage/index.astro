@@ -313,14 +313,6 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
   </main>
 </Layout>
 <style>
-  @keyframes cardSlideUpMobile {
-    from {
-      transform: translateY(calc(100% + 24px));
-    }
-    to {
-      transform: translateY(12%);
-    }
-  }
   @keyframes cardSlideUp {
     from {
       transform: translateY(calc(100% + 24px));
@@ -331,23 +323,17 @@ import NeoObjectImg from "../../assets/images/Brokerage/introduce-neo.png";
   }
 
   .brokerage-intro-card--animated {
-    animation-name: cardSlideUpMobile;
+    animation-name: cardSlideUp;
     animation-duration: auto;
     animation-timing-function: linear;
     animation-fill-mode: both;
     animation-timeline: --section-timeline;
-    animation-range: 40% 72%;
+    animation-range: contain 40% contain 100%;
   }
   @media (max-width: 1199px) {
     .brokerage-intro-card--animated {
       animation: none;
       transform: none;
-    }
-  }
-  @media (min-width: 1200px) {
-    .brokerage-intro-card--animated {
-      animation-name: cardSlideUp;
-      animation-range: contain 0% contain 30%;
     }
   }
 
