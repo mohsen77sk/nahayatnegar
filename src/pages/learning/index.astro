@@ -93,12 +93,14 @@ const articlesJson = JSON.stringify(
     </SectionLayer1>
 
     <!-- Tabs and Search -->
-    <section class="neo-page-content flex bg-fg-primary py-8 lg:py-2 px-4 lg:px-0" aria-label="Post filters">
+    <section class="neo-page-content flex bg-fg-primary px-4 py-8 lg:px-0 lg:py-2" aria-label="Post filters">
       <div class="relative mx-auto flex w-full max-w-lg flex-col gap-6">
         <h4 class="text-heading-medium">مقالات آموزشی</h4>
 
-        <div class="flex w-full flex-1 flex-col items-center justify-between gap-4 lg:w-auto lg:flex-row max-lg:grid max-lg:grid-cols-[1fr_auto] max-lg:gap-3">
-          <div id="article-level" class="neo-tabs w-full lg:w-auto max-lg:min-w-0" aria-label="Post categories">
+        <div
+          class="flex w-full flex-1 flex-col items-center justify-between gap-4 max-lg:grid max-lg:grid-cols-[1fr_auto] max-lg:gap-3 lg:w-auto lg:flex-row"
+        >
+          <div id="article-level" class="neo-tabs w-full max-lg:min-w-0 lg:w-auto" aria-label="Post categories">
             {
               levels.map((level) => (
                 <button class="neo-tab-label w-full lg:w-auto" type="button" data-account-tab={level.value}>
@@ -109,7 +111,7 @@ const articlesJson = JSON.stringify(
           </div>
 
           <div class="flex w-full justify-end gap-2 max-lg:contents">
-            <div class="relative flex w-full lg:w-30 max-lg:w-28">
+            <div class="relative flex w-full max-lg:w-28 lg:w-30">
               <select
                 id="article-sort"
                 class="text-2xl h-8.75 w-full appearance-none rounded-lg border border-(--border-color-secondary) pr-2 pl-2 text-right text-secondary outline-none focus:border-brand"
@@ -121,7 +123,7 @@ const articlesJson = JSON.stringify(
               <ArrowDown class="pointer-events-none absolute top-2.5 left-3 h-4 w-4" />
             </div>
 
-            <div class="relative flex w-full lg:w-55 max-lg:col-span-2">
+            <div class="relative flex w-full max-lg:col-span-2 lg:w-55">
               <input
                 id="article-search"
                 class="flex-1 pl-10"
@@ -169,21 +171,20 @@ const articlesJson = JSON.stringify(
 
     <!-- Card template: cloned by the script, 6 at a time -->
     <template id="article-card-template">
-      <article class="h-full w-full overflow-hidden rounded-lg bg-secondary lg:h-66 lg:w-64">
+      <article
+        class="h-full w-full overflow-hidden rounded-lg bg-secondary transition-all duration-500 hover:bg-disabled lg:h-66 lg:w-64"
+      >
         <a data-field="link" href="#" class="block h-full cursor-pointer p-2 pb-4">
           <header class="overflow-hidden rounded-xl bg-[#E9EBF2]">
             <img
               data-field="image"
               src=""
               alt=""
-              class="aspect-[16/11] w-full rounded-xl object-cover opacity-0 transition-opacity duration-500 lg:aspect-auto lg:h-[141px]"
+              class="aspect-16/11 w-full rounded-xl object-cover opacity-0 transition-opacity duration-500 lg:aspect-auto lg:h-35.25"
               loading="lazy"
               decoding="async"
             />
-            <div
-              data-field="placeholder"
-              class="aspect-[16/11] w-full rounded-xl bg-[#E9EBF2] lg:aspect-auto lg:h-[141px]"
-            >
+            <div data-field="placeholder" class="aspect-16/11 w-full rounded-xl bg-[#E9EBF2] lg:aspect-auto lg:h-35.25">
             </div>
           </header>
 
@@ -211,6 +212,8 @@ const articlesJson = JSON.stringify(
 </Layout>
 
 <script>
+  import { siteUrl } from "@utils/url";
+
   type ArticleCard = {
     id: string;
     title: string;
@@ -259,7 +262,7 @@ const articlesJson = JSON.stringify(
     const fragment = template!.content.cloneNode(true) as DocumentFragment;
 
     const link = fragment.querySelector<HTMLAnchorElement>('[data-field="link"]');
-    if (link) link.href = `/learning/${encodeURIComponent(article.id)}`;
+    if (link) link.href = siteUrl(`/learning/${encodeURIComponent(article.id)}`);
 
     const image = fragment.querySelector<HTMLImageElement>('[data-field="image"]');
     const placeholder = fragment.querySelector<HTMLElement>('[data-field="placeholder"]');
