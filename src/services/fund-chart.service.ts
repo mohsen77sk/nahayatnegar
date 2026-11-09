@@ -58,7 +58,7 @@ export async function fetchFundChart(
   fund: string,
   timeframe: FundTimeframe,
   signal?: AbortSignal,
-  apiBaseUrl: string = import.meta.env?.PUBLIC_API_URL || "https://landing-api.nahayatnegar.com",
+  apiBaseUrl: string = import.meta.env?.PUBLIC_API_URL,
 ): Promise<FundChartResponse> {
   const baseUrl = apiBaseUrl.replace(/\/+$/, "");
   if (!baseUrl || !fund.trim()) throw new Error("Fund chart API URL and fund are required.");

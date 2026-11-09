@@ -7,7 +7,7 @@ export interface ContactMessage {
 }
 
 export async function sendContactMessage(message: ContactMessage): Promise<void> {
-  const baseUrl = (import.meta.env?.PUBLIC_API_URL || "https://landing-api.nahayatnegar.com").replace(/\/+$/, "");
+  const baseUrl = (import.meta.env?.PUBLIC_API_URL).replace(/\/+$/, "");
   const response = await fetch(`${baseUrl}/contact-us`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },

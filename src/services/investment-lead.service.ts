@@ -7,7 +7,7 @@ export interface InvestmentLead {
 }
 
 export async function sendInvestmentLead(lead: InvestmentLead): Promise<void> {
-  const baseUrl = (import.meta.env?.PUBLIC_API_URL || "https://landing-api.nahayatnegar.com").replace(/\/+$/, "");
+  const baseUrl = (import.meta.env?.PUBLIC_API_URL).replace(/\/+$/, "");
   const response = await fetch(`${baseUrl}/investmentLead`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },

@@ -1,6 +1,13 @@
 // @ts-check
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
+
+const envFile = resolve(process.cwd(), ".env");
+if (existsSync(envFile)) {
+  process.loadEnvFile(envFile);
+}
 
 // https://astro.build/config
 export default defineConfig({
