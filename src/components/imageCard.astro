@@ -12,7 +12,7 @@ const { image, alt } = Astro.props;
 ---
 
 <div class="relative rounded-xl bg-fg-primary p-2 shadow-primary" data-image-card>
-  <Image src={image} alt={alt ?? ""} class="h-auto w-full rounded-xl" loading="lazy" />
+  <Image src={image} format="webp" alt={alt ?? ""} class="h-auto w-full rounded-xl" loading="lazy" />
   <button
     class="neo-button neo-icon-button neo-button-light-neutral absolute right-4 bottom-4"
     type="button"
@@ -32,7 +32,7 @@ const { image, alt } = Astro.props;
         <path d="m6 6 12 12M18 6 6 18"></path>
       </svg>
     </button>
-    <Image src={image} alt={alt ?? ""} class="image-preview__image" />
+    <Image src={image} format="webp" alt={alt ?? ""} class="image-preview__image" />
   </dialog>
 </div>
 

@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 
 import SectionLayer1 from "@components/@layout/section-layer-1.astro";
@@ -118,7 +119,7 @@ import Section2Img from "@assets/images/Nahayatnegar/About Us/about-us-pic1.png"
       </div>
       <!-- left -->
       <div class="flex flex-1 items-center" slot="left">
-        <img src={Section3ImgObj.src} alt="" aria-hidden="true" />
+        <Image src={Section3ImgObj} format="webp" alt="" aria-hidden="true" />
       </div>
     </SectionLayer1>
   </main>
