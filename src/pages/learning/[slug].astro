@@ -35,30 +35,15 @@ if (!id || id !== article.id) {
 
 interface TocItem {
   id: string;
-  text: string;
-  isSub: boolean;
+  title: string;
+  order: number;
 }
 
-const tocItems: TocItem[] = [];
-let processedContent = article.content || "";
-
-const headingRegex = new RegExp("<h2([^>]*)>([\\s\\S]*?)</h2>", "gi");
-let headingCounter = 1;
-
-processedContent = processedContent.replace(headingRegex, (match, attrs, innerText) => {
-  const cleanText = innerText.replace(/<[^>]*>/g, "").trim();
-  const idMatch = attrs.match(/id=["']([^"']+)["']/i);
-  const headingId = idMatch ? idMatch[1] : `topic-${headingCounter++}`;
-  tocItems.push({ id: headingId, text: cleanText, isSub: false });
-
-  if (!idMatch) {
-    return `<h2${attrs} id="${headingId}">${innerText}</h2>`;
-  }
-  return match;
-});
+const tocItems: TocItem[] = [...(article.headings || [])].sort((a, b) => a.order - b.order);
+const processedContent = (article.content || "").replace(/&nbsp;|&#160;|&#xA0;|\u00a0/gi, " ");
 
 const bannerSrc = resolveImageUrl(article.imageUrl);
-const readingTime = calculateReadingTime(article.content);
+const readingTime = calculateReadingTime(article.content).toLocaleString("fa-IR");
 const publishDate = formatPersianDate(article.publishedAt || article.createdAt);
 const levelLabel = getLevelLabel(article.level);
 
@@ -102,7 +87,7 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
           <div class="flex items-center gap-2">
             <Book class="w-5 text-brand" />
             <span>
-              زمان مطالعه: <span class="font-bold">{readingTime}</span>
+              زمان مطالعه: <span class="font-bold">{readingTime} دقیقه</span>
             </span>
           </div>
 
@@ -116,7 +101,7 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
 
         <article
           id="article-content"
-          class="prose prose-slate max-w-none p-6 leading-8 lg:col-span-8 [&_a]:text-brand [&_a]:no-underline [&_h2]:scroll-mt-10 [&_h2]:text-heading-small [&_h2]:leading-9 [&_h2]:font-bold"
+          class="prose prose-slate max-w-none p-6 text-justify leading-8 wrap-break-word lg:col-span-8 [&_a]:text-brand [&_a]:no-underline [&_h2]:scroll-mt-10 [&_h2]:text-heading-small [&_h2]:leading-9 [&_h2]:font-bold"
           set:html={processedContent}
         />
       </div>
@@ -124,7 +109,7 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
       {/* Sticky Sidebar (Table of Contents) */}
       {
         tocItems.length > 0 && (
-          <aside class="order-1 hidden w-full flex-col self-start lg:sticky lg:top-24 lg:col-span-3 lg:flex">
+          <aside class="order-1 hidden w-full flex-col self-start wrap-break-word lg:sticky lg:top-24 lg:col-span-3 lg:flex">
             <nav class="shadow-sm text-xs flex flex-col gap-3" aria-label="فهرست مطالب">
               <div class="flex items-center justify-center rounded-lg bg-neutral-300 p-3">
                 <h2 class="font-bold">فهرست مطالب</h2>
@@ -139,9 +124,8 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
                         "toc-item block border-r-2 p-2 leading-snug transition-all duration-200",
                         index === 0 ? "border-r-brand font-semibold" : "border-transparent text-secondary",
                       ]}
-                    >
-                      {item.text}
-                    </a>
+                      set:html={item.title}
+                    />
                   </div>
                 ))}
               </div>
@@ -153,38 +137,89 @@ const breadCrumbItems = [{ label: "مقالات آموزشی", href: "/learning"
   </main>
 </Layout>
 <script>
-  function initDynamicTOC() {
-    const article = document.getElementById("article-content");
-    const tocLinks = document.querySelectorAll(".toc-item");
+  let tocEventController: AbortController | undefined;
+  let tocScrollFrame = 0;
 
-    const headings = article?.querySelectorAll<HTMLHeadingElement>("h2");
-    if (headings?.length === 0) return;
+  function initDynamicTOC() {
+    tocEventController?.abort();
+    cancelAnimationFrame(tocScrollFrame);
+
+    const article = document.getElementById("article-content");
+    const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>(".toc-item"));
+    if (!article || tocLinks.length === 0) return;
+
+    const headings = Array.from(article.querySelectorAll<HTMLHeadingElement>("h2"));
+    if (headings.length === 0) return;
 
     headings?.forEach((heading, index) => {
       if (!heading.id) {
-        heading.id = `topic-${index}`;
+        heading.id = tocLinks[index]?.getAttribute("href")?.slice(1) || `topic-${index}`;
       }
     });
 
-    tocLinks.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute("href")?.substring(1);
-        const targetHeading = document.getElementById(targetId || "");
-
-        if (targetHeading) {
-          targetHeading.scrollIntoView({ behavior: "smooth", block: "start" });
-          history.pushState(null, "", `#${targetId}`);
-        }
-
-        tocLinks.forEach((el) => {
-          el.classList.remove("border-r-brand", "font-semibold");
-          el.classList.add("border-transparent");
-        });
-        link.classList.remove("border-transparent");
-        link.classList.add("border-r-brand", "font-semibold");
+    const controller = new AbortController();
+    tocEventController = controller;
+    const setActiveLink = (activeLink: HTMLAnchorElement) => {
+      tocLinks.forEach((link) => {
+        const isActive = link === activeLink;
+        link.classList.toggle("border-r-brand", isActive);
+        link.classList.toggle("font-semibold", isActive);
+        link.classList.toggle("border-transparent", !isActive);
+        link.classList.toggle("text-secondary", !isActive);
       });
+    };
+
+    tocLinks.forEach((link) => {
+      link.addEventListener(
+        "click",
+        (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute("href")?.substring(1);
+          const targetHeading = document.getElementById(targetId || "");
+
+          if (targetHeading) {
+            targetHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+            history.pushState(null, "", `#${targetId}`);
+          }
+
+          setActiveLink(link);
+        },
+        { signal: controller.signal },
+      );
     });
+
+    const updateActiveLink = () => {
+      const activationLine = 120;
+      let activeIndex = 0;
+
+      headings.forEach((heading, index) => {
+        if (heading.getBoundingClientRect().top <= activationLine) {
+          activeIndex = index;
+        }
+      });
+
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        activeIndex = headings.length - 1;
+      }
+
+      const activeId = headings[activeIndex]?.id;
+      const activeLink = tocLinks.find((link) => link.getAttribute("href") === `#${activeId}`);
+      if (activeLink) setActiveLink(activeLink);
+    };
+
+    const scheduleActiveLinkUpdate = () => {
+      cancelAnimationFrame(tocScrollFrame);
+      tocScrollFrame = requestAnimationFrame(updateActiveLink);
+    };
+
+    window.addEventListener("scroll", scheduleActiveLinkUpdate, {
+      passive: true,
+      signal: controller.signal,
+    });
+    window.addEventListener("resize", scheduleActiveLinkUpdate, {
+      signal: controller.signal,
+    });
+    updateActiveLink();
   }
 
   document.addEventListener("DOMContentLoaded", initDynamicTOC);

@@ -58,7 +58,7 @@ export async function fetchPostById(id: string): Promise<PostsResponseDto> {
     return article;
   }
 
-  const response = await fetch(getApiUrl(`/panel/posts/${id}`));
+  const response = await fetch(getApiUrl(`/posts/${id}`));
 
   if (!response.ok) {
     throw new Error(`خطا در دریافت پست با شناسه ${id} - وضعیت: ${response.status}`);
@@ -87,7 +87,7 @@ export async function fetchAllArticles(params: PostsQueryParams = {}): Promise<P
   }
   const queryString = query.toString();
 
-  const response = await fetch(getApiUrl(`/panel/posts${queryString ? `?${queryString}` : ""}`));
+  const response = await fetch(getApiUrl(`/posts${queryString ? `?${queryString}` : ""}`));
 
   if (!response.ok) {
     throw new Error(`خطا در دریافت لیست مقالات: ${response.statusText}`);
@@ -113,12 +113,45 @@ export function getLevelLabel(raw?: string): string {
   return ARTICLE_LEVELS.find((item) => item.value === raw || raw.includes(item.label))?.label ?? raw;
 }
 
-export function calculateReadingTime(htmlContent?: string): string {
-  if (!htmlContent) return "۳ دقیقه";
-  const cleanText = htmlContent.replace(/<[^>]*>/g, " ");
-  const wordsCount = cleanText.trim().split(/\s+/).length;
-  const minutes = Math.max(1, Math.ceil(wordsCount / 200));
-  return `${minutes} دقیقه`;
+const WORDS_PER_MINUTE = 200;
+const NAMED_HTML_ENTITIES: Record<string, string> = {
+  amp: "&",
+  apos: "'",
+  gt: ">",
+  lt: "<",
+  nbsp: " ",
+  quot: '"',
+  zwnj: "\u200c",
+  zwj: "\u200d",
+};
+
+function decodeHtmlEntity(entity: string): string {
+  const value = entity.slice(1, -1);
+  if (value.startsWith("#")) {
+    const isHex = value[1]?.toLowerCase() === "x";
+    const codePoint = Number.parseInt(value.slice(isHex ? 2 : 1), isHex ? 16 : 10);
+    if (
+      !Number.isInteger(codePoint) ||
+      codePoint < 0 ||
+      codePoint > 0x10ffff ||
+      (codePoint >= 0xd800 && codePoint <= 0xdfff)
+    ) {
+      return " ";
+    }
+    return String.fromCodePoint(codePoint);
+  }
+  return NAMED_HTML_ENTITIES[value.toLowerCase()] ?? " ";
+}
+
+export function calculateReadingTime(htmlContent?: string | null): number {
+  const visibleText = (htmlContent ?? "")
+    .replace(/<!--[\s\S]*?-->/g, " ")
+    .replace(/<(script|style|template|noscript)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&(?:#(?:x[\da-f]+|\d+)|[a-z][\da-z]+);/gi, decodeHtmlEntity)
+    .replace(/[\u00a0\u200b\ufeff]/g, " ");
+  const wordsCount = visibleText.match(/[\p{L}\p{N}]+(?:[\u200c\u200d'’\-][\p{L}\p{N}]+)*/gu)?.length ?? 0;
+  return Math.max(1, Math.ceil(wordsCount / WORDS_PER_MINUTE));
 }
 
 export function formatPersianDate(dateInput?: string | null): string {

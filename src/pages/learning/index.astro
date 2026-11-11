@@ -13,6 +13,7 @@ import Section1ImgMob from "@assets/images/Learning/learning-hero-mob.png";
 
 import {
   ARTICLE_LEVELS,
+  calculateReadingTime,
   fetchLatestArticles,
   type ArticleLevel,
   type PostsResponseDto,
@@ -29,17 +30,6 @@ type Article = {
 };
 
 const levels = ARTICLE_LEVELS;
-
-const WORDS_PER_MINUTE = 120;
-
-const getReadingTime = (html: string) => {
-  const words = html
-    .replace(/<[^>]*>/g, " ")
-    .split(/\s+/)
-    .filter(Boolean).length;
-
-  return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
-};
 
 let rawArticles: PostsResponseDto[] = [];
 try {
@@ -60,7 +50,7 @@ const articles: Article[] = rawArticles
     title: article.title,
     description: article.description ?? "",
     level: toLevel(article.level),
-    readingTime: getReadingTime(article.content ?? ""),
+    readingTime: calculateReadingTime(article.content),
     publishedAt: article.publishedAt || article.createdAt,
     image: { url: article.imageUrl ?? "", alt: article.title },
   }));

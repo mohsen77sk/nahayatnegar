@@ -36,6 +36,10 @@ export async function fetchPageHeader(
   }
 
   const result = await response.json();
+  if (!result || typeof result !== "object") {
+    return null;
+  }
+
   const header: PageHeader = result?.data ?? result;
   if (!header || typeof header.isActive !== "boolean") {
     throw new Error(`Invalid page header response for "${pageKey}".`);
