@@ -12,7 +12,7 @@ export interface PageHeader {
   text: string;
   description: string;
   ctas: { label: string; link: string; variant: "primary" | "secondary" }[];
-  slides: {
+  slides?: {
     mediaType: "image" | "video";
     desktop?: PageHeaderMedia | null;
     mobile?: PageHeaderMedia | null;
@@ -52,7 +52,7 @@ export async function fetchPageHeader(
     typeof header.text !== "string" ||
     typeof header.description !== "string" ||
     !Array.isArray(header.ctas) ||
-    !Array.isArray(header.slides) ||
+    (header.slides !== undefined && !Array.isArray(header.slides)) ||
     !header.ctas.every(
       (cta) =>
         cta &&
@@ -60,7 +60,7 @@ export async function fetchPageHeader(
         typeof cta.link === "string" &&
         ["primary", "secondary"].includes(cta.variant),
     ) ||
-    !header.slides.every(
+    !(header.slides ?? []).every(
       (slide) =>
         slide &&
         ["image", "video"].includes(slide.mediaType) &&
@@ -72,7 +72,7 @@ export async function fetchPageHeader(
   }
 
   // Upload paths belong to the API origin, not the frontend deployment base.
-  for (const slide of header.slides) {
+  for (const slide of header.slides ?? []) {
     for (const media of [slide.desktop, slide.mobile]) {
       if (media) media.url = new URL(media.url, `${baseUrl}/`).href;
     }
