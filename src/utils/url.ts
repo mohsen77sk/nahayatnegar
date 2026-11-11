@@ -27,7 +27,7 @@ function withBaseUrl(path: string, base: string): string {
 }
 
 export function siteUrl(path = ""): string {
-  return withBaseUrl(path, import.meta.env.BASE_URL || "");
+  return withBaseUrl(path, import.meta.env.PUBLIC_BASE_URL || "");
 }
 
 export function assetUrl(path = ""): string {
