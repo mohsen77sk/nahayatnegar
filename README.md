@@ -38,7 +38,9 @@ The Astro development server runs at `http://localhost:4321` by default.
 
 The GitHub Actions workflow in `.github/workflows/astro.yml` runs on pushes to the `master` branch. It installs dependencies with `npm ci`, builds the site, and publishes the contents of `dist/` to the `production` branch.
 
-To build the site under a different base path, set `PUBLIC_BASE_URL`. The default value is `/`.
+Set `PUBLIC_BASE_URL` to the base path for page URLs (for example, `/nahayatnegar`). The default value is `/`.
+Set `PUBLIC_BASE_ASSETS_URL` to the base URL for assets, including Astro-generated files and files in `public/`.
+It can be a separate CDN URL (for example, `https://cdn.example.com`) or a path; when omitted, it falls back to `PUBLIC_BASE_URL`.
 
 Set `PUBLIC_SITE_URL` to the deployed site's canonical HTTPS origin (without a path) during production builds. It is used to emit absolute canonical and social URLs.
 

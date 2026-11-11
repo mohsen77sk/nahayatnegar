@@ -1,4 +1,6 @@
 ---
+import { assetUrl } from "@utils/url";
+
 interface Props {
   src?: string;
   hdrSrc?: string;
@@ -8,7 +10,7 @@ interface Props {
 }
 
 const {
-  src = "/assets/models/diamond.glb",
+  src = assetUrl("assets/models/diamond.glb"),
   hdrSrc = "neutral",
   speed = "35deg",
   size = "320px",

@@ -35,6 +35,7 @@ jobs:
         run: npm run build
         env:
           PUBLIC_BASE_URL: /nahayatnegar
+          PUBLIC_BASE_ASSETS_URL: /nahayatnegar
           PUBLIC_SITE_URL: https://nahayatnegar.com
           PUBLIC_API_URL: https://landing-api.nahayatnegar.com
           # PUBLIC_ADMIN_API_URL: https://panel.nnbrokerage.ir

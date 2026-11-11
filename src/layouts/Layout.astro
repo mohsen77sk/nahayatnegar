@@ -4,7 +4,7 @@ import Header from "@components/@base/header.astro";
 import Footer from "@components/@base/footer.astro";
 import ConsultationModal from "@components/consultation-modal.astro";
 import Toast from "@components/toast.astro";
-import { siteUrl } from "@utils/url";
+import { assetUrl, siteUrl } from "@utils/url";
 
 const {
   title,
@@ -18,9 +18,9 @@ const pageDescription = (typeof description === "string" ? description : "")
   .trim()
   .slice(0, 160);
 const canonicalUrl = import.meta.env.PUBLIC_SITE_URL
-  ? new URL(siteUrl(Astro.url.pathname), import.meta.env.PUBLIC_SITE_URL).toString()
+  ? new URL(Astro.url.pathname, import.meta.env.PUBLIC_SITE_URL).toString()
   : undefined;
-const socialImageUrl = image && canonicalUrl ? new URL(siteUrl(image), canonicalUrl).toString() : undefined;
+const socialImageUrl = image && canonicalUrl ? new URL(assetUrl(image), canonicalUrl).toString() : undefined;
 ---
 
 <!doctype html>
@@ -50,11 +50,11 @@ const socialImageUrl = image && canonicalUrl ? new URL(siteUrl(image), canonical
     {socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href={siteUrl("assets/favicon.svg")} />
-    <link rel="icon" href={siteUrl("assets/favicon.ico")} />
+    <link rel="icon" type="image/svg+xml" href={assetUrl("assets/favicon.svg")} />
+    <link rel="icon" href={assetUrl("assets/favicon.ico")} />
 
     <!-- Styles -->
-    <link rel="stylesheet" href={siteUrl("assets/fonts/fontiran.css")} />
+    <link rel="stylesheet" href={assetUrl("assets/fonts/fontiran.css")} />
   </head>
   <body lang="fa" dir="rtl">
     <Header />

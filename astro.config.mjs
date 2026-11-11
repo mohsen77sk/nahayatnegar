@@ -13,6 +13,9 @@ if (existsSync(envFile)) {
 export default defineConfig({
   site: process.env.PUBLIC_SITE_URL,
   base: process.env.PUBLIC_BASE_URL || "/",
+  build: {
+    assetsPrefix: process.env.PUBLIC_BASE_ASSETS_URL || process.env.PUBLIC_BASE_URL || "/",
+  },
   output: 'static',
   vite: {
     plugins: [tailwindcss()],

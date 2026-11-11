@@ -1,6 +1,6 @@
 ---
 import type { PageHeader } from "../../services/page-header.service";
-import { siteUrl } from "@utils/url";
+import { assetUrl, siteUrl } from "@utils/url";
 
 interface Props {
   header: PageHeader;
@@ -25,8 +25,8 @@ const ctaHref = (link: string) => {
     <page-header-hero
       data-theme={header.theme}
       data-layout={header.layout}
-      data-hexagon-asset-base-url={siteUrl("assets/animated-hexagon-background/")}
-      data-hexagon-fallback-url={siteUrl("assets/animated-hexagon-background/hexagons-desktop.mp4")}
+      data-hexagon-asset-base-url={assetUrl("assets/animated-hexagon-background/")}
+      data-hexagon-fallback-url={assetUrl("assets/animated-hexagon-background/hexagons-desktop.mp4")}
     >
       <section class="hero relative isolate flex min-h-225 overflow-hidden px-4 py-8 lg:py-16" aria-label={header.text}>
         <div class="absolute inset-0" aria-hidden="true">
