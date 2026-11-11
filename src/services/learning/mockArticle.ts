@@ -19,8 +19,8 @@ interface MockSeed {
 const buildContent = (seed: MockSeed): string => {
   const sections = seed.sections
     .map(
-      (section) => `
-    <h2>${section.heading}</h2>
+      (section, index) => `
+    <h2 id="topic-${index}">${section.heading}</h2>
     <p>${section.body}</p>
     <p>
       برای تسلط بر این بخش، توصیه می‌شود مفاهیم را ابتدا با مثال‌های ساده تمرین کنید و سپس آن‌ها را روی داده‌های واقعی بازار بررسی کنید. تکرار و ثبت نتایج در یک دفتر معاملاتی، یادگیری را سریع‌تر می‌کند.
@@ -265,7 +265,11 @@ export const MOCK_ARTICLES_LIST: PostsResponseDto[] = MOCK_SEEDS.map((seed) => (
   createdAt: seed.createdAt,
   updatedAt: seed.createdAt,
   level: seed.level,
-  headings: [],
+  headings: seed.sections.map((section, index) => ({
+    id: `topic-${index}`,
+    title: section.heading,
+    order: index,
+  })),
 }));
 
 export const MOCK_ARTICLE: PostsResponseDto = MOCK_ARTICLES_LIST[0];

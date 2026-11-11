@@ -8,6 +8,12 @@ export const ARTICLE_LEVELS: { label: string; value: ArticleLevel }[] = [
   { label: "پیشرفته", value: "advanced" },
 ];
 
+export interface ArticleHeadingDto {
+  id: string;
+  title: string;
+  order: number;
+}
+
 export interface PostsResponseDto {
   id: string;
   title: string;
@@ -20,7 +26,7 @@ export interface PostsResponseDto {
   createdAt: string;
   updatedAt: string;
   level: string;
-  headings: any[];
+  headings: ArticleHeadingDto[];
 }
 
 export interface PostsListResponseDto {
