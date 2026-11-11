@@ -18,13 +18,13 @@ The Astro development server runs at `http://localhost:4321` by default.
 
 ## Commands
 
-| Command                | Description                                                   |
-| ---------------------- | ------------------------------------------------------------- |
-| `npm run dev`          | Start the development server                                  |
-| `npm run build`        | Build the static site into `dist/`                            |
-| `npm run preview`      | Preview the built site locally                                |
-| `npm run format`       | Format Astro, CSS, JavaScript, and TypeScript files in `src/` |
-| `npm run format:check` | Check formatting of source files                              |
+| Command                | Description                                                           |
+| ---------------------- | --------------------------------------------------------------------- |
+| `npm run dev`          | Start the development server                                          |
+| `npm run build`        | Build the static site into `dist/` and rename HTML files to PHTML     |
+| `npm run preview`      | Preview the built site locally                                        |
+| `npm run format`       | Format Astro, CSS, JavaScript, and TypeScript files in `src/`          |
+| `npm run format:check` | Check formatting of source files                                      |
 
 ## Project Structure
 
