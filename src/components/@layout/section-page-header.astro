@@ -132,20 +132,38 @@ const ctaHref = (link: string) => {
 
       const backgroundElement = this.querySelector<HTMLElement>("[data-hexagon-background]");
       if (backgroundElement) {
-        void import("../../scripts/animated-hexagon-background.js")
-          .then(({ createHexagonBackground }) => {
-            if (signal.aborted || !this.isConnected) return;
-            const hero = backgroundElement.closest<HTMLElement>(".hero");
-            if (!hero) throw new Error("Could not find the hero section for the animated background.");
-            this.hexagonBackground = createHexagonBackground(hero, {
-              assetBaseUrl: this.dataset.hexagonAssetBaseUrl,
-              fallback: this.dataset.hexagonFallbackUrl,
-              zIndex: -1,
+        const initializeBackground = () => {
+          if (signal.aborted || !this.isConnected) return;
+          void import("../../scripts/animated-hexagon-background.js")
+            .then(({ createHexagonBackground }) => {
+              if (signal.aborted || !this.isConnected) return;
+              const hero = backgroundElement.closest<HTMLElement>(".hero");
+              if (!hero) throw new Error("Could not find the hero section for the animated background.");
+              this.hexagonBackground = createHexagonBackground(hero, {
+                assetBaseUrl: this.dataset.hexagonAssetBaseUrl,
+                fallback: this.dataset.hexagonFallbackUrl,
+                zIndex: -1,
+              });
+            })
+            .catch((error) => {
+              if (!signal.aborted) console.error("Could not load the animated hexagon background:", error);
             });
-          })
-          .catch((error) => {
-            if (!signal.aborted) console.error("Could not load the animated hexagon background:", error);
-          });
+        };
+        const scheduleBackground = () => {
+          const idleWindow = window as Window & {
+            requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+          };
+          if (idleWindow.requestIdleCallback) {
+            idleWindow.requestIdleCallback(initializeBackground, { timeout: 2000 });
+          } else {
+            window.setTimeout(initializeBackground, 0);
+          }
+        };
+        if (document.readyState === "complete") {
+          scheduleBackground();
+        } else {
+          window.addEventListener("load", scheduleBackground, { once: true, signal });
+        }
       }
 
       const showSlide = (index: number) => {
