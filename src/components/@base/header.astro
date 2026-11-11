@@ -388,7 +388,7 @@ const mobileMenu = [
   });
 
   function resetHeaderStyles() {
-    headerInner.classList.remove("bg-[#102550]/75", "shadow-lg", "lg:py-2", "lg:px-4", "lg:w-md");
+    headerInner.classList.remove("bg-[#102550]/75", "backdrop-blur-md", "shadow-xl", "lg:px-4", "lg:w-md");
     headerInner.classList.add("lg:py-4", "lg:px-6", "w-full");
     hIcon.classList.remove("!text-brand");
     hIconLogo.forEach((path) => path.classList.remove("hidden"));
@@ -401,14 +401,23 @@ const mobileMenu = [
     hIconLogo.forEach((path) => path.classList.add("hidden"));
   }
 
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      applyScrolledStyles();
-    } else {
-      resetHeaderStyles();
-    }
+  let isScrolled;
+  let scrollFrame = 0;
+  const updateHeader = () => {
+    scrollFrame = 0;
+    const nextIsScrolled = window.scrollY > 50;
+    if (nextIsScrolled === isScrolled) return;
+
+    isScrolled = nextIsScrolled;
+    if (isScrolled) applyScrolledStyles();
+    else resetHeaderStyles();
   };
 
-  window.addEventListener("scroll", handleScroll);
-  handleScroll();
+  const handleScroll = () => {
+    if (scrollFrame) return;
+    scrollFrame = window.requestAnimationFrame(updateHeader);
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  updateHeader();
 </script>
