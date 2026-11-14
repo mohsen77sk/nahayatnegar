@@ -27,7 +27,7 @@ import Section1Img from "@assets/images/Asset Management/2-Pirooz/pirooz-hero.pn
 import SectionBanner1Img from "@assets/images/Asset Management/2-Pirooz/pirooz-pic1.png";
 import SectionBanner2Img from "@assets/images/Asset Management/2-Pirooz/pirooz-pic2.png";
 
-import { siteUrl } from "@utils/url";
+import { siteUrl, URLS } from "@utils/url";
 
 const BreadCrumbItem = [
   {
@@ -165,11 +165,11 @@ const faqs = [
           منعطف برای سرمایه‌گذاری در بازار سهام است.
         </p>
         <div class="flex gap-4">
-          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={URLS.neoTraderAppAddress}>
             خرید صندوق
             <ArrowLeft aria-hidden="true" />
           </a>
-          <a class="neo-button neo-button-outline-primary neo-button-large" href={siteUrl("/")}>
+          <a class="neo-button neo-button-outline-primary neo-button-large" href={URLS.registerAddress}>
             دریافت کد بورسی
             <ArrowLeft aria-hidden="true" />
           </a>
@@ -278,7 +278,7 @@ const faqs = [
             فروش واحدهای صندوق را همانند سهام در اختیار داشته باشید.
           </p>
         </div>
-        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+        <a href={URLS.neoTraderAppAddress} class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
           خرید صندوق
           <ArrowLeft aria-hidden="true" />
         </a>

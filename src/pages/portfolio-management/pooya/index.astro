@@ -26,7 +26,7 @@ import Section1Img from "@assets/images/Asset Management/3-Pooya/pooya-hero.png"
 import SectionBanner1Img from "@assets/images/Asset Management/3-Pooya/pooya-pic1.png";
 import SectionBanner2Img from "@assets/images/Asset Management/3-Pooya/pooya-pic2.png";
 
-import { siteUrl } from "@utils/url";
+import { siteUrl, URLS } from "@utils/url";
 
 const BreadCrumbItem = [
   {
@@ -163,11 +163,11 @@ const faqs = [
           بلندمدت سرمایه و بهره‌مندی از فرصت‌های بازار سرمایه است.
         </p>
         <div class="flex gap-4">
-          <a class="neo-button neo-button-fill-primary neo-button-large" href={siteUrl("/")}>
+          <a class="neo-button neo-button-fill-primary neo-button-large" href={URLS.pooyaFund}>
             خرید صندوق
             <ArrowLeft aria-hidden="true" />
           </a>
-          <a class="neo-button neo-button-outline-primary neo-button-large" href={siteUrl("/")}>
+          <a class="neo-button neo-button-outline-primary neo-button-large" href={URLS.registerAddress}>
             دریافت کد بورسی
             <ArrowLeft aria-hidden="true" />
           </a>
@@ -277,7 +277,7 @@ const faqs = [
             فراهم می‌کند تا بدون نیاز به مدیریت مستقیم پرتفوی، در مسیر رشد بلندمدت سرمایه حرکت کنید.
           </p>
         </div>
-        <a href="" class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
+        <a href={URLS.pooyaFund} class="neo-button neo-button-fill-primary neo-button-large min-w-25 lg:w-40">
           خرید صندوق
           <ArrowLeft aria-hidden="true" />
         </a>

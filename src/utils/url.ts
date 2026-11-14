@@ -4,6 +4,7 @@ export const URLS = {
   proTraderAppAddress: "https://neotrader.nahayatnegar.com/",
   registerAddress: "https://reg.nahayatnegar.com/",
   sejamAddress: "https://www.sejam.ir/",
+  pooyaFund: "https://iran-funds.com",
 };
 
 export const CommunicationURLS = {
