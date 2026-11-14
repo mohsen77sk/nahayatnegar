@@ -10,7 +10,7 @@ const { header } = Astro.props;
 const slides = header.slides ?? [];
 const ctaClasses = {
   primary: "neo-button-fill-primary",
-  secondary: "neo-button-outline-primary",
+  secondary: "neo-button-fill-neutral",
 };
 const ctaHref = (link: string) => {
   if (/^(https?:\/\/|mailto:|tel:)/i.test(link)) return link;
@@ -68,7 +68,7 @@ const ctaHref = (link: string) => {
         </div>
         <div class="hero-overlay pointer-events-none absolute inset-0" />
         <div class="relative mx-auto flex w-full max-w-lg flex-col lg:flex-row">
-          <div class="flex min-h-150 w-full flex-col items-center justify-center text-center">
+          <div class="flex h-150 min-h-150 w-full flex-col items-center justify-center text-center">
             <h1 class="mb-2 text-display-large whitespace-pre-line">{header.text}</h1>
             {header.description && <p class="mb-6 text-heading-large whitespace-pre-line">{header.description}</p>}
             <div class="flex flex-wrap justify-center gap-3">
