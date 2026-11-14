@@ -1,0 +1,1 @@
+var e=class extends Error{detail;constructor(e,t=``){super(`API request failed (HTTP ${e}).`),this.name=`ApiError`,this.detail=t}};async function t(t){let n=``;try{let e=await t.json();e&&typeof e==`object`&&`detail`in e&&typeof e.detail==`string`&&(n=e.detail.trim())}catch{}return new e(t.status,n)}function n(t,n){return t instanceof e&&t.detail?t.detail:n}export{n,t};

@@ -1,0 +1,1 @@
+function e({message:e,title:t,type:n=`success`,duration:r=6e3}){document.dispatchEvent(new CustomEvent(`app:toast`,{detail:{message:e,title:t,type:n,duration:r}}))}export{e as t};
